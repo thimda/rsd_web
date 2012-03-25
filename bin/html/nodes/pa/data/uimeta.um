@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0" flowmode="false" id="data_um">
+    <FlowvLayout autoFill="0" id="flvlo01">
+        <FlowvPanel height="41" id="ffvp01">
+            <Menubar id="menu_set" widgetId="data"></Menubar>
+        </FlowvPanel>
+        <FlowvPanel id="ffvp02">
+		    <TabLayout currentItem="0" id="tab1" oneTabHide="false" widgetId="data">
+		        <TabItem i18nName="" id="item_struct" text="导航">
+		            <TreeViewComp id="structtree" widgetId="data">
+		            </TreeViewComp>
+		        </TabItem>
+		        <TabItem i18nName="" id="item_uicomp" text="UI组件">
+		            <ShutterLayout currentItem="0" id="outlookbar1" widgetId="data">
+		                <ShutterItem i18nName="" id="item_curr" text="UI组件">
+		                    <TreeViewComp id="currtree" widgetId="data">
+		                    </TreeViewComp>
+		                </ShutterItem>
+		                <ShutterItem i18nName="" id="item_layout" text="容器">
+		                    <TreeViewComp id="layouttree" widgetId="data">
+		                    </TreeViewComp>
+		                </ShutterItem>
+		                <ShutterItem i18nName="" id="item_ctrl" text="控件">
+		                    <TreeViewComp id="ctrltree" widgetId="data">
+		                    </TreeViewComp>
+		                </ShutterItem>
+		                <ShutterItem i18nName="" id="item_bind" text="数据绑定控件">
+		                    <TreeViewComp id="bindtree" widgetId="data">
+		                    </TreeViewComp>
+		                </ShutterItem>
+		                <ShutterItem i18nName="" id="item_entity" text="数据集">
+		                	<TreeViewComp id="entitytree" widgetId="data">
+		                	</TreeViewComp>
+		                </ShutterItem>
+		            </ShutterLayout>
+		        </TabItem>
+		    </TabLayout>
+        </FlowvPanel>
+	</FlowvLayout>
+</UIMeta>

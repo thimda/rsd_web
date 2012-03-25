@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <BorderLayout id="null">
+        <BorderPanel position="center">
+            <FlowvLayout autoFill="0" id="flowv1">
+                <FlowvPanel height="150">
+                    <GridComp id="flowHistoryGrid" widgetId="main"></GridComp>
+                </FlowvPanel>
+                <FlowvPanel height="35">
+                    <FlowhLayout>
+                        <FlowhPanel width="250">
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <TextField id="approveSelText" type="7" widgetId="main">
+                            </TextField>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <TextField id="approveMessage" type="6" widgetId="main">
+                    </TextField>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel width="450">
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="okButton" widgetId="main">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="closebutton" widgetId="main">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="assignButton" widgetId="main">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="addsign" widgetId="main">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="wfbutton" widgetId="main">
+                            </Button>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

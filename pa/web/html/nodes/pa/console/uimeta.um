@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <TabLayout currentItem="0" id="tab_console" oneTabHide="false" widgetId="console">
+        <TabItem i18nName="" id="item_cons" text="控制台">
+            <TextField id="output" type="6" widgetId="console">
+            </TextField>
+        </TabItem>
+    </TabLayout>
+</UIMeta>

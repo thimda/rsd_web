@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Manifest>
+  <BusinessComponet name="bc" dispname="bc">
+    <public/>
+    <client/>
+    <private/>
+    <test/>
+    <resource/>
+  </BusinessComponet>
+  <BusinessComponet name="ba" dispname="ba">
+    <public/>
+    <client/>
+    <private/>
+    <test/>
+    <resource/>
+  </BusinessComponet>
+  <BusinessComponet name="nb" dispname="nb">
+    <public/>
+    <client/>
+    <private/>
+    <test/>
+    <resource/>
+  </BusinessComponet>
+  <BusinessComponet name="pa" dispname="pa">
+    <public/>
+    <client/>
+    <private/>
+    <test/>
+    <resource/>
+  </BusinessComponet>
+  <BusinessComponet name="ra" dispname="ra">
+    <public/>
+    <client/>
+    <private/>
+    <test/>
+    <resource/>
+  </BusinessComponet>
+  <BusinessComponet name="ca" dispname="ca">
+    <public/>
+    <client/>
+    <private/>
+    <test/>
+    <resource/>
+  </BusinessComponet>
+  <BusinessComponet name="bcu" dispname="bcu">
+    <public>
+      <src name="src/public"/>
+    </public>
+    <client>
+      <src name="src/client"/>
+    </client>
+    <private>
+      <src name="src/private"/>
+    </private>
+    <test>
+      <src name="src/test"/>
+    </test>
+    <resource>
+      <src name="resources"/>
+    </resource>
+  </BusinessComponet>
+</Manifest>

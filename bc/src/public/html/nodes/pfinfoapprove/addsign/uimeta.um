@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0">
+    <BorderLayout id="null">
+        <BorderPanel position="center">
+            <FlowvLayout autoFill="0" id="flowv1c">
+                <FlowvPanel height="250">
+                    <FlowhLayout>
+                        <FlowhPanel>
+                            <Border id="border3c" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
+                                <BorderTrue>
+                                    <GridComp id="grid_left" widgetId="addsign"></GridComp>
+                                </BorderTrue>
+                            </Border>
+                        </FlowhPanel>
+                        <FlowhPanel width="50">
+                            <Border id="border2c" leftWidth="0" rightWidth="0" showBottom="true" showLeft="false" showRight="false" showTop="true" width="1">
+                                <BorderTrue>
+                                    <FlowvLayout autoFill="0" id="flowv2c">
+                                        <FlowvPanel>
+                                        </FlowvPanel>
+                                        <FlowvPanel>
+                                            <Button id="btn_right" widgetId="addsign">
+                                            </Button>
+                                        </FlowvPanel>
+                                        <FlowvPanel>
+                                            <Button id="btn_left" widgetId="addsign">
+                                            </Button>
+                                        </FlowvPanel>
+                                        <FlowvPanel>
+                                        </FlowvPanel>
+                                    </FlowvLayout>
+                                </BorderTrue>
+                            </Border>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Border id="border4c" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
+                                <BorderTrue>
+                                    <GridComp id="grid_right" widgetId="addsign">
+                                    </GridComp>
+                                </BorderTrue>
+                            </Border>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel height="50">
+                    <TextField id="text_addsigntype" type="7" widgetId="addsign">
+                    </TextField>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel width="150">
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="btn_ok" widgetId="addsign">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="btn_cancel" widgetId="addsign">
+                            </Button>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

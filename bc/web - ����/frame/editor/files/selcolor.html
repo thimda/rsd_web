@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Strict//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>调色板工具</title>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<link href="pop.css" type=text/css rel=stylesheet>
+<script src='../../script/basic/BrowserSniffer.js'></script>
+<script src='../../script/basic/EventUtil.js'></script>
+<script src='../../script/basic/JsExtensions.js'></script>
+	<script>
+		var SelRGB = '#000000';
+		var DrRGB = '';
+		var SelGRAY = '120';
+		var hexch = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
+		
+		function ToHex(n) {	
+			var h, l;
+			n = Math.round(n);
+			l = n % 16;
+			h = Math.floor((n / 16)) % 16;
+			return (hexch[h] + hexch[l]);
+		}
+		
+		function DoColor(c, l) {
+			var r, g, b;
+		    r = '0x' + c.substring(1, 3);
+		    g = '0x' + c.substring(3, 5);
+		    b = '0x' + c.substring(5, 7);
+		  
+		   if (l > 120) {
+		      l = l - 120;
+		      r = (r * (120 - l) + 255 * l) / 120;
+		      g = (g * (120 - l) + 255 * l) / 120;
+		      b = (b * (120 - l) + 255 * l) / 120;
+		   } else {
+		      r = (r * l) / 120;
+		      g = (g * l) / 120;
+		      b = (b * l) / 120;
+		   }
+		   return '#' + ToHex(r) + ToHex(g) + ToHex(b);
+		}
+		
+		function EndColor() { 
+			var i;
+		    if (DrRGB != SelRGB) {
+		    	DrRGB = SelRGB;
+		    	for (i = 0; i <= 30; i ++) {
+		      		document.getElementById("GrayTable").rows[i].bgColor = DoColor(SelRGB, 240 - i * 8);
+		    	}
+		  	}
+		    if (IS_IE) {
+				var RGBContent = document.getElementById("RGB").innerText;
+				var GRAYContent = document.getElementById("GRAY").innerText;
+			} else {
+				var RGBContent = document.getElementById("RGB").textContent;
+				var GRAYContent = document.getElementById("GRAY").textContent;
+			}
+		    document.getElementById("SelColor").value = DoColor(RGBContent, GRAYContent);
+		    document.getElementById("ShowColor").bgColor = document.getElementById("SelColor").value;
+		}
+
+		function initPage() {
+			var oRGB = document.getElementById("RGB");
+			var oGRAY = document.getElementById("GRAY");
+			document.getElementById("ColorTable").onclick = function(e) {
+				e = EventUtil.getEvent();
+				SelRGB = e.target.bgColor;
+				EndColor();
+			}
+			document.getElementById("ColorTable").onmouseover = function(e) {
+				e = EventUtil.getEvent();
+				if (IS_IE) {
+					oRGB.innerText = e.target.bgColor.toUpperCase();
+				} else {
+					oRGB.textContent = e.target.bgColor.toUpperCase();
+				}
+				EndColor();
+			}
+			document.getElementById("ColorTable").onmouseout = function(e) {
+				if (IS_IE) {
+					oRGB.innerText = SelRGB;
+				} else {
+					oRGB.textContent = SelRGB;
+				}
+				EndColor();
+			}
+			document.getElementById("GrayTable").onclick = function(e) {
+				e = EventUtil.getEvent();
+				SelGRAY = e.target.title;
+				EndColor();
+			}
+			document.getElementById("GrayTable").onmouseover = function(e) {
+				e = EventUtil.getEvent();
+				if (IS_IE) {
+					oGRAY.innerText = e.target.title;
+				} else {
+					oGRAY.textContent = e.target.title;
+				}
+				EndColor();
+			}
+			document.getElementById("GrayTable").onmouseout = function(e) {
+				if (IS_IE) {
+					oGRAY.innerText = SelGRAY;
+				} else {
+					oGRAY.textContent = SelGRAY;
+				}
+				EndColor();
+			}
+		}
+	</script>
+	
+	<script>
+		function btOk(){
+		  	window.returnValue = document.getElementById("SelColor").value;
+			window.close();
+	  	}
+	</script>
+
+</head>
+<body bgColor="menu" onload="initPage();">
+<div align="center">
+<center>
+<table cellSpacing="10" cellPadding="0" border="0px">
+	<tbody>
+		<tr>
+			<td>
+			<table id="ColorTable" style="cursor: pointer" cellSpacing="0"
+				cellPadding="0" border="0px">
+				<script>
+					function wc(r, g, b, n) {
+						r = ((r * 16 + r) * 3 * (15 - n) + 0x80 * n) / 15;
+						g = ((g * 16 + g) * 3 * (15 - n) + 0x80 * n) / 15;
+						b = ((b * 16 + b) * 3 * (15 - n) + 0x80 * n) / 15;
+					
+						document.write('<td BGCOLOR=#' + ToHex(r) + ToHex(g) + ToHex(b) + ' height=8 width=8></td>');
+					}
+					
+					var cnum = new Array(1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0);
+				
+					for (i = 0; i < 16; i ++) {
+					   document.write('<tr>');
+					   for (j = 0; j < 30; j ++) {
+					   	n1 = j % 5;
+					   	n2 = Math.floor(j / 5) * 3;
+					   	n3 = n2 + 3;
+					
+					   	wc((cnum[n3] * n1 + cnum[n2] * (5 - n1)),
+					   		(cnum[n3 + 1] * n1 + cnum[n2 + 1] * (5 - n1)),
+					   		(cnum[n3 + 2] * n1 + cnum[n2 + 2] * (5 - n1)), i);
+					   }
+					
+					   document.writeln('</tr>');
+					}
+				</script>
+
+				<tbody></tbody>
+			</table>
+			</td>
+			<td>
+			<table id=GrayTable style="cursor:pointer;" cellSpacing="0" cellPadding="0"
+				border="0px">
+				<script>
+				  for(i = 255; i >= 0; i -= 8.5)
+				     document.write('<tr bgcolor="#' + ToHex(i) + ToHex(i) + ToHex(i) + '"><td title="' + Math.floor(i * 16 / 17) + '" height="4px" width="20px"></td></tr>');
+				</script>
+				<tbody></tbody>
+			</table>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</center>
+</div>
+
+<div align="center">
+<center>
+<table cellSpacing="10" cellPadding="0" width="100%" border="0px">
+	<tbody>
+		<tr>
+			<td align="middle" width="70px" rowSpan="2">
+			<table id="ShowColor" height="40" cellSpacing="0" cellPadding="0" width="50px"
+				bgColor="#000000" border="1px">
+				<tbody>
+					<tr>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+			<td rowSpan="2">基色 : <span id="RGB">#000000</span><br />
+			亮度 : <span id="GRAY">120</span><br />
+			代码 : <input id="SelColor" size="7" value="#000000" /></td>
+			<td width="50px">
+			<button onclick="btOk();">确定</button>
+			</td>
+		</tr>
+		<tr>
+			<td width="50px">
+			<button onclick="window.close();">关闭</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</center>
+</div>
+</body>
+</html>

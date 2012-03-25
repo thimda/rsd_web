@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>dataset</id>
+	<fullname>ui.model.WebDataset,ui.model.IDatasetConstant,ui.model.WebDatasetEvent,ui.model.DatasetUtil,ui.model.DatasetRuleChecker</fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.data.Dataset</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.DatasetSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

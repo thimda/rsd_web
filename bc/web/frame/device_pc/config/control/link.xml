@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>link</id>
+	<fullname>ui.ctrl.link.LinkComp</fullname>
+	<cssfullname>ui.ctrl.link.link</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.LinkComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UILinkComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.LinkSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UILinkSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCLinkCompRender</uirender>
+	<zone>view</zone>
+</plugin>

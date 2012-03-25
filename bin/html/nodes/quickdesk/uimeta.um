@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta>
+    <BorderLayout>
+        <BorderPanel position="center">
+            <Splitter divideSize="50" id="spliter1" orientation="v" spliterWidth="1" >
+                <SplitterOne>
+                	<Border bottomWidth="0" leftWidth="6" rightWidth="6" topWidth="6" color="#FFFFFF" topColor="-moz-linear-gradient(top,  #E7F2F8,  #FFFFFF); -webkit-gradient(linear, left top, left bottom, from(#fefeff), to(#ecfafd)); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefeff', endColorstr='#ecfafd');">
+	                	<BorderTrue>
+		                    <Widget id="mybillwidget">
+		                    </Widget>
+	                    </BorderTrue>
+                    </Border>
+                </SplitterOne>
+                <SplitterTwo>
+                	<Border bottomWidth="6" leftWidth="6" rightWidth="6" topWidth="6" color="#FFFFFF">
+	                	<BorderTrue>
+                    		<Widget id="myjobwidget">
+                    		</Widget>
+	                    </BorderTrue>
+                    </Border>
+                </SplitterTwo>
+            </Splitter>
+        </BorderPanel>
+    </BorderLayout>
+    <Dialog id="myjobserniorwidget">
+    </Dialog>
+    <Dialog id="billjobserniorwidget">
+    </Dialog>
+</UIMeta>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>combotext</id>
+	<fullname>ui.ctrl.text.ComboComp,ui.ctrl.text.OptionComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>text,combodata</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.text.ComboBoxComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.ComboBoxCompSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

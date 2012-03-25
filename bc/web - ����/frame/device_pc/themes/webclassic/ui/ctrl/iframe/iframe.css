@@ -1,0 +1,22 @@
+.frame_div
+{	
+}
+
+.frame_div .frame_title_bar
+{
+	left:5px;
+    top:0px;
+    background-color:#F3F3F3
+}
+
+.frame_div .frame_content
+{
+	position:relative;
+	top:10px;
+	height:100%;
+	width:100%;
+	overflow:auto;
+	border-color:white;
+	border-style:outset;
+	border-width:1px;
+}

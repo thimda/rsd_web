@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="ds_ncfile" lazyLoad="false" voMeta="nc.impl.pub.filesystem.NCFileVO">
+                <Fields>
+                    <Field dataType="String" field="filepath" id="filepath" isPrimaryKey="false" nullAble="true" text="filepath">
+                    </Field>
+                    <Field dataType="String" field="pk" id="pk" isPrimaryKey="false" nullAble="true" text="pk">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.ncfile.NCFileDatasetLoadListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_ncfile" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <GridComp dataset="ds_ncfile" editable="true" enabled="true" height="100%" id="grid_ncfile" left="0" multiSelect="false" pagenationTop="false" position="relative" showColInfo="false" showHeader="false" showNumCol="false" showSumRow="false" sortable="true" top="0" visible="true" width="100%">
+            <Column autoExpand="true" dataType="String" editable="true" editorType="StringText" field="filepath" fixedHeader="false" id="filepath" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="filepath" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk" fixedHeader="false" id="pk" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="pk" textAlign="left" visible="false" width="120">
+            </Column>
+        </GridComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

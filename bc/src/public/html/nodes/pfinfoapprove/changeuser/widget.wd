@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="true" height="400" i18nName="pfinfo_changeuser" langDir="lfw" width="600">
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="ds_leftuser" lazyLoad="false" voMeta="nc.vo.sm.UserVO">
+                <Fields>
+                    <Field dataType="String" field="cuserid" id="cuserid" isPrimaryKey="false" nullAble="true" text="cuserid">
+                    </Field>
+                    <Field dataType="String" field="user_code" id="user_code" isPrimaryKey="false" nullAble="true" text="用户编码">
+                    </Field>
+                    <Field dataType="String" field="user_name" id="user_name" isPrimaryKey="false" nullAble="true" text="用户名称">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="changeuser" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_leftuser" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="ds_rightuser" lazyLoad="true" voMeta="nc.vo.sm.UserVO">
+                <Fields>
+                    <Field dataType="String" field="cuserid" id="cuserid" isPrimaryKey="false" nullAble="true" text="cuserid">
+                    </Field>
+                    <Field dataType="String" field="user_code" id="user_code" isPrimaryKey="false" nullAble="true" text="用户编码">
+                    </Field>
+                    <Field dataType="String" field="user_name" id="user_name" isPrimaryKey="false" nullAble="true" text="用户名称">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="changeuser" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_rightuser" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <GridComp dataset="ds_leftuser" editable="true" enabled="true" height="100%" id="grid_left" left="0" multiSelect="false" pagenationTop="false" position="relative" showColInfo="true" showHeader="true" showNumCol="false" showSumRow="false" sortable="true" top="0" visible="true" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_code" fixedHeader="false" id="user_code" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户编码" i18nName="pfinfo_usercode" langDir="lfw"  textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_name" fixedHeader="false" id="user_name" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户名称" i18nName="pfinfo_username" langDir="lfw" textAlign="left" visible="true" width="120">
+            </Column>
+        </GridComp>
+        <GridComp dataset="ds_rightuser" editable="true" enabled="true" height="100%" id="grid_right" left="0" multiSelect="false" pagenationTop="false" position="relative" showColInfo="true" showHeader="true" showNumCol="false" showSumRow="false" sortable="true" top="0" visible="true" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_code" fixedHeader="false" id="user_code" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户编码" i18nName="pfinfo_usercode" langDir="lfw"  textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_name" fixedHeader="false" id="user_name" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户名称" i18nName="pfinfo_username" langDir="lfw"  textAlign="left" visible="true" width="120">
+            </Column>
+        </GridComp>
+        <ButtonComp align="left" enabled="true" height="22" id="btn_left" left="0" position="relative" refImg="/themes/${t}/images/pfinfo/leftbutton.gif" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="changeuserListener" serverClazz="nc.uap.lfw.pfinfoapprove.ChangeUserButtonListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="changeuser" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="ds_leftuser" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="ds_rightuser" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="btn_cancel" left="0" position="relative" text="取消" i18nName="PrefePageModel-000001" langDir="lfw" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="changeuserListener" serverClazz="nc.uap.lfw.pfinfoapprove.ChangeUserButtonListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="changeuser" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="ds_leftuser" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="ds_rightuser" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="btn_right" left="0" position="relative" refImg="/themes/${t}/images/pfinfo/rightbutton.gif" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="changeuserListener" serverClazz="nc.uap.lfw.pfinfoapprove.ChangeUserButtonListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="changeuser" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="ds_leftuser" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="ds_rightuser" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="btn_ok" left="0" position="relative" text="确定" i18nName="PrefePageModel-000000" langDir="lfw" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="changeuserListener" serverClazz="nc.uap.lfw.pfinfoapprove.ChangeUserButtonListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="changeuser" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="ds_leftuser" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="ds_rightuser" type="ds_all_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

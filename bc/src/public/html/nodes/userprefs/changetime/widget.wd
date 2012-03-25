@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="true" height="200" width="280" i18nName="lfw_prefs006" langDir="lfw">
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+        <TextComp editorType="DateText" enabled="true" focus="false" height="22" id="changetimeText" left="0" position="relative" text="业务时间" i18nName="lfw_prefs007" langDir="lfw" textAlign="left" top="0" visible="true" width="220">
+        </TextComp>
+        <ButtonComp align="left" enabled="true" height="22" id="btn_cancel" left="0" position="relative" i18nName="lfwPreferenceHandler-000012" langDir="lfw" text="取消" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="chageTimeListener" serverClazz="nc.uap.lfw.main.prefs.ChangeTimeListener">
+                    <Events>
+                        <Event async="false" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="changetime" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="btn_ok" left="0" position="relative" text="确定" i18nName="lfwPreferenceHandler-000011" langDir="lfw"  top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="chageTimeListener" serverClazz="nc.uap.lfw.main.prefs.ChangeTimeListener">
+                    <Events>
+                        <Event async="false" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="changetime" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

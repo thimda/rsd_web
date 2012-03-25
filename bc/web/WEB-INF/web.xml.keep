@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" id="WebApp">
+	<display-name>Lfw Web Application</display-name>
+	
+	<context-param>
+		<param-name>ctxPath</param-name>
+		<param-value>/lfw</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>errorPage</param-name>
+		<param-value>/html/nodes/lfw_error.jsp</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>websessionListener</param-name>
+		<param-value></param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>nc.uap.lfw.core.servlet.dft.LfwContextLoadListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			nc.uap.lfw.core.servlet.dft.LfwDefaultSessionListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			nc.uap.lfw.core.servlet.dft.LfwDefaultRequestListener
+		</listener-class>
+	</listener>
+	
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>
+			nc.uap.lfw.core.servlet.SetCharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+	</filter-mapping>
+
+	<!-- compress Filter -->
+	<filter>
+		<filter-name>CompressingFilter</filter-name>
+		<filter-class>
+			nc.uap.lfw.core.servlet.filter.compression.CompressingFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CompressingFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CompressingFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CompressingFilter</filter-name>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>HttpResponseFilter</filter-name>
+		<filter-class>
+			nc.uap.lfw.core.servlet.ResponseHeaderFilter
+		</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>max-age=3600</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.gif</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.png</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.swf</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.jpg</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+		<servlet-class>
+			nc.uap.lfw.core.servlet.LfwDispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>ctrlclass</param-name>
+			<param-value>nc.uap.lfw.core.LfwCoreController</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ctxpath</param-name>
+			<param-value>/core</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>BillDataImageServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.core.servlet.BillDataImageServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>LfwSessionExchangeServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.login.action.LfwSessionExchangeAction</servlet-class>
+	</servlet>
+		<servlet>
+		<servlet-name>WatchLoggerServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.core.servlet.WatchLoggerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WatchLoggerServlet</servlet-name>
+		<url-pattern>/watchlogger</url-pattern>
+	</servlet-mapping>
+
+	
+	<servlet-mapping>
+		<servlet-name>LfwSessionExchangeServlet</servlet-name>
+		<url-pattern>/pt/sso/exchange</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+		<url-pattern>/core/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>BillDataImageServlet</servlet-name>
+		<url-pattern>/bdimg</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>180</session-timeout>
+	</session-config>
+	
+	<!--@EJBREF@-->
+	
+	<jsp-config>
+		
+	</jsp-config>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<error-page>   
+        <error-code>403</error-code>   
+        <location>/error.jsp</location>   
+    </error-page>   
+	<error-page>   
+        <error-code>404</error-code>   
+        <location>/error.jsp</location>   
+    </error-page>   
+     <error-page>   
+        <error-code>400</error-code>   
+        <location>/error.jsp</location>   
+    </error-page>   
+    <error-page>   
+        <error-code>500</error-code>   
+        <location>/error.jsp</location>   
+	</error-page>   
+	
+</web-app>
+

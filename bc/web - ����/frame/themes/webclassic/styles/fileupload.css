@@ -1,0 +1,54 @@
+.file_upload_div {
+}
+
+.file_upload_div .file_upload_main_div {
+	overflow-y : auto;
+	overflow-x : hidden;
+}
+
+.file_upload_div .btn_line_div {
+	height: 30px;
+	width: 100%;
+ 	padding-top: 0px;
+ 	overflow: hidden;
+}
+
+.file_upload_div .btn_line_div .btn_div {
+	height: 30px;
+	width: 70px;
+ 	padding-top: 0px;
+ 	float: right;
+}
+
+.file_upload_div .file_upload_main_div .line_div {
+	margin-top: 10px;
+	height: 20px;
+	width: 100%;
+ 	padding-top: 0px;
+ 	overflow: hidden;
+}
+
+.file_upload_div .file_upload_main_div .delete_div {
+	height: 20px;
+ 	padding-left: 7px;
+ 	padding-top: 2px;
+ 	float: left;
+}
+
+.file_upload_div .file_upload_main_div .file_div {
+	height: 20px;
+ 	padding-top: 0px;
+ 	float: left;
+}
+
+.file_upload_div .file_upload_main_div .sel_btn_div {
+	height: 30px;
+ 	padding-top: 0px;
+ 	float: left;
+}
+
+.file_upload_div .file_upload_main_div .remove_img {
+	top: 2px;
+	left: 5px;
+	cursor: pointer;
+}

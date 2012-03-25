@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta>
+    <BorderLayout>
+        <BorderPanel position="center">
+            <FlowvLayout>
+                <FlowvPanel height="25">
+                    <Border bottomWidth="1" leftWidth="1" rightWidth="1" topWidth="1">
+                        <BorderTrue>
+                            <PanelLayout id="billpanel" paddingTop="2">
+                                <PanelPanel>
+                                    <FlowhLayout>
+                                        <FlowhPanel>
+                                            <FlowhLayout>
+                                            	<FlowhPanel width="10">
+		                             			</FlowhPanel>
+                                                <FlowhPanel width="100">
+                                                    <ToolBarComp id="mybilltoolbar" widgetId="mybillwidget">
+                                                    </ToolBarComp>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="50">
+                                                	<Linkcomp id="oneweekless" widgetId="mybillwidget">
+                                                    </Linkcomp>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="50">
+                                                	<Linkcomp id="onemonthless" widgetId="mybillwidget">
+                                                    </Linkcomp>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="50">
+                                                	<Linkcomp id="twomonthsless" widgetId="mybillwidget">
+                                                    </Linkcomp>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="50">
+                                                	<Linkcomp id="threemonthsless" widgetId="mybillwidget">
+                                                    </Linkcomp>
+                                                </FlowhPanel>
+                                                <FlowhPanel>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="120">
+                                                    <TextField id="completedbillcheckbox" type="4" widgetId="mybillwidget">
+                                                    </TextField>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="150">
+                                                    <TextField id="billsearchtextcomp" type="1" widgetId="mybillwidget">
+                                                    </TextField>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="30">
+                                                    <Image id="billsearchimage" widgetId="mybillwidget">
+                                                    </Image>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="50">
+                                                    <Linkcomp id="billsernior" widgetId="mybillwidget">
+                                                    </Linkcomp>
+                                                </FlowhPanel>
+                                            </FlowhLayout>
+                                        </FlowhPanel>
+                                    </FlowhLayout>
+                                </PanelPanel>
+                            </PanelLayout>
+                        </BorderTrue>
+                    </Border>
+                </FlowvPanel>
+                <FlowvPanel>
+                		<Border bottomWidth="1" leftWidth="1" rightWidth="1" topWidth="0">
+		                    <BorderTrue>
+				                    <GridComp id="billgrid" widgetId="mybillwidget">
+				                    </GridComp>
+				                </BorderTrue>
+                    </Border>
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

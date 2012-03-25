@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>checkboxtext</id>
+	<fullname>ui.ctrl.text.CheckboxComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>text</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.CheckBoxComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.CheckboxSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCCheckBoxCompRender</uirender>
+	<zone>view</zone>
+</plugin>

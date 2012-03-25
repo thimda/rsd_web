@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>flowvpanel</id>
+	<fullname></fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIFlowvPanel</uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCFlowvPanelRender</uirender>
+	<zone>window</zone>
+</plugin>

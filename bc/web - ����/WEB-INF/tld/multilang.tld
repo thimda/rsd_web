@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd" version="2.0">
+	<description>Multi Lang EL EXPRESSION</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>ELFunctionTaglib</short-name>
+	<uri>http://www.ufida.com/multilang</uri>
+	<function>
+		<description>Exposes the get(id) function</description>
+		<name>trans</name>
+		<function-class>nc.uap.lfw.util.LanguageUtil</function-class>
+		<function-signature>java.lang.String get(java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<description>Exposes the getByProductCode(productCode, id) function</description>
+		<name>transp</name>
+		<function-class>nc.uap.lfw.util.LanguageUtil</function-class>
+		<function-signature>java.lang.String getByProductCode(java.lang.String, java.lang.String)</function-signature>
+	</function>
+</taglib>

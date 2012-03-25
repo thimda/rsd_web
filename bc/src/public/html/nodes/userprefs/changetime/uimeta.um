@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <FlowvLayout autoFill="0" id="flowv1">
+    		<FlowvPanel height="20">
+    		</FlowvPanel>
+        <FlowvPanel>
+            <TextField id="changetimeText" type="1" widgetId="changetime">
+            </TextField>
+        </FlowvPanel>
+        <FlowvPanel height="60">
+            <FlowhLayout>
+                <FlowhPanel>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Button id="btn_ok" widgetId="changetime">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Button id="btn_cancel" widgetId="changetime">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+    </FlowvLayout>
+</UIMeta>

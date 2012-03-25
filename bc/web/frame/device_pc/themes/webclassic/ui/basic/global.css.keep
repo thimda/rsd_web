@@ -1,0 +1,72 @@
+*{
+	font-family:simsun;
+	font-size:12px;
+}
+
+img{
+	border:0;
+}
+
+
+/* body中去掉此样式，解决流式布局下，gird数据量大时，body无滚动条，下面数据看不全问题
+overflow-y:hidden;
+*/
+body 
+{
+	margin:0px;
+	padding:0px;
+	SCROLLBAR-FACE-COLOR: #DBDBDD;
+	SCROLLBAR-HIGHLIGHT-COLOR: #FFFFFF;
+	SCROLLBAR-SHADOW-COLOR: #FFFFFF;
+	SCROLLBAR-3DLIGHT-COLOR: #FFFFFF;
+	SCROLLBAR-ARROW-COLOR: #838383;
+	SCROLLBAR-DARKSHADOW-COLOR: #FFFFFF;
+	scrollbar-track-color: #ffffff;
+}
+
+@media screen and (-webkit-min-device-pixcel-ratio:0){
+	overflow-y:auto;
+	height:100%;
+}
+
+html {
+	overflow-x: hidden; 
+	font-size:12px;
+}
+html,body {
+	height:100%;
+}
+
+
+.unselectable{
+	-moz-user-select:none;
+	user-select:none;
+	gn:expression(this.onselectstart=function(){return false;});
+}
+
+.roundcorner{
+	border: 1px solid #d1e2d8;
+	-webkit-border-radius:13px;
+	-moz-border-radius:13px;
+	border-radius:13px;
+	behavior:url("/lfw/frame/device_pc/themes/webclassic/ui/basic/PIE.htc");
+}
+
+.gridLayout{
+	border : 0px;
+}
+
+.gridLayout td{
+	border : 0px;
+}
+
+
+
+.table_red{
+	border:1px solid red;
+}
+
+.table_red td{
+	border:1px solid red;
+}
+

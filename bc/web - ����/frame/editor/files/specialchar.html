@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Strict//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<meta http-equiv=Expires content=0>
+<link href="pop.css" type=text/css rel=stylesheet>
+<script src='../../script/basic/BrowserSniffer.js'></script>
+<script src='../../script/basic/EventUtil.js'></script>
+<style type=text/css>
+.Disactive {
+	border-right: 1px solid;
+	border-top: 1px solid;
+	border-left: 1px solid;
+	width: 1%;
+	cursor: pointer;
+	border-bottom: 1px solid;
+	background-color: #dedbd6;
+	text-align: center
+}
+
+.Active {
+	cursor: pointer;
+	background-color: #ffffcc;
+	text-align: center
+}
+
+.MainTable {
+	border-right: #e8e8e8 5px solid;
+	border-top: #e8e8e8 5px solid;
+	border-left: #e8e8e8 5px solid;
+	border-bottom: #e8e8e8 5px solid
+}
+
+.Sample {
+	border-right: 1px solid;
+	border-top: 1px solid;
+	font-size: 24px;
+	border-left: 1px solid;
+	border-bottom: 1px solid;
+	background-color: #dedbd6
+}
+
+.Empty {
+	border-right: 1px solid;
+	border-top: 1px solid;
+	border-left: 1px solid;
+	width: 1%;
+	cursor: default;
+	border-bottom: 1px solid;
+	background-color: #dedbd6
+}
+
+TD {
+	FONT-SIZE: 12pt; FONT-FAMILY: Arial
+}
+</style>
+
+<script>
+<!--
+var oSample ;
+function insertChar(charValue) {
+	window.returnValue = charValue;
+	window.close();
+}
+
+function over(td) {
+	oSample.innerHTML = td.innerHTML;
+	td.className = 'Active' ;
+	if (IS_FF)
+		td.style.textAlign = "-moz-center";
+}
+
+function out(td) {
+	oSample.innerHTML = "&nbsp;" ;
+	td.className = 'Disactive' ;
+	if (IS_FF)
+		td.style.textAlign = "-moz-center";
+}
+
+function CloseWindow() {
+	window.returnValue = null ;
+	window.close() ;
+}
+//-->
+</script>
+</head>
+<body bottomMargin="0px" leftMargin="0px" topMargin="0px" rightMargin="0px">
+<table height="100%" cellSpacing="10" cellPadding="0" width="100%">
+	<tbody>
+		<tr>
+			<td width="100%" rowSpan="2">
+			<table class="MainTable" height="100%" cellSpacing="0" cellPadding="0"
+				width="100%" align="center" border="1px">
+				<script>
+				<!--
+				//var aChars = ["!","&quot;","#","$","%","&","\\'","(",")","*","+","-",".","/","0","1","2","3","4","5","6","7","8","9",":",";","&lt;","=","&gt;","?","@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","]","^","_","`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","|","}","~","&euro;","?,"?,"?,"?,"?,"?,"\?,"?,"?,"?,"&lsquo;","&rsquo;","&rsquo;","&ldquo;","&rdquo;","?,"&ndash;","&mdash;","?,"?,"?,"?,"?,"?,"&iexcl;","&cent;","&pound;","&pound;","&curren;","&yen;","&brvbar;","&sect;","&uml;","&copy;","&ordf;","&laquo;","&not;","?,"&reg;","&macr;","&deg;","&plusmn;","&sup2;","&sup3;","&acute;","&micro;","&para;","&middot;","&cedil;","&sup1;","&ordm;","&raquo;","&frac14;","&frac12;","&frac34;","&iquest;","&Agrave;","&Aacute;","&Acirc;","&Atilde;","&Auml;","&Aring;","&AElig;","&Ccedil;","&Egrave;","&Eacute;","&Ecirc;","&Euml;","&Igrave;","&Iacute;","&Icirc;","&Iuml;","&ETH;","&Ntilde;","&Ograve;","&Oacute;","&Ocirc;","&Otilde;","&Ouml;","&times;","&Oslash;","&Ugrave;","&Uacute;","&Ucirc;","&Uuml;","&Yacute;","&THORN;","&szlig;","&agrave;","&aacute;","&acirc;","&atilde;","&auml;","&aring;","&aelig;","&ccedil;","&egrave;","&eacute;","&ecirc;","&euml;","&igrave;","&iacute;","&icirc;","&iuml;","&eth;","&ntilde;","&ograve;","&oacute;","&ocirc;","&otilde;","&ouml;","&divide;","&oslash;","&ugrave;","&uacute;","&ucirc;","&uuml;","&uuml;","&yacute;","&thorn;","&yuml;"] ;
+				var aChars = ["!","&quot;","#","$","%","&","\\'","(",")","*","+","-",".","/","0","1","2","3","4","5","6","7","8","9",":",";","&lt;","=","&gt;","?","@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","]","^","_","`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","|","}","~","&euro;","&lsquo;","&rsquo;","&rsquo;","&ldquo;","&rdquo;","&ndash;","&mdash;","&iexcl;","&cent;","&pound;","&curren;","&yen;","&brvbar;","&sect;","&uml;","&copy;","&ordf;","&laquo;","&not;","&reg;","&macr;","&deg;","&plusmn;","&sup2;","&sup3;","&acute;","&micro;","&para;","&middot;","&cedil;","&sup1;","&ordm;","&raquo;","&frac14;","&frac12;","&frac34;","&iquest;","&Agrave;","&Aacute;","&Acirc;","&Atilde;","&Auml;","&Aring;","&AElig;","&Ccedil;","&Egrave;","&Eacute;","&Ecirc;","&Euml;","&Igrave;","&Iacute;","&Icirc;","&Iuml;","&ETH;","&Ntilde;","&Ograve;","&Oacute;","&Ocirc;","&Otilde;","&Ouml;","&times;","&Oslash;","&Ugrave;","&Uacute;","&Ucirc;","&Uuml;","&Yacute;","&THORN;","&szlig;","&agrave;","&aacute;","&acirc;","&atilde;","&auml;","&aring;","&aelig;","&ccedil;","&egrave;","&eacute;","&ecirc;","&euml;","&igrave;","&iacute;","&icirc;","&iuml;","&eth;","&ntilde;","&ograve;","&oacute;","&ocirc;","&otilde;","&ouml;","&divide;","&oslash;","&ugrave;","&uacute;","&ucirc;","&uuml;","&uuml;","&yacute;","&thorn;","&yuml;"] ;
+				
+				var cols = 20 ;
+				
+				var i = 0 ;
+				while (i < aChars.length) {
+					document.write("<tr>") ;
+					for (var j = 0 ; j < cols ; j++) {
+						if (aChars[i]) {
+							document.write('<td class="Disactive" onclick="insertChar(\'' + aChars[i].replace(/&/g, "&amp;") + '\')" onmouseover="over(this)" onmouseout="out(this)">') ;
+							document.write(aChars[i]) ;
+						} 
+						else
+							document.write("<td class='Empty'>&nbsp;") ;
+						document.write("</td>") ;
+						i++ ;
+					}
+					document.write("</tr>") ;
+				}
+				//-->
+				</script>
+
+				<tbody></tbody>
+			</table>
+			</td>
+			<td vAlign="top">
+			<table class="MainTable">
+				<tbody>
+					<tr>
+						<td class="Sample" id="SampleTD" align="middle" width="40px" height="40px">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="middle" height="1px">
+			<button onclick=window.close();>关闭</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<script>
+<!--
+oSample = document.getElementById("SampleTD") ;
+if (IS_FF)
+	oSample.style.textAlign = "-moz-center";
+//-->
+</script>
+</body>
+</html>

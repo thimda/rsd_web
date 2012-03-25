@@ -1,0 +1,292 @@
+/*panel样式*/
+
+.panel_medicine
+{
+	background:url('themes/mediclassic/images/background.png') repeat-x top;
+	_background:url('themes/mediclassic/images/background.gif') repeat-x top;
+ }
+
+/*tab样式*/
+.main_tab_div
+{
+	overflow:hidden;
+}
+
+.main_tab_div .tab_item_closeicon {
+	background:url('themes/mediclassic/images/tabs/tabitem_close_off.png') no-repeat right top;
+	position:absolute;
+	height: 15px;
+	width: 15px;
+	top: 8px;
+	right: 20px;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tabitem_close_off.png");
+	
+}
+
+.main_tab_div .tab_item_closeicon_on {
+	background:url('themes/mediclassic/images/tabs/tabitem_close_on.png') no-repeat right top;
+	position:absolute;
+	height: 15px;
+	width: 15px;
+	top: 8px;
+	right: 20px;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tabitem_close_on.png");
+	
+}
+
+.main_tab_div .tab_item_closeicon_over {
+	background:url('themes/mediclassic/images/tabs/tabitem_close_over.png') no-repeat right top;
+	position:absolute;
+	height: 15px;
+	width: 15px;
+	top: 8px;
+	right: 20px;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tabitem_close_over.png");
+}
+
+.main_tab_div .tab_content_div
+{
+	overflow: hidden;
+}
+
+.main_tab_div .tab_items_bar
+{
+	clear:both;
+	height: 33px;
+    background-image:url("themes/mediclassic/images/tabs/tab_bg.png");
+    _background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg.png");
+}
+
+.main_tab_div .tab_seperator_ver
+{
+	position:relative;
+	top: 1px;
+	float:left;
+	height:23px;
+	width:0px;
+}
+
+.main_tab_div .left_space
+{
+	position:relative;
+	float:left;
+	height:100%;
+}
+
+.main_tab_div .right_space
+{
+	position:relative;
+	float:right;
+	height:100%;
+	overflow:hidden;
+}
+
+.main_tab_div .tab_img_div
+{
+    /*position: relative;
+ 	height:19px;
+ 	top:3px;
+ 	float:left;
+ 	overflow:hidden;
+ 	padding-right: 2px;*/
+ 	
+ 	float:right;
+    position: relative;
+    height:100%;
+}
+
+.main_tab_div .tab_item_div
+{
+ 	position: relative;
+ 	height:100%;
+ 	float:left;
+ 	overflow:hidden;
+    background-repeat:repeat-x;
+}
+
+.tab_content_div
+{
+	 overflow:auto; 
+	 width:100%;
+	 height:100%;  
+	 position:relative;
+}
+
+.main_tab_div .tab_item_leftborder_off_0
+{
+    width:26px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_left_off_0.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_left_off_0.png");
+ 	height:100%; /* all browsers */
+    height:32px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.main_tab_div .tab_item_leftborder_off_1
+{
+    width:15px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_left_off_1.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_left_off_1.png");
+ 	height:100%; /* all browsers */
+    height:32px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.main_tab_div .tab_item_leftborder_off_2
+{
+    width:15px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_left_off_2.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_left_off_2.png");
+ 	height:100%; /* all browsers */
+    height:32px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.main_tab_div .tab_item_centerborder_off
+{
+    height:100%;
+    float:left;
+    padding-top:7px;
+    padding-left:4px;
+    padding-right:3px;
+    white-space:nowrap;
+    font-weight:normal;
+    background-image:url("themes/mediclassic/images/tabs/tab_bg_center_off.png");
+    	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_center_off.png");
+   _padding-top:0px;
+   _line-height:28px;
+}
+
+.main_tab_div .tab_item_rightborder_off_0
+{
+    height:100%;
+    width:55px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_right_off_0.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_right_off_0.png");
+ 	
+}
+
+.main_tab_div .tab_item_rightborder_off_1
+{
+    height:100%;
+    width:40px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_right_off_1.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_right_off_1.png");
+ 	
+}
+
+.main_tab_div .tab_item_rightborder_off_2
+{
+    height:100%;
+    width:40px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_right_off_2.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_right_off_2.png");
+}
+
+.main_tab_div .tab_item_leftborder_on_0 {
+    width:26px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_left_on_0.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_left_on_0.png");
+    height:100%; /* all browsers */
+    height:32px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.main_tab_div .tab_item_leftborder_on_1
+{
+    width:15px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_left_on_1.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_left_on_1.png");
+	height:100%; /* all browsers */
+    height:32px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.main_tab_div .tab_item_centerborder_on
+{
+	float:left;
+    padding-top:7px;
+    padding-left:4px;
+    padding-right:3px;
+    height:100%;
+    white-space:nowrap;
+    font-weight:bold;
+    background-image:url("themes/mediclassic/images/tabs/tab_bg_center_on.png");
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_center_on.png");
+   _padding-top:0px;
+   _line-height:28px;
+}
+
+.main_tab_div .tab_item_rightborder_on_0
+{
+    height:100%;
+    width:55px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_right_on_0.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_right_on_0.png");
+}
+
+.main_tab_div .tab_item_rightborder_on_1
+{
+    height:100%;
+    width:40px;
+    float:left;
+ 	background:url('themes/mediclassic/images/tabs/tab_bg_right_on_1.png') no-repeat right top;
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+ window.globalPath +"/"+window.tempPath+"/"  + window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_right_on_1.png");
+}
+
+.main_tab_div .left_fixed_space{
+	position:relative;
+	width:0px;
+    height:100%;
+    float:left;
+    background-position-y:bottom;
+}
+
+.main_tab_div .right_fixed_space{
+	position:relative;
+	width:0px;
+    height:23px;
+    float:right;
+    padding-top:2px;
+    background-position-y:bottom;
+}
+
+/**用于计算子项标题文字宽度**/
+.main_tab_div_text_width 
+{
+	float:left;
+    padding-top:7px;
+    padding-left:4px;
+    padding-right:3px;
+    height:100%;
+    white-space:nowrap;
+    font-weight:bold;
+    background-image:url("themes/mediclassic/images/tabs/tab_bg_center_on.png");
+	_background: none;
+	_filter: expression("progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="+window.globalPath +"/"+window.tempPath+"/"  +window.nodePath+ "/themes/mediclassic/images/tabs/tab_bg_center_on.png");
+}

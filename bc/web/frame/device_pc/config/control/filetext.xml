@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>filetext</id>
+	<fullname>ui.ctrl.text.FileComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>text</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.text.TextComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

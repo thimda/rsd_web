@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta>
+    <BorderLayout>
+        <BorderPanel position="center">
+            <Widget id="pfinfowidget">
+            </Widget>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>text</id>
+	<fullname>ui.ctrl.text.TextComp</fullname>
+	<cssfullname>ui.ctrl.text.text</cssfullname>
+	<dependences>label</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.text.TextComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UITextField</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.TextSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UITextSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCTextCompRender</uirender>
+	<zone>view</zone>
+</plugin>

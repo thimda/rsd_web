@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset enabled="false" id="shortcutds" lazyLoad="false" voMeta="nc.uap.lfw.login.vo.LfwShortCutVO">
+                <Fields>
+                    <Field dataType="String" field="pk_shortcut" id="pk_shortcut">
+                    </Field>
+                    <Field dataType="String" field="fun_code" id="fun_code">
+                    </Field>
+                    <Field dataType="Integer" field="frequency" id="frequency">
+                    </Field>
+                    <Field dataType="String" field="pk_user" id="pk_user">
+                    </Field>
+                    <Field dataType="String" field="pk_corp" id="pk_corp">
+                    </Field>
+                    <Field dataType="Integer" field="sysid" id="sysid">
+                    </Field>
+                    <Field dataType="String" field="name" id="name">
+                    </Field>
+                     <Field dataType="String" field="ext1" id="ext1">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="sdefaultDsListener" serverClazz="nc.uap.lfw.ncadapter.main.LoadShortCutDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" tabSubmit="false">
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset enabled="false" id="funnodeds" lazyLoad="false" voMeta="nc.uap.lfw.login.vo.MainMenuItemVO">
+                <Fields>
+                    <Field dataType="String" field="funcode" id="funcode">
+                    </Field>
+                    <Field dataType="String" field="menuitemcode" id="menuitemcode">
+                    </Field>
+                    <Field dataType="String" field="menuitemname" id="menuitemname">
+                    </Field>
+                    <Field dataType="String" field="funurl" id="funurl">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.ncadapter.main.LoadNodesListenerWithPermission">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" tabSubmit="false">
+                                	<Widget cardSubmit="false" id="navwidget" tabSubmit="false">
+                                		<Dataset id="shortcutds" type="ds_all_line">
+                                		</Dataset>
+                                		<Dataset id="funnodeds" type="ds_current_line">
+                                		</Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <TreeViewComp height="100%" id="funnodetree" rootOpen="true" width="100%" withRoot="false">
+            <CodeTreeLevel codeField="menuitemcode" codeRule="2/2/2" dataset="funnodeds" id="level" labelDelims="" labelFields="menuitemname" masterKeyField="menuitemcode" contextMenu="funnodetree_menu">
+            </CodeTreeLevel>
+            <Listeners>
+                <TreeNodeListener id="opennodeListener">
+                    <Events>
+                        <Event async="true" name="ondbclick" onserver="false">
+                            <SubmitRule cardSubmit="false" tabSubmit="false">
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[if(mouseEvent.node.isLeaf == false)
+										return;
+									var widget = mouseEvent.obj.widget;
+									var ds = widget.getDataset("funnodeds");
+									var row = mouseEvent.node.nodeData;
+									var funnode = row.getCellValue(ds.nameToIndex("funcode"));
+									var url = row.getCellValue(ds.nameToIndex("funurl"));
+									var funcode = row.getCellValue(ds.nameToIndex("funcode"));
+								 	var title = row.getCellValue(ds.nameToIndex("menuitemname"));
+								 	var src = window.corePath + "/" + url;
+								 	var openTabMax = 5;
+								 	var widget = pageUI.getWidget("mainwidget");
+									var tab = pageUI.getTab("pagetab");
+									var items = tab.getTabItems();
+									var count = items.length;
+									for (var i = 0; i < count; i++) {
+										// 如果已经打开过相同funcode的单据
+										if (items[i].name == funcode) {
+											tab.activeTab(tab.getItemIndex(items[i]));
+											return;
+										}
+									}
+					
+									// 如果已经打开单据数超过设置的打开最大限度则进行提示
+									if (count > openTabMax) 
+									{
+										continueOpen.tab = tab;
+										continueOpen.funcode = funcode;
+										continueOpen.title = title;
+										continueOpen.src = src;
+										ConfirmDialogComp.showDialog("已经打开了 " + (count - 1)
+														+ "个布局,继续打开将影响客户端速度,确定打开吗?",
+												continueOpen, null, null, null);
+									}
+									else {
+										var item1 = tab.createItem(funcode, title, true);
+										tab.activeTab(tab.getItemIndex(item1));
+										item1.getObjHtml().appendChild(getNodeFrame(funcode, src));
+									}			
+												
+									function continueOpen()
+									{
+										var	tab = continueOpen.tab;
+										var	funcode = continueOpen.funcode;
+										var	title = continueOpen.title;
+										var	src = continueOpen.src;
+										var item1 = tab.createItem(funcode, title, true);
+										tab.activeTab(tab.getItemIndex(item1));
+										var div = getNodeFrame(funcode, src);
+										item1.getObjHtml().appendChild(div);
+										delete(continueOpen.tab);
+										delete(continueOpen.funcode);
+										delete(continueOpen.title);
+										delete(continueOpen.src);
+									};
+									
+									function getNodeFrame(funcode,src)
+									{
+										var div = $ce("DIV");
+									    div.id = "tab_item_div_" + funcode;
+									    div.style.top = "0px";
+									    div.style.left = "0px";                        
+									    div.style.height = "100%";
+									    div.style.width = "100%";
+									    
+									    var frame=document.createElement("iframe");
+										frame.style.top = "0px";
+									    frame.style.left = "0px";                        
+									    frame.style.height = "100%";
+									    frame.style.width = "100%";
+									    frame.style.border = "0";
+									    if(IS_FF)
+									    	frame.style.background = "#FFFFFF";
+									    frame.frameBorder = "0";
+										frame.src=src;
+										div.appendChild(frame);
+										return div;
+									};]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </TreeNodeListener>
+                <TreeNodeListener id="rootNodeCreateListener">
+                    <Events>
+                        <Event async="true" name="rootNodeCreated" onserver="false">
+                            <SubmitRule cardSubmit="false" tabSubmit="false">
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>treeNodeEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[treeNodeEvent.node.caption = "节点列表";]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </TreeNodeListener>
+            </Listeners>
+        </TreeViewComp>
+    </Components>
+    <Menus>
+    	<ContextMenuComp id="funnodetree_menu" width="120">
+    		<MenuItem id="addShortCutItem" text="添加到快捷方式">
+    			<Listeners>
+                    <MouseListener id="addShortCutMouseListener" serverClazz="nc.uap.lfw.ncadapter.main.AddShortCutMouseListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="true">
+                                <SubmitRule cardSubmit="false" tabSubmit="false">
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+    		</MenuItem>
+        </ContextMenuComp>
+        <ContextMenuComp id="shortcut_menu" width="120">
+    		<MenuItem id="delShortCutItem" text="删除快捷方式">
+    			<Listeners>
+                    <MouseListener id="delShortCutMouseListener" serverClazz="nc.uap.lfw.ncadapter.main.DelShortCutMouseListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="true">
+                                <SubmitRule cardSubmit="false" tabSubmit="false">
+                                	<Widget cardSubmit="false" id="navwidget" tabSubmit="false">
+                                		<Dataset id="shortcutds" type="ds_current_line">
+                                		</Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+    		</MenuItem>
+        </ContextMenuComp>
+    </Menus>
+</Widget>

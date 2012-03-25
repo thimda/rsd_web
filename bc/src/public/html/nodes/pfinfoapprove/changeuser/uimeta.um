@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+    <BorderLayout>
+        <BorderPanel position="center">
+              <FlowvLayout autoFill="0" id="flowva">
+                <FlowvPanel height="300">
+                     <FlowhLayout>
+                        <FlowhPanel>
+                       		<Border id="border3a" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
+                    			<BorderTrue>
+                                    <GridComp id="grid_left" widgetId="changeuser">
+                               		</GridComp>
+                               	 </BorderTrue>
+            				</Border>
+                        </FlowhPanel>
+                        <FlowhPanel width="50">
+                        <Border id="border2a" showBottom="true" showLeft="false" leftWidth="0" rightWidth="0" showRight="false" showTop="true" width="1">
+                			<BorderTrue>
+                            <FlowvLayout autoFill="0" id="flowvb">
+                                <FlowvPanel>
+                                </FlowvPanel>
+                                <FlowvPanel>
+                                    <Button id="btn_right" widgetId="changeuser">
+                                    </Button>
+                                </FlowvPanel>
+                                <FlowvPanel>
+                                    <Button id="btn_left" widgetId="changeuser">
+                                    </Button>
+                                </FlowvPanel>
+                                <FlowvPanel>
+                                </FlowvPanel>
+                            </FlowvLayout>
+                               	</BorderTrue>
+            					</Border>
+                            </FlowhPanel>
+                            <FlowhPanel>
+                            <Border id="border4a" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
+                    			<BorderTrue>
+                                <GridComp id="grid_right" widgetId="changeuser">
+                                </GridComp>
+                        	</BorderTrue>
+        					</Border>
+                            </FlowhPanel>
+                        </FlowhLayout>
+                	</FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel width="150">
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="btn_ok" widgetId="changeuser">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                            <Button id="btn_cancel" widgetId="changeuser">
+                            </Button>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+         </BorderPanel>
+    </BorderLayout>
+</UIMeta>

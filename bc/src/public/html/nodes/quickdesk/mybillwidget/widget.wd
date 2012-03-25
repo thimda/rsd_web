@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset enabled="false" id="billds" lazyLoad="false" pageSize="20" voMeta="nc.uap.lfw.quickdesk.MainPageBillVO">
+                <Fields>
+                    <Field field="pk_bill" id="pk_bill">
+                    </Field>
+                    <Field field="billcode" id="billcode">
+                    </Field>
+                    <Field field="billdesc" id="billdesc">
+                    </Field>
+                    <Field field="approver" id="approver">
+                    </Field>
+                    <Field field="billstatus" id="billstatus">
+                    </Field>
+                    <Field field="billtype" id="billtype">
+                    </Field>
+                    <Field field="funcode" id="funcode">
+                    </Field>
+                    <Field field="menuitemcode" id="menuitemcode">
+                    </Field>
+                    <Field field="menuitemname" id="menuitemname">
+                    </Field>
+                    <Field field="funurl" id="funurl">
+                    </Field>
+                    <Field field="billtypename" id="billtypename">
+                    </Field>
+                    <Field field="maindsid" id="maindsid">
+                    </Field>
+                 </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.quickdesk.MainPageBillDsServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="mybillwidget" tabSubmit="false">
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <GridComp dataset="billds" editable="true" height="100%" id="billgrid" multiSelect="false" width="100%">
+            <Column autoExpand="false" dataType="String" id="operate" renderType="MyDjOperateRender" text="操作" visible="true" width="160">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="pk_bill" id="pk_bill" text="主键" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="billcode" id="billcode" text="单据号" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="approver" id="approver" text="审批人" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="billtype" id="billtype" text="单据类型" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="billtypename" id="billtypename" text="单据类型" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="billstatus" id="billstatus" renderType="MyBillStateRender" text="单据状态" visible="true" width="120">
+            </Column>
+            <Column autoExpand="true" dataType="String" editorType="StringText" field="billdesc" id="billdesc" text="单据描述" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="funcode" id="funcode" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="funurl" id="funurl" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="menuitemcode" id="menuitemcode" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="menuitemname" id="menuitemname" visible="false" width="120">
+            </Column>
+        </GridComp>
+        <ToolBarComp enabled="true" heigth="100%" id="mybilltoolbar" left="0" top="0" transparent="true" visible="true" width="100%">
+            <ToolBarTitle color="black" i18nName="我的报销单据" bold="true" refImg="titleicon.gif" text="我的报销单据">
+            </ToolBarTitle>
+        </ToolBarComp>
+        <LinkComp hasImg="false" i18nName="一周内" id="oneweekless" target="#" top="2">
+        </LinkComp>
+        <LinkComp hasImg="false" i18nName="一月内" id="onemonthless" target="#" top="2">
+        </LinkComp>
+        <LinkComp hasImg="false" i18nName="两月内" id="twomonthsless" target="#" top="2">
+        </LinkComp>
+        <LinkComp hasImg="false" i18nName="三月内" id="threemonthsless" target="#" top="2">
+        </LinkComp>
+        <LabelComp enabled="true" heigth="22" id="mybilllabel" left="0" position="relative" text="我的报销单据" top="0" visible="true" width="100">
+        </LabelComp>
+        <LinkComp hasImg="false" i18nName="高级" id="billsernior" target="#" top="2">
+            <Listeners>
+                <LinkListener id="billLinkListener" serverClazz="nc.uap.lfw.quickdesk.MainBillSeniorClickListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="mybillwidget" tabSubmit="false">
+                                    <Dataset id="billds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>linkEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </LinkListener>
+            </Listeners>
+        </LinkComp>
+        <ImageComp enabled="true" floatLeft="false" floatRight="false" heigth="100%" id="billsearchimage" image1="search.gif" image2="search.gif" imageInact="search.gif" left="0" top="0" visible="true" width="20">
+            <Listeners>
+                <MouseListener id="billsearchimageListener" serverClazz="nc.uap.lfw.quickdesk.MainBillSearchListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="mybillwidget" tabSubmit="false">
+                                    <Dataset id="billds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ImageComp>
+        <CheckBoxComp checked="false" dataType="boolean" editorType="CheckBox" focus="false" i18nName="包含已完成单据" id="completedbillcheckbox" textAlign="left" textWidth="0" visible="true">
+            <Listeners>
+                <TextListener id="billcompletedListener" serverClazz="nc.uap.lfw.quickdesk.MainbillComplateckServerListener">
+                    <Events>
+                        <Event async="true" name="valueChanged" onserver="true">
+                            <SubmitRule cardSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="mybillwidget" tabSubmit="false">
+                                    <Dataset id="billds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>valueChangeEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </TextListener>
+            </Listeners>
+        </CheckBoxComp>
+        <TextComp editorType="StringText" focus="false" height="100%" id="billsearchtextcomp" textAlign="left" visible="true" width="100%" tip="搜索我的报销单据">
+            <Listeners>
+                <KeyListener id="billsearchtextListener" serverClazz="nc.uap.lfw.quickdesk.MainbillSearchTextServerListener">
+                    <Events>
+                        <Event async="true" name="onEnter" onserver="true">
+                            <SubmitRule cardSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="mybillwidget" tabSubmit="false">
+                                    <Dataset id="billds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>keyEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </KeyListener>
+            </Listeners>
+        </TextComp>
+    </Components>
+</Widget>

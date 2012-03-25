@@ -1,0 +1,12 @@
+package nc.uap.lfw.core.ctrl;
+
+import java.io.Serializable;
+
+
+/**
+ * View控制器声明接口
+ * @author dengjt
+ *
+ */
+public interface ViewController extends Serializable {
+}

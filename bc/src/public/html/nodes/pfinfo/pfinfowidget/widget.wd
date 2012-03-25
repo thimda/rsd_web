@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset enabled="false" id="flowHistroyDs" lazyLoad="false" voMeta="nc.vo.pub.workflownote.WorkflownoteVO">
+                <Fields>
+                    <Field field="pk_checkflow" id="pk_checkflow">
+                    </Field>
+                    <Field field="pk_org" id="pk_org">
+                    </Field>
+                    <Field field="actiontype" id="actiontype">
+                    </Field>
+                    <Field field="billid" id="billid">
+                    </Field>
+                    <Field field="billno" id="billno">
+                    </Field>
+                    <Field field="pk_billtype" id="pk_billtype">
+                    </Field>
+                    <Field field="checknote" id="checknote">
+                    </Field>
+                    <Field dataType="UFTime" field="senddate" id="senddate">
+                    </Field>
+                    <Field dataType="UFTime" field="dealdate" id="dealdate">
+                    </Field>
+                    <Field field="ischeck" id="ischeck">
+                    </Field>
+                    <Field field="messagenote" id="messagenote">
+                    </Field>
+                    <Field dataType="UFBoolean" field="receivedeleteflag" id="receivedeleteflag">
+                    </Field>
+                    <Field field="senderman" id="senderman">
+                    </Field>
+                    <Field field="checkman" id="checkman">
+                    </Field>
+                    <Field field="approveresult" id="approveresult">
+                    </Field>
+                    <Field dataType="Integer" field="approvestatus" id="approvestatus">
+                    </Field>
+                    <Field dataType="Integer" field="priority" id="priority">
+                    </Field>
+                    <Field field="pk_wf_task" id="pk_wf_task">
+                    </Field>
+                    <Field field="userobject" id="userobject">
+                    </Field>
+                    <Field dataType="Integer" field="workflow_type" id="workflow_type">
+                    </Field>
+                    <Field field="sendername" id="sendername">
+                    </Field>
+                    <Field field="checkname" id="checkname">
+                    </Field>
+                    <Field field="taskInfo" id="taskInfo">
+                    </Field>
+                    <Field field="observer" id="observer">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.billtemplate.workflow.WorkflowHistoryLoader">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+        <ComboDatas>
+           <StaticComboData id="isCheckComp">
+                <ComboItem i18nName="是" value="Y">
+                </ComboItem>
+                <ComboItem i18nName="否" value="N">
+                </ComboItem>
+            </StaticComboData>
+        </ComboDatas>
+    </Models>
+    <Components>
+        <GridComp dataset="flowHistroyDs" editable="false" height="100%" id="flowHistoryGrid" multiSelect="false" width="100%">
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="pk_checkflow" id="pk_checkflow" text="主键" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="pk_org" id="pk_org" text="公司" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="actiontype" id="actiontype" text="扩展代码" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="billid" id="billid" text="单据ID" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="billno" id="billno" text="单据号" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="sendername" id="sendername" text="发送人" i18nName="pfinfo_sendername" langDir="lfw" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="UFTime" editorType="DateText" field="senddate" id="senddate" renderType="DefaultRender" text="发送时间" i18nName="pfinfo_senddate" langDir="lfw" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="checkname" id="checkname" text="审核人" visible="true" width="120" i18nName="pfinfo_checkname" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="UFTime" editorType="DateText" field="dealdate" id="dealdate" renderType="DefaultRender" text="处理时间" visible="true" width="120" i18nName="pfinfo_dealdate" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="pk_billtype" id="pk_billtype" text="单据类型主键" visible="false" width="120" >
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="checknote" id="checknote" text="批语" visible="true" width="120" i18nName="pfinfo_checknote" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="ComboBox" refComboData="isCheckComp" field="ischeck" renderType="ComboRender" id="ischeck" text="是否审批"  i18nName="pfinfo_isapproveornot" langDir="lfw" visible="true" width="120">
+            </Column>
+            <Column autoExpand="true" dataType="String" editorType="StringText" field="messagenote" id="messagenote" text="消息内容" visible="true" width="120" i18nName="消息内容" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="UFBoolean" editorType="CheckBox" field="receivedeleteflag" id="receivedeleteflag" renderType="BooleanRender" text="接受删除标记" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="senderman" id="senderman" text="发送人pk" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="checkman" id="checkman" text="接收人pk" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="approveresult" id="approveresult" text="任务项的处理结果" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="Integer" editorType="IntegerText" field="approvestatus" id="approvestatus" renderType="IntegerRender" text="工作项的处理状态" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="Integer" editorType="IntegerText" field="priority" id="priority" renderType="IntegerRender" text="任务优先权" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="pk_wf_task" id="pk_wf_task" text="任务pk" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="userobject" id="userobject" text="用户对象" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="Integer" editorType="IntegerText" field="workflow_type" id="workflow_type" renderType="IntegerRender" text="工作流类型" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="taskInfo" id="taskInfo" text="任务信息" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editorType="StringText" field="observer" id="observer" text="工作项处理后 需要通知的用户" visible="false" width="120">
+            </Column>
+        </GridComp>
+        <LabelComp enabled="true" heigth="22" id="flowHistoryLabel" left="0" position="center" i18nName="pfinfo_workflowhistory" langDir="lfw" text="流程历史信息" top="0" visible="true" width="100">
+        </LabelComp>
+        <ImageComp enabled="true" floatLeft="false" floatRight="false" id="wfimage" image1="wfimg?billType=${billType}&amp;billId=${billId}" image2="wfimg?billType=${billType}&amp;billId=${billId}" left="0" top="0" visible="true">
+        </ImageComp>
+        <ButtonComp align="left" height="22" id="closebutton" text="关闭" i18nName="pfinfo_close" langDir="lfw"  width="60">
+            <Listeners>
+                <MouseListener id="closeListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[parent.hideDialog('pfinfoDialog', true);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+</Widget>

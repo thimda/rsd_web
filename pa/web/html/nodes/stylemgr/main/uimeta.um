@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <Splitter boundMode="0" divideSize="20" hideBar="true" id="spliter1" inverse="0" oneTouch="true" orientation="h" spliterWidth="4">
+        <SplitterOne id = "splitter_1">
+            <TreeViewComp id="tree_funcnode" widgetId="main">
+            </TreeViewComp>
+        </SplitterOne>
+        <SplitterTwo id = "splitter_2" >
+        	<Splitter boundMode="0" divideSize="50" hideBar="true" id="spliter11" inverse="0" oneTouch="true" orientation="v" spliterWidth="4">
+                <SplitterOne id = "splitter_11">
+                  	<GridComp id="grid_template" widgetId="main">
+            		</GridComp>
+                </SplitterOne>
+                <SplitterTwo id = "splitter_12">
+                </SplitterTwo>
+            </Splitter>  
+        </SplitterTwo> 
+    </Splitter>
+</UIMeta>

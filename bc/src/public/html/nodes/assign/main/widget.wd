@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="400" i18nName="指派" width="600">
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="leftds" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" field="cuserid" id="cuserid" isPrimaryKey="false" nullAble="true" text="cuserid">
+                    </Field>
+                    <Field dataType="String" defaultValue="用户名称" field="user_name" id="user_name" isPrimaryKey="false" nullAble="true" text="username">
+                    </Field>
+                    <Field dataType="String" defaultValue="用户编码" field="user_code" id="user_code" isPrimaryKey="false" nullAble="true" text="usercode">
+                    </Field>
+                 </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.pfinfoapprove.AssignInfoDelegator">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="leftds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="rightds" lazyLoad="true">
+                <Fields>
+                   <Field dataType="String" field="cuserid" id="cuserid" isPrimaryKey="false" nullAble="true" text="cuserid">
+                    </Field>
+                    <Field dataType="String" defaultValue="用户名称" field="user_name" id="user_name" isPrimaryKey="false" nullAble="true" text="username">
+                    </Field>
+                    <Field dataType="String" defaultValue="用户编码" field="user_code" id="user_code" isPrimaryKey="false" nullAble="true" text="usercode">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="rightds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <GridComp dataset="leftds" editable="true" height="100%" id="leftgrid" multiSelect="false" showColInfo="true" showHeader="true" showNumCol="false" showSumRow="false" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_name" id="user_name" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户名称" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_code" id="user_code" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户编码" visible="true" width="120">
+            </Column>
+        </GridComp>
+        <GridComp dataset="rightds" editable="true" height="100%" id="rightgrid" multiSelect="false" showColInfo="true" showHeader="true" showNumCol="false" showSumRow="false" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_name" id="user_name" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户名称" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="user_code" id="user_code" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="用户编码" visible="true" width="120">
+            </Column>
+        </GridComp>
+        <ButtonComp align="left" enabled="true" height="22" id="assignokButton" text="确定" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="assignOkListener" serverClazz="nc.uap.lfw.pfinfoapprove.AssignOkMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="leftds" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="rightds" type="ds_all_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="rightbutton" refImg="/themes/${t}/images/pfinfo/rightbutton.gif"  visible="true" width="60">
+            <Listeners>
+                <MouseListener id="rightButtonListener" serverClazz="nc.uap.lfw.pfinfoapprove.AssignRightInfoListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="leftds" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="rightds" type="ds_all_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="leftbutton"  refImg="/themes/${t}/images/pfinfo/leftbutton.gif" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="leftButtonListener" serverClazz="nc.uap.lfw.pfinfoapprove.AssignLeftMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="leftds" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="rightds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="assingCancelButton" text="取消" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="assignCancleListener" serverClazz="nc.uap.lfw.pfinfoapprove.AssignPageCancelMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="leftds" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="rightds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

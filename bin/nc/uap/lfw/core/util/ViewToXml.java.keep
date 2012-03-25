@@ -1,0 +1,2474 @@
+/**
+ * 
+ */
+package nc.uap.lfw.core.util;
+
+import java.io.File;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import nc.bs.framework.common.NCLocator;
+import nc.bs.logging.Logger;
+import nc.uap.lfw.conf.persist.WidgetToXml;
+import nc.uap.lfw.core.LfwRuntimeEnvironment;
+import nc.uap.lfw.core.base.ExtAttribute;
+import nc.uap.lfw.core.combodata.CombItem;
+import nc.uap.lfw.core.combodata.ComboData;
+import nc.uap.lfw.core.combodata.DynamicComboDataConf;
+import nc.uap.lfw.core.combodata.MDComboDataConf;
+import nc.uap.lfw.core.combodata.StaticComboData;
+import nc.uap.lfw.core.common.EditorTypeConst;
+import nc.uap.lfw.core.comp.BaseChartModel;
+import nc.uap.lfw.core.comp.ButtonComp;
+import nc.uap.lfw.core.comp.CardLayout;
+import nc.uap.lfw.core.comp.ChartComp;
+import nc.uap.lfw.core.comp.ChartConfig;
+import nc.uap.lfw.core.comp.CheckBoxComp;
+import nc.uap.lfw.core.comp.CheckboxGroupComp;
+import nc.uap.lfw.core.comp.CodeTreeLevel;
+import nc.uap.lfw.core.comp.ContextMenuComp;
+import nc.uap.lfw.core.comp.ExcelColumn;
+import nc.uap.lfw.core.comp.ExcelColumnGroup;
+import nc.uap.lfw.core.comp.ExcelComp;
+import nc.uap.lfw.core.comp.FormComp;
+import nc.uap.lfw.core.comp.FormElement;
+import nc.uap.lfw.core.comp.GridColumn;
+import nc.uap.lfw.core.comp.GridColumnGroup;
+import nc.uap.lfw.core.comp.GridComp;
+import nc.uap.lfw.core.comp.GridTreeLevel;
+import nc.uap.lfw.core.comp.IExcelColumn;
+import nc.uap.lfw.core.comp.IFrameComp;
+import nc.uap.lfw.core.comp.IGridColumn;
+import nc.uap.lfw.core.comp.ImageComp;
+import nc.uap.lfw.core.comp.LabelComp;
+import nc.uap.lfw.core.comp.LinkComp;
+import nc.uap.lfw.core.comp.MenuItem;
+import nc.uap.lfw.core.comp.MenubarComp;
+import nc.uap.lfw.core.comp.OutlookItem;
+import nc.uap.lfw.core.comp.OutlookbarComp;
+import nc.uap.lfw.core.comp.PanelLayout;
+import nc.uap.lfw.core.comp.ProgressBarComp;
+import nc.uap.lfw.core.comp.RadioComp;
+import nc.uap.lfw.core.comp.RadioGroupComp;
+import nc.uap.lfw.core.comp.RecursiveTreeLevel;
+import nc.uap.lfw.core.comp.ReferenceComp;
+import nc.uap.lfw.core.comp.SelfDefComp;
+import nc.uap.lfw.core.comp.SimpleTreeLevel;
+import nc.uap.lfw.core.comp.TabItem;
+import nc.uap.lfw.core.comp.TabLayout;
+import nc.uap.lfw.core.comp.TextAreaComp;
+import nc.uap.lfw.core.comp.ToolBarComp;
+import nc.uap.lfw.core.comp.ToolBarItem;
+import nc.uap.lfw.core.comp.ToolBarTitle;
+import nc.uap.lfw.core.comp.TreeLevel;
+import nc.uap.lfw.core.comp.TreeViewComp;
+import nc.uap.lfw.core.comp.WebComponent;
+import nc.uap.lfw.core.comp.WebPartComp;
+import nc.uap.lfw.core.comp.text.ComboBoxComp;
+import nc.uap.lfw.core.comp.text.TextComp;
+import nc.uap.lfw.core.data.Dataset;
+import nc.uap.lfw.core.data.DatasetRelation;
+import nc.uap.lfw.core.data.DatasetRelations;
+import nc.uap.lfw.core.data.Field;
+import nc.uap.lfw.core.data.FieldRelation;
+import nc.uap.lfw.core.data.FieldRelations;
+import nc.uap.lfw.core.data.FieldSet;
+import nc.uap.lfw.core.data.MDField;
+import nc.uap.lfw.core.data.MatchField;
+import nc.uap.lfw.core.data.MdDataset;
+import nc.uap.lfw.core.data.PubDataset;
+import nc.uap.lfw.core.data.PubField;
+import nc.uap.lfw.core.data.RefDataset;
+import nc.uap.lfw.core.data.RefMdDataset;
+import nc.uap.lfw.core.data.RefPubDataset;
+import nc.uap.lfw.core.data.WhereField;
+import nc.uap.lfw.core.event.conf.JsListenerConf;
+import nc.uap.lfw.core.exception.LfwRuntimeException;
+import nc.uap.lfw.core.log.LfwLogger;
+import nc.uap.lfw.core.page.LfwWidget;
+import nc.uap.lfw.core.page.PluginDesc;
+import nc.uap.lfw.core.page.PluginDescItem;
+import nc.uap.lfw.core.page.PlugoutDesc;
+import nc.uap.lfw.core.page.PlugoutDescItem;
+import nc.uap.lfw.core.page.PlugoutEmitItem;
+import nc.uap.lfw.core.page.manager.PoolObjectManager;
+import nc.uap.lfw.core.persistence.PersistenceUtil;
+import nc.uap.lfw.core.refnode.IRefNode;
+import nc.uap.lfw.core.refnode.MasterFieldInfo;
+import nc.uap.lfw.core.refnode.NCRefNode;
+import nc.uap.lfw.core.refnode.RefNode;
+import nc.uap.lfw.core.refnode.RefNodeRelation;
+import nc.uap.lfw.core.refnode.RefNodeRelations;
+import nc.uap.lfw.core.refnode.SelfDefRefNode;
+import nc.uap.lfw.core.uimodel.conf.Model;
+import nc.uap.lfw.core.uimodel.conf.ViewConf;
+import nc.uap.lfw.design.itf.IDatasetProvider;
+import nc.uap.lfw.util.JsURLEncoder;
+import nc.vo.jcom.xml.XMLUtil;
+
+import org.apache.commons.digester.Digester;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+/**
+ * @author chouhl
+ *
+ */
+public class ViewToXml {
+
+	public static final String DYN_ATTRIBUTE_KEY = "DYN";
+	
+	/**
+	 * 修改View引用ID（RefID）
+	 * @param filePath
+	 * @param fileName
+	 * @param projectPath
+	 * @param refId
+	 */
+	public static void toXml(String filePath, String fileName, String projectPath, String refId){
+		Digester d = new Digester();
+		d.addObjectCreate("Widget", LfwWidget.class);
+		d.addSetProperties("Widget");
+		try {
+			LfwWidget widget = (LfwWidget) d.parse(new File(filePath + "/" + fileName));
+			widget.setRefId(refId);
+			WidgetToXml.toXml(filePath, fileName, projectPath, widget);
+		} catch (Exception e) {
+			LfwLogger.error(e.getMessage(), e);
+		}
+	}
+	/**
+	 * 将LfwWidget持久化为xml文件
+	 * @param filePath 文件全路径
+	 * @param fileName 文件名
+	 * @param projectPath 工程路径
+	 * @param widget
+	 */
+	public static void toXml(String filePath, String fileName, String projectPath, ViewConf widget) {
+		toXml(filePath, fileName, projectPath, (LfwWidget)widget);
+	}
+	
+	public static void toXml(String filePath, String fileName, String projectPath, LfwWidget widget) {
+		Document doc = getDocumentByWidget(widget);
+	
+		// 写出文件
+		PersistenceUtil.toXmlFile(doc, filePath, fileName);
+		
+		if(widget.getExtendAttribute(LfwWidget.POOLWIDGET) != null){
+			PoolObjectManager.refreshWidgetPool(LfwRuntimeEnvironment.getRootPath(), widget);
+		}
+	}
+	
+	public static String toString(LfwWidget widget){
+		Document doc = getDocumentByWidget(widget);
+		Writer wt = new StringWriter();
+		XMLUtil.printDOMTree(wt, doc, 0, "UTF-8");
+		String xmlStr = wt.toString();
+		return xmlStr;
+	}
+	
+	private static Document getDocumentByWidget(LfwWidget widget){
+		Document doc = XMLUtil.getNewDocument();
+		Element rootNode = doc.createElement(ViewConf.TagName);
+		doc.appendChild(rootNode);
+		rootNode.setAttribute("dialog", String.valueOf(widget.isDialog()));
+		if(isNotNullString(widget.getId())){
+			rootNode.setAttribute("id", widget.getId());
+		}
+		if(isNotNullString(widget.getFrom())){
+			rootNode.setAttribute("from", widget.getFrom());
+		}
+		
+		if(isNotNullString(widget.getI18nName())){
+			rootNode.setAttribute("i18nName", widget.getI18nName());
+		}
+		if(isNotNullString(widget.getRefId())){
+			rootNode.setAttribute("refId", widget.getRefId());
+		}
+		if(isNotNullString(widget.getControllerClazz())){
+			rootNode.setAttribute("controllerClazz", widget.getControllerClazz());
+		}
+		rootNode.setAttribute("sourcePackage", widget.getSourcePackage());
+//		if(widget.getMasterDataset() != null && !widget.getMasterDataset().equals(""))
+//			rootNode.setAttribute("masterDataset", widget.getMasterDataset());
+//		if(widget.getSlaveDatasets() != null && !widget.getSlaveDatasets().equals(""))
+//			rootNode.setAttribute("slaveDatasets", widget.getSlaveDatasets());
+		
+		Map<String, ExtAttribute> extAttrs = widget.getExtendMap();
+		if(extAttrs != null && !extAttrs.isEmpty()){
+			Element attributesNode = doc.createElement("Attributes");
+			rootNode.appendChild(attributesNode);
+			
+			Iterator<String> attrIt = extAttrs.keySet().iterator();
+			while(attrIt.hasNext()){
+				String attrKey = attrIt.next();
+				ExtAttribute attr = extAttrs.get(attrKey);
+				if(attr.getValue() != null){
+					if(!attr.getKey().toString().startsWith(DYN_ATTRIBUTE_KEY) && ((attr.getValue() instanceof String) || (attr.getValue() instanceof Integer))){
+						Element attributeNode = doc.createElement("Attribute");
+						attributesNode.appendChild(attributeNode);
+						Element keyNode = doc.createElement("Key");
+						keyNode.appendChild(doc.createTextNode(attrKey));
+						attributeNode.appendChild(keyNode);
+						Element valueNode = doc.createElement("Value");
+						if(attr.getValue() != null)
+							valueNode.appendChild(doc.createTextNode(attr.getValue().toString()));
+						attributeNode.appendChild(valueNode);
+					}
+				}
+			}
+		}
+		//引用元数据描述
+		addModelsGroups(doc, rootNode, widget);
+		
+		//增加plugin plugout 描述
+		addPlugDesc(doc, rootNode, widget);
+		
+		//Events
+		AMCUtil.addEvents(doc, widget.getEventConfs(), rootNode);
+		
+		addModels(doc, rootNode, widget);
+	
+//		addComboDatas(doc, rootNode, widget);
+		
+		addComponents(doc, rootNode, widget);
+		
+		addContainers(doc, rootNode, widget);
+		
+		addMenus(doc, rootNode, widget);
+		// 写出文件
+		return doc;
+		
+//		PersistenceUtil.toXmlFile(doc, filePath, fileName);
+		
+//		if(widget.getExtendAttribute(LfwWidget.POOLWIDGET) != null){
+//			PoolObjectManager.refreshWidgetPool(LfwRuntimeEnvironment.getRootPath(), widget);
+//		}
+	}
+	
+	/**
+	 * 增加plugin plugout 描述
+	 * @param doc
+	 * @param rootNode
+	 * @param widget
+	 */
+	private static void addPlugDesc(Document doc, Element rootNode, LfwWidget widget) {
+		Element plugoutNodes = doc.createElement("PlugoutDescs");
+		rootNode.appendChild(plugoutNodes);
+		//plugout
+		List<PlugoutDesc> plugoutDescs =  widget.getPlugoutDescs();
+		if (plugoutDescs != null){
+			for (PlugoutDesc plugoutDesc : plugoutDescs){
+				Element plugoutDescNodes = doc.createElement("PlugoutDesc");
+				plugoutNodes.appendChild(plugoutDescNodes);
+				if (isNotNullString(plugoutDesc.getId()))
+					plugoutDescNodes.setAttribute("id", plugoutDesc.getId());
+				
+				List<PlugoutDescItem> plugoutDescItems =  plugoutDesc.getDescItemList();
+				if (plugoutDescItems != null){
+					for (PlugoutDescItem descItem : plugoutDescItems){
+						Element plugoutDescItemNodes = doc.createElement("PlugoutDescItem");
+						plugoutDescNodes.appendChild(plugoutDescItemNodes);
+						if (isNotNullString(descItem.getName()))
+							plugoutDescItemNodes.setAttribute("name", descItem.getName());
+						if (isNotNullString(descItem.getType()))
+							plugoutDescItemNodes.setAttribute("type", descItem.getType());
+						if (isNotNullString(descItem.getSource()))
+							plugoutDescItemNodes.setAttribute("source", descItem.getSource());
+						if (isNotNullString(descItem.getValue()))
+							plugoutDescItemNodes.setAttribute("value", descItem.getValue());
+						if (isNotNullString(descItem.getDesc()))
+							plugoutDescItemNodes.setAttribute("desc", descItem.getDesc());
+						if (isNotNullString(descItem.getClazztype()))
+							plugoutDescItemNodes.setAttribute("clazztype", descItem.getClazztype());
+					}
+				}
+				List<PlugoutEmitItem> plugoutEmitItems =  plugoutDesc.getEmitList();
+				if (plugoutEmitItems != null){
+					for (PlugoutEmitItem emitItem : plugoutEmitItems){
+						Element plugoutEmitItemNodes = doc.createElement("PlugoutEmitItem");
+						plugoutDescNodes.appendChild(plugoutEmitItemNodes);
+						if (isNotNullString(emitItem.getId()))
+							plugoutEmitItemNodes.setAttribute("id", emitItem.getId());
+						if (isNotNullString(emitItem.getSource()))
+							plugoutEmitItemNodes.setAttribute("source", emitItem.getSource());
+						if (isNotNullString(emitItem.getType()))
+							plugoutEmitItemNodes.setAttribute("type", emitItem.getType());
+						if (isNotNullString(emitItem.getDesc()))
+							plugoutEmitItemNodes.setAttribute("desc", emitItem.getDesc());
+					}
+				}
+			}
+		}
+		//plugin
+		Element pluginNodes = doc.createElement("PluginDescs");
+		rootNode.appendChild(pluginNodes);
+		List<PluginDesc> pluginDescs =  widget.getPluginDescs();
+		if (pluginDescs != null){
+			for (PluginDesc pluginDesc : pluginDescs){
+				Element pluginDescNodes = doc.createElement("PluginDesc");
+				pluginNodes.appendChild(pluginDescNodes);
+				if (isNotNullString(pluginDesc.getId()))
+					pluginDescNodes.setAttribute("id", pluginDesc.getId());
+
+				//提交规则
+//				EventSubmitRule submitRule = pluginDesc.getSubmitRule();
+//				if(submitRule != null){
+//					Element submitRuleNode = doc.createElement("SubmitRule");
+//					submitRuleNode.setAttribute("cardSubmit", "" + submitRule.isCardSubmit());
+//					submitRuleNode.setAttribute("tabSubmit", "" + submitRule.isTabSubmit());
+//					submitRuleNode.setAttribute("panelSubmit", "" + submitRule.isPanelSubmit());
+//					pluginDescNodes.appendChild(submitRuleNode);
+//					// 父提交规则
+//					EventSubmitRule pSubmitRule = submitRule.getParentSubmitRule();
+//					if(pSubmitRule != null){
+//						Element pSubmitRuleNode = doc.createElement("SubmitRule");
+//						pSubmitRuleNode.setAttribute("pagemeta", pSubmitRule.getPagemeta());
+//						pSubmitRuleNode.setAttribute("cardSubmit", "" + pSubmitRule.isCardSubmit());
+//						pSubmitRuleNode.setAttribute("tabSubmit", "" + pSubmitRule.isTabSubmit());
+//						pSubmitRuleNode.setAttribute("panelSubmit", "" + pSubmitRule.isPanelSubmit());
+//						submitRuleNode.appendChild(pSubmitRuleNode);
+//						Map<String, WidgetRule> pWidgetRuleMap = pSubmitRule.getWidgetRules();
+//						if(!pWidgetRuleMap.isEmpty()){
+//							PersistenceUtil.addSubmitContent(doc, pSubmitRuleNode, pWidgetRuleMap);
+//						}
+//					}
+//					
+//					Map<String, WidgetRule> widgetRuleMap = submitRule.getWidgetRules();
+//					if(!widgetRuleMap.isEmpty()){
+//						PersistenceUtil.addSubmitContent(doc, submitRuleNode, widgetRuleMap);
+//					}
+//					PersistenceUtil.addParameters(doc, submitRule.getParams(), submitRuleNode);
+//				}
+				
+				//pluginDescItems
+				List<PluginDescItem> pluginDescItems =  pluginDesc.getDescItemList();
+				if (pluginDescItems != null){
+					for (PluginDescItem descItem : pluginDescItems){
+						Element pluginDescItemNodes = doc.createElement("PluginDescItem");
+						pluginDescNodes.appendChild(pluginDescItemNodes);
+						if (isNotNullString(descItem.getId()))
+							pluginDescItemNodes.setAttribute("id", descItem.getId());
+						if (isNotNullString(descItem.getValue()))
+							pluginDescItemNodes.setAttribute("value", descItem.getValue());
+						if (isNotNullString(descItem.getClazztype()))
+							pluginDescItemNodes.setAttribute("clazztype", descItem.getClazztype());
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 增加menus
+	 * @param doc
+	 * @param rootNode
+	 * @param widget
+	 */
+	private static void addMenus(Document doc, Element rootNode, LfwWidget widget) {
+		Element menusNodes = doc.createElement("Menus");
+		rootNode.appendChild(menusNodes);
+		//menubarcomp
+		MenubarComp[] menubars = widget.getViewMenus().getMenuBars();
+		if(menubars.length > 0){
+			for (int i = 0; i < menubars.length; i++){
+				MenubarComp menubar = menubars[i];
+				Element menubarNode = doc.createElement("MenuBarComp");
+				menusNodes.appendChild(menubarNode);
+				if(isNotNullString(menubar.getId()))
+					menubarNode.setAttribute("id", menubar.getId());
+				if(isNotNullString(menubar.getContextMenu()))
+					menubarNode.setAttribute("contextMenu", menubar.getContextMenu());
+				
+//				Map<String, JsListenerConf> listenerMap = menubar.getListenerMap();
+//				if(listenerMap != null && !listenerMap.isEmpty())
+//				{
+//					JsListenerConf[] listeners = listenerMap.values().toArray(new JsListenerConf[0]);
+//					PersistenceUtil.addListeners(doc, listeners, menubarNode);
+//				}
+				
+				//Events
+				AMCUtil.addEvents(doc, menubar.getEventConfs(), menubarNode);
+					
+				List<MenuItem> menuItems = menubar.getMenuList();
+				if(menuItems != null && menuItems.size() > 0)
+					processMenuItem(menuItems.toArray(new MenuItem[0]), menubarNode, doc);
+			}
+		}
+		// <ContextMenuComp>
+		ContextMenuComp[] contextMenus = widget.getViewMenus().getContextMenus();
+		if(contextMenus != null && contextMenus.length > 0){
+			int size = contextMenus.length;
+			for (int i = 0; i < size; i++){
+				ContextMenuComp contextMenu = (ContextMenuComp) contextMenus[i];
+				Element contextMenuNode = doc.createElement("ContextMenuComp");
+				menusNodes.appendChild(contextMenuNode);
+				if(isNotNullString( contextMenu.getId())){
+					contextMenuNode.setAttribute("id", contextMenu.getId());
+				}
+				if(isNotNullString(contextMenu.getContextMenu())){
+					contextMenuNode.setAttribute("contextMenu", contextMenu.getContextMenu());
+				}
+//				Map<String, JsListenerConf> listenerMap = contextMenu.getListenerMap();
+//				if(listenerMap != null && !listenerMap.isEmpty()){
+//					JsListenerConf[] listeners = listenerMap.values().toArray(new JsListenerConf[0]);
+//					PersistenceUtil.addListeners(doc, listeners, contextMenuNode);
+//				}
+				
+				//Events
+				AMCUtil.addEvents(doc, contextMenu.getEventConfs(), contextMenuNode);
+				
+				List<MenuItem> menuItems = contextMenu.getItemList();
+				if(menuItems != null && menuItems.size() > 0){
+					processMenuItem(menuItems.toArray(new MenuItem[0]),contextMenuNode, doc);
+				}
+			}
+		}
+	}
+	
+	private static void processMenuItem(MenuItem[] cItems, Element parentNode, Document doc)
+	{
+		for (int i = 0; i < cItems.length; i++){
+			MenuItem menuItem = cItems[i];
+			Element menuItemNode = doc.createElement("MenuItem");
+			parentNode.appendChild(menuItemNode);
+			if(isNotNullString(menuItem.getId()))
+				menuItemNode.setAttribute("id", menuItem.getId());
+			if(menuItem.getI18nName() != null && !menuItem.getI18nName().equals(""))
+				menuItemNode.setAttribute("i18nName", menuItem.getI18nName());
+			if(menuItem.getText() != null && !menuItem.getText().equals(""))
+				menuItemNode.setAttribute("text", menuItem.getText());
+			if(menuItem.getOperatorStatusArray() != null && !menuItem.getOperatorStatusArray().equals(""))
+				menuItemNode.setAttribute("operatorStatusArray", menuItem.getOperatorStatusArray());
+			if(menuItem.getBusinessStatusArray() != null && !menuItem.getBusinessStatusArray().equals(""))
+				menuItemNode.setAttribute("businessStatusArray", menuItem.getBusinessStatusArray());
+			if(menuItem.getUserStatusArray() != null && !menuItem.getUserStatusArray().equals(""))
+				menuItemNode.setAttribute("userStatusArray", menuItem.getUserStatusArray());
+			//可见状态保存
+			if(menuItem.getOperatorVisibleStatusArray() != null && !menuItem.getOperatorVisibleStatusArray().equals(""))
+				menuItemNode.setAttribute("operatorVisibleStatusArray", menuItem.getOperatorVisibleStatusArray());
+			if(menuItem.getBusinessVisibleStatusArray() != null && !menuItem.getBusinessVisibleStatusArray().equals(""))
+				menuItemNode.setAttribute("businessVisibleStatusArray", menuItem.getBusinessVisibleStatusArray());
+			if(menuItem.getUserVisibleStatusArray() != null && !menuItem.getUserVisibleStatusArray().equals(""))
+				menuItemNode.setAttribute("userVisibleStatusArray", menuItem.getUserVisibleStatusArray());
+			//
+			if(menuItem.getImgIcon() != null && !menuItem.getImgIcon().equals(""))
+				menuItemNode.setAttribute("imgIcon", menuItem.getImgIcon());
+			if(menuItem.getImgIconOn() != null && !menuItem.getImgIconOn().equals(""))
+				menuItemNode.setAttribute("imgIconOn", menuItem.getImgIconOn());
+			if(menuItem.getImgIconDisable() != null && !menuItem.getImgIconDisable().equals(""))
+				menuItemNode.setAttribute("imgIconDisable", menuItem.getImgIconDisable());
+			if(menuItem.getLangDir() != null && !menuItem.getLangDir().equals(""))
+				menuItemNode.setAttribute("langDir", menuItem.getLangDir());
+			if(isNotNullString(menuItem.getHotKey()))
+				menuItemNode.setAttribute("hotKey", menuItem.getHotKey());
+			if(isNotNullString(menuItem.getDisplayHotKey()))
+				menuItemNode.setAttribute("displayHotKey", menuItem.getDisplayHotKey());
+			if(menuItem.isSep())
+				menuItemNode.setAttribute("sep", "true");
+			menuItemNode.setAttribute("modifiers", String.valueOf(menuItem.getModifiers()));
+//			Map<String, JsListenerConf> listenerMap = menuItem.getListenerMap();
+//			if(listenerMap != null && !listenerMap.isEmpty()){
+//				JsListenerConf[] listeners = listenerMap.values().toArray(new JsListenerConf[0]);
+//				PersistenceUtil.addListeners(doc, listeners, menuItemNode);
+//			}
+			
+			//Events
+			AMCUtil.addEvents(doc, menuItem.getEventConfs(), menuItemNode);
+			
+			if(menuItem.getChildList() != null && menuItem.getChildList().size() > 0){
+				processMenuItem(menuItem.getChildList().toArray(new MenuItem[0]), menuItemNode, doc);
+			}
+		}
+	}
+	
+	/**
+	 * 增加容器类组件
+	 * @param doc
+	 * @param rootNode
+	 * @param widget
+	 */
+	private static void addContainers(Document doc, Element rootNode, LfwWidget widget) {
+		Element containersNodes = doc.createElement("Containers");
+		rootNode.appendChild(containersNodes);
+		// <TabComp>
+		WebComponent[] tabs = widget.getViewConinters().getContainerByType(TabLayout.class);
+		if(tabs != null){
+			for (int i = 0; i < tabs.length; i++){
+				TabLayout tab = (TabLayout) tabs[i];
+				Element tabNode = doc.createElement("TabComp");
+				containersNodes.appendChild(tabNode);
+				tabNode.setAttribute("id", tab.getId());
+				List<TabItem> tabItemList = tab.getItemList();
+				if(tabItemList != null && tabItemList.size() > 0){
+					for (int j = 0; j < tabItemList.size(); j++){
+						TabItem tabItem = (TabItem) tabItemList.get(j);
+						Element tabItemNode = doc.createElement("TabItem");
+						tabNode.appendChild(tabItemNode);
+						tabItemNode.setAttribute("id", tabItem.getId());
+						if(isNotNullString(tabItem.getI18nName())){
+							tabItemNode.setAttribute("i18nName", tabItem.getI18nName());
+						}
+						if(isNotNullString(tabItem.getText())){
+							tabItemNode.setAttribute("text", tabItem.getText());
+						}
+//						tabItemNode.setAttribute("active", String.valueOf(tabItem.isActive()));
+					}
+				}
+//				Map<String, JsListenerConf> jsListeners = tab.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0){
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), tabNode);
+//				}
+				
+				//Events
+				AMCUtil.addEvents(doc, tab.getEventConfs(), tabNode);
+			}
+		}
+		WebComponent[] cards = widget.getViewConinters().getContainerByType(CardLayout.class);
+		if(cards != null){
+			for (int i = 0; i < cards.length; i++){
+				CardLayout card = (CardLayout) cards[i];
+				Element cardNode = doc.createElement("CardLayout");
+				containersNodes.appendChild(cardNode);
+				cardNode.setAttribute("id", card.getId());
+//				Map<String, JsListenerConf> jsListeners = card.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0){
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), cardNode);
+//				}
+				//Events
+				AMCUtil.addEvents(doc, card.getEventConfs(), cardNode);
+			}
+		}
+		WebComponent[] panels = widget.getViewConinters().getContainerByType(PanelLayout.class);
+		if(panels != null)
+		{
+			for (int i = 0; i < panels.length; i++) {
+				PanelLayout panel = (PanelLayout) panels[i];
+				Element panelNode = doc.createElement("PanelLayout");
+				containersNodes.appendChild(panelNode);
+				panelNode.setAttribute("id", panel.getId());
+//				Map<String, JsListenerConf> jsListeners = panel.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0)
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), panelNode);
+				//Events
+				AMCUtil.addEvents(doc, panel.getEventConfs(), panelNode);
+			}
+		}
+		WebComponent[] outlookbars = widget.getViewConinters().getContainerByType(OutlookbarComp.class);
+		if(outlookbars != null){
+			for (int i = 0; i < outlookbars.length; i++) {
+				OutlookbarComp outlookbar = (OutlookbarComp) outlookbars[i];
+				Element outlookbarNode = doc.createElement("OutlookbarComp");
+				containersNodes.appendChild(outlookbarNode);
+				outlookbarNode.setAttribute("id", outlookbar.getId());
+				List<OutlookItem> outlookList = outlookbar.getItemList();
+				if(outlookList != null && outlookList.size() > 0){
+					for (int j = 0; j < outlookList.size(); j++) {
+						OutlookItem outlookItem = (OutlookItem) outlookList.get(j);
+						Element outlookItemNode = doc.createElement("OutlookItem");
+						outlookbarNode.appendChild(outlookItemNode);
+						outlookItemNode.setAttribute("id", outlookItem.getId());
+						if(isNotNullString(outlookItem.getI18nName()))
+							outlookItemNode.setAttribute("i18nName", outlookItem.getI18nName());
+						if(isNotNullString(outlookItem.getImage()))
+							outlookItemNode.setAttribute("image", outlookItem.getImage());
+					}
+				}
+//				Map<String, JsListenerConf> jsListeners = outlookbar.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0)
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), outlookbarNode);
+				//Events
+				AMCUtil.addEvents(doc, outlookbar.getEventConfs(), outlookbarNode);
+			}
+		}
+		
+	}
+	
+	private static void addComponents(Document doc, Element rootNode, LfwWidget widget) {
+		// <Components>
+		Element compsNodes = doc.createElement("Components");
+		rootNode.appendChild(compsNodes);
+		
+		// <GridComp>
+		WebComponent[] grids = widget.getViewComponents().getComponentByType(GridComp.class);
+		if(grids != null){
+			for (int i = 0; i < grids.length; i++){
+				GridComp grid = (GridComp) grids[i];
+				Element gridNode = null;
+				if(grid.getFrom() == null){
+					gridNode = doc.createElement("GridComp");
+					compsNodes.appendChild(gridNode);
+					gridNode.setAttribute("id", grid.getId());
+					if(isNotNullString(grid.getHeaderRowHeight()))
+						gridNode.setAttribute("headerRowHeight", grid.getHeaderRowHeight());
+					if(isNotNullString(grid.getRowHeight()))
+						gridNode.setAttribute("rowHeight", grid.getRowHeight());
+					
+					if(isNotNullString(grid.getCaption()))
+						gridNode.setAttribute("caption", grid.getCaption());
+					if(isNotNullString(grid.getDataset()))
+						gridNode.setAttribute("dataset", grid.getDataset());
+					gridNode.setAttribute("editable", String.valueOf(grid.isEditable()));
+					
+					if(isNotNullString(grid.getPageSize()))
+						gridNode.setAttribute("pageSize", grid.getPageSize());
+					gridNode.setAttribute("multiSelect", String.valueOf(grid.isMultiSelect()));
+					gridNode.setAttribute("showHeader", String.valueOf(grid.isShowHeader()));
+					gridNode.setAttribute("showColInfo", String.valueOf(grid.isShowColInfo()));
+					gridNode.setAttribute("showSumRow", String.valueOf(grid.isShowSumRow()));
+					gridNode.setAttribute("pagenationTop", String.valueOf(grid.isPagenationTop()));
+					gridNode.setAttribute("sortable", String.valueOf(grid.isSortable()));
+					gridNode.setAttribute("visible", String.valueOf(grid.isVisible()));
+					gridNode.setAttribute("editable", String.valueOf(grid.isEditable()));
+					gridNode.setAttribute("enabled", String.valueOf(grid.isEnabled()));
+//					if(isNotNullString(grid.getClassName()))
+//						gridNode.setAttribute("className", grid.getClassName());
+					if(isNotNullString(grid.getGroupColumns()))
+						gridNode.setAttribute("groupColumns", grid.getGroupColumns());
+					if(isNotNullString(grid.getContextMenu()))
+						gridNode.setAttribute("contextMenu", grid.getContextMenu());
+					gridNode.setAttribute("showSumRow", String.valueOf(grid.isShowSumRow()));
+					gridNode.setAttribute("showNumCol", String.valueOf(grid.isShowNumCol()));
+					List<IGridColumn> colums = grid.getColumnList();
+					if(colums != null && !colums.isEmpty()){
+						for(int j = 0; j < colums.size(); j++){
+							if(colums.get(j) instanceof GridColumnGroup){
+								GridColumnGroup columngroup = (GridColumnGroup) colums.get(j);
+								Element columGroupNode = doc.createElement("ColumnGroup");
+								gridNode.appendChild(columGroupNode);
+								columGroupNode.setAttribute("id", columngroup.getId());
+								if(isNotNullString(columngroup.getI18nName()))
+									columGroupNode.setAttribute("i18nName", columngroup.getI18nName());
+								if(isNotNullString(columngroup.getText()))
+									columGroupNode.setAttribute("text", columngroup.getText());
+								columGroupNode.setAttribute("visible", String.valueOf(columngroup.isVisible()));
+								List<IGridColumn> groupColumns = columngroup.getChildColumnList();
+								if(groupColumns != null && !groupColumns.isEmpty()){
+									for (int k = 0; k < groupColumns.size(); k++){
+										GridColumn colum = (GridColumn) groupColumns.get(k);
+										Element columNode = doc.createElement("Column");
+										columGroupNode.appendChild(columNode);
+										columNode.setAttribute("id", colum.getId());
+										if(isNotNullString(colum.getField()))
+											columNode.setAttribute("field", colum.getField());
+										if(isNotNullString(colum.getText()))
+											columNode.setAttribute("text", colum.getText());
+										if(isNotNullString(String.valueOf(colum.getWidth())))
+											columNode.setAttribute("width", String.valueOf(colum.getWidth()));
+										columNode.setAttribute("autoExpand", String.valueOf(colum.isAutoExpand()));
+										if(isNotNullString(colum.getDataType()))
+											columNode.setAttribute("dataType", colum.getDataType());
+										if(isNotNullString(colum.getEditorType()))
+											columNode.setAttribute("editorType", colum.getEditorType());
+										if(isNotNullString(colum.getRenderType()))
+											columNode.setAttribute("renderType", colum.getRenderType());
+										if(isNotNullString(colum.getRefNode()))
+											columNode.setAttribute("refNode", colum.getRefNode());
+										if(isNotNullString(colum.getRefComboData()))
+											columNode.setAttribute("refComboData", colum.getRefComboData());
+										if(isNotNullString(colum.getColmngroup()))
+											columNode.setAttribute("colmngroup", colum.getColmngroup());
+										if(isNotNullString(colum.getI18nName()))
+											columNode.setAttribute("i18nName", colum.getI18nName());
+										if(isNotNullString(colum.getLangDir()))
+											columNode.setAttribute("langDir", colum.getLangDir());
+										if(isNotNullString(colum.getColumBgColor()))
+											columNode.setAttribute("columBgColor", colum.getColumBgColor());
+										if(isNotNullString(colum.getTextAlign()))
+											columNode.setAttribute("textAlign", colum.getTextAlign());
+										if(isNotNullString(colum.getTextColor()))
+											columNode.setAttribute("textColor", colum.getTextColor());
+										columNode.setAttribute("visible", String.valueOf(colum.isVisible()));
+										columNode.setAttribute("fixedHeader", String.valueOf(colum.isFixedHeader()));
+										columNode.setAttribute("imageOnly", String.valueOf(colum.isImageOnly()));
+										columNode.setAttribute("sortable", String.valueOf(colum.isSortable()));
+										columNode.setAttribute("editable", String.valueOf(colum.isEditable()));
+										columNode.setAttribute("nullAble", String.valueOf(colum.isNullAble()));
+										columNode.setAttribute("sumCol", String.valueOf(colum.isSumCol()));
+									}
+								}
+							}
+							if(colums.get(j) instanceof GridColumn){
+								GridColumn colum = (GridColumn) colums.get(j);
+								Element columNode = doc.createElement("Column");
+								gridNode.appendChild(columNode);
+								columNode.setAttribute("id", colum.getId());
+								if(isNotNullString(colum.getField()))
+									columNode.setAttribute("field", colum.getField());
+								if(isNotNullString(colum.getText()))
+									columNode.setAttribute("text", colum.getText());
+								if(isNotNullString(String.valueOf(colum.getWidth())))
+									columNode.setAttribute("width", String.valueOf(colum.getWidth()));
+								columNode.setAttribute("autoExpand", String.valueOf(colum.isAutoExpand()));
+								if(isNotNullString(colum.getDataType()))
+									columNode.setAttribute("dataType", colum.getDataType());
+								if(isNotNullString(colum.getEditorType()))
+									columNode.setAttribute("editorType", colum.getEditorType());
+								if(isNotNullString(colum.getRenderType()))
+									columNode.setAttribute("renderType", colum.getRenderType());
+								if(isNotNullString(colum.getRefNode()))
+									columNode.setAttribute("refNode", colum.getRefNode());
+								if(isNotNullString(colum.getRefComboData()))
+									columNode.setAttribute("refComboData", colum.getRefComboData());
+								if(isNotNullString(colum.getI18nName()))
+									columNode.setAttribute("i18nName", colum.getI18nName());
+								if(isNotNullString(colum.getLangDir()))
+									columNode.setAttribute("langDir", colum.getLangDir());
+								if(isNotNullString(colum.getColumBgColor()))
+									columNode.setAttribute("columBgColor", colum.getColumBgColor());
+								if(isNotNullString(colum.getTextAlign()))
+									columNode.setAttribute("textAlign", colum.getTextAlign());
+								if(isNotNullString(colum.getTextColor()))
+									columNode.setAttribute("textColor", colum.getTextColor());
+								columNode.setAttribute("visible", String.valueOf(colum.isVisible()));
+								columNode.setAttribute("fixedHeader", String.valueOf(colum.isFixedHeader()));
+								columNode.setAttribute("imageOnly", String.valueOf(colum.isImageOnly()));
+								columNode.setAttribute("sortable", String.valueOf(colum.isSortable()));
+								columNode.setAttribute("editable", String.valueOf(colum.isEditable()));
+								columNode.setAttribute("nullAble", String.valueOf(colum.isNullAble()));
+								columNode.setAttribute("sumCol", String.valueOf(colum.isSumCol()));
+								columNode.setAttribute("showCheckBox", String.valueOf(colum.isShowCheckBox()));
+							}	
+						}
+					}
+					GridTreeLevel level = grid.getTopLevel();
+					if(level != null){
+						Element levelNode = null;
+						levelNode = doc.createElement("RecursiveGridLevel");
+						gridNode.appendChild(levelNode);
+						levelNode.setAttribute("recursiveKeyField", level.getRecursiveKeyField());
+						levelNode.setAttribute("recursivePKeyField", level.getRecursivePKeyField());
+						if(isNotNullString(level.getId()))	
+							levelNode.setAttribute("id", level.getId());
+						
+						if(isNotNullString(level.getLabelFields()))
+							levelNode.setAttribute("labelFields", level.getLabelFields());
+					
+						if(isNotNullString(level.getDataset()))
+							levelNode.setAttribute("dataset", level.getDataset());
+
+//						if(isNotNullString(level.getContextMenu()))
+//							levelNode.setAttribute("contextMenu", level.getContextMenu());
+						
+//						Element parentNode = levelNode;
+						
+					}
+//					Map<String, JsListenerConf> jsListeners = grid.getListenerMap();
+//					if(jsListeners != null && jsListeners.size() > 0)
+//						PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), gridNode);
+					//Events
+					AMCUtil.addEvents(doc, grid.getEventConfs(), gridNode);
+				}else{
+//					Map<String, JsListenerConf> jsListeners = grid.getListenerMap();
+//					boolean saveFlag = false;
+//					for (Iterator<String> itwd = jsListeners.keySet().iterator(); itwd.hasNext();) {
+//						String listenerId = (String) itwd.next();
+//						JsListenerConf listener = jsListeners.get(listenerId);
+//						if(listener.getFrom() == null){
+//							saveFlag = true;
+//							break;
+//						}else if(listener.getConfType().equals(WebElement.CONF_DEL)){
+//							saveFlag = true;
+//							break;
+//						}
+//					}
+//					if(saveFlag){
+//						if(jsListeners != null && jsListeners.size() > 0){
+//							gridNode = doc.createElement("GridComp");
+//							compsNodes.appendChild(gridNode);
+//							gridNode.setAttribute("id", grid.getId());
+//							if(isNotNullString(grid.getConfType()))
+//								gridNode.setAttribute("confType", grid.getConfType());
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), gridNode);
+//						}
+//					}
+					gridNode = doc.createElement("GridComp");
+					//Events
+					AMCUtil.addEvents(doc, grid.getEventConfs(), gridNode);
+				}
+			}
+		}
+		// <ExcelComp>
+		WebComponent[] excels = widget.getViewComponents().getComponentByType(ExcelComp.class);
+		if(excels != null){
+			for (int i = 0; i < excels.length; i++) {
+				ExcelComp excel = (ExcelComp) excels[i];
+				Element excelNode = null;
+				if(excel.getFrom() == null){
+					excelNode = doc.createElement("ExcelComp");
+					compsNodes.appendChild(excelNode);
+					excelNode.setAttribute("id", excel.getId());
+					if(isNotNullString(excel.getHeaderRowHeight()))
+						excelNode.setAttribute("headerRowHeight", excel.getHeaderRowHeight());
+					if(isNotNullString(excel.getRowHeight()))
+						excelNode.setAttribute("rowHeight", excel.getRowHeight());
+					
+					if(isNotNullString(excel.getCaption()))
+						excelNode.setAttribute("caption", excel.getCaption());
+					if(isNotNullString(excel.getDataset()))
+						excelNode.setAttribute("dataset", excel.getDataset());
+					excelNode.setAttribute("editable", String.valueOf(excel.isEditable()));
+					
+					if(isNotNullString(excel.getPageSize()))
+						excelNode.setAttribute("pageSize", excel.getPageSize());
+					excelNode.setAttribute("multiSelect", String.valueOf(excel.isMultiSelect()));
+					excelNode.setAttribute("showHeader", String.valueOf(excel.isShowHeader()));
+					excelNode.setAttribute("showColInfo", String.valueOf(excel.isShowColInfo()));
+					excelNode.setAttribute("showSumRow", String.valueOf(excel.isShowSumRow()));
+					excelNode.setAttribute("pagenationTop", String.valueOf(excel.isPagenationTop()));
+					excelNode.setAttribute("sortable", String.valueOf(excel.isSortable()));
+					excelNode.setAttribute("visible", String.valueOf(excel.isVisible()));
+					excelNode.setAttribute("editable", String.valueOf(excel.isEditable()));
+					excelNode.setAttribute("enabled", String.valueOf(excel.isEnabled()));
+//					if(isNotNullString(excel.getClassName()))
+//						excelNode.setAttribute("className", excel.getClassName());
+					if(isNotNullString(excel.getGroupColumns()))
+						excelNode.setAttribute("groupColumns", excel.getGroupColumns());
+					if(isNotNullString(excel.getContextMenu()))
+						excelNode.setAttribute("contextMenu", excel.getContextMenu());
+					excelNode.setAttribute("showSumRow", String.valueOf(excel.isShowSumRow()));
+					excelNode.setAttribute("showNumCol", String.valueOf(excel.isShowNumCol()));
+					List<IExcelColumn> colums = excel.getColumnList();
+					if(colums != null && !colums.isEmpty()){
+						for(int j = 0; j < colums.size(); j++){
+							if(colums.get(j) instanceof ExcelColumnGroup){
+								ExcelColumnGroup columngroup = (ExcelColumnGroup) colums.get(j);
+								Element columGroupNode = doc.createElement("ColumnGroup");
+								excelNode.appendChild(columGroupNode);
+								columGroupNode.setAttribute("id", columngroup.getId());
+								if(isNotNullString(columngroup.getI18nName()))
+									columGroupNode.setAttribute("i18nName", columngroup.getI18nName());
+								if(isNotNullString(columngroup.getText()))
+									columGroupNode.setAttribute("text", columngroup.getText());
+								columGroupNode.setAttribute("visible", String.valueOf(columngroup.isVisible()));
+								List<IExcelColumn> groupColumns = columngroup.getChildColumnList();
+								if(groupColumns != null && !groupColumns.isEmpty()){
+									for (int k = 0; k < groupColumns.size(); k++) {
+										ExcelColumn colum = (ExcelColumn) groupColumns.get(k);
+										Element columNode = doc.createElement("Column");
+										columGroupNode.appendChild(columNode);
+										columNode.setAttribute("id", colum.getId());
+										if(isNotNullString(colum.getField()))
+											columNode.setAttribute("field", colum.getField());
+										if(isNotNullString(colum.getText()))
+											columNode.setAttribute("text", colum.getText());
+										if(isNotNullString(String.valueOf(colum.getWidth())))
+											columNode.setAttribute("width", String.valueOf(colum.getWidth()));
+										columNode.setAttribute("autoExpand", String.valueOf(colum.isAutoExpand()));
+										if(isNotNullString(colum.getDataType()))
+											columNode.setAttribute("dataType", colum.getDataType());
+										if(isNotNullString(colum.getEditorType()))
+											columNode.setAttribute("editorType", colum.getEditorType());
+										if(isNotNullString(colum.getRenderType()))
+											columNode.setAttribute("renderType", colum.getRenderType());
+										if(isNotNullString(colum.getRefNode()))
+											columNode.setAttribute("refNode", colum.getRefNode());
+										if(isNotNullString(colum.getRefComboData()))
+											columNode.setAttribute("refComboData", colum.getRefComboData());
+										if(isNotNullString(colum.getColmngroup()))
+											columNode.setAttribute("colmngroup", colum.getColmngroup());
+										if(isNotNullString(colum.getI18nName()))
+											columNode.setAttribute("i18nName", colum.getI18nName());
+										if(isNotNullString(colum.getLangDir()))
+											columNode.setAttribute("langDir", colum.getLangDir());
+										if(isNotNullString(colum.getColumBgColor()))
+											columNode.setAttribute("columBgColor", colum.getColumBgColor());
+										if(isNotNullString(colum.getTextAlign()))
+											columNode.setAttribute("textAlign", colum.getTextAlign());
+										if(isNotNullString(colum.getTextColor()))
+											columNode.setAttribute("textColor", colum.getTextColor());
+										columNode.setAttribute("visible", String.valueOf(colum.isVisible()));
+										columNode.setAttribute("fixedHeader", String.valueOf(colum.isFixedHeader()));
+										columNode.setAttribute("imageOnly", String.valueOf(colum.isImageOnly()));
+										columNode.setAttribute("sortable", String.valueOf(colum.isSortable()));
+										columNode.setAttribute("editable", String.valueOf(colum.isEditable()));
+										columNode.setAttribute("nullAble", String.valueOf(colum.isNullAble()));
+										columNode.setAttribute("sumCol", String.valueOf(colum.isSumCol()));
+									}
+								}
+							}
+							if(colums.get(j) instanceof ExcelColumn){
+								ExcelColumn colum = (ExcelColumn) colums.get(j);
+								Element columNode = doc.createElement("Column");
+								excelNode.appendChild(columNode);
+								columNode.setAttribute("id", colum.getId());
+								if(isNotNullString(colum.getField()))
+									columNode.setAttribute("field", colum.getField());
+								if(isNotNullString(colum.getText()))
+									columNode.setAttribute("text", colum.getText());
+								if(isNotNullString(String.valueOf(colum.getWidth())))
+									columNode.setAttribute("width", String.valueOf(colum.getWidth()));
+								columNode.setAttribute("autoExpand", String.valueOf(colum.isAutoExpand()));
+								if(isNotNullString(colum.getDataType()))
+									columNode.setAttribute("dataType", colum.getDataType());
+								if(isNotNullString(colum.getEditorType()))
+									columNode.setAttribute("editorType", colum.getEditorType());
+								if(isNotNullString(colum.getRenderType()))
+									columNode.setAttribute("renderType", colum.getRenderType());
+								if(isNotNullString(colum.getRefNode()))
+									columNode.setAttribute("refNode", colum.getRefNode());
+								if(isNotNullString(colum.getRefComboData()))
+									columNode.setAttribute("refComboData", colum.getRefComboData());
+								if(isNotNullString(colum.getI18nName()))
+									columNode.setAttribute("i18nName", colum.getI18nName());
+								if(isNotNullString(colum.getLangDir()))
+									columNode.setAttribute("langDir", colum.getLangDir());
+								if(isNotNullString(colum.getColumBgColor()))
+									columNode.setAttribute("columBgColor", colum.getColumBgColor());
+								if(isNotNullString(colum.getTextAlign()))
+									columNode.setAttribute("textAlign", colum.getTextAlign());
+								if(isNotNullString(colum.getTextColor()))
+									columNode.setAttribute("textColor", colum.getTextColor());
+								columNode.setAttribute("visible", String.valueOf(colum.isVisible()));
+								columNode.setAttribute("fixedHeader", String.valueOf(colum.isFixedHeader()));
+								columNode.setAttribute("imageOnly", String.valueOf(colum.isImageOnly()));
+								columNode.setAttribute("sortable", String.valueOf(colum.isSortable()));
+								columNode.setAttribute("editable", String.valueOf(colum.isEditable()));
+								columNode.setAttribute("nullAble", String.valueOf(colum.isNullAble()));
+								columNode.setAttribute("sumCol", String.valueOf(colum.isSumCol()));
+							}	
+						}
+					}
+//					Map<String, JsListenerConf> jsListeners = excel.getListenerMap();
+//					if(jsListeners != null && jsListeners.size() > 0)
+//						PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), excelNode);
+					//Events
+					AMCUtil.addEvents(doc, excel.getEventConfs(), excelNode);
+				}else{
+//					Map<String, JsListenerConf> jsListeners = excel.getListenerMap();
+//					boolean saveFlag = false;
+//					for (Iterator<String> itwd = jsListeners.keySet().iterator(); itwd.hasNext();) {
+//						String listenerId = (String) itwd.next();
+//						JsListenerConf listener = jsListeners.get(listenerId);
+//						if(listener.getFrom() == null){
+//							saveFlag = true;
+//							break;
+//						}else if(listener.getConfType().equals(WebElement.CONF_DEL)){
+//							saveFlag = true;
+//							break;
+//						}
+//					}
+//					if(saveFlag){
+//						if(jsListeners != null && jsListeners.size() > 0){
+//							excelNode = doc.createElement("ExcelComp");
+//							compsNodes.appendChild(excelNode);
+//							excelNode.setAttribute("id", excel.getId());
+//							if(isNotNullString(excel.getConfType()))
+//								excelNode.setAttribute("confType", excel.getConfType());
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), excelNode);
+//						}
+//					}
+					excelNode = doc.createElement("ExcelComp");
+					//Events
+					AMCUtil.addEvents(doc, excel.getEventConfs(), excelNode);
+				}
+			}
+		}
+		// <ChartComp>
+		WebComponent[] charts = widget.getViewComponents().getComponentByType(ChartComp.class);
+		if (charts != null) {
+			for (int i = 0; i < charts.length; i++) {
+				ChartComp chart = (ChartComp) charts[i];
+				Element chartNode = doc.createElement("ChartComp");
+				compsNodes.appendChild(chartNode);
+				chartNode.setAttribute("id", chart.getId());
+				
+//				if (isNotNullString(chart.getClassName()))
+//					chartNode.setAttribute("className", chart.getClassName());
+				BaseChartModel chartModel = chart.getChartModel();
+				if (chartModel != null) {
+					Element modelNode = null;
+					modelNode = doc.createElement("ChartModel");
+					chartNode.appendChild(modelNode);
+					modelNode.setAttribute("dataset", (chartModel.getDataset()));
+				}
+				ChartConfig config = chart.getConfig();
+				if (config != null) {
+					Element configNode = null;
+					configNode = doc.createElement("ChartConfig");
+					chartNode.appendChild(configNode);
+					configNode.setAttribute("showType", (config.getShowType()));
+					configNode.setAttribute("seriesType", (config.getSeriesType()));
+					configNode.setAttribute("caption", (config.getCaption()));
+					configNode.setAttribute("numberPrefix", (config.getNumberPrefix()));
+					configNode.setAttribute("groupColumn", (config.getGroupColumn()));
+					configNode.setAttribute("groupName", (config.getGroupName()));
+					configNode.setAttribute("seriesColumns", (config.getSeriesColumns()));
+					configNode.setAttribute("seriesNames", (config.getSeriesNames()));
+					configNode.setAttribute("xAxisName", (config.getXAxisName()));
+					configNode.setAttribute("yAxisName", (config.getYAxisName()));
+				}
+			}
+		}
+		// <TreeviewComp>
+		WebComponent[] trees = widget.getViewComponents().getComponentByType(TreeViewComp.class);
+		if(trees != null){
+			for (int i = 0; i < trees.length; i++){
+				TreeViewComp tree = (TreeViewComp) trees[i];
+				Element treeNode = doc.createElement("TreeViewComp");
+				if(tree.getFrom() == null){
+					compsNodes.appendChild(treeNode);
+					treeNode.setAttribute("id", tree.getId());
+					if(isNotNullString(tree.getCaption()))
+						treeNode.setAttribute("caption", tree.getCaption());
+					if(isNotNullString(tree.getText()))
+						treeNode.setAttribute("text", tree.getText());
+					if(isNotNullString(tree.getContextMenu()))
+						treeNode.setAttribute("contextMenu", tree.getContextMenu());
+					if(isNotNullString(tree.getLangDir()))
+						treeNode.setAttribute("langDir", tree.getLangDir());
+					if(isNotNullString(tree.getI18nName()))
+						treeNode.setAttribute("i18nName", tree.getI18nName());
+					treeNode.setAttribute("withCheckBox", String.valueOf(tree.isWithCheckBox()));
+					treeNode.setAttribute("withRoot", String.valueOf(tree.isWithRoot()));
+					treeNode.setAttribute("rootOpen", String.valueOf(tree.isRootOpen()));
+					treeNode.setAttribute("visible", String.valueOf(tree.isVisible()));
+					treeNode.setAttribute("enabled", String.valueOf(tree.isEnabled()));
+					treeNode.setAttribute("dragEnable", String.valueOf(tree.isDragEnable()));
+					treeNode.setAttribute("canEdit", String.valueOf(tree.isCanEdit()));
+//					if(isNotNullString(tree.getClassName()))
+//						treeNode.setAttribute("className", tree.getClassName());
+					TreeLevel level = tree.getTopLevel();
+					if(level != null){
+						Element levelNode = null;
+						if(level instanceof CodeTreeLevel){
+							levelNode = doc.createElement("CodeTreeLevel");
+							treeNode.appendChild(levelNode);
+							if(isNotNullString(((CodeTreeLevel) level).getCodeField()))
+								levelNode.setAttribute("codeField", ((CodeTreeLevel) level).getCodeField());
+							if(isNotNullString(((CodeTreeLevel) level).getCodeRule()))
+								levelNode.setAttribute("codeRule", ((CodeTreeLevel) level).getCodeRule());
+						}else if(level instanceof RecursiveTreeLevel){
+							levelNode = doc.createElement("RecursiveTreeLevel");
+							treeNode.appendChild(levelNode);
+							levelNode.setAttribute("recursiveKeyField", ((RecursiveTreeLevel) level).getRecursiveKeyField());
+							levelNode.setAttribute("recursivePKeyField", ((RecursiveTreeLevel) level).getRecursivePKeyField());
+						}else if(level instanceof SimpleTreeLevel){
+							levelNode = doc.createElement("SimpleTreeLevel");
+							treeNode.appendChild(levelNode);
+						}
+						if(isNotNullString(level.getId()))	
+							levelNode.setAttribute("id", level.getId());
+						if(isNotNullString(level.getDataset()))
+							levelNode.setAttribute("dataset", level.getDataset());
+						if(isNotNullString(level.getMasterKeyField()))
+							levelNode.setAttribute("masterKeyField", level.getMasterKeyField());
+						if(isNotNullString(level.getLabelFields()))
+							levelNode.setAttribute("labelFields", level.getLabelFields());
+						if(isNotNullString(level.getLabelDelims()))
+							levelNode.setAttribute("labelDelims", level.getLabelDelims());
+						if(isNotNullString(level.getContextMenu()))
+							levelNode.setAttribute("contextMenu", level.getContextMenu());
+						
+						Element parentNode = levelNode;
+						while(level.getChildTreeLevel() != null){
+							level = level.getChildTreeLevel();
+							Element childLevelNode = null;
+							 if(level instanceof CodeTreeLevel){
+								childLevelNode = doc.createElement("CodeTreeLevel");
+								parentNode.appendChild(childLevelNode);
+								childLevelNode.setAttribute("codeField", ((CodeTreeLevel) level).getCodeField());
+								childLevelNode.setAttribute("codeRule", ((CodeTreeLevel) level).getCodeRule());
+							}else if(level instanceof RecursiveTreeLevel){
+								childLevelNode = doc.createElement("RecursiveTreeLevel");
+								parentNode.appendChild(childLevelNode);
+								childLevelNode.setAttribute("recursiveKeyField", ((RecursiveTreeLevel) level).getRecursiveKeyField());
+								childLevelNode.setAttribute("recursivePKeyField", ((RecursiveTreeLevel) level).getRecursivePKeyField());
+							}else if(level instanceof SimpleTreeLevel){
+								childLevelNode = doc.createElement("SimpleTreeLevel");
+								parentNode.appendChild(childLevelNode);
+							}
+							if(isNotNullString(level.getId()))	
+								childLevelNode.setAttribute("id", level.getId());
+							if(isNotNullString(level.getDataset()))
+								childLevelNode.setAttribute("dataset", level.getDataset());
+							if(isNotNullString(level.getMasterKeyField()))
+								childLevelNode.setAttribute("masterKeyField", level.getMasterKeyField());
+							if(isNotNullString(level.getLabelFields()))
+								childLevelNode.setAttribute("labelFields", level.getLabelFields());
+							if(isNotNullString(level.getLabelDelims()))
+								childLevelNode.setAttribute("labelDelims", level.getLabelDelims());
+							if(isNotNullString(level.getDetailKeyParameter()))
+								childLevelNode.setAttribute("detailKeyParameter", level.getDetailKeyParameter());
+							if(isNotNullString(level.getContextMenu()))
+								childLevelNode.setAttribute("contextMenu", level.getContextMenu());
+							parentNode = childLevelNode;
+						}
+					}
+//					Map<String, JsListenerConf> jsListeners = tree.getListenerMap();
+//					if(jsListeners != null && jsListeners.size() > 0)
+//						PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), treeNode);
+				}
+				//Events
+				AMCUtil.addEvents(doc, tree.getEventConfs(), treeNode);
+			}
+		}
+		//<ToolbarComp>
+		WebComponent[] toolbars = widget.getViewComponents().getComponentByType(ToolBarComp.class);
+		if(toolbars != null){
+			for (int i = 0; i < toolbars.length; i++){
+				ToolBarComp toolbar = (ToolBarComp) toolbars[i];
+				Element toolbarNode = doc.createElement("ToolBarComp");
+				compsNodes.appendChild(toolbarNode);
+				toolbarNode.setAttribute("id", toolbar.getId());
+				toolbarNode.setAttribute("enabled", String.valueOf(toolbar.isEnabled()));
+				toolbarNode.setAttribute("visible", String.valueOf(toolbar.isVisible()));
+				toolbarNode.setAttribute("transparent",String.valueOf(toolbar.isTransparent()));
+				if(isNotNullString(toolbar.getContextMenu()))
+					toolbarNode.setAttribute("contextMenu", toolbar.getContextMenu());
+//				if(isNotNullString(toolbar.getClassName()))
+//					toolbarNode.setAttribute("className", toolbar.getClassName());
+				if(isNotNullString(toolbar.getContextMenu()))
+					toolbarNode.setAttribute("contextMenu", toolbar.getContextMenu());
+				ToolBarItem[] eles = toolbar.getElements();
+				if(eles != null && eles.length > 0){
+					for(int j = 0; j < eles.length; j++){
+						ToolBarItem ele = eles[j];
+						Element toolbarEleNode = doc.createElement("ToolBarItem");
+						toolbarNode.appendChild(toolbarEleNode);
+						toolbarEleNode.setAttribute("id", ele.getId());
+						if(isNotNullString(ele.getText()))
+							toolbarEleNode.setAttribute("text", ele.getText());
+						if(isNotNullString(ele.getRefImg()))
+							toolbarEleNode.setAttribute("refImg", ele.getRefImg());
+						if(isNotNullString(ele.getI18nName()))
+							toolbarEleNode.setAttribute("i18nName", ele.getI18nName());
+						if(isNotNullString(ele.getLangDir()))
+							toolbarEleNode.setAttribute("langdir", ele.getLangDir());
+						if(isNotNullString(ele.getTip()))
+							toolbarEleNode.setAttribute("tip", ele.getTip());
+						if(isNotNullString(ele.getTipI18nName()))
+							toolbarEleNode.setAttribute("tipI18nName", ele.getTipI18nName());
+						if(isNotNullString(ele.getAlign()))
+							toolbarEleNode.setAttribute("align", ele.getAlign());
+						toolbarEleNode.setAttribute("modifiers", String.valueOf(ele.getModifiers()));
+						if(isNotNullString(ele.getHotKey()))
+							toolbarEleNode.setAttribute("hotKey", ele.getHotKey());
+						if(isNotNullString(ele.getDisplayHotKey()))
+							toolbarEleNode.setAttribute("displayHotKey", ele.getDisplayHotKey());
+						if(isNotNullString(ele.getLangDir()))
+							toolbarEleNode.setAttribute("langDir", ele.getLangDir());
+						toolbarEleNode.setAttribute("type", ele.getType());
+						toolbarEleNode.setAttribute("withSep", String.valueOf(ele.isWithSep()));
+//						Map<String, JsListenerConf> jsListeners = ele.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), toolbarEleNode);
+						//Events
+						AMCUtil.addEvents(doc, ele.getEventConfs(), toolbarEleNode);
+					}
+				}
+				ToolBarTitle title = toolbar.getTitle();
+				if(title != null){
+					Element toolbarTitelNode = doc.createElement("ToolBarTitle");
+					toolbarNode.appendChild(toolbarTitelNode);
+					if(isNotNullString(title.getText()))
+						toolbarTitelNode.setAttribute("text", title.getText());
+					if(isNotNullString(title.getRefImg1()))
+						toolbarTitelNode.setAttribute("refImg1", title.getRefImg1());
+					if(isNotNullString(title.getRefImg2()))
+						toolbarTitelNode.setAttribute("refImg2", title.getRefImg2());
+					if(isNotNullString(title.getI18nName()))
+						toolbarTitelNode.setAttribute("i18nName", title.getI18nName());
+					if(isNotNullString(title.getLangDir()))
+						toolbarTitelNode.setAttribute("langDir", title.getLangDir());
+					if(isNotNullString(title.getColor()))
+						toolbarTitelNode.setAttribute("color", title.getColor());
+					if(isNotNullString(title.getMenuId()))
+						toolbarTitelNode.setAttribute("menuId", title.getMenuId());
+					toolbarTitelNode.setAttribute("bold", String.valueOf(title.isBold()));
+				}
+			}
+		}
+		// <FormComp>
+		WebComponent[] comps = widget.getViewComponents().getComponentByType(FormComp.class);
+		if(comps != null){
+			for (int i = 0; i < comps.length; i++){
+				FormComp form = (FormComp) comps[i];
+				Element formNode = null;
+				if(form.getFrom() == null){
+					formNode = doc.createElement("FormComp");
+					compsNodes.appendChild(formNode);
+					formNode.setAttribute("id", form.getId());
+					formNode.setAttribute("dataset", form.getDataset());
+					if(isNotNullString(form.getCaption()))
+						formNode.setAttribute("caption", form.getCaption());
+					formNode.setAttribute("rowHeight", String.valueOf(form.getRowHeight()));
+					formNode.setAttribute("eleWidth", String.valueOf(form.getEleWidth()));
+					if(form.getColumnCount() != null)
+						formNode.setAttribute("columnCount", String.valueOf(form.getColumnCount()));
+					if(form.getRenderType() > 0)
+						formNode.setAttribute("renderType", String.valueOf(form.getRenderType()));
+					if(isNotNullString(form.getContextMenu()))
+						formNode.setAttribute("contextMenu", form.getContextMenu());
+//					if(isNotNullString(form.getClassName()))
+//						formNode.setAttribute("className", form.getClassName());
+					if(isNotNullString(form.getBackgroundColor()))
+						formNode.setAttribute("backgroundColor", form.getBackgroundColor());
+					formNode.setAttribute("labelMinWidth", String.valueOf(form.getLabelMinWidth()));
+					formNode.setAttribute("enabled", String.valueOf(form.isEnabled()));
+					formNode.setAttribute("visible", String.valueOf(form.isVisible()));
+					formNode.setAttribute("renderHiddenEle", String.valueOf(form.isRenderHiddenEle()));
+					
+					List<FormElement> eles = form.getElementList();
+					if(eles != null && eles.size() > 0){
+						for(int j = 0; j < eles.size(); j++){
+							FormElement ele = eles.get(j);
+							Element formEleNode = doc.createElement("Element");
+							formNode.appendChild(formEleNode);
+							
+							formEleNode.setAttribute("id", ele.getId());
+							if(isNotNullString(ele.getField()))
+								formEleNode.setAttribute("field", ele.getField());
+							if(isNotNullString(ele.getText()))
+								formEleNode.setAttribute("text", ele.getText());
+							if(isNotNullString(ele.getI18nName()))
+								formEleNode.setAttribute("i18nName", ele.getI18nName());
+							if(isNotNullString(ele.getDescription()))
+								formEleNode.setAttribute("description", ele.getDescription());
+							if(isNotNullString(ele.getLangDir()))
+								formEleNode.setAttribute("langDir", ele.getLangDir());
+							if(isNotNullString(ele.getEditorType()))
+								formEleNode.setAttribute("editorType", ele.getEditorType());
+							if(isNotNullString(ele.getDataType()))
+								formEleNode.setAttribute("dataType", ele.getDataType());
+							if(isNotNullString(ele.getRefNode()))
+								formEleNode.setAttribute("refNode", ele.getRefNode());
+							if(isNotNullString(ele.getRefComboData()))
+								formEleNode.setAttribute("refComboData", ele.getRefComboData());
+							if(isNotNullString(ele.getLabelColor()))
+								formEleNode.setAttribute("labelColor", ele.getLabelColor());
+							if(isNotNullString(ele.getDefaultValue()))
+								formEleNode.setAttribute("defaultValue", ele.getDefaultValue());
+							if(isNotNullString(ele.getDataDivHeight()))
+								formEleNode.setAttribute("dataDivHeight", ele.getDataDivHeight());
+							if(isNotNullString(ele.getRelationField()))
+								formEleNode.setAttribute("relationField", ele.getRelationField());
+							if(isNotNullString(ele.getMaxLength()))
+								formEleNode.setAttribute("maxLength", ele.getMaxLength());
+							formEleNode.setAttribute("editable", String.valueOf(ele.isEditable()));
+							formEleNode.setAttribute("enabled", String.valueOf(ele.isEnabled()));
+							formEleNode.setAttribute("visible", String.valueOf(ele.isVisible()));
+							formEleNode.setAttribute("nextLine", String.valueOf(ele.isNextLine()));
+							formEleNode.setAttribute("rowSpan", String.valueOf(ele.getRowSpan()));
+							formEleNode.setAttribute("colSpan", String.valueOf(ele.getColSpan()));
+							if(isNotNullString(ele.getWidth()))
+								formEleNode.setAttribute("width", String.valueOf(ele.getWidth()));
+							if(isNotNullString(ele.getHeight()))
+								formEleNode.setAttribute("height", String.valueOf(ele.getHeight()));
+							formEleNode.setAttribute("visible", String.valueOf(ele.isVisible()));
+							formEleNode.setAttribute("imageOnly", String.valueOf(ele.isImageOnly()));
+							formEleNode.setAttribute("selectOnly", String.valueOf(ele.isSelectOnly()));
+							formEleNode.setAttribute("nullAble", String.valueOf(ele.isNullAble()));
+							formEleNode.setAttribute("attachNext", String.valueOf(ele.isAttachNext()));
+							if(isNotNullString(ele.getInputAssistant()))
+								formEleNode.setAttribute("inputAssistant", ele.getInputAssistant());
+							if(isNotNullString(ele.getMaxValue()))
+								formEleNode.setAttribute("maxValue", ele.getMaxValue());
+							if(isNotNullString(ele.getBindId()))
+								formEleNode.setAttribute("bindId", ele.getBindId());
+							if(isNotNullString(ele.getMinValue()))
+								formEleNode.setAttribute("minValue", ele.getMinValue());
+							if(isNotNullString(ele.getPrecision()))
+								formEleNode.setAttribute("precision", ele.getPrecision());
+							if(isNotNullString(ele.getHideBarIndices()))
+								formEleNode.setAttribute("hideBarIndices", ele.getHideBarIndices());
+							if(isNotNullString(ele.getHideImageIndices()))
+								formEleNode.setAttribute("hideImageIndices", ele.getHideImageIndices());
+							if(isNotNullString(ele.getTip()))
+								formEleNode.setAttribute("tip", ele.getTip());
+							if(isNotNullString(ele.getPrecision()))
+								formEleNode.setAttribute("precision", ele.getPrecision());
+						}
+					}
+//					Map<String, JsListenerConf> jsListeners = form.getListenerMap();
+//					if(jsListeners != null && jsListeners.size() > 0)
+//						PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), formNode);
+					//Events
+					AMCUtil.addEvents(doc, form.getEventConfs(), formNode);
+				}else{
+//					Map<String, JsListenerConf> jsListeners = form.getListenerMap();
+//					boolean saveFlag = false;
+//					for (Iterator<String> itwd = jsListeners.keySet().iterator(); itwd.hasNext();) {
+//						String listenerId = (String) itwd.next();
+//						JsListenerConf listener = jsListeners.get(listenerId);
+//						if(listener.getFrom() == null){
+//							saveFlag = true;
+//							break;
+//						}else if(listener.getConfType().equals(WebElement.CONF_DEL)){
+//							saveFlag = true;
+//							break;
+//						}
+//					}
+//					if(saveFlag){
+//						if(jsListeners != null && jsListeners.size() > 0){
+//							formNode = doc.createElement("FormComp");
+//							compsNodes.appendChild(formNode);
+//							formNode.setAttribute("id", form.getId());
+//							if(isNotNullString(form.getConfType()))
+//								formNode.setAttribute("confType", form.getConfType());
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), formNode);
+//						}
+//					}
+					formNode = doc.createElement("FormComp");
+					//Events
+					AMCUtil.addEvents(doc, form.getEventConfs(), formNode);
+				}
+			}
+		}
+		WebComponent[] progressbars = widget.getViewComponents().getComponentByType(ProgressBarComp.class);
+		if(progressbars != null){
+			for (int i = 0; i < progressbars.length; i++){
+				ProgressBarComp progressBar = (ProgressBarComp) progressbars[i];
+				Element progressNode = doc.createElement("ProgressBarComp");
+				compsNodes.appendChild(progressNode);
+				progressNode.setAttribute("id", progressBar.getId());
+//				if(isNotNullString(progressBar.getClassName()))
+//					progressNode.setAttribute("className", progressBar.getClassName());
+				if(isNotNullString(progressBar.getValue()))
+					progressNode.setAttribute("value", progressBar.getValue());
+				if(isNotNullString(progressBar.getConfType()))
+					progressNode.setAttribute("confType", progressBar.getConfType());
+				if(isNotNullString(progressBar.getContextMenu()))
+					progressNode.setAttribute("contextMenu", progressBar.getContextMenu());
+				progressNode.setAttribute("enabled", String.valueOf(progressBar.isEnabled()));
+				progressNode.setAttribute("visible", String.valueOf(progressBar.isVisible()));
+				if(isNotNullString(progressBar.getValueAlign()))
+					progressNode.setAttribute("valueAlign", progressBar.getValueAlign());
+//				//Events
+//				AMCUtil.addEvents(doc, progressBar.getEventConfs(), progressNode);
+			}
+		}
+		// <LabelComp>
+		WebComponent[] labels = widget.getViewComponents().getComponentByType(LabelComp.class);
+		if(labels != null){
+			for (int i = 0; i < labels.length; i++){
+				LabelComp label = (LabelComp) labels[i];
+				Element labelNode = doc.createElement("LabelComp");
+				compsNodes.appendChild(labelNode);
+				labelNode.setAttribute("id", label.getId());
+				if(isNotNullString(label.getSize()))
+					labelNode.setAttribute("size", label.getSize());
+				if(isNotNullString(label.getFamily()))
+					labelNode.setAttribute("family", label.getFamily());
+				if(isNotNullString(label.getInnerHTML()))
+					labelNode.setAttribute("innerHTML", label.getInnerHTML());
+				if(isNotNullString(label.getText()))
+					labelNode.setAttribute("text", label.getText());
+				if(isNotNullString(label.getColor()))
+					labelNode.setAttribute("color", label.getColor());
+				if(isNotNullString(label.getStyle()))
+					labelNode.setAttribute("style", label.getStyle());
+				if(isNotNullString(label.getWeight()))
+					labelNode.setAttribute("weight", label.getWeight());
+				if(isNotNullString(label.getI18nName()))
+					labelNode.setAttribute("i18nName", label.getI18nName());
+				if(isNotNullString(label.getLangDir()))
+					labelNode.setAttribute("langDir", label.getLangDir());
+				if(isNotNullString(label.getContextMenu()))
+					labelNode.setAttribute("contextMenu", label.getContextMenu());
+//				if(isNotNullString(label.getClassName()))
+//					labelNode.setAttribute("className", label.getClassName());
+				labelNode.setAttribute("enabled", String.valueOf(label.isEnabled()));
+				labelNode.setAttribute("visible", String.valueOf(label.isVisible()));
+				//Events
+				AMCUtil.addEvents(doc, label.getEventConfs(), labelNode);
+			}
+		}
+		WebComponent[] links = widget.getViewComponents().getComponentByType(LinkComp.class);
+		if(links != null){
+			for (int i = 0; i < links.length; i++){
+				LinkComp link = (LinkComp) links[i];
+				Element linkNode = doc.createElement("LinkComp");
+				compsNodes.appendChild(linkNode);
+				linkNode.setAttribute("id", link.getId());
+				if(isNotNullString(link.getHref()))
+					linkNode.setAttribute("href", link.getHref());
+				if(isNotNullString(link.getContextMenu()))
+					linkNode.setAttribute("contextMenu", link.getContextMenu());
+				if(isNotNullString(link.getI18nName()))
+					linkNode.setAttribute("i18nName", link.getI18nName());
+				if(isNotNullString(link.getImage()))
+					linkNode.setAttribute("image", link.getImage());
+				if(isNotNullString(link.getTarget()))
+					linkNode.setAttribute("target", link.getTarget());
+				if(isNotNullString(link.getLangDir()))
+					linkNode.setAttribute("langDir", link.getLangDir());
+//				if(isNotNullString(link.getClassName()))
+//					linkNode.setAttribute("className", link.getClassName());
+				linkNode.setAttribute("hasImg", String.valueOf(link.isHasImg()));
+//				Map<String, JsListenerConf> jsListeners = link.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0)
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), linkNode);
+				//Events
+				AMCUtil.addEvents(doc, link.getEventConfs(), linkNode);
+			}
+		}
+		//images
+		WebComponent[] images = widget.getViewComponents().getComponentByType(ImageComp.class);
+		if(images != null){
+			for (int i = 0; i < images.length; i++){
+				ImageComp image = (ImageComp) images[i];
+				Element imageNode = doc.createElement("ImageComp");
+				compsNodes.appendChild(imageNode);
+				imageNode.setAttribute("id", image.getId());
+				if(isNotNullString(image.getContextMenu()))
+					imageNode.setAttribute("contextMenu", image.getContextMenu());
+				imageNode.setAttribute("enabled", String.valueOf(image.isEnabled()));
+				imageNode.setAttribute("visible", String.valueOf(image.isVisible()));
+//				if(isNotNullString(image.getClassName()))
+//					imageNode.setAttribute("className", image.getClassName());
+				if(isNotNullString(image.getImage1()))
+					imageNode.setAttribute("image1", image.getImage1());
+				if(isNotNullString(image.getImage2()))
+					imageNode.setAttribute("image2", image.getImage2());
+				if(isNotNullString(image.getAlt()))
+					imageNode.setAttribute("alt", image.getAlt());
+				if(isNotNullString(image.getImageInact()))
+					imageNode.setAttribute("imageInact", image.getImageInact());
+				imageNode.setAttribute("floatRight", String.valueOf(image.isFloatRight()));
+				imageNode.setAttribute("floatLeft", String.valueOf(image.isFloatLeft()));
+//				Map<String, JsListenerConf> jsListeners = image.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0)
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), imageNode);
+				//Events
+				AMCUtil.addEvents(doc, image.getEventConfs(), imageNode);
+			}
+		}
+		WebComponent[] textcomps = widget.getViewComponents().getComponentByType(TextComp.class);
+			if(textcomps != null){
+				for (int i = 0; i < textcomps.length; i++) {
+					TextComp textcomp = (TextComp) textcomps[i];
+					if(textcomp instanceof TextAreaComp){
+						TextAreaComp textareacomp = (TextAreaComp)textcomp;
+						Element textareaNode = doc.createElement("TextAreaComp");
+						compsNodes.appendChild(textareaNode);
+						textareaNode.setAttribute("id", textareacomp.getId());
+						textareaNode.setAttribute("visible", String.valueOf(textareacomp.isVisible()));
+						textareaNode.setAttribute("editorType", textareacomp.getEditorType());
+						textareaNode.setAttribute("enabled", String.valueOf(textareacomp.isEnabled()));
+						if(isNotNullString(textareacomp.getText()))
+							textareaNode.setAttribute("text", textareacomp.getText());
+						textareaNode.setAttribute("textWidth", String.valueOf(textareacomp.getTextWidth()));
+						if(isNotNullString(textareacomp.getI18nName()))
+							textareaNode.setAttribute("i18nName", textareacomp.getI18nName());
+						if(isNotNullString(textareacomp.getLangDir()))
+							textareaNode.setAttribute("langDir", textareacomp.getLangDir());
+						if(isNotNullString(textareacomp.getTextAlign()))
+							textareaNode.setAttribute("textAlign", textareacomp.getTextAlign());
+						textareaNode.setAttribute("focus", String.valueOf(textareacomp.isFocus()));
+						if(isNotNullString(textareacomp.getRows()))
+							textareaNode.setAttribute("rows", textareacomp.getRows());
+						if(isNotNullString(textareacomp.getCols()))
+							textareaNode.setAttribute("cols", textareacomp.getCols());
+//						if(isNotNullString(textareacomp.getClassName()))
+//							textareaNode.setAttribute("className", textareacomp.getClassName());
+						if(isNotNullString(textareacomp.getTip()))
+							textareaNode.setAttribute("tip", textareacomp.getTip());
+						if(isNotNullString(textareacomp.getContextMenu()))
+							textareaNode.setAttribute("contextMenu", textareacomp.getContextMenu());
+//						Map<String, JsListenerConf> jsListeners = textareacomp.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), textareaNode);
+						//Events
+						AMCUtil.addEvents(doc, textareacomp.getEventConfs(), textareaNode);
+					}else if(textcomp instanceof CheckboxGroupComp){
+						CheckboxGroupComp checkboxGroupcomp = (CheckboxGroupComp)textcomp;
+						Element checkBoxGroupNode = doc.createElement("CheckboxGroupComp");
+						compsNodes.appendChild(checkBoxGroupNode);
+						checkBoxGroupNode.setAttribute("id", checkboxGroupcomp.getId());
+						checkBoxGroupNode.setAttribute("visible", String.valueOf(checkboxGroupcomp.isVisible()));
+						checkBoxGroupNode.setAttribute("editorType", checkboxGroupcomp.getEditorType());
+						checkBoxGroupNode.setAttribute("enabled", String.valueOf(checkboxGroupcomp.isEnabled()));
+						if(isNotNullString(checkboxGroupcomp.getText()))
+							checkBoxGroupNode.setAttribute("text", checkboxGroupcomp.getText());
+						checkBoxGroupNode.setAttribute("textWidth", String.valueOf(checkboxGroupcomp.getTextWidth()));
+						if(isNotNullString(checkboxGroupcomp.getI18nName()))
+							checkBoxGroupNode.setAttribute("i18nName", checkboxGroupcomp.getI18nName());
+						if(isNotNullString(checkboxGroupcomp.getLangDir()))
+							checkBoxGroupNode.setAttribute("langDir", checkboxGroupcomp.getLangDir());
+						if(isNotNullString(checkboxGroupcomp.getTextAlign()))
+							checkBoxGroupNode.setAttribute("textAlign", checkboxGroupcomp.getTextAlign());
+						checkBoxGroupNode.setAttribute("focus", String.valueOf(checkboxGroupcomp.isFocus()));
+						if(isNotNullString(checkboxGroupcomp.getComboDataId()))
+							checkBoxGroupNode.setAttribute("comboDataId", checkboxGroupcomp.getComboDataId());
+						if(isNotNullString(checkboxGroupcomp.getContextMenu()))
+							checkBoxGroupNode.setAttribute("contextMenu", checkboxGroupcomp.getContextMenu());
+						if(isNotNullString(checkboxGroupcomp.getValue()))
+							checkBoxGroupNode.setAttribute("value", checkboxGroupcomp.getValue());
+						checkBoxGroupNode.setAttribute("tabIndex", String.valueOf(checkboxGroupcomp.getTabIndex()));
+						checkBoxGroupNode.setAttribute("sepWidth", String.valueOf(checkboxGroupcomp.getSepWidth()));
+//						if(isNotNullString(checkboxGroupcomp.getClassName()))
+//							checkBoxGroupNode.setAttribute("className", checkboxGroupcomp.getClassName());
+//						Map<String, JsListenerConf> jsListeners = checkboxGroupcomp.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), checkBoxGroupNode);
+						//Events
+						AMCUtil.addEvents(doc, checkboxGroupcomp.getEventConfs(), checkBoxGroupNode);
+					}else if(textcomp instanceof RadioGroupComp){
+						RadioGroupComp radioGroupcomp = (RadioGroupComp)textcomp;
+						Element radioGroupNode = doc.createElement("RadioGroupComp");
+						compsNodes.appendChild(radioGroupNode);
+						radioGroupNode.setAttribute("id", radioGroupcomp.getId());
+						radioGroupNode.setAttribute("visible", String.valueOf(radioGroupcomp.isVisible()));
+						radioGroupNode.setAttribute("editorType", radioGroupcomp.getEditorType());
+						if(isNotNullString(radioGroupcomp.getText()))
+							radioGroupNode.setAttribute("text", radioGroupcomp.getText());
+						if(isNotNullString(radioGroupcomp.getI18nName()))
+							radioGroupNode.setAttribute("i18nName", radioGroupcomp.getI18nName());
+						if(isNotNullString(radioGroupcomp.getLangDir()))
+							radioGroupNode.setAttribute("langDir", radioGroupcomp.getLangDir());
+						if(isNotNullString(radioGroupcomp.getTextAlign()))
+							radioGroupNode.setAttribute("textAlign", radioGroupcomp.getTextAlign());
+						radioGroupNode.setAttribute("focus", String.valueOf(radioGroupcomp.isFocus()));
+						if(isNotNullString(radioGroupcomp.getComboDataId()))
+							radioGroupNode.setAttribute("comboDataId", radioGroupcomp.getComboDataId());
+						if(isNotNullString(radioGroupcomp.getValue()))
+							radioGroupNode.setAttribute("value", radioGroupcomp.getValue());
+						if(isNotNullString(radioGroupcomp.getContextMenu()))
+							radioGroupNode.setAttribute("contextMenu", radioGroupcomp.getContextMenu());
+						radioGroupNode.setAttribute("textWidth", String.valueOf(radioGroupcomp.getTextWidth()));
+						radioGroupNode.setAttribute("tabIndex", String.valueOf(radioGroupcomp.getTabIndex()));
+						radioGroupNode.setAttribute("sepWidth", String.valueOf(radioGroupcomp.getSepWidth()));
+						radioGroupNode.setAttribute("index", String.valueOf(radioGroupcomp.getIndex()));
+						radioGroupNode.setAttribute("enabled", String.valueOf(radioGroupcomp.isEnabled()));
+//						if(isNotNullString(radioGroupcomp.getClassName()))
+//							radioGroupNode.setAttribute("className", radioGroupcomp.getClassName());
+//						Map<String, JsListenerConf> jsListeners =radioGroupcomp.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), radioGroupNode);
+						//Events
+						AMCUtil.addEvents(doc, radioGroupcomp.getEventConfs(), radioGroupNode);
+					}else if(textcomp instanceof ReferenceComp){
+						ReferenceComp refcomp = (ReferenceComp)textcomp;
+						Element refNode = doc.createElement("ReferenceComp");
+						compsNodes.appendChild(refNode);
+						refNode.setAttribute("id", refcomp.getId());
+						refNode.setAttribute("visible", String.valueOf(refcomp.isVisible()));
+						refNode.setAttribute("enabled", String.valueOf(refcomp.isEnabled()));
+						refNode.setAttribute("editorType", refcomp.getEditorType());
+						if(isNotNullString(textcomp.getText()))
+							refNode.setAttribute("text", refcomp.getText());
+						if(isNotNullString(refcomp.getI18nName()))
+							refNode.setAttribute("i18nName", refcomp.getI18nName());
+						if(isNotNullString(refcomp.getLangDir()))
+							refNode.setAttribute("langDir", refcomp.getLangDir());
+						if(isNotNullString(textcomp.getContextMenu()))
+							refNode.setAttribute("contextMenu", refcomp.getContextMenu());
+						if(isNotNullString(refcomp.getTextAlign()))
+							refNode.setAttribute("textAlign", refcomp.getTextAlign());
+						if(isNotNullString(String.valueOf(refcomp.getTextWidth())))
+							refNode.setAttribute("textWidth", String.valueOf(refcomp.getTextWidth()));
+						refNode.setAttribute("focus", String.valueOf(refcomp.isFocus()));
+//						if(isNotNullString(refcomp.getClassName()))
+//							refNode.setAttribute("className", refcomp.getClassName());
+						if(isNotNullString(refcomp.getRefcode()))
+							refNode.setAttribute("refcode", refcomp.getRefcode());
+						if(isNotNullString(refcomp.getTip()))
+							refNode.setAttribute("tip", refcomp.getTip());
+//						Map<String, JsListenerConf> jsListeners =refcomp.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), refNode);
+						//Events
+						AMCUtil.addEvents(doc, refcomp.getEventConfs(), refNode);
+					}else if(textcomp instanceof CheckBoxComp){
+						CheckBoxComp checkbox = (CheckBoxComp)textcomps[i];
+						Element checkboxNode = doc.createElement("CheckBoxComp");
+						compsNodes.appendChild(checkboxNode);
+						checkboxNode.setAttribute("id", checkbox.getId());
+						checkboxNode.setAttribute("visible", String.valueOf(checkbox.isVisible()));
+						checkboxNode.setAttribute("editorType", checkbox.getEditorType());
+						if(isNotNullString(checkbox.getI18nName()))
+							checkboxNode.setAttribute("i18nName", checkbox.getI18nName());
+						if(isNotNullString(checkbox.getTextAlign()))
+							checkboxNode.setAttribute("textAlign", checkbox.getTextAlign());
+						if(isNotNullString(String.valueOf(checkbox.getTextWidth())))
+							checkboxNode.setAttribute("textWidth", String.valueOf(checkbox.getTextWidth()));
+						checkboxNode.setAttribute("focus", String.valueOf(checkbox.isFocus()));
+						if(isNotNullString(checkbox.getValue()))
+							checkboxNode.setAttribute("value", checkbox.getValue());
+						if(isNotNullString(checkbox.getContextMenu()))
+							checkboxNode.setAttribute("contextMenu", checkbox.getContextMenu());
+						if(isNotNullString(textcomp.getText()))
+							checkboxNode.setAttribute("text", checkbox.getText());
+						if(isNotNullString(textcomp.getLangDir()))
+							checkboxNode.setAttribute("langDir", checkbox.getLangDir());
+						if(isNotNullString(checkbox.getDataType()))
+//						if(isNotNullString(checkbox.getClassName()))
+//							checkboxNode.setAttribute("className", checkbox.getClassName());
+						checkboxNode.setAttribute("dataType", checkbox.getDataType());
+						checkboxNode.setAttribute("enabled", String.valueOf(checkbox.isEnabled()));
+						checkboxNode.setAttribute("checked", String.valueOf(checkbox.isChecked()));
+//						Map<String, JsListenerConf> jsListeners = checkbox.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), checkboxNode);
+						//Events
+						AMCUtil.addEvents(doc, checkbox.getEventConfs(), checkboxNode);
+					}else if(textcomp instanceof ComboBoxComp){
+						ComboBoxComp combocomp = (ComboBoxComp)textcomps[i];
+						Element comboNode = doc.createElement("ComBoBoxComp");
+						compsNodes.appendChild(comboNode);
+						comboNode.setAttribute("id", combocomp.getId());
+						comboNode.setAttribute("visible", String.valueOf(combocomp.isVisible()));
+						comboNode.setAttribute("editorType", combocomp.getEditorType());
+						if(isNotNullString(combocomp.getText()))
+							comboNode.setAttribute("text", combocomp.getText());
+						if(isNotNullString(combocomp.getI18nName()))
+							comboNode.setAttribute("i18nName", combocomp.getI18nName());
+						if(isNotNullString(combocomp.getContextMenu()))
+							comboNode.setAttribute("contextMenu", combocomp.getContextMenu());	
+						if(isNotNullString(combocomp.getTextAlign()))
+							comboNode.setAttribute("textAlign", combocomp.getTextAlign());
+						if(isNotNullString(String.valueOf(combocomp.getTextWidth())))
+							comboNode.setAttribute("textWidth", String.valueOf(combocomp.getTextWidth()));
+						comboNode.setAttribute("focus", String.valueOf(combocomp.isFocus()));
+						if(isNotNullString(combocomp.getLangDir()))
+							comboNode.setAttribute("langDir", combocomp.getLangDir());
+						if(isNotNullString(combocomp.getValue()))
+							comboNode.setAttribute("value", combocomp.getValue());
+//						if(isNotNullString(combocomp.getClassName()))
+//							comboNode.setAttribute("className", combocomp.getClassName());
+						if(isNotNullString(combocomp.getRefComboData()))
+							comboNode.setAttribute("refComboData", combocomp.getRefComboData());
+						comboNode.setAttribute("selectOnly", String.valueOf(combocomp.isSelectOnly()));
+						comboNode.setAttribute("enabled", String.valueOf(combocomp.isEnabled()));
+						comboNode.setAttribute("allowExtendValue", String.valueOf(combocomp.isAllowExtendValue()));
+//						Map<String, JsListenerConf> jsListeners = combocomp.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), comboNode);
+						//Events
+						AMCUtil.addEvents(doc, combocomp.getEventConfs(), comboNode);
+					}else if(textcomp instanceof RadioComp){
+						RadioComp radiocomp = (RadioComp)textcomps[i];
+						Element radioNode = doc.createElement("RadioComp");
+						compsNodes.appendChild(radioNode);
+						radioNode.setAttribute("id", radiocomp.getId());
+						radioNode.setAttribute("visible", String.valueOf(radiocomp.isVisible()));
+						radioNode.setAttribute("enabled", String.valueOf(radiocomp.isEnabled()));
+						radioNode.setAttribute("editorType", radiocomp.getEditorType());
+						if(isNotNullString(radiocomp.getText()))
+							radioNode.setAttribute("text", radiocomp.getText());
+						if(isNotNullString(textcomp.getI18nName()))
+							radioNode.setAttribute("i18nName", radiocomp.getI18nName());
+						if(isNotNullString(textcomp.getLangDir()))
+							radioNode.setAttribute("langDir", radiocomp.getLangDir());
+						if(isNotNullString(radiocomp.getGroup()))
+							radioNode.setAttribute("group", radiocomp.getGroup());
+						if(isNotNullString(radiocomp.getContextMenu()))
+							radioNode.setAttribute("contextMenu", radiocomp.getContextMenu());
+						if(isNotNullString(radiocomp.getTextAlign()))
+							radioNode.setAttribute("textAlign", radiocomp.getTextAlign());
+						if(isNotNullString(String.valueOf(radiocomp.getTextWidth())))
+							radioNode.setAttribute("textWidth", String.valueOf(radiocomp.getTextWidth()));
+						radioNode.setAttribute("focus", String.valueOf(radiocomp.isFocus()));
+//						if(isNotNullString(radiocomp.getClassName()))
+//							radioNode.setAttribute("className", radiocomp.getClassName());
+						if(isNotNullString(radiocomp.getValue()))
+							radioNode.setAttribute("value", radiocomp.getValue());
+						radioNode.setAttribute("isChecked", String.valueOf(radiocomp.isChecked()));
+						if(isNotNullString(radiocomp.getGroup()))
+							radioNode.setAttribute("radioGroup", radiocomp.getGroup());
+//						Map<String, JsListenerConf> jsListeners = radiocomp.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), radioNode);
+						//Events
+						AMCUtil.addEvents(doc, radiocomp.getEventConfs(), radioNode);
+					}else{
+						Element stringNode = doc.createElement("TextComp");
+						compsNodes.appendChild(stringNode);
+						stringNode.setAttribute("id", textcomp.getId());
+						stringNode.setAttribute("visible", String.valueOf(textcomp.isVisible()));
+						stringNode.setAttribute("editorType", textcomp.getEditorType());
+						if(isNotNullString(textcomp.getText()))
+							stringNode.setAttribute("text", textcomp.getText());
+						if(isNotNullString(textcomp.getI18nName()))
+							stringNode.setAttribute("i18nName", textcomp.getI18nName());
+						if(isNotNullString(textcomp.getLangDir()))
+							stringNode.setAttribute("langDir", textcomp.getLangDir());
+						if(isNotNullString(textcomp.getTextAlign()))
+							stringNode.setAttribute("textAlign", textcomp.getTextAlign());
+						if(isNotNullString(textcomp.getContextMenu()))
+							stringNode.setAttribute("contextMenu", textcomp.getContextMenu());
+						if(isNotNullString(String.valueOf(textcomp.getTextWidth())) && !(textcomp.getTextWidth() == 0))
+							stringNode.setAttribute("textWidth", String.valueOf(textcomp.getTextWidth()));
+						stringNode.setAttribute("focus", String.valueOf(textcomp.isFocus()));
+						stringNode.setAttribute("enabled", String.valueOf(textcomp.isEnabled()));
+//						if(isNotNullString(textcomp.getClassName()))
+//							stringNode.setAttribute("className", textcomp.getClassName());
+						if(isNotNullString(textcomp.getValue()))
+							stringNode.setAttribute("value", textcomp.getValue());
+						if(isNotNullString(textcomp.getTip()))
+							stringNode.setAttribute("tip", textcomp.getTip());
+						//integer
+						if(textcomp.getEditorType().equals(EditorTypeConst.INTEGERTEXT)){
+							if(isNotNullString(textcomp.getMaxValue()))
+								stringNode.setAttribute("maxValue", textcomp.getMaxValue());
+							if(isNotNullString(textcomp.getMinValue()))
+								stringNode.setAttribute("minValue", textcomp.getMinValue());
+						}
+						//decimal
+						else if(textcomp.getEditorType().equals(EditorTypeConst.DECIMALTEXT)){
+							if(isNotNullString(textcomp.getPrecision()))
+								stringNode.setAttribute("precision", textcomp.getPrecision());
+						}
+//						Map<String, JsListenerConf> jsListeners = textcomp.getListenerMap();
+//						if(jsListeners != null && jsListeners.size() > 0)
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), stringNode);
+						//Events
+						AMCUtil.addEvents(doc, textcomp.getEventConfs(), stringNode);
+					}
+				}
+			}
+		// <ButtonComp>
+		WebComponent[] btns = widget.getViewComponents().getComponentByType(ButtonComp.class);
+		if(btns != null){
+			for (int i = 0; i < btns.length; i++){
+				ButtonComp btn = (ButtonComp) btns[i];
+				Element btnNode = doc.createElement("ButtonComp");
+				compsNodes.appendChild(btnNode);
+				btnNode.setAttribute("id", btn.getId());
+				btnNode.setAttribute("enabled",String.valueOf(btn.isEnabled()));
+				btnNode.setAttribute("visible",String.valueOf(btn.isVisible()));
+				if(isNotNullString(btn.getContextMenu()))
+					btnNode.setAttribute("contextMenu", btn.getContextMenu());
+				if(isNotNullString(btn.getLangDir()))
+					btnNode.setAttribute("langDir", btn.getLangDir());
+				if(isNotNullString(btn.getTip()))
+					btnNode.setAttribute("tip", btn.getTip());
+				if(isNotNullString(btn.getTipI18nName()))
+					btnNode.setAttribute("tipI18nName", btn.getTipI18nName());
+				if(isNotNullString(btn.getText()))
+					btnNode.setAttribute("text", btn.getText());
+//				if(isNotNullString(btn.getAlign()))
+//					btnNode.setAttribute("align", btn.getAlign());
+				if(isNotNullString(btn.getHotKey()))
+					btnNode.setAttribute("hotKey", btn.getHotKey());
+				if(isNotNullString(btn.getDisplayHotKey()))
+					btnNode.setAttribute("displayHotKey", btn.getDisplayHotKey());
+//				if(isNotNullString(btn.getClassName()))
+//					btnNode.setAttribute("className", btn.getClassName());
+				if(isNotNullString(btn.getI18nName()))
+					btnNode.setAttribute("i18nName", btn.getI18nName());
+				if(isNotNullString(btn.getRefImg()))
+					btnNode.setAttribute("refImg", btn.getRefImg());
+				if(isNotNullString(btn.getHotKey()))
+					btnNode.setAttribute("hotKey", btn.getHotKey());
+				if(isNotNullString(btn.getDisplayHotKey()))
+					btnNode.setAttribute("displayHotKey", btn.getDisplayHotKey());
+//				Map<String, JsListenerConf> jsListeners = btn.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0)
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), btnNode);
+				//Events
+				AMCUtil.addEvents(doc, btn.getEventConfs(), btnNode);
+			}
+		}
+		// <IframeComp>
+		WebComponent[] iframes = widget.getViewComponents().getComponentByType(IFrameComp.class);
+		if(iframes != null){
+			for (int i = 0; i < iframes.length; i++){
+				IFrameComp frame = (IFrameComp) iframes[i];
+				Element frameNode = doc.createElement("IframeComp");
+				compsNodes.appendChild(frameNode);
+				frameNode.setAttribute("visible", String.valueOf(frame.isVisible()));
+				frameNode.setAttribute("enabled", String.valueOf(frame.isEnabled()));
+				if(isNotNullString(frame.getSrc()))
+					frameNode.setAttribute("src", frame.getSrc());
+				if(isNotNullString(frame.getContextMenu()))
+					frameNode.setAttribute("contextMenu", frame.getContextMenu());
+				frameNode.setAttribute("id", frame.getId());
+				if(isNotNullString(frame.getSrc()))
+					frameNode.setAttribute("src", frame.getSrc());
+				if(isNotNullString(frame.getName()))
+					frameNode.setAttribute("name", frame.getName());
+				if(isNotNullString(frame.getBorder()))
+					frameNode.setAttribute("border", frame.getBorder());
+				if(isNotNullString(frame.getFrameBorder()))
+					frameNode.setAttribute("frameborder", frame.getFrameBorder());
+//				if(isNotNullString(frame.getClassName()))
+//					frameNode.setAttribute("className", frame.getClassName());
+				if(isNotNullString(frame.getScrolling()));
+					frameNode.setAttribute("scrolling", frame.getScrolling());
+//				Map<String, JsListenerConf> jsListeners = frame.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0)
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), frameNode);
+				//Events
+				AMCUtil.addEvents(doc, frame.getEventConfs(), frameNode);
+			}
+		}
+		// <SelfDefComp>
+		WebComponent[] selfDefComps = widget.getViewComponents().getComponentByType(SelfDefComp.class);
+		if(selfDefComps != null){
+			for (int i = 0; i < selfDefComps.length; i++){
+				SelfDefComp selfDefComp = (SelfDefComp) selfDefComps[i];
+				Element selfDefCompNode = doc.createElement("SelfDefComp");
+				compsNodes.appendChild(selfDefCompNode);
+				selfDefCompNode.setAttribute("id", selfDefComp.getId());
+//				if(isNotNullString(selfDefComp.getClassName()))
+//					selfDefCompNode.setAttribute("className", selfDefComp.getClassName());
+				selfDefCompNode.setAttribute("visible", String.valueOf(selfDefComp.isVisible()));
+//				Map<String, JsListenerConf> jsListeners = selfDefComp.getListenerMap();
+//				if(jsListeners != null && jsListeners.size() > 0)
+//					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), selfDefCompNode);
+				//Events
+				AMCUtil.addEvents(doc, selfDefComp.getEventConfs(), selfDefCompNode);
+			}
+		}
+		// <WebPartComp>    2011-11-15 by wupeng1
+		WebComponent[] webPartComps = widget.getViewComponents().getComponentByType(WebPartComp.class);
+		if(webPartComps != null){
+			for(int i = 0; i < webPartComps.length; i++){
+				WebPartComp webPartComp = (WebPartComp) webPartComps[i];
+				Element webPartCompNode = doc.createElement("WebPartComp");
+				compsNodes.appendChild(webPartCompNode);
+				
+				webPartCompNode.setAttribute("id", webPartComp.getId());
+//				if(isNotNullString(webPartComp.getClassName()))
+//					webPartCompNode.setAttribute("className", webPartComp.getClassName());
+				if(isNotNullString(webPartComp.getContentFetcher()))
+					webPartCompNode.setAttribute("contentFetcher", webPartComp.getContentFetcher());
+				
+				Map<String, JsListenerConf> jsListeners = webPartComp.getListenerMap();
+				if(jsListeners != null && jsListeners.size() > 0)
+					PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), webPartCompNode);
+				
+				//Events
+				AMCUtil.addEvents(doc, webPartComp.getEventConfs(), webPartCompNode);
+			}
+		}
+		
+	}
+
+	private static void addComboDatas(Document doc, Element rootNode, LfwWidget widget) {
+		// <ComboDatas>
+		ComboData[] cds = widget.getViewModels().getComboDatas();
+		if(cds != null && cds.length > 0){
+			Element comboDatasNode = doc.createElement("ComboDatas");
+			rootNode.appendChild(comboDatasNode);
+			for (int j = 0; j < cds.length; j++){
+				ComboData cd = cds[j];
+				if(cd.getFrom() == null){
+					if(cd instanceof StaticComboData){
+						Element staticComboDataNode = doc.createElement("StaticComboData");
+						comboDatasNode.appendChild(staticComboDataNode);
+						staticComboDataNode.setAttribute("id", cd.getId());
+						if(isNotNullString(cd.getCaption()))
+							staticComboDataNode.setAttribute("caption", cd.getCaption());
+						CombItem[] combItems = cd.getAllCombItems();
+						if(combItems != null){
+							for (int i = 0; i < combItems.length; i++){
+								Element combItemNode = doc.createElement("ComboItem");
+								staticComboDataNode.appendChild(combItemNode);
+								combItemNode.setAttribute("value", combItems[i].getValue());
+								if(isNotNullString(combItems[i].getI18nName()))
+									combItemNode.setAttribute("i18nName", combItems[i].getI18nName());
+								if(isNotNullString(combItems[i].getText()))
+									combItemNode.setAttribute("text", combItems[i].getText());
+							}
+						}
+						//Events
+//						AMCUtil.addEvents(doc, cd.getEventConfs(), comboDatasNode);
+					}else if(cd instanceof DynamicComboDataConf){
+						DynamicComboDataConf dCd = (DynamicComboDataConf) cd;
+						Element dymComboDataNode = doc.createElement("DynamicComboData");
+						comboDatasNode.appendChild(dymComboDataNode);
+						dymComboDataNode.setAttribute("id", dCd.getId());
+						if(isNotNullString(dCd.getCaption()))
+							dymComboDataNode.setAttribute("caption", dCd.getCaption());
+						dymComboDataNode.setAttribute("className", dCd.getClassName() == null?"":dCd.getClassName());
+						//Events
+//						AMCUtil.addEvents(doc, cd.getEventConfs(), dymComboDataNode);
+					}else if(cd instanceof MDComboDataConf){
+						MDComboDataConf mdCd = (MDComboDataConf) cd;
+						Element mdComboDataNode = doc.createElement("MDComboDataConf");
+						comboDatasNode.appendChild(mdComboDataNode);
+						mdComboDataNode.setAttribute("id", mdCd.getId());
+						if(isNotNullString(mdCd.getCaption()))
+							mdComboDataNode.setAttribute("caption", mdCd.getCaption());
+						mdComboDataNode.setAttribute("fullclassName", mdCd.getFullclassName() == null?"":mdCd.getFullclassName());
+						//Events
+//						AMCUtil.addEvents(doc, cd.getEventConfs(), mdComboDataNode);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * 添加参照节点
+	 * @param doc
+	 * @param rootNode
+	 * @param widget
+	 */
+	private static void addRefNodes(Document doc, Element rootNode, LfwWidget widget) {
+		IRefNode[] refnodes = widget.getViewModels().getRefNodes();
+		if(refnodes != null && refnodes.length > 0){
+			Element refDatasNode = doc.createElement("RefNodes");
+			rootNode.appendChild(refDatasNode);
+			//增加RefnodeRelation
+			RefNodeRelations refNodeRels = widget.getViewModels().getRefNodeRelations();
+			if(refNodeRels != null && refNodeRels.getRefnodeRelations().size() > 0){
+				Element refnodeRelNode = doc.createElement("RefNodeRelations");
+				refDatasNode.appendChild(refnodeRelNode);
+				
+				Map<String,RefNodeRelation> rels = refNodeRels.getRefnodeRelations();
+				if(rels != null && rels.size() > 0){
+					// 创建<DatasetRelation>
+					RefNodeRelation[] refnodeRels = rels.values().toArray(new RefNodeRelation[0]);
+					for(int i = 0; i < refnodeRels.length; i++){
+						RefNodeRelation rel = refnodeRels[i];
+						Element relationNode = doc.createElement("RefNodeRelation");
+						relationNode.setAttribute("id", rel.getId());
+						if(isNotNullString(rel.getDetailRefNode()))
+							relationNode.setAttribute("detailRefNode", rel.getDetailRefNode());
+						List<MasterFieldInfo> masterInfo = rel.getMasterFieldInfos();
+						if(masterInfo != null && masterInfo.size() > 0){
+							for (int j = 0; j < masterInfo.size(); j++) {
+								MasterFieldInfo master = masterInfo.get(j);
+								Element masterNode = doc.createElement("MasterFieldInfo");
+								relationNode.appendChild(masterNode);
+								if(isNotNullString(master.getFieldId()))
+									masterNode.setAttribute("fieldId", master.getFieldId());
+								if(isNotNullString(master.getDsId()))
+									masterNode.setAttribute("dsId", master.getDsId());
+								if(isNotNullString(master.getFilterSql()))
+									masterNode.setAttribute("filterSql", master.getFilterSql());
+								if(isNotNullString(master.getNullProcess()))
+									masterNode.setAttribute("nullProcess", master.getNullProcess());
+							}
+						}
+						refnodeRelNode.appendChild(relationNode);
+					}
+				}
+			}
+			for (IRefNode refnode : refnodes){
+				if(refnode instanceof RefNode){
+					RefNode cd = (RefNode)refnode;
+					if(cd.getFrom() == null){
+						if(cd instanceof NCRefNode){
+							NCRefNode ncrefnode = (NCRefNode)cd;
+							Element ncRefDataNode = doc.createElement("NCRefNode");
+							refDatasNode.appendChild(ncRefDataNode);
+							ncRefDataNode.setAttribute("id", ncrefnode.getId());
+//							if(isNotNullString(ncrefnode.getCaption()))
+//								ncRefDataNode.setAttribute("caption", ncrefnode.getCaption());
+		//					ncRefDataNode.setAttribute("relationId", ncrefnode.getRelationId());
+							ncRefDataNode.setAttribute("pagemodel", ncrefnode.getPageModel());
+							ncRefDataNode.setAttribute("pagemeta", ncrefnode.getPagemeta());
+							ncRefDataNode.setAttribute("path", ncrefnode.getPath());
+							ncRefDataNode.setAttribute("refcode", ncrefnode.getRefcode());
+							ncRefDataNode.setAttribute("multiSel",String.valueOf(ncrefnode.isMultiSel()));
+							ncRefDataNode.setAttribute("refresh",String.valueOf(ncrefnode.isRefresh()));
+							ncRefDataNode.setAttribute("dialog",String.valueOf(ncrefnode.isDialog()));
+							ncRefDataNode.setAttribute("allowInput",String.valueOf(ncrefnode.isAllowInput()));
+							ncRefDataNode.setAttribute("usePower",String.valueOf(ncrefnode.isUsePower()));
+							ncRefDataNode.setAttribute("orgs",String.valueOf(ncrefnode.isOrgs()));
+							ncRefDataNode.setAttribute("selLeafOnly",String.valueOf(ncrefnode.isSelLeafOnly()));
+							ncRefDataNode.setAttribute("readDs", cd.getReadDs() == null?"":ncrefnode.getReadDs());
+							ncRefDataNode.setAttribute("writeDs", ncrefnode.getWriteDs() == null?"":ncrefnode.getWriteDs());
+							ncRefDataNode.setAttribute("readFields", ncrefnode.getReadFields() == null?"":ncrefnode.getReadFields());
+							ncRefDataNode.setAttribute("writeFields", ncrefnode.getWriteFields() == null?"":ncrefnode.getWriteFields());
+		//					ncRefDataNode.setAttribute("relationId", ncrefnode.getRelationId() == null?"":ncrefnode.getRelationId());
+							ncRefDataNode.setAttribute("refId", ncrefnode.getRefId() == null?"":ncrefnode.getRefId());
+							ncRefDataNode.setAttribute("text", ncrefnode.getText());
+							ncRefDataNode.setAttribute("path", ncrefnode.getPath());
+							ncRefDataNode.setAttribute("i18nName", ncrefnode.getI18nName());
+							ncRefDataNode.setAttribute("text", ncrefnode.getText());
+							ncRefDataNode.setAttribute("langDir", ncrefnode.getLangDir());
+							ncRefDataNode.setAttribute("dataListener", ncrefnode.getDataListener());
+							ncRefDataNode.setAttribute("refnodeDelegator", ncrefnode.getRefnodeDelegator());
+							if(isNotNullString(ncrefnode.getPageModel()))
+								ncRefDataNode.setAttribute("pageModel", ncrefnode.getPageModel());
+							if(isNotNullString(ncrefnode.getRefModel()))
+								ncRefDataNode.setAttribute("refModel", ncrefnode.getRefModel());
+							//Events
+//							AMCUtil.addEvents(doc, cd.getEventConfs(), ncRefDataNode);
+						}else{
+							Element refNode = doc.createElement("RefNode");
+							refDatasNode.appendChild(refNode);
+							refNode.setAttribute("id", cd.getId());
+//							if(isNotNullString(cd.getCaption()))
+//								refNode.setAttribute("caption", cd.getCaption());
+							refNode.setAttribute("dialog",String.valueOf(cd.isDialog()));
+							refNode.setAttribute("refresh",String.valueOf(cd.isRefresh()));
+							refNode.setAttribute("selLeafOnly",String.valueOf(cd.isSelLeafOnly()));
+							refNode.setAttribute("readDs", cd.getReadDs() == null?"":cd.getReadDs());
+							refNode.setAttribute("writeDs", cd.getWriteDs() == null?"":cd.getWriteDs());
+							refNode.setAttribute("isRefresh",String.valueOf(cd.isRefresh()));
+//							refNode.setAttribute("isDialog",String.valueOf(cd.isDialog()));
+							refNode.setAttribute("allowInput",String.valueOf(cd.isAllowInput()));
+							refNode.setAttribute("readFields", cd.getReadFields() == null?"":cd.getReadFields());
+							refNode.setAttribute("writeFields", cd.getWriteFields() == null?"":cd.getWriteFields());
+							refNode.setAttribute("refId", cd.getRefId() == null?"":cd.getRefId());
+							refNode.setAttribute("pagemodel", cd.getPageModel());
+							refNode.setAttribute("pagemeta", cd.getPagemeta());
+							refNode.setAttribute("path", cd.getPath());
+							refNode.setAttribute("multiSel",String.valueOf(cd.isMultiSel()));
+							refNode.setAttribute("i18nName", cd.getI18nName());
+							refNode.setAttribute("text", cd.getText());
+							refNode.setAttribute("refnodeDelegator", cd.getRefnodeDelegator());
+							refNode.setAttribute("refModel", cd.getRefModel());
+							refNode.setAttribute("langDir", cd.getLangDir());
+							refNode.setAttribute("path", cd.getPath());
+							refNode.setAttribute("dataListener", cd.getDataListener());
+							if(isNotNullString(cd.getPageModel()))
+								refNode.setAttribute("pageModel", cd.getPageModel());
+							//Events
+//							AMCUtil.addEvents(doc, cd.getEventConfs(), refNode);
+						}
+					}
+				}else if(refnode instanceof SelfDefRefNode){
+					SelfDefRefNode cd = (SelfDefRefNode)refnode;
+					Element refNode = doc.createElement("SelfRefNode");
+					refDatasNode.appendChild(refNode);
+					refNode.setAttribute("id", cd.getId());
+					refNode.setAttribute("dialog",String.valueOf(cd.isDialog()));
+					refNode.setAttribute("refresh",String.valueOf(cd.isRefresh()));
+					refNode.setAttribute("isRefresh",String.valueOf(cd.isRefresh()));
+					refNode.setAttribute("isDialog",String.valueOf(cd.isDialog()));
+					refNode.setAttribute("path", cd.getPath());
+					refNode.setAttribute("i18nName", cd.getI18nName());
+					refNode.setAttribute("text", cd.getText());
+					refNode.setAttribute("langDir", cd.getLangDir());
+					refNode.setAttribute("path", cd.getPath());
+				}
+			}
+		}
+	}
+	
+	private static void addModels(Document doc, Element rootNode, LfwWidget widget){
+		//<Models>
+		Element modelsNode = doc.createElement("Models");
+		rootNode.appendChild(modelsNode);
+		// 创建<Datasets>
+		Element datasetsNode = doc.createElement("Datasets");
+		modelsNode.appendChild(datasetsNode);
+		// 创建<DatasetRelations> 
+		DatasetRelations dsRels = widget.getViewModels().getDsrelations();
+		if(dsRels != null){
+			DatasetRelation[] rels = dsRels.getDsRelations();
+			
+			Element datasetRelNode = doc.createElement("DatasetRelations");
+			datasetsNode.appendChild(datasetRelNode);
+			
+			if(rels != null && rels.length > 0){
+				// 创建<DatasetRelation>
+				for(int i = 0; i < rels.length; i++){
+					//<DatasetRelation id="role_resource" masterDataset="roleManageDs" masterKeyField="pk_role" detailDataset="roleresourceds" detailForeignKey="pk_role"
+					DatasetRelation rel = rels[i];
+					//if(rel.getFrom() == null){
+						Element relationNode = doc.createElement("DatasetRelation");
+						relationNode.setAttribute("id", rel.getId());
+						if(isNotNullString(rel.getMasterDataset()))
+							relationNode.setAttribute("masterDataset", rel.getMasterDataset());
+						if(isNotNullString(rel.getMasterKeyField()))
+							relationNode.setAttribute("masterKeyField", rel.getMasterKeyField());
+						if(isNotNullString(rel.getDetailDataset()))
+							relationNode.setAttribute("detailDataset", rel.getDetailDataset());
+						if(isNotNullString(rel.getDetailForeignKey()))
+							relationNode.setAttribute("detailForeignKey", rel.getDetailForeignKey());
+						datasetRelNode.appendChild(relationNode);
+					//}
+				}
+			}
+		}
+		// 创建<Dataset>
+		Dataset[] dss = widget.getViewModels().getDatasets();
+		if(dss != null && dss.length > 0){
+			for (int i = 0; i < dss.length; i++){
+				Dataset ds = dss[i];
+				Element dsNode = null;
+				if(ds.getFrom() == null){
+					if(ds instanceof RefDataset){
+						dsNode = doc.createElement("RefDataset");
+					}else if(ds instanceof RefMdDataset){
+						dsNode = doc.createElement("RefMdDataset");
+						if(isNotNullString(((RefMdDataset)ds).getObjMeta()))
+							dsNode.setAttribute("objMeta", ((RefMdDataset)ds).getObjMeta());
+					}else if(ds instanceof RefPubDataset){
+						dsNode = doc.createElement("RefPubDataset");
+						String refId = ((RefPubDataset)ds).getRefId();
+						if(isNotNullString(refId))
+							dsNode.setAttribute("refId", ((RefPubDataset)ds).getRefId());
+					}else if(ds instanceof PubDataset){
+						dsNode = doc.createElement("PubDataset");
+						String refId = ((PubDataset)ds).getRefId();
+						if(isNotNullString(refId))
+							dsNode.setAttribute("refId", ((PubDataset)ds).getRefId());
+					}else if(ds instanceof MdDataset){
+						dsNode = doc.createElement("MdDataset");
+						if(isNotNullString(((MdDataset)ds).getObjMeta()))
+							dsNode.setAttribute("objMeta", ((MdDataset)ds).getObjMeta());
+					}else{
+						dsNode = doc.createElement("Dataset");
+					}
+					dsNode.setAttribute("id", ds.getId());
+					dsNode.setAttribute("enabled", String.valueOf(ds.isEnabled()));
+					dsNode.setAttribute("controloperatorStatus", String.valueOf(ds.isControloperatorStatus()));
+					dsNode.setAttribute("controlwidgetopeStatus", String.valueOf(ds.isControlwidgetopeStatus()));
+					
+					if(isNotNullString(ds.getCaption()))
+						dsNode.setAttribute("caption", ds.getCaption());
+					if(isNotNullString(ds.getVoMeta()))
+						dsNode.setAttribute("voMeta", ds.getVoMeta());
+					dsNode.setAttribute("lazyLoad", String.valueOf(ds.isLazyLoad()));
+					if(isNotNullString(ds.getOperatorStatusArray()))
+						dsNode.setAttribute("operatorStatusArray", ds.getOperatorStatusArray());
+					
+					if(ds.getPageSize() > 0)
+						dsNode.setAttribute("pageSize", String.valueOf(ds.getPageSize()));
+					
+					datasetsNode.appendChild(dsNode);
+					// <FieldRelations>
+					FieldRelations rels = ds.getFieldRelations();
+					if(rels != null && rels.getFieldRelations() != null && rels.getFieldRelations().length > 0){
+						FieldRelation[] fieldRels = rels.getFieldRelations();
+						addFieldRelations(doc, fieldRels, dsNode);
+					}
+					// <Fields>
+					Field[] fields = ds.getFieldSet().getFields();
+					if(fields != null && fields.length > 0){
+						Element fieldsNode = doc.createElement("Fields");
+						dsNode.appendChild(fieldsNode);
+						if(ds instanceof PubDataset){
+							PubDataset pubDs = (PubDataset)ds;
+							Dataset poolDs = PoolObjectManager.getDataset(pubDs.getRefId());
+							for(int m = 0, count = pubDs.getFieldSet().getFieldCount(); m < count; m++){
+								Field field = pubDs.getFieldSet().getField(m);
+								if(field instanceof PubField){// 该字段来自公共池,判断是否修改过
+									Element mFieldNode = convertModifiedField(field, poolDs.getFieldSet(), doc);
+									if(mFieldNode != null)
+										fieldsNode.appendChild(mFieldNode);
+								}else{// 添加的新的字段
+									Element fieldNode = createNormalField(doc, field);
+									fieldsNode.appendChild(fieldNode);
+								}
+							}
+						}else if(ds instanceof MdDataset){
+							MdDataset mdDs = (MdDataset)ds;
+							MdDataset trueMdDs = new MdDataset();
+							trueMdDs.setObjMeta(mdDs.getObjMeta());
+							trueMdDs = NCLocator.getInstance().lookup(IDatasetProvider.class).getMdDataset(trueMdDs);
+							
+							if(trueMdDs == null)
+								throw new LfwRuntimeException("根据ds:" + mdDs.getId() + "配置的元数据路径mdPath=" + mdDs.getObjMeta() + "未获取实际的MdDataset!");
+							
+							for(int m = 0, count = mdDs.getFieldSet().getFieldCount(); m < count; m++){
+								Field field = mdDs.getFieldSet().getField(m);
+								if(field instanceof MDField){// 该字段来自元数据,判断是否修改过
+									Element mFieldNode = convertModifiedField(field, trueMdDs.getFieldSet(), doc);
+									if(mFieldNode != null)
+										fieldsNode.appendChild(mFieldNode);
+								}else{//添加的新的字段(field instanceof MDField))
+									Element fieldNode = createNormalField(doc, field);
+									fieldsNode.appendChild(fieldNode);
+								}
+							}
+						}else{
+							for (int j = 0; j < fields.length; j++){
+								Field field = fields[j];
+								Element fieldNode = createNormalField(doc, field);
+								fieldsNode.appendChild(fieldNode);
+							}	
+						}
+					}
+					// <Listeners>
+//					Map<String, JsListenerConf> jsListeners = ds.getListenerMap();
+//					if(jsListeners != null && jsListeners.size() > 0)
+//						PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), dsNode);
+					//Events
+					AMCUtil.addEvents(doc, ds.getEventConfs(), dsNode);
+				}else{
+					dsNode = doc.createElement("Dataset");
+					//Events
+					AMCUtil.addEvents(doc, ds.getEventConfs(), dsNode);
+//					Map<String, JsListenerConf> jsListeners = ds.getListenerMap();
+//					boolean saveFlag = false;
+//					for (Iterator<String> itwd = jsListeners.keySet().iterator(); itwd.hasNext();){
+//						String listenerId = (String) itwd.next();
+//						JsListenerConf listener = jsListeners.get(listenerId);
+//						if(listener.getFrom() == null){
+//							saveFlag = true;
+//							break;
+//						}
+//						else if(listener.getConfType() != null  && listener.getConfType().equals(WebElement.CONF_DEL)){
+//							saveFlag = true;
+//							break;
+//						}
+//					}
+//					if(saveFlag){
+//						if(jsListeners != null && jsListeners.size() > 0){
+//							dsNode = doc.createElement("Dataset");
+//							dsNode.setAttribute("id", ds.getId());
+//							dsNode.setAttribute("confType", ds.getConfType());
+//							datasetsNode.appendChild(dsNode);
+//							PersistenceUtil.addListeners(doc, jsListeners.values().toArray(new JsListenerConf[0]), dsNode);
+//						}
+//					}
+				}
+			}
+		}
+		addComboDatas(doc, modelsNode, widget);
+		addRefNodes(doc, modelsNode, widget);
+	}
+
+	private static Element createNormalField(Document doc, Field field){
+		Element fieldNode = doc.createElement("Field");
+		if(isNotNullString(field.getId()))
+			fieldNode.setAttribute("id", field.getId());
+		if(isNotNullString(field.getField()))
+			fieldNode.setAttribute("field", field.getField());
+		if(isNotNullString(field.getText()))
+			fieldNode.setAttribute("text", field.getText());
+		if(isNotNullString(field.getLangDir()))
+			fieldNode.setAttribute("langDir", field.getLangDir());
+		if(isNotNullString(field.getDataType()))
+			fieldNode.setAttribute("dataType", field.getDataType());
+		if(isNotNullString(field.getI18nName()))
+			fieldNode.setAttribute("i18nName", field.getI18nName());
+		if(isNotNullString(field.getFormater()))
+			fieldNode.setAttribute("formater", field.getFormater());
+		if(isNotNullString(field.getPrecision()))
+			fieldNode.setAttribute("precision", field.getPrecision());
+		if(isNotNullString(field.getMaxValue()))
+			fieldNode.setAttribute("maxValue", field.getMaxValue());
+		if(isNotNullString(field.getMinValue()))
+			fieldNode.setAttribute("minValue", field.getMinValue());
+		if(isNotNullString(field.getEditFormular())){
+			try {
+				fieldNode.setAttribute("editFormular", JsURLEncoder.encode(field.getEditFormular(), "UTF-8"));
+			} catch (Exception e) {
+				Logger.error(e, e);
+			}
+		}
+		if(isNotNullString(field.getValidateFormula())){
+			try {
+				fieldNode.setAttribute("validateFormula", JsURLEncoder.encode(field.getValidateFormula(), "UTF-8"));
+			} catch (Exception e) {
+				Logger.error(e, e);
+			}
+		}
+		if(field.getDefaultValue() != null)
+			fieldNode.setAttribute("defaultValue", String.valueOf(field.getDefaultValue()));
+		if(field.getSourceField() != null)
+			fieldNode.setAttribute("sourceField", String.valueOf(field.getSourceField()));
+		fieldNode.setAttribute("primaryKey", String.valueOf(field.isPrimaryKey()));
+		fieldNode.setAttribute("nullAble", String.valueOf(field.isNullAble()));
+		return fieldNode;
+	}
+	
+	private static void addFieldRelations(Document doc, FieldRelation[] fieldRels, Element parentNode) {
+		if(fieldRels != null && fieldRels.length > 0){
+			Element fieldRelsNode = doc.createElement("FieldRelations");
+			parentNode.appendChild(fieldRelsNode);
+			
+			for (int j = 0; j < fieldRels.length; j++){
+				FieldRelation fieldRel = fieldRels[j];
+				Element fieldRelNode = doc.createElement("FieldRelation");
+				fieldRelsNode.appendChild(fieldRelNode);
+				
+				if(isNotNullString(fieldRel.getId()))
+					fieldRelNode.setAttribute("id", fieldRel.getId());
+				if(isNotNullString(fieldRel.getRefDataset()))
+					fieldRelNode.setAttribute("refDataset", fieldRel.getRefDataset());
+				
+				MatchField[] matchFields = fieldRel.getMatchFields();
+				if(matchFields != null && matchFields.length > 0){
+					Element matchFieldsNode = doc.createElement("MatchFields");
+					fieldRelNode.appendChild(matchFieldsNode);
+					for (int k = 0; k < matchFields.length; k++){
+						MatchField matchField = matchFields[k];
+						Element fieldNode = doc.createElement("Field");
+						if(isNotNullString(matchField.getReadField()))
+							fieldNode.setAttribute("readField", matchField.getReadField());
+						if(isNotNullString(matchField.getWriteField()))
+							fieldNode.setAttribute("writeField", matchField.getWriteField());
+						if(isNotNullString(matchField.getIscontains()))
+							fieldNode.setAttribute("ismatch", matchField.getIscontains());
+						if(isNotNullString(matchField.getIscontains()))
+							fieldNode.setAttribute("iscontains", matchField.getIscontains());
+						matchFieldsNode.appendChild(fieldNode);
+					}
+				}
+				
+				WhereField whereField = fieldRel.getWhereField();
+				if(whereField != null){
+					Element whereFieldsNode = doc.createElement("WhereField");
+					fieldRelNode.appendChild(whereFieldsNode);
+					Element fieldNode = doc.createElement("Field");
+					if(isNotNullString(whereField.getKey()))
+						fieldNode.setAttribute("key", whereField.getKey());
+					if(isNotNullString(whereField.getValue()))
+						fieldNode.setAttribute("value", whereField.getValue());
+					whereFieldsNode.appendChild(fieldNode);
+				}
+				
+				List<FieldRelation> childRels = fieldRel.getChildRelationList();
+				if(childRels != null && childRels.size() > 0)
+					addChildFieldRelations(doc, childRels.toArray(new FieldRelation[0]), fieldRelNode);
+			}
+		}
+	}
+	
+	private static void addChildFieldRelations(Document doc, FieldRelation[] fieldRels, Element parentNode) {
+		if(fieldRels != null && fieldRels.length > 0){
+			for (int j = 0; j < fieldRels.length; j++){
+				FieldRelation fieldRel = fieldRels[j];
+				Element fieldRelNode = doc.createElement("FieldRelation");
+				parentNode.appendChild(fieldRelNode);
+				
+				if(isNotNullString(fieldRel.getId()))
+					fieldRelNode.setAttribute("id", fieldRel.getId());
+				if(isNotNullString(fieldRel.getRefDataset()))
+					fieldRelNode.setAttribute("refDataset", fieldRel.getRefDataset());
+				
+				MatchField[] matchFields = fieldRel.getMatchFields();
+				if(matchFields != null && matchFields.length > 0){
+					Element matchFieldsNode = doc.createElement("MatchFields");
+					fieldRelNode.appendChild(matchFieldsNode);
+					for (int k = 0; k < matchFields.length; k++){
+						MatchField matchField = matchFields[k];
+						Element fieldNode = doc.createElement("Field");
+						if(isNotNullString(matchField.getReadField()))
+							fieldNode.setAttribute("readField", matchField.getReadField());
+						if(isNotNullString(matchField.getWriteField()))
+							fieldNode.setAttribute("writeField", matchField.getWriteField());
+						if(isNotNullString(matchField.getIscontains()))
+							fieldNode.setAttribute("ismatch", matchField.getIscontains());
+						if(isNotNullString(matchField.getIscontains()))
+							fieldNode.setAttribute("iscontains", matchField.getIscontains());
+						matchFieldsNode.appendChild(fieldNode);
+					}
+				}
+				
+				WhereField whereField = fieldRel.getWhereField();
+				if(whereField != null){
+					Element whereFieldsNode = doc.createElement("WhereField");
+					fieldRelNode.appendChild(whereFieldsNode);
+					Element fieldNode = doc.createElement("Field");
+					if(isNotNullString(whereField.getKey()))
+						fieldNode.setAttribute("key", whereField.getKey());
+					if(isNotNullString(whereField.getValue()))
+						fieldNode.setAttribute("value", whereField.getValue());
+					whereFieldsNode.appendChild(fieldNode);
+				}
+				
+				List<FieldRelation> childRels = fieldRel.getChildRelationList();
+				if(childRels != null && childRels.size() > 0)
+					addChildFieldRelations(doc, childRels.toArray(new FieldRelation[0]), fieldRelNode);
+			}
+		}
+	}
+
+	/**
+	 * 判断field是否被修改过
+	 * @param field
+	 * @param fields
+	 * @return
+	 */
+	private static Element convertModifiedField(Field field, FieldSet fields, Document doc){
+		Field poolField = fields.getField(field.getId());
+		
+		if(poolField == null)
+			return null;
+		Object dftValue = poolField.getDefaultValue();
+		Element node = null;
+		if((field.getDefaultValue() != null && dftValue == null) || (field.getDefaultValue() != null && dftValue != null && !field.getDefaultValue().equals(dftValue))){
+			node = doc.createElement("ModifyField");
+			node.setAttribute("defaultValue", field.getDefaultValue().toString());
+		}
+		
+		String i18nName = poolField.getI18nName();
+		if((field.getI18nName() != null && i18nName == null) || (field.getI18nName() != null && i18nName != null && !field.getI18nName().equals(i18nName))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("i18nName", field.getI18nName());
+		}
+		
+		String text = poolField.getText();
+		if((field.getText() != null && text == null) || (field.getText() != null && text != null && !field.getText().equals(text))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("text", field.getText());
+		}
+		
+		String editorFormular = poolField.getEditFormular();
+		if((field.getEditFormular() != null && editorFormular == null) || (field.getEditFormular() != null 
+				&& editorFormular != null && !field.getEditFormular().equals(editorFormular))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("editFormular", JsURLEncoder.encode(field.getEditFormular(), "UTF-8"));
+		}
+		
+		String validateFormular = poolField.getValidateFormula();
+		if((field.getValidateFormula() != null && validateFormular == null) || (field.getValidateFormula() != null 
+				&& validateFormular != null && !field.getValidateFormula().equals(validateFormular))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("validateFormula", JsURLEncoder.encode(field.getValidateFormula(), "UTF-8"));
+		}
+		String formatter = poolField.getFormater();
+		if((field.getFormater() != null && formatter == null) || (field.getFormater() != null 
+				&& formatter != null && !field.getFormater().equals(formatter))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("formater", JsURLEncoder.encode(field.getFormater(), "UTF-8"));
+		}
+		
+		String maxValue = poolField.getMaxValue();
+		if((field.getMaxValue() != null && maxValue == null) || (field.getMaxValue() != null 
+				&& maxValue != null && !field.getMaxValue().equals(maxValue))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("maxValue", field.getMaxValue());
+		}
+		
+		String minValue = poolField.getMinValue();
+		if((field.getMinValue() != null && minValue == null) || (field.getMinValue() != null 
+				&& minValue != null && !field.getMinValue().equals(minValue))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("minValue", field.getMinValue());
+		}
+		
+		String presion = poolField.getPrecision();
+		if((field.getPrecision() != null && presion == null) || (field.getPrecision() != null 
+				&& presion != null && !field.getPrecision().equals(presion))){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("precision", field.getPrecision());
+		}
+		
+		Boolean nullAble = poolField.isNullAble();
+		if((field.isNullAble() != nullAble)){
+			if(node == null)
+				node = doc.createElement("ModifyField");
+			node.setAttribute("nullAble", String.valueOf(field.isNullAble()));
+		}
+		
+		if(node != null)
+			node.setAttribute("id", poolField.getId());
+		return node;
+	}
+	
+	public static void addModelsGroups(Document doc, Element parentNode, LfwWidget widget){
+		List<Model> models = widget.getModels();
+		if(models != null && models.size() > 0){
+			Element modelsNode = doc.createElement(Model.TagName + "Groups");
+			parentNode.appendChild(modelsNode);
+			for(Model model : models){
+				Element modelNode = AMCUtil.getElementFromClass(doc, model);
+				modelsNode.appendChild(modelNode);
+			}
+		}
+	}
+
+	private static boolean isNotNullString(String param){
+		if(param != null && !param.equals(""))
+			return true;
+		else
+			return false;
+	}
+	
+}

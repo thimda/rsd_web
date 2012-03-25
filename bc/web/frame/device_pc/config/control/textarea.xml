@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>textarea</id>
+	<fullname>ui.ctrl.text.TextAreaComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>text</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.TextAreaComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.TextAreaSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCTextAreaCompRender</uirender>
+	<zone>view</zone>
+</plugin>

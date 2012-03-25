@@ -1,0 +1,113 @@
+.outlookbar_div
+{
+	/*
+	border-top-width:1;
+	border-top-style:solid;
+	border-top-color:#9098AE;
+	
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-bottom-color:#9098AE;
+	
+	border-left-width:1px;
+	border-left-style:solid;
+	border-left-color:#9098AE;
+	
+	border-right-width:1px;
+	border-right-style:solid;
+	border-right-color:#9098AE;
+	*/
+}
+
+.outlookbar_div .itembardiv{
+	height:31px;
+	width:100%;
+}
+
+.outlookbar_div .itembardiv .leftborderdiv{
+	height:100%;
+	float:left;
+	width:4px;
+	background-image:url('../images/outlookbar/outlook_item_left.png');
+}
+
+.outlookbar_div .itembardiv .rightborderdiv{
+	height:100%;
+	float:right;
+	width:4px;
+	background-image:url('../images/outlookbar/outlook_item_right.png');
+}
+
+.outlookbar_div .itembardiv .outlooktreeitem_div
+{
+	height:100%;
+	background:url("../images/outlookbar/outlook_bg.png");
+	cursor:pointer;
+	overflow-x:hidden;
+}
+
+.outlookbar_div .outlooktreeitem_div_showcontent
+{
+	height:100%;
+	background:url("../images/outlookbar/outlook_bg_on.png");
+	cursor:pointer;
+	overflow-x:hidden;
+}
+
+.outlookbar_div .itembardiv .leftborderdiv_showcontent
+{
+	height:100%;
+	float:left;
+	width:4px;
+	background-image:url('../images/outlookbar/outlook_item_left.png');
+}
+
+.outlookbar_div .itembardiv .rightborderdiv_showcontent
+{
+	height:100%;
+	float:right;
+	width:4px;
+	background-image:url('../images/outlookbar/outlook_item_right.png');
+}
+
+.outlookbar_div .outlooktreeitem_content_div
+{
+	padding-top:5px;
+}
+
+.outlookbar_div .itemimg
+{
+	width:16px;
+	height:16px;
+	margin-top:4px;
+	padding-left:3px;
+	float:left;
+}
+
+.outlookbar_div .itemtitle
+{
+	width:auto;
+	height:16px;
+	margin-top:7px;
+	margin-left:8px;
+	float:left;
+	color:#ffffff;
+	font-weight:bold;
+	font-family:微软雅黑;
+	font-size:14px;
+}
+
+.outlookbar_div .item_arrow_div
+{
+	width:16px;
+	height:16px;
+	margin-top:8px;
+	margin-left:11px;
+	float:left;
+}
+
+.outlookbar_div .item_arrow_img
+{
+	width:16px;
+	height:16px;
+}

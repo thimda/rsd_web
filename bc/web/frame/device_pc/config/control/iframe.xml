@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>iframe</id>
+	<fullname>ui.ctrl.iframe.IFrameComp</fullname>
+	<cssfullname>ui.ctrl.iframe.iframe</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.IFrameComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIIFrame</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.IFrameSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIIFrameSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCIFrameRender</uirender>
+	<zone>view</zone>
+</plugin>

@@ -1,0 +1,29 @@
+.normallabel{
+}
+
+.normallabel .label_normal {        
+    font-size: 9pt;
+    font-family: Arial;
+    color: black;
+    text-align: left;
+    font-weight: normal;       
+}
+.normallabel .label_inactive{
+	color:#BBBBBB;
+}
+
+.titlelabel{
+}
+
+.titlelabel .label_normal {        
+    font-size: 14pt;
+    color: #007DC4;
+    text-align: left;
+    font-weight: normal;       
+}
+.titlelabel .label_inactive{
+	color:#BBBBBB;
+}
+
+
+

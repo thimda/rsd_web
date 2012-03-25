@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="nc.uap.lfw.LfwEJB">
+  <public>
+    <component priority="0" remote="true" singleton="true" supportAlias="false" tx="NONE">
+        <interface>nc.uap.lfw.design.itf.IAMCProviderForDesign</interface>
+        <implementation>nc.uap.lfw.design.impl.AMCProviderForDesignImpl</implementation>
+    </component>
+    
+    <component priority="0" remote="true" singleton="true" supportAlias="false" tx="NONE">
+        <interface>nc.uap.lfw.design.itf.ILfwAMCDesignDataProvider</interface>
+        <implementation>nc.uap.lfw.design.impl.LfwAMCDesignDataProviderImpl</implementation>
+    </component>
+
+  </public>
+</module>
+

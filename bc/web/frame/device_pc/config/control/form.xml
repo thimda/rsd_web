@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>form</id>
+	<fullname>ui.ctrl.form.FormComp,ui.ctrl.form.FixedGridLayout,ui.ctrl.form.FlowGridLayout</fullname>
+	<cssfullname>ui.ctrl.form.form</cssfullname>
+	<dependences>panel,alltext,label,selfdefcomp,button</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.FormComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIFormComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.Form2XmlSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIFormSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCFormCompRender</uirender>
+	<zone>view</zone>
+</plugin>

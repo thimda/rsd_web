@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" from="NCQ">
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+    </Components>
+</Widget>

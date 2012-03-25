@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>bordert</id>
+	<fullname></fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIBorderTrue</uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCBorderTrueRender</uirender>
+	<zone>window</zone>
+</plugin>

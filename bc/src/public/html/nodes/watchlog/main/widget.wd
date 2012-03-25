@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="temp" lazyLoad="true">
+                <Fields>
+                    <Field dataType="String" id="logInfo" isPrimaryKey="false" nullAble="true" text="信息">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="temp" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+        <ComboDatas>
+            <StaticComboData id="loggerLevel">
+                <ComboItem text="全部" value="all">
+                </ComboItem>
+                <ComboItem text="error" value="error">
+                </ComboItem>
+                <ComboItem text="debug" value="debug">
+                </ComboItem>
+                <ComboItem text="info" value="info">
+                </ComboItem>
+            </StaticComboData>
+        </ComboDatas>
+    </Models>
+    <Components>
+        <FormComp columnCount="2" dataset="temp" eleWidth="500" enabled="true" id="logInfo" labelMinWidth="0" left="0" position="relative" renderType="2" rowHeight="22" top="0" visible="true" width="100%">
+            <Element attachNext="false" colSpan="10" editable="true" editorType="TextArea" enabled="true" field="logInfo" height="176" id="logInfo" imageOnly="false" nextLine="false" nullAble="true" rowSpan="8" selectOnly="true" text="日志" i18nName="lfw_logging" langDir="lfw" visible="true" width="">
+            </Element>
+        </FormComp>
+        <ComBoBoxComp allowExtendValue="false" editorType="ComboBox" enabled="true" focus="false" height="100%" id="levelCombo" left="0" position="relative" refComboData="loggerLevel" selectOnly="true" text="日志级别" textAlign="left" textWidth="0" top="0" visible="true" width="100%">
+        </ComBoBoxComp>
+        <ButtonComp align="left" enabled="true" height="22" id="endBtn" left="0" position="relative" i18nName="lfw_stoplogging" landDir="lfw" text="停止" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="endBtnListener2" serverClazz="nc.uap.lfw.core.listener.WatchLoggerEndListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+                <MouseListener id="endBtnListener1">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[pageUI.getWidget("main").getComponent("startBtn").setActive(true);
+pageUI.getWidget("main").getComponent("endBtn").setActive(false);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="startBtn" left="0" position="relative" i18nName="lfw_startlogging" landDir="lfw" text="开始" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="startBtnListener1">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[pageUI.getWidget("main").getComponent("startBtn").setActive(false);
+pageUI.getWidget("main").getComponent("endBtn").setActive(true);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+                <MouseListener id="startBtnListener2" serverClazz="nc.uap.lfw.core.listener.WatchLoggerStartListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

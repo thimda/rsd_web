@@ -1,0 +1,108 @@
+.tree_div
+{
+	overflow-x: auto;
+	background-color:#FAFDFE;
+}
+
+.tree_div .treeview_div
+{    
+    white-space: nowrap;                    
+    text-overflow: ellipsis;
+    top: 0px;
+    left: 0px;
+    width: auto;
+}
+
+.tree_div .treebg_div
+{
+	width: 100%;
+	height: 100%;	
+}
+
+.tree_div .treenode_div
+{                      
+    position:relative;
+}
+
+.tree_div .treenode_img{
+    top:0px;
+    left:0px;   
+    width:8px;
+    height:8px;
+    cursor: pointer;
+}
+
+.tree_div .treenode_text{        
+	width: auto;
+    font-family: arial;
+    font-size: 12px;    
+    white-space: nowrap;                    
+    text-overflow: ellipsis; 
+    font-weight: normal;    
+    cursor: pointer; 
+    margin-left:5px;
+}
+
+.tree_div .treenode_textsel{
+	font-family: arial;
+	font-size: 12px;
+	white-space: nowrap;                    
+    text-overflow: ellipsis; 
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tree_div .treenode_nodesel{  
+	font-family: arial; 
+	font-size: 12px;
+	white-space: nowrap;                    
+    text-overflow: ellipsis;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.tree_div .treenode_left_on {
+	width:3px;
+    float:left;
+    height:100%; /* all browsers */
+    height:26px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+	background-image:url('../images/treeview/list_selected_left.png');
+    background-repeat:no-repeat;
+}
+
+.tree_div .treenode_left_off {
+	width:3px;
+    float:left;
+    height:100%; /* all browsers */
+    height:26px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tree_div .treenode_on {
+	height:26px;
+ 	cursor: pointer;
+ 	background:url('../images/treeview/list_selected_center.png') repeat-x;
+ 	white-space:nowrap;
+}
+
+.tree_div .treenode_off {
+	float:left;
+    height:100%;
+    white-space:nowrap;
+}
+
+.tree_div .treenode_right_on {
+	width:3px;
+    float:left;
+    height:100%;
+    background-image:url('../images/treeview/list_selected_right.png');
+    background-repeat:no-repeat;
+}
+
+.tree_div .treenode_right_off {
+	width:3px;
+    float:left;
+    height:100%;
+}
+

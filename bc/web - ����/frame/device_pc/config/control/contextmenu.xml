@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>contextmenu</id>
+	<fullname>ui.ctrl.menu.ContextMenuComp</fullname>
+	<cssfullname>ui.ctrl.menu.contextmenu</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.ContextMenuComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.ContextMenuSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCContextMenuCompRender</uirender>
+	<zone>view</zone>
+</plugin>

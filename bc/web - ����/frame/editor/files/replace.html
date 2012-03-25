@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Strict//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>查找替换</title>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<link href="pop.css" type=text/css rel=stylesheet>
+<script>
+    function okFunc() {
+	    window.returnValue = document.getElementById("a").value+"*"+document.getElementById("b").value+"*"+(document.getElementById("c").checked?"1":"0")+"*";
+	    window.close();
+    }
+</script>
+
+<script>
+	function IsDigit() {
+	  return ((event.keyCode >= 48) && (event.keyCode <= 57));
+	}
+</script>
+
+<meta content="MSHTML 6.00.3790.2666" name=GENERATOR>
+</head>
+<body bgColor="menu">
+<table style="PADDING-LEFT: 10px" cellSpacing="10" cellPadding="0"
+	align="center" border="0px">
+	<tbody>
+		<tr>
+			<td align="middle" colSpan=2><font class="title">查 找 替 换</font>
+			<hr width="100%" />
+			查 找: <input id="a" size="15" /></td>
+		</tr>
+		<tr>
+			<td>替 换: <input id="b" size="15" /></td>
+		</tr>
+		<tr>
+			<td colSpan="2"><input id="c" type="checkbox" />区分大小写</td>
+		</tr>
+		<tr>
+			<td align="middle" colSpan="2">
+			<button id="Ok" type="submit" onclick="okFunc();">开始</button>
+			&nbsp; &nbsp;
+			<button onclick="window.close();">关闭</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

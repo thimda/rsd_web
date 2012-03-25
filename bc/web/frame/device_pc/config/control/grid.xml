@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>grid</id>
+	<fullname>ui.ctrl.grid.GridComp,ui.ctrl.grid.GridAssistant,ui.ctrl.tree.TreeLevel</fullname>
+	<cssfullname>ui.ctrl.grid.grid</cssfullname>
+	<dependences>alltextnoeditor,button</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.GridComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIGridComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.Grid2XmlSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIGridSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCGridCompRender</uirender>
+	<zone>view</zone>
+</plugin>

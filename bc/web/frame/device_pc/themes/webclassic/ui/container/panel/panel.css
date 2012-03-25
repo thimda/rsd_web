@@ -1,0 +1,40 @@
+.panel_div
+{
+}
+
+.panel_div .img_left_div_col
+{
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/panel/images/arrow_down.png') no-repeat;
+	width:11px;
+	height:11px;
+	float:left;
+	margin-left:8px;
+	margin-right:10px;
+	margin-top:2px;
+}
+
+.panel_div .img_left_div_expand
+{
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/panel/images/arrow_up.png') no-repeat;
+	width:11px;
+	height:11px;
+	float:left;
+	margin-left:8px;
+	margin-right:10px;
+	margin-top:2px;
+}
+
+.panel_div .panel_transparent_title_left_div
+{
+	float:left;
+	color:#007dc4;
+	font-weight:bold;
+	font-size:14px;
+}
+
+.panel_div .panel_hr
+{
+	border:1px dotted #cecece;
+	margin-top:10px;
+	margin-bottom:10px;
+}

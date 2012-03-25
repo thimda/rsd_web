@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component conRouterType="手动" createTime="2010-06-21 16:15:34" creator="" description="" displayName="lfwinterface" gencodestyle="NC传统样式" help="" id="dd8bebc3-d5e3-4cf1-b7ac-5cd7a96f5531" isbizmodel="false" mainEntity="" modifier="" modifyTime="2010-07-14 09:27:37" name="lfwinterface" namespace="uapweb" ownModule="uapweb" preLoad="false" resModuleName="lfwinterface" resid="" version="3" versionType="0">
+    <celllist>
+        <busiIterface bizItfImpClassName="nc.uap.lfw.md.LfwTabcodeImpl" componentID="dd8bebc3-d5e3-4cf1-b7ac-5cd7a96f5531" createTime="2010-06-21 16:15:42" creator="" description="" displayName="分页签接口" fullClassName="nc.uap.lfw.md.LfwTabcodeItf" height="188" help="" id="80e8ecb8-ea12-44c7-a4bd-41026c78de5b" modifier="" modifyTime="2010-07-14 09:27:37" name="lfw_tabcode_itf" resid="" versionType="0" visibility="public" width="172" x="208" y="77">
+            <busiItfAttrs>
+                <busiItAttr classID="80e8ecb8-ea12-44c7-a4bd-41026c78de5b" dataType="BS000010000100001001" dataTypeStyle="SINGLE" dbtype="varchar" desc="" displayName="页签字段" id="c0c4c77c-23a9-41bb-9ccf-c9dafa8059c5" name="tabcode" sequence="0" typeDisplayName="String" typeName="String"/>
+            </busiItfAttrs>
+        </busiIterface>
+    </celllist>
+    <connectlist/>
+    <refdepends/>
+    <refdependLoseIDs/>
+    <cellRemoveLog/>
+    <rulers>
+        <ruler isHorizontal="true" unit="0">
+            <guideList/>
+        </ruler>
+        <ruler isHorizontal="false" unit="0">
+            <guideList/>
+        </ruler>
+    </rulers>
+</component>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <FlowvLayout autoFill="0" id="flowv1" widgetId="main">
+        <FlowvPanel id="panel0" height="100" widgetId="main">
+            <FlowhLayout id="flowh1" widgetId="main">
+                <FlowhPanel id="panel01" widgetId="main">
+                    <Button id="button1" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel id="panel02" widgetId="main">
+                    <Button id="button2" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel id="panel03" widgetId="main">
+                    <Button id="button3" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+        <FlowvPanel id="panel1" widgetId="main">
+            <FormComp id="form_test2" widgetId="main">
+            </FormComp>
+        </FlowvPanel>
+        <FlowvPanel id="panel2" widgetId="main">
+            <GridComp id="grid_test1" widgetId="main">
+            </GridComp>
+        </FlowvPanel>
+    </FlowvLayout>
+</UIMeta>

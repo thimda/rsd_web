@@ -1,0 +1,164 @@
+
+.toolbar_div
+{	
+	height:26px;
+	background-image:url('../images/toolbar/toolbar-bg.png');
+	background-repeat:repeat-x;
+}
+
+.toolbar_div_title
+{	
+	height:24px;
+	background-image:url('../images/toolbar/titlebar_bg.png');
+	background-repeat:repeat-x;
+}
+
+.toolbar_div_title_text
+{	
+	margin-top:2px;
+	margin-left:5px;
+}
+
+.toolbar_div_transparent
+{
+	height:23px;
+}
+
+.toolbar_div_transparent_text
+{
+	margin-top:2px;
+	margin-left:5px;
+}
+
+.toolbar_div_title_transparent
+{
+	height:24px;
+}
+
+.toolbar_div_title .toolbar_title
+{
+	margin-top:3px;
+	margin-left:5px;
+	top:0px;
+	left:0px;
+	height:22px;
+}
+
+.toolbar_div_title_transparent .toolbar_title
+{
+	margin-top:3px;
+	margin-left:5px;
+	top:0px;
+	left:0px;
+	height:22px;
+}
+
+/* 和toolbar_div同样大小,且是toolbar_div的子div */
+.toolbar_div .center_div
+{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	clear: both;
+}
+
+.toolbar_div_title .center_div
+{
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+}
+
+.toolbar_div_transparent .center_div
+{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.toolbar_div_title_transparent .center_div
+{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+/* 分隔条 */
+.toolbar_div .toolitem_seperator
+{
+	width:1px;
+	background-image:url('../images/toolbar/separator.png');
+	margin-left:2px;
+	margin-right:2px;
+	margin-top:4px;
+}
+
+.toolbar_div_title .toolitem_seperator
+{
+	width:1px;
+	background-image:url('../images/toolbar/separator.png');
+	margin-left:2px;
+	margin-right:2px;
+	margin-top:4px;
+}
+
+.toolbar_div_transparent .toolitem_seperator
+{
+	width:1px;
+	background-image:url('../images/toolbar/separator.png');
+	margin-left:2px;
+	margin-right:2px;
+	margin-top:4px;
+}
+
+.toolbar_div_title_transparent .toolitem_seperator
+{
+	width:1px;
+	background-image:url('../images/toolbar/separator.png');
+	margin-left:2px;
+	margin-right:2px;
+	margin-top:4px;
+}
+
+
+.toolbar_div_toleft_div_hidden
+{
+	height: 100%;
+	width: 0px;
+	float: left;
+}
+
+.toolbar_div_toright_div_hidden
+{
+	height: 100%;
+	width: 0px;
+	float: right;
+}
+
+.toolbar_div_toleft_div
+{
+	height: 100%;
+	width: 16px;
+	top: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	float: left;
+	position: relative;
+}
+
+.toolbar_div_toright_div
+{
+	height: 100%;
+	width: 16px;
+	top: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	float: right;
+	position: relative;
+}
+
+.toolbar_div_arrow_div
+{
+	cursor: pointer;
+}
+

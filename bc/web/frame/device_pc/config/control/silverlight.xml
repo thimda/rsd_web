@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>silverlight</id>
+	<fullname></fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

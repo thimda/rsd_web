@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+    <BorderLayout>
+        <BorderPanel position="center">
+            <FlowvLayout autoFill="0" id="" widgetId="">
+                <FlowvPanel>
+                    <PanelLayout display="0" visibility="0" transparent="1" className="panel_medicine">
+                        <PanelPanel>
+		                    <FlowvLayout autoFill="0" id="" widgetId="">
+		                        <FlowvPanel height="60">
+		                            <Widget id="main">
+		                            </Widget>
+		                        </FlowvPanel>
+		                        <FlowvPanel>
+		                            <TabLayout id="pagetab" oneTabHide="false">
+		                                <TabItem i18nName="" id="item1" text="首页面">
+		                                </TabItem>
+		                            </TabLayout>
+		                        </FlowvPanel>
+                    		</FlowvLayout>
+                        </PanelPanel>
+                    </PanelLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

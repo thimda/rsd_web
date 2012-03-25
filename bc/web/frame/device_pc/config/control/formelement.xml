@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>formelement</id>
+	<fullname></fullname>
+	<cssfullname></cssfullname>
+	<dependences>form</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.FormElement</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIFormElement</uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCFormElementRender</uirender>
+	<zone>view</zone>
+</plugin>

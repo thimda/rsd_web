@@ -1,0 +1,84 @@
+.calendar_div
+{
+	position:absolute;                
+    z-Index:10000;
+    width:255px;               
+	visibility:hidden;
+	overflow:hidden;
+	border-color:#A0B3C6;
+	border-width:1px;
+	border-style:solid;
+	background:url('../images/common/background.gif');
+}
+
+.calendar_div .calendar_bar_input
+{
+	border-color:#A0B3C6;
+	border-width:1px;
+	border-style:solid;
+	width:48px;
+	height:18px;
+	position:absolute;
+	left:10px;
+	top:5px;
+}
+
+.calendar_div .calendar_bar_img_div
+{
+	position:absolute;
+	left:60px;
+	top:5px;
+	height:18px;
+	width:14px;
+	padding-top:2px;
+	border-top-style:solid;
+	border-top-width:1px;
+	border-top-color:#A0B3C6;
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#A0B3C6;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#A0B3C6;
+}
+
+.calendar_div .calendar_bar_imgup
+{
+	position:absolute;
+	left:0px;
+	top:1px;
+}
+
+.calendar_div .calendar_bar_imgdown
+{
+	position:absolute;
+	left:0px;
+	top:10px;
+}
+
+.calendar_day_cell {
+        cursor:pointer;
+        padding:0px;
+        vertical-align:sub;
+        text-align:center;
+        border:0px;
+        font-size:10pt;
+        font-family:Arial;
+        z-index:10000;
+        position:absolute;
+        left:0px;
+        top:0px;
+        width:216px;
+        height:205px;
+ }
+
+.calendar_day {
+        position:absolute;
+        text-align:center;
+        font-size:11pt;
+        font-family:Arial;
+        top:40px;
+        width:30px;
+        height:20px;
+}
+

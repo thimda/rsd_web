@@ -1,0 +1,1674 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"
+version="2.0">
+
+<description>The Web Framework's tld</description>
+<tlib-version>1.1</tlib-version>
+<short-name>lfw</short-name>
+<uri>http://www.ufida.com/lfw</uri>
+<tag>
+	<description>Lfw Import Tag</description>
+	<name>import</name>
+	<tag-class>nc.uap.lfw.core.tags.LfwImportTag</tag-class>
+	<body-content>empty</body-content>
+
+	<attribute>
+		<name>globalPath</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>themeId</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsBasic</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsContainer</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsDialog</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	
+	<attribute>
+		<name>jsNormal</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsExcel</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsBinding</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsMvc</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsMenu</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jsEditor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>pageId</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>jquery</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>chart</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+			<attribute>
+		<name>includeCss</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>includeJs</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>type</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>Lfw Head Tag</description>
+	<name>head</name>
+	<tag-class>nc.uap.lfw.core.tags.LfwHeadTag</tag-class>
+	<body-content>empty</body-content>
+</tag>
+
+<tag>
+	<description>Lfw Excel Tag</description>
+	<name>excel</name>
+	<tag-class>nc.uap.lfw.core.tags.ExcelCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Layout Tag</description>
+	<name>layout</name>
+	<tag-class>nc.uap.lfw.core.tags.LayoutTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>type</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>cellSpacing</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>cellPadding</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>border</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>dragable</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>cardId</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>colCount</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>rowCount</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>cardIndex</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+<tag>
+	<description>Lfw Base Tag</description>
+	<name>base</name>
+	<tag-class>nc.uap.lfw.core.tags.HtmlBaseTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>enable</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+<tag>
+	<description>Lfw Border Tag</description>
+	<name>border</name>
+	<tag-class>nc.uap.lfw.core.tags.BorderTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>type</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>leftType</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>rightType</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>topType</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>bottomType</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>leftWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>rightWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>topWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>bottomWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>color</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>leftColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>rightColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>topColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>bottomColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>showLeft</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>showRight</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>showTop</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>showBottom</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginTop</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginRight</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginBottom</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginLeft</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>className</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+<tag>
+	<description>Lfw Group Tag</description>
+	<name>group</name>
+	<tag-class>nc.uap.lfw.core.tags.GroupTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>text</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>i18nName</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>langDir</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginTop</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginBottom</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginLeft</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>marginRight</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Widget Tag</description>
+	<name>widget</name>
+	<tag-class>nc.uap.lfw.core.tags.WidgetTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Components Tag</description>
+	<name>components</name>
+	<tag-class>nc.uap.lfw.core.tags.ComponentsTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>componentType</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>var</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+<tag>
+	<description>Lfw TextComp Tag</description>
+	<name>textcomp</name>
+	<tag-class>nc.uap.lfw.core.tags.TextCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw TextAreaComp Tag</description>
+	<name>textarea</name>
+	<tag-class>nc.uap.lfw.core.tags.TextAreaCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw LayoutPanel Tag</description>
+	<name>layoutPanel</name>
+	<tag-class>nc.uap.lfw.core.tags.LayoutPanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>position</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>cardId</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>align</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>valign</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw PageModel Tag</description>
+	<name>pageModel</name>
+	<tag-class>nc.uap.lfw.core.tags.PageModelTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>modelId</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>className</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>showLoadingPage</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>simple</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw Form Tag</description>
+	<name>form</name>
+	<tag-class>nc.uap.lfw.core.tags.FormCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw FormGroup Tag</description>
+	<name>formgroup</name>
+	<tag-class>nc.uap.lfw.core.tags.FormGroupTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw SelDefElement Tag</description>
+	<name>selfDefElement</name>
+	<tag-class>nc.uap.lfw.core.tags.SelfDefElementTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Tab Tag</description>
+	<name>tab</name>
+	<tag-class>nc.uap.lfw.core.tags.TabCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>beforeLogicScript</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>className</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>currentIndex</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>oneTabHide</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<dynamic-attributes>true</dynamic-attributes>
+</tag>
+
+<tag>
+	<description>Lfw menubargroup Tag</description>
+	<name>menubargroup</name>
+	<tag-class>nc.uap.lfw.core.tags.MenubarGroupTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw menubargroupitem Tag</description>
+	<name>menubargroupitem</name>
+	<tag-class>nc.uap.lfw.core.tags.MenubarGroupItemTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>state</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>Lfw TabItem Tag</description>
+	<name>tabitem</name>
+	<tag-class>nc.uap.lfw.core.tags.TabItemTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>text</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>i18nName</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>langDir</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>state</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>Lfw Outlook Tag</description>
+	<name>outlookbar</name>
+	<tag-class>nc.uap.lfw.core.tags.OutlookbarCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>className</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>currentIndex</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Outlook Item Tag</description>
+	<name>outlookitem</name>
+	<tag-class>nc.uap.lfw.core.tags.OutlookItemTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>text</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>i18nName</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>image</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>Lfw Menubar Tag</description>
+	<name>menubar</name>
+	<tag-class>nc.uap.lfw.core.tags.MenubarCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw ContextMenu Tag</description>
+	<name>contextmenu</name>
+	<tag-class>nc.uap.lfw.core.tags.ContextMenuCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>Lfw TreeView Tag</description>
+	<name>tree</name>
+	<tag-class>nc.uap.lfw.core.tags.TreeViewCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Dialog Tag</description>
+	<name>dialog</name>
+	<tag-class>nc.uap.lfw.core.tags.ModalDialogCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Grid Tag</description>
+	<name>grid</name>
+	<tag-class>nc.uap.lfw.core.tags.GridCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Button Tag</description>
+	<name>button</name>
+	<tag-class>nc.uap.lfw.core.tags.ButtonCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>className</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Chart Tag</description>
+	<name>chart</name>
+	<tag-class>nc.uap.lfw.core.tags.ChartCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw ImageButton Tag</description>
+	<name>imageButton</name>
+	<tag-class>nc.uap.lfw.core.tags.ImageButtonCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag> 
+
+<tag>
+	<description>Lfw Radio Tag</description>
+	<name>radio</name>
+	<tag-class>nc.uap.lfw.core.tags.RadioCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>  
+
+<tag>
+	<description>Lfw CheckBox Tag</description>
+	<name>checkbox</name>
+	<tag-class>nc.uap.lfw.core.tags.CheckBoxCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw CheckBoxGroup Tag</description>
+	<name>checkboxgroup</name>
+	<tag-class>nc.uap.lfw.core.tags.CheckboxGroupCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw RadioGroup Tag</description>
+	<name>radiogroup</name>
+	<tag-class>nc.uap.lfw.core.tags.RadioGroupCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Combocomp Tag</description>
+	<name>combo</name>
+	<tag-class>nc.uap.lfw.core.tags.ComboCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>Lfw Progress Tag</description>
+	<name>progressbar</name>
+	<tag-class>nc.uap.lfw.core.comp.ProgressBarComp</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Image Tag</description>
+	<name>image</name>
+	<tag-class>nc.uap.lfw.core.tags.ImageCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Link Tag</description>
+	<name>link</name>
+	<tag-class>nc.uap.lfw.core.tags.LinkCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Label Tag</description>
+	<name>label</name>
+	<tag-class>nc.uap.lfw.core.tags.LabelCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Pagination Tag</description>
+	<name>pagination</name>
+	<tag-class>nc.uap.lfw.core.tags.PaginationCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>Lfw TabSpace Tag</description>
+	<name>tabspace</name>
+	<tag-class>nc.uap.lfw.core.tags.TabSpaceTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>width</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>position</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw floatingPanel Tag</description>
+	<name>floatingPanel</name>
+	<tag-class>nc.uap.lfw.core.tags.FloatingPanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>attachId</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>floatPos</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>VIndent</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>HIndent</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>dragEnable</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw CardLayout Tag</description>
+	<name>cardLayout</name>
+	<tag-class>nc.uap.lfw.core.tags.CardLayoutTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>cardIndex</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw CardPanel Tag</description>
+	<name>cardPanel</name>
+	<tag-class>nc.uap.lfw.core.tags.CardPanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw FlowhLayout Tag</description>
+	<name>flowhLayout</name>
+	<tag-class>nc.uap.lfw.core.tags.FlowhLayoutTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw FlowhPanel Tag</description>
+	<name>flowhPanel</name>
+	<tag-class>nc.uap.lfw.core.tags.FlowhPanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw FlowvLayout Tag</description>
+	<name>flowvLayout</name>
+	<tag-class>nc.uap.lfw.core.tags.FlowvLayoutTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>autoFill</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw FlowvPanel Tag</description>
+	<name>flowvPanel</name>
+	<tag-class>nc.uap.lfw.core.tags.FlowvPanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>anchor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw BorderLayout Tag</description>
+	<name>borderLayout</name>
+	<tag-class>nc.uap.lfw.core.tags.BorderLayoutTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw BorderPanel Tag</description>
+	<name>borderPanel</name>
+	<tag-class>nc.uap.lfw.core.tags.BorderPanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>position</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw GridLayout Tag</description>
+	<name>gridLayout</name>
+	<tag-class>nc.uap.lfw.core.tags.GridLayoutTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>rowcount</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>colcount</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+
+<tag>
+	<description>Lfw GridPanel Tag</description>
+	<name>gridPanel</name>
+	<tag-class>nc.uap.lfw.core.tags.GridPanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+<!-- 
+<tag>
+	<description>Lfw Border Tag</description>
+	<name>border</name>
+	<tag-class>nc.uap.lfw.core.tags.BorderTag</tag-class>
+	<body-content>scriptless</body-content>
+	
+	<attribute>
+		<name>id</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>leftWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>rightWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>topWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>bottomWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>color</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>leftColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>rightColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>topColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>bottomColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>showLeft</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>showRight</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>showTop</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>showBottom</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>className</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	
+</tag>
+ -->
+<tag>
+	<description>Lfw Spliter Tag</description>
+	<name>spliter</name>
+	<tag-class>nc.uap.lfw.core.tags.SpliterTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>divideSize</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>orientation</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+		<attribute>
+		<name>boundMode</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>oneTouch</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>spliterWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>inverse</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>hideBar</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>hideDirection</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw SpliterOne Tag</description>
+	<name>spliterPanelOne</name>
+	<tag-class>nc.uap.lfw.core.tags.SpliterPanelOneTag</tag-class>
+	<body-content>scriptless</body-content>
+</tag>
+<tag>
+	<description>Lfw SpliterTwo Tag</description>
+	<name>spliterPanelTwo</name>
+	<tag-class>nc.uap.lfw.core.tags.SpliterPanelTwoTag</tag-class>
+	<body-content>scriptless</body-content>
+</tag>
+
+<tag>
+	<description>IFrame Tag</description>
+	<name>iframe</name>
+	<tag-class>nc.uap.lfw.core.tags.IFrameTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Panel Tag</description>
+	<name>panel</name>
+	<tag-class>nc.uap.lfw.core.tags.PanelTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>left</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>top</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>width</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>height</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>position</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>scroll</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>className</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>display</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>visibility</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>transparent</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>backgroundColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>paddingLeft</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>paddingTop</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>paddingRight</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>paddingBottom</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>roundRect</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>radius</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>withBorder</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>borderWidth</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>borderColor</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Toolbar Tag</description>
+	<name>toolbar</name>
+	<tag-class>nc.uap.lfw.core.tags.ToolbarCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw FileUpload Tag</description>
+	<name>fileupload</name>
+	<tag-class>nc.uap.lfw.core.tags.FileUploadCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw SelfDefComp Tag</description>
+	<name>selfDefComp</name>
+	<tag-class>nc.uap.lfw.core.tags.SelfDefCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widget</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+<tag>
+	<description>Lfw Page View Tag</description>
+	<name>pageView</name>
+	<tag-class>nc.uap.lfw.core.tags.PageTag</tag-class>
+	<body-content>scriptless</body-content>
+</tag>
+
+<tag>
+	<description>Lfw Page Body Tag</description>
+	<name>pageBody</name>
+	<tag-class>nc.uap.lfw.core.tags.PageBodyTag</tag-class>
+	<body-content>scriptless</body-content>
+</tag>
+<tag>
+	<description>Lfw Page Import Tag</description>
+	<name>pageImport</name>
+	<tag-class>nc.uap.lfw.core.tags.PageImportTag</tag-class>
+	<body-content>scriptless</body-content>
+</tag>
+</taglib>

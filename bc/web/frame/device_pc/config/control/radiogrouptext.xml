@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>radiogrouptext</id>
+	<fullname>ui.ctrl.text.RadioGroupComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>text</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.RadioGroupComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.RadioGroupSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCRadioGroupCompRender</uirender>
+	<zone>view</zone>
+</plugin>

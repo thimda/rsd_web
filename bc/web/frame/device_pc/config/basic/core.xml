@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>core</id>
+	<fullname>ui.basic.BrowserSniffer,ui.basic.Logger,ui.basic.EventUtil,ui.basic.Listener,ui.basic.JsExtensions,ui.basic.ArgumentsUtil,ui.basic.HashMap,ui.basic.Singleton,ui.basic.Formater,ui.basic.Event,ui.basic.Measures,ui.basic.BaseComponent,ui.basic.Boot,ui.basic.Cache,ui.basic.Dynamic,ui.basic.ButtonManager,ui.masker.MaskerMeta,ui.masker.Maskers,ui.masker.MaskerUtil,ui.mvc.PageUtil,ui.ctrl.loading.LoadingBarComp,ui.rpc.Ajax,ui.rpc.Json,ui.container.support.LayoutSupport,ui.ctrl.menu.ContextMenuComp</fullname>
+	<cssfullname>ui.basic.global</cssfullname>
+	<dependences></dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view,window</zone>
+</plugin>

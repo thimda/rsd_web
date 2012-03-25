@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+      <FlowvLayout autoFill="0" id="flowv2">
+        <FlowvPanel>
+            <IFrame id="iframe_tmp" widgetId="editor"  width="98%">
+   			 </IFrame>
+        </FlowvPanel>
+
+    </FlowvLayout> 
+   
+    
+</UIMeta>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="true" id="flowHistroyDs" lazyLoad="false" voMeta="nc.vo.pub.workflownote.WorkflownoteVO">
+                <Fields>
+                    <Field field="pk_checkflow" id="pk_checkflow" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="pk_org" id="pk_org" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="actiontype" id="actiontype" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="billid" id="billid" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="billno" id="billno" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="pk_billtype" id="pk_billtype" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="checknote" id="checknote" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field dataType="UFTime" field="senddate" id="senddate" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field dataType="UFTime" field="dealdate" id="dealdate" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="ischeck" id="ischeck" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="messagenote" id="messagenote" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field dataType="UFBoolean" field="receivedeleteflag" id="receivedeleteflag" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="senderman" id="senderman" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="checkman" id="checkman" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="approveresult" id="approveresult" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field dataType="Integer" field="approvestatus" id="approvestatus" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field dataType="Integer" field="priority" id="priority" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="pk_wf_task" id="pk_wf_task" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="userobject" id="userobject" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field dataType="Integer" field="workflow_type" id="workflow_type" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="sendername" id="sendername" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="checkname" id="checkname" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="taskInfo" id="taskInfo" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="observer" id="observer" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.billtemplate.workflow.WorkflowHistoryLoader">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+        <ComboDatas>
+            <StaticComboData id="approveSel">
+                <ComboItem text="批准" value="0" i18nName="pfinfo_approve" langDir="lfw">
+                </ComboItem>
+                <ComboItem text="不批准" value="1" i18nName="pfinfo_unapprove" langDir="lfw">
+                </ComboItem>
+                <ComboItem text="驳回" value="2" i18nName="pfinfo_reject" langDir="lfw">
+                </ComboItem>
+                <ComboItem text="改派" value="3" i18nName="pfinfo_changeuser" langDir="lfw">
+                </ComboItem>
+            </StaticComboData>
+        </ComboDatas>
+    </Models>
+    <Components>
+         <GridComp dataset="flowHistroyDs" editable="false" enabled="false" height="100%" id="flowHistoryGrid" left="0" multiSelect="false" pagenationTop="false" position="relative" showColInfo="true" showHeader="true" showNumCol="false" showSumRow="false" sortable="true" top="0" visible="true" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_checkflow" fixedHeader="false" id="pk_checkflow" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="主键" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_org" fixedHeader="false" id="pk_org" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="公司" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="actiontype" fixedHeader="false" id="actiontype" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="扩展代码" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="billid" fixedHeader="false" id="billid" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="单据ID" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="billno" fixedHeader="false" id="billno" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="单据号" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="sendername" fixedHeader="false" id="sendername" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="发送人" visible="true" i18nName="pfinfo_sendername" langDir="lfw" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="UFTime" editable="true" editorType="DateText" field="senddate" fixedHeader="false" id="senddate" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="发送时间" i18nName="pfinfo_senddate" langDir="lfw" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="checkname" fixedHeader="false" id="checkname" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="审核人" visible="true" width="120" i18nName="pfinfo_checkname" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="UFTime" editable="true" editorType="DateText" field="dealdate" fixedHeader="false" id="dealdate" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="处理时间" visible="true" width="120" i18nName="pfinfo_dealdate" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_billtype" fixedHeader="false" id="pk_billtype" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="单据类型主键" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="checknote" fixedHeader="false" id="checknote" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="批语" visible="true" width="120" i18nName="pfinfo_checknote" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="ischeck" fixedHeader="false" id="ischeck" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="是否审批" visible="true" width="120" i18nName="pfinfo_isapproveornot" langDir="lfw">
+            </Column>
+            <Column autoExpand="true" dataType="String" editable="true" editorType="StringText" field="messagenote" fixedHeader="false" id="messagenote" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="消息内容" visible="true" width="120" i18nName="消息内容" langDir="lfw">
+            </Column>
+            <Column autoExpand="false" dataType="UFBoolean" editable="true" editorType="CheckBox" field="receivedeleteflag" fixedHeader="false" id="receivedeleteflag" imageOnly="false" nullAble="true" renderType="BooleanRender" sortable="true" sumCol="false" text="接受删除标记" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="senderman" fixedHeader="false" id="senderman" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="发送人pk" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="checkman" fixedHeader="false" id="checkman" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="接收人pk" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="approveresult" fixedHeader="false" id="approveresult" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="任务项的处理结果" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="Integer" editable="true" editorType="IntegerText" field="approvestatus" fixedHeader="false" id="approvestatus" imageOnly="false" nullAble="true" renderType="IntegerRender" sortable="true" sumCol="false" text="工作项的处理状态" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="Integer" editable="true" editorType="IntegerText" field="priority" fixedHeader="false" id="priority" imageOnly="false" nullAble="true" renderType="IntegerRender" sortable="true" sumCol="false" text="任务优先权" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_wf_task" fixedHeader="false" id="pk_wf_task" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="任务pk" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="userobject" fixedHeader="false" id="userobject" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="用户对象" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="Integer" editable="true" editorType="IntegerText" field="workflow_type" fixedHeader="false" id="workflow_type" imageOnly="false" nullAble="true" renderType="IntegerRender" sortable="true" sumCol="false" text="工作流类型" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="taskInfo" fixedHeader="false" id="taskInfo" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="任务信息" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="observer" fixedHeader="false" id="observer" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="工作项处理后 需要通知的用户" visible="false" width="120">
+            </Column>
+        </GridComp>
+        <LabelComp enabled="true" height="22" id="approvelabel" left="0" position="relative" i18nName="pfinfo_approvemessage" langDir="lfw" text="审批意见" top="0" visible="true" width="100">
+        </LabelComp>
+        <LabelComp enabled="true" height="22" id="flowHistoryLabel" left="0" position="center" text="流程历史信息" i18nName="pfinfo_workflowhistory" langDir="lfw" top="0" visible="true" width="100">
+        </LabelComp>
+        <ImageComp enabled="true" floatLeft="false" floatRight="false" id="wfimage" image1="wfimg?billType=${billType}&amp;billId=${billId}" image2="wfimg?billType=${billType}&amp;billId=${billId}" left="0" position="relative" top="0" visible="true">
+        </ImageComp>
+        <RadioGroupComp comboDataId="approveSel" editorType="RadioGroup" enabled="true" focus="false" height="22" id="approveSelText" index="0" left="0" position="relative" sepWidth="0" tabIndex="0" textAlign="left" textWidth="0" visible="true" width="300">
+            <Listeners>
+                <TextListener id="appSelChangeListener" serverClazz="nc.uap.lfw.pfinfoapprove.ApproveSelValueChangeListener">
+                    <Events>
+                        <Event async="true" name="onselect" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="flowHistroyDs" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>valueChangeEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                        <Event async="true" name="valueChanged" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="flowHistroyDs" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>valueChangeEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </TextListener>
+            </Listeners>
+        </RadioGroupComp>
+        <TextAreaComp editorType="TextArea" enabled="true" focus="false" height="80" id="approveMessage" left="0" i18nName="pfinfo_messagenote" langDir="lfw" position="relative" text="意见" textAlign="left" textWidth="0" top="0" visible="true" width="100%">
+        </TextAreaComp>
+        <ButtonComp align="left" enabled="true" height="22" id="closebutton" left="0" position="relative" i18nName="pfinfo_close" langDir="lfw" text="关闭" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="closeListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[parent.hideDialog('pfinfoDialog', false);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="addsign" left="0" position="relative" i18nName="pfinfo_addsign" langDir="lfw" text="加签" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="addsignListener" serverClazz="nc.uap.lfw.core.uif.delegator.AddSignDelegator">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="flowHistroyDs" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        
+         <ButtonComp align="left" enabled="true" height="22" id="assignButton" left="0" position="relative" text="指派" i18nName="pfinfo_addsignuser" langDir="lfw"  top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="addsignListener" serverClazz="nc.uap.lfw.pfinfoapprove.ApproveAssignButtonListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="flowHistroyDs" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        
+        <ButtonComp align="left" enabled="true" height="22" id="cancleButton" left="0" position="relative" i18nName="PrefePageModel-000001" langDir="lfw" text="取消" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="cancleListener" serverClazz="nc.uap.lfw.pfinfoapprove.PfinfoCancelMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="leftds" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="rightds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="flowHistroyDs" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+ 
+        <ButtonComp align="left" enabled="true" height="22" id="wfbutton" left="0" position="relative" text="流程" i18nName="pfinfo_workflow" langDir="lfw" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="wfButtonListener" serverClazz="nc.uap.lfw.pfinfoapprove.WfMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="leftds" type="ds_current_line">
+                                    </Dataset>
+                                    <Dataset id="rightds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="flowHistroyDs" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="okButton" left="0" position="relative" i18nName="PrefePageModel-000000" langDir="lfw" text="确定" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="dealPfInfoListener" serverClazz="nc.uap.lfw.pfinfoapprove.PfinfoApproveOkListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="flowHistroyDs" type="ds_current_line">
+                                    </Dataset>
+                                     <Dataset id="rightds" type="ds_all_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

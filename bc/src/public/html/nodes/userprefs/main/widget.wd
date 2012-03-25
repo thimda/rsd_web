@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset enabled="false" id="userprefsds" lazyLoad="false" voMeta="nc.uap.lfw.login.vo.LFWUserPrefsVO">
+                <Fields>
+                    <Field dataType="String" field="id" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" field="showname" id="showname" isPrimaryKey="false" nullAble="true" text="显示名称">
+                    </Field>
+                    <Field dataType="String" field="parentid" id="parentid" isPrimaryKey="false" nullAble="true" text="parentid">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.main.prefs.UserPrefsDelegator">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="userprefsds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <TreeViewComp height="100%" id="userprefstree" rootOpen="true" text="配置" i18nName="lfwPreferenceHandler-000010" langDir="lfw" width="100%" withCheckBox="false" withRoot="true">
+            <RecursiveTreeLevel dataset="userprefsds" id="level1" labelDelims="" labelFields="showname" masterKeyField="id" recursiveKeyField="id" recursivePKeyField="parentid">
+            </RecursiveTreeLevel>
+            <Listeners>
+                <TreeNodeListener id="userprefsListener" serverClazz="nc.uap.lfw.main.prefs.UserPrefsTreeNodeListener">
+                    <Events>
+                        <Event async="false" name="ondbclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="userprefsds" type="ds_current_line">
+                                    </Dataset>
+                                    <Tree id="userprefstree" type="tree_current_root">
+                                    </Tree>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>treeNodeMouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </TreeNodeListener>
+            </Listeners>
+        </TreeViewComp>
+        <ButtonComp align="left" height="22" id="okbutton" text="确定" i18nName="lfwPreferenceHandler-000011" langDir="lfw" width="60">
+            <Listeners>
+                <MouseListener id="userprefsListener" serverClazz="nc.uap.lfw.main.prefs.UserPrefsMouseListener">
+                    <Events>
+                        <Event async="false" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="password" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="userprefsds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" height="22" id="cancelbutton" i18nName="lfwPreferenceHandler-000011" langDir="lfw" text="取消" width="60">
+            <Listeners>
+                <MouseListener id="prefsCancelListener">
+                    <Events>
+                        <Event async="false" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[window.close();]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

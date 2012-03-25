@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>card</id>
+	<fullname>ui.container.CardLayout</fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.CardLayout</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UICardLayout</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.CardSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UICardSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCCardLayoutRender</uirender>
+	<zone>view,window</zone>
+</plugin>

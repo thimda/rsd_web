@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="jobds" lazyLoad="false" pageSize="20" voMeta="nc.uap.lfw.quickdesk.MainPageJobVO">
+                <Fields>
+                    <Field field="pk_job" id="pk_job" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="jobcode" id="jobcode" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="jobdesc" id="jobdesc" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="creator" id="creator" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="billtype" id="billtype" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="billstatus" id="billstatus" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="funcode" id="funcode" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="menuitemcode" id="menuitemcode" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="menuitemname" id="menuitemname" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="funurl" id="funurl" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="billtypename" id="billtypename" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                    <Field field="maindsid" id="maindsid" isPrimaryKey="false" nullAble="true">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.quickdesk.MainPageJobDsServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="myjobwidget" panelSubmit="false" tabSubmit="false">
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value></Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <GridComp dataset="jobds" editable="true" enabled="true" height="100%" id="jobgrid" left="0" multiSelect="false" pagenationTop="false" position="relative" showColInfo="false" showHeader="true" showNumCol="false" showSumRow="false" sortable="true" top="0" visible="true" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" fixedHeader="false" id="operate" imageOnly="false" nullAble="true" renderType="MyJobOperateRender" sortable="true" sumCol="false" text="操作" visible="true" width="100">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_job" fixedHeader="false" id="pk_job" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="主键" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="jobcode" fixedHeader="false" id="jobcode" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="单据号" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="creator" fixedHeader="false" id="creator" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="创建者" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="billtype" fixedHeader="false" id="billtype" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="单据类型" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" field="billtypename" fixedHeader="false" id="billtypename" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="单据类型" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="billstatus" fixedHeader="false" id="billstatus" imageOnly="false" nullAble="true" renderType="MyJobStateRender" sortable="true" sumCol="false" text="单据状态" visible="true" width="120">
+            </Column>
+            <Column autoExpand="true" dataType="String" editable="true" editorType="StringText" field="jobdesc" fixedHeader="false" id="jobdesc" imageOnly="false" nullAble="true" sortable="true" sumCol="false" text="描述" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="funcode" fixedHeader="false" id="funcode" imageOnly="false" nullAble="true" sortable="true" sumCol="false" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="funurl" fixedHeader="false" id="funurl" imageOnly="false" nullAble="true" sortable="true" sumCol="false" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="menuitemcode" fixedHeader="false" id="menuitemcode" imageOnly="false" nullAble="true" sortable="true" sumCol="false" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="menuitemname" fixedHeader="false" id="menuitemname" imageOnly="false" nullAble="true" sortable="true" sumCol="false" visible="false" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="maindsid" fixedHeader="false" id="maindsid" imageOnly="false" nullAble="true" sortable="true" sumCol="false" visible="false" width="120">
+            </Column>
+        </GridComp>
+        <ToolBarComp enabled="true" height="100%" id="myjobtoolbar" left="0" position="relative" top="0" transparent="true" visible="true" width="100%">
+            <ToolBarTitle bold="true" color="black" i18nName="我的代办事务" text="我的代办事务">
+            </ToolBarTitle>
+        </ToolBarComp>
+        <LinkComp hasImg="false" height="20" i18nName="高级" id="jobsernior" left="0" position="relative" target="#" top="2" width="100%">
+            <Listeners>
+                <LinkListener id="jobserniorListener" serverClazz="nc.uap.lfw.quickdesk.MainJobSerniorClickListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="billjobserniorwidget" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                                <Widget cardSubmit="false" id="myjobserniorwidget" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                                <Widget cardSubmit="false" id="myjobwidget" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="jobds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>linkEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </LinkListener>
+            </Listeners>
+        </LinkComp>
+        <LinkComp hasImg="false" height="20" i18nName="一月内" id="onemonthless" left="0" position="relative" target="#" top="2" width="100%">
+        </LinkComp>
+        <LinkComp hasImg="false" height="20" i18nName="三月内" id="threemonthsless" left="0" position="relative" target="#" top="2" width="100%">
+        </LinkComp>
+        <LinkComp hasImg="false" height="20" i18nName="一周内" id="oneweekless" left="0" position="relative" target="#" top="2" width="100%">
+        </LinkComp>
+        <LinkComp hasImg="false" height="20" i18nName="两月内" id="twomonthsless" left="0" position="relative" target="#" top="2" width="100%">
+        </LinkComp>
+        <ImageComp enabled="true" floatLeft="false" floatRight="false" id="jobsearchimage" image1="search.gif" image2="search.gif" imageInact="search.gif" left="0" position="relative" top="0" visible="true" width="20">
+            <Listeners>
+                <MouseListener id="jobsearchimageListener" serverClazz="nc.uap.lfw.quickdesk.MainJobSearchListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="myjobwidget" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="jobds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ImageComp>
+        <TextComp editorType="StringText" enabled="true" focus="false" height="20" id="jobsearchtextcomp" left="0" position="relative" textAlign="left" tip="搜索我的代办事务" top="0" visible="true" width="100%">
+            <Listeners>
+                <KeyListener id="jobsearchtextListener" serverClazz="nc.uap.lfw.quickdesk.MainJobSearchTextServerListener">
+                    <Events>
+                        <Event async="true" name="onEnter" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="myjobwidget" panelSubmit="false" tabSubmit="false">
+                                    <Dataset id="jobds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>keyEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </KeyListener>
+            </Listeners>
+        </TextComp>
+        <CheckBoxComp checked="false" dataType="boolean" editorType="CheckBox" enabled="true" focus="false" i18nName="包含已完成单据" id="completedcheckbox" left="0" position="relative" textAlign="left" textWidth="0" visible="true" width="120">
+            <Listeners>
+                <TextListener id="complatedcboxListener" serverClazz="nc.uap.lfw.quickdesk.MainJobComplateckServerListener">
+                    <Events>
+                        <Event async="true" name="valueChanged" onserver="true">
+                            <SubmitRule cardSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="myjobwidget" tabSubmit="false">
+                                    <Dataset id="jobds" type="ds_current_line">
+                                    </Dataset>
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>valueChangeEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </TextListener>
+            </Listeners>
+        </CheckBoxComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

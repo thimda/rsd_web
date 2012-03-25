@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" refId="secondView" width="100%">
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+        <ButtonComp align="left" enabled="true" height="22" id="newButton" left="0" position="relative" top="0" visible="true" width="60">
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

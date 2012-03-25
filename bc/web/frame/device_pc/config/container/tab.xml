@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>tab</id>
+	<fullname>ui.container.TabComp</fullname>
+	<cssfullname>ui.container.tab.tab</cssfullname>
+	<dependences>image,iframe</dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UITabComp</uijavaclazz>
+	<serializer></serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UITabLayoutSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCTabLayoutRender</uirender>
+	<zone>view,window</zone>
+</plugin>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>datetext</id>
+	<fullname>ui.ctrl.text.DateTextComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>text,combodata,calendar</dependences>
+	<javaclazz>nc.uap.lfw.core.comp.text.TextComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCTextCompRender</uirender>
+	<zone>view</zone>
+</plugin>

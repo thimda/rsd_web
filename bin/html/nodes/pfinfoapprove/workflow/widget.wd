@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="true" height="350" i18nName="pfinfo_workflow" langDir="lfw" width="700">
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+        <ImageComp enabled="true" floatLeft="false" floatRight="false" heigth="100%" id="wfimage" image1="wfimg?billType=${billType}&amp;billId=${billId}" image2="wfimg?billType=${billType}&amp;billId=${billId}" left="0" top="0" visible="true" width="100%">
+        </ImageComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

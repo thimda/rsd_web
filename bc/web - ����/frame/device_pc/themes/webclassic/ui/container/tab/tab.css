@@ -1,0 +1,388 @@
+.tab_div
+{
+	overflow:hidden;
+}
+
+.tab_div .tab_item_closeicon {
+	background:url('images/tabitem_close.gif') no-repeat right center;
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 1px;
+	right: 1px;
+}
+
+.tab_div .tab_item_closeicon_bottom {
+	background:url('images/tabitem_close.gif') no-repeat right center;
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 1px;
+	right: 1px;
+}
+
+.tab_div .tab_item_closeicon_on {
+	background:url('images/tabitem_close.gif') no-repeat right center;
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 1px;
+	right: 1px;
+}
+
+.tab_div .tab_item_closeicon_on_bottom {
+	background:url('images/tabitem_close.gif') no-repeat right center;
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 1px;
+	right: 1px;
+}
+
+.tab_div .tab_item_closeicon_over {
+	background:url('images/tabitem_close.gif') no-repeat right center;
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 1px;
+	right: 1px;
+}
+
+.tab_div .tab_content_div
+{
+	overflow:hidden;
+}
+
+.tab_div .tab_items_bar
+{
+	clear:both;
+	height: 41px;
+    background-image:url("images/tab_bg.png");
+    background-repeat:repeat-x;
+}
+
+.tab_div .tab_items_bar_bottom
+{
+	clear:both;
+	height: 41px;
+    background-image:url("images/tab_bg.png");
+    background-position:center bottom;
+    background-repeat:repeat-x;
+}
+
+.tab_div .tab_seperator_ver
+{
+	position:relative;
+	top: 1px;
+	float:left;
+	height:23px;
+	width:1px;
+}
+
+.tab_div .left_space
+{
+	position:relative;
+	float:left;
+	height:100%;
+}
+
+.tab_div .right_space
+{
+	position:relative;
+	float:right;
+	height:100%;
+	overflow:hidden;
+}
+
+.tab_div .tab_img_div
+{
+    /*position: relative;
+ 	height:19px;
+ 	top:3px;
+ 	float:left;
+ 	overflow:hidden;
+ 	padding-right: 2px;*/
+ 	
+ 	float:right;
+    position: relative;
+    height:100%;
+}
+
+.tab_div .tab_item_div
+{
+ 	position: relative;
+ 	height:100%;
+ 	float:left;
+ 	overflow:hidden;
+}
+
+.tab_div .tab_item_div_bottom
+{
+ 	position: relative;
+ 	height:100%;
+ 	float:left;
+ 	overflow:hidden;
+}
+
+.tab_content_div{
+	 overflow:auto; 
+	 width:100%;
+	 height:100%;  
+	 position:relative;
+}
+
+.tab_div .tab_item_leftborder_off_0
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_0_bottom
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_1
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_1_bottom
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_2
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_2_bottom
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_centerborder_off{
+    height:100%;
+    float:left;
+    line-height:45px;
+    padding-left:4px;
+    white-space:nowrap;
+    color:#4d4d4d;
+}
+
+.tab_div .tab_item_centerborder_off_bottom{
+    height:100%;
+    float:left;
+    /*padding-top:5px;*/
+    padding-left:4px;
+    white-space:nowrap;
+    color:#4d4d4d;
+}
+
+.tab_div .tab_item_rightborder_off_0
+{
+    height:100%;
+    width:15px;
+    float:left;
+}
+
+.tab_div .tab_item_rightborder_off_0_bottom
+{
+    height:100%;
+    width:15px;
+    float:left;
+}
+
+.tab_div .tab_item_rightborder_off_1
+{
+    height:100%;
+    width:15px;
+    float:left;
+}
+
+.tab_div .tab_item_rightborder_off_1_bottom
+{
+    height:100%;
+    width:15px;
+    float:left;
+}
+
+.tab_div .tab_item_rightborder_off_2
+{
+    height:100%;
+    width:15px;
+    float:left;
+}
+
+.tab_div .tab_item_rightborder_off_2_bottom
+{
+    height:100%;
+    width:15px;
+    float:left;   
+}
+
+.tab_div .tab_item_leftborder_on_0
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+	background-image:url('images/tab_slide_left.png');
+    background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_leftborder_on_0_bottom
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+	background-image:url('images/tab_slide_left1.png');
+	background-position:top center;
+    background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_leftborder_on_1
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+	background-image:url("images/tab_slide_left.png");
+	background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_leftborder_on_1_bottom
+{
+    width:15px;
+    float:left;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+	background-image:url("images/tab_slide_left1.png");
+	background-position:top center;
+	background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_centerborder_on 
+{
+	float:left;
+    line-height:45px;
+    padding-left:4px;
+    height:100%;
+    white-space:nowrap;
+    background-image:url('images/tab_slide_center.png');
+    background-repeat:repeat-x;
+ 	color:#007dc4;
+ 	font-weight:bold;
+}
+
+.tab_div .tab_item_centerborder_on_bottom 
+{
+	float:left;
+    /*padding-top:5px;*/
+    padding-left:4px;
+    height:100%;
+    white-space:nowrap;
+    background-image:url('images/tab_slide_center1.png');
+ 	background-position:top center;
+ 	background-repeat:repeat-x;
+ 	color:#007dc4;
+ 	font-weight:bold;
+}
+
+.tab_div .tab_item_rightborder_on_0
+{
+    width:15px;
+    float:left;
+    height:100%;
+    background-image:url("images/tab_slide_right.png");
+	background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_rightborder_on_0_bottom
+{
+    width:14px;
+    float:left;
+    height:100%;
+    background-image:url("images/tab_slide_right1.png");
+    background-position:top center;
+	background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_rightborder_on_1
+{
+    width:15px;
+    float:left;
+    height:100%;
+    background-image:url('images/tab_slide_right.png');
+    background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_rightborder_on_1_bottom
+{
+    width:14px;
+    float:left;
+    height:100%;
+    background-image:url('images/tab_slide_right1.png');
+    background-position:top center;
+    background-repeat:no-repeat;
+}
+
+.tab_div .left_fixed_space{
+	position:relative;
+	width:5px;
+    height:100%;
+    float:left;
+    background-position-y:bottom;
+}
+
+.tab_div .right_fixed_space{
+	position:relative;
+	width:5px;
+    height:23px;
+    float:right;
+    padding-top:2px;
+    background-position-y:bottom;
+}
+
+/**用于计算子项标题文字宽度**/
+.tab_div_text_width 
+{
+	float:left;
+    padding-top:5px;
+    padding-left:4px;
+    padding-right:3px;
+    height:100%;
+    white-space:nowrap;
+    background-image:url('images/tab_arrow.gif');
+ 	background-position:bottom center;
+ 	background-repeat:no-repeat;
+}

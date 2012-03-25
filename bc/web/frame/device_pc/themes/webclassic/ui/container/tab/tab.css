@@ -1,0 +1,399 @@
+.tab_div
+{
+	overflow:hidden;
+}
+
+.tab_div .tab_item_closeicon {
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/close.png') no-repeat center center;
+	position:absolute;
+	height: 10px;
+	width: 10px;
+	top: 14px;
+	right: 16px;
+}
+
+.tab_div .tab_item_closeicon_bottom {
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/close.png') no-repeat center center;
+	position:absolute;
+	height: 10px;
+	width: 10px;
+	top: 11px;
+	right: 16px;
+}
+
+.tab_div .tab_item_closeicon_on {
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/close.png') no-repeat center center;
+	position:absolute;
+	height: 10px;
+	width: 10px;
+	top: 14px;
+	right: 16px;
+}
+
+.tab_div .tab_item_closeicon_on_bottom {
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/close.png') no-repeat center center;
+	position:absolute;
+	height: 10px;
+	width: 10px;
+	top: 11px;
+	right: 16px;
+}
+
+.tab_div .tab_item_closeicon_over {
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/close.png') no-repeat center center;
+	position:absolute;
+	height: 10px;
+	width: 10px;
+	top: 14px;
+	right: 16px;
+}
+
+.tab_div .tab_item_closeicon_over_bottom {
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/close.png') no-repeat center center;
+	position:absolute;
+	height: 10px;
+	width: 10px;
+	top: 11px;
+	right: 16px;
+}
+
+.tab_div .tab_content_div
+{
+	 overflow:hidden; 
+	 width:100%;
+	 position:relative;
+}
+
+.tab_div .tab_items_bar
+{
+	height:100%;
+}
+
+.tab_div .tab_items_bar_bottom
+{
+	clear:both;
+	height:100%;
+}
+
+.tab_div .tab_seperator_ver
+{
+	position:relative;
+	top: 1px;
+	float:left;
+	height:23px;
+	width:1px;
+}
+
+.tab_div .left_space
+{
+	position:relative;
+	float:left;
+	height:100%;
+}
+
+.tab_div .right_space
+{
+	position:relative;
+	float:right;
+	height:100%;
+	overflow:hidden;
+}
+
+.tab_div .tab_img_div
+{
+    /*position: relative;
+ 	height:19px;
+ 	top:3px;
+ 	float:left;
+ 	overflow:hidden;
+ 	padding-right: 2px;*/
+ 	
+ 	float:right;
+    position: relative;
+    height:100%;
+}
+
+.tab_div .tab_item_div
+{
+ 	position: relative;
+ 	height:30px;
+ 	float:left;
+ 	overflow:hidden;
+}
+
+.tab_div .tab_item_div_bottom
+{
+ 	position: relative;
+ 	height:100%;
+ 	float:left;
+ 	overflow:hidden;
+}
+
+.tab_div .tab_item_leftborder_off_0
+{
+    width:16px;
+    height:100%; /* all browsers */
+}
+
+.tab_div .tab_item_leftborder_off_0_bottom
+{
+    width:16px;
+    height:30px; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_1
+{
+    width:16px;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_1_bottom
+{
+    width:16px;
+    height:30px; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_2
+{
+    width:16px;
+    height:100%; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_leftborder_off_2_bottom
+{
+    width:16px;
+    height:30px; /* all browsers */
+    height:28px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.tab_div .tab_item_centerborder_off{
+    height:100%;
+    line-height:40px;
+    text-align:center;
+    white-space:nowrap;
+    color:#4d4d4d;
+}
+
+.tab_div .tab_item_centerborder_off_bottom{
+    height:100%;
+    text-align:center;
+    white-space:nowrap;
+    color:#4d4d4d;
+}
+
+.tab_div .tab_item_rightborder_off_0
+{
+    height:100%;
+    width:16px;
+}
+
+.tab_div .tab_item_rightborder_off_0_bottom
+{
+    height:100%;
+    width:16px;
+}
+
+.tab_div .tab_item_rightborder_off_1
+{
+    height:100%;
+    width:16px;
+}
+
+.tab_div .tab_item_rightborder_off_1_bottom
+{
+    height:100%;
+    width:16px;
+}
+
+.tab_div .tab_item_rightborder_off_2
+{
+    height:100%;
+    width:16px;
+}
+
+.tab_div .tab_item_rightborder_off_2_bottom
+{
+    height:100%;
+    width:16px;
+}
+
+.tab_div .tab_item_leftborder_on_0
+{
+    width:16px;
+    height:100%; /* all browsers */
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_left.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+
+.tab_div .tab_item_leftborder_on_0_bottom
+{
+    width:16px;
+    height:30px; /* all browsers */
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_left1.png');
+	background-position:top center;
+    background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_leftborder_on_1
+{
+    width:16px;
+    height:100%; /* all browsers */
+	background-image:url("/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_left.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+.tab_div .tab_item_leftborder_on_1_bottom
+{
+    width:16px;
+    height:30px; /* all browsers */
+    height:30px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+	background-image:url("/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_left1.png");
+	background-position:top center;
+	background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_centerborder_on 
+{
+    line-height:40px;
+    text-align:center;
+    height:100%;
+    white-space:nowrap;
+    background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_center.png');
+    background-repeat:repeat-x;
+    background-position:center center;
+ 	color:#007dc4;
+ 	font-weight:bold;
+}
+
+.tab_div .tab_item_centerborder_on_bottom 
+{
+    text-align:center;
+    height:100%;
+    white-space:nowrap;
+    background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_center1.png');
+ 	background-position:top center;
+ 	background-repeat:repeat-x;
+ 	color:#007dc4;
+ 	font-weight:bold;
+}
+
+.tab_div .tab_item_rightborder_on_0
+{
+    width:16px;
+    height:100%;
+    background-image:url("/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_right.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+.tab_div .tab_item_rightborder_on_0_bottom
+{
+    width:14px;
+    height:100%;
+    background-image:url("/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_right1.png");
+    background-position:top center;
+	background-repeat:no-repeat;
+}
+
+.tab_div .tab_item_rightborder_on_1
+{
+    width:16px;
+    height:100%;
+    background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_right.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+
+.tab_div .tab_item_rightborder_on_1_bottom
+{
+    width:16px;
+    height:100%;
+    background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_slide_right1.png');
+    background-position:top center;
+    background-repeat:no-repeat;
+}
+
+.tab_div .left_fixed_space{
+	position:relative;
+	width:5px;
+    height:100%;
+    float:left;
+    background-position-y:bottom;
+}
+
+.tab_div .right_fixed_space{
+	position:relative;
+	width:5px;
+    height:100%;
+    float:right;
+    background-position-y:bottom;
+}
+
+.tab_div_text_width 
+{
+	float:left;
+    padding-top:5px;
+    padding-left:4px;
+    padding-right:3px;
+    height:100%;
+    white-space:nowrap;
+    background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_arrow.gif');
+ 	background-position:bottom center;
+ 	background-repeat:no-repeat;
+}
+
+.tab_div .bg_top_left_div{
+	width:7px;
+	height:100%;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_bg_top_left.png');
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-color:#ffffff;
+}
+
+.tab_div .bg_center_div{
+	height:33px;
+	width:100%;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_bg.png');
+    background-position:center center;
+    background-repeat:repeat-x;
+}
+
+.tab_div .bg_top_right_div{
+	width:7px;
+	height:100%;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_bg_top_right.png');
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-color:#ffffff;
+}
+
+.tab_div .bg_bottom_left_div{
+	width:7px;
+	height:33px;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_bg_bottom_left.png');
+    background-position:top center;
+    background-repeat:no-repeat;
+    background-color:#ffffff;
+}
+
+.tab_div .bg_bottom_right_div{
+	width:7px;
+	height:33px;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/container/tab/images/tab_bg_bottom_right.png');
+    background-position:top center;
+    background-repeat:no-repeat;
+    background-color:#ffffff;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>tree</id>
+	<fullname>ui.ctrl.tree.TreeViewComp,ui.ctrl.tree.TreeLevel</fullname>
+	<cssfullname>ui.ctrl.tree.tree</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.TreeViewComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UITreeComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.TreeSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UITreeSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCTreeViewCompRender</uirender>
+	<zone>view</zone>
+</plugin>

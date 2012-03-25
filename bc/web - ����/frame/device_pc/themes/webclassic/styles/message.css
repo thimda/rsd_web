@@ -1,0 +1,18 @@
+.message_div {
+	background-color:#FFFFFF;
+	position: absolute;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.message_div_DEFAULT_HEIGHT
+{
+	height:25px;
+}
+/********************定义JS所需静态常量   end ***********************/
+
+.message_div .message_text_div {
+	width: 100%;
+	top: 5px;
+	text-align: center;
+	position:relative;
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+    <BorderLayout>
+        <BorderPanel position="center">
+            <FlowvLayout autoFill="0">
+            		<FlowvPanel height="20">
+                </FlowvPanel>
+                <FlowvPanel height="30">
+                		<FlowhLayout>
+                        <FlowhPanel width="20">
+                        </FlowhPanel>
+                         <FlowhPanel>
+						                <Label id="tipmodifypass" widgetId="main">
+						               	</Label>
+		               	     </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel>
+                		<FlowhLayout>
+                        <FlowhPanel width="20">
+                        </FlowhPanel>
+                         <FlowhPanel>
+				                    <TextField id="newpassword" type="1" widgetId="main">
+				                    </TextField>
+		                    </FlowhPanel>
+		                </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel>
+                		<FlowhLayout>
+                        <FlowhPanel width="20">
+                        </FlowhPanel>
+                        <FlowhPanel>
+			                     <TextField id="confirmnewpassword" type="1" widgetId="main">
+			                     </TextField>
+                     		</FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                        <FlowhPanel width="100">
+                            <Button id="passokbutton" widgetId="main">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel width="100">
+                            <Button id="passcancelbutton" widgetId="main">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel height="20">
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

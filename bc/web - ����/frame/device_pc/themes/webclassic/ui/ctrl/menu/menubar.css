@@ -1,0 +1,128 @@
+.menubar_div
+{	
+	height:23px;
+	background-image:url('images/menubar_bg.png');
+	background-repeat:repeat-x;
+}
+
+/* 和menubar_div同样大小,且是menubar_div的子div */
+.menubar_div .center_div
+{
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+}
+
+/* 分隔条 */
+.menubar_div .menuitem_seperator
+{
+	position:relative;
+	float:left;
+	width:1px;
+	margin-top: 4px;
+	background:url("images/separator.png");
+}
+
+/* menubar中的menu的css */
+.menu_div
+{
+	border-width:0px;
+	position:relative;
+	float:left;
+}
+
+.menu_div .right_div
+{
+	position: relative;
+	float: left;
+	height: 100%;
+	padding-top: 10px;
+	margin-right: 2px;
+	background-color:transparent;
+}
+
+.menu_div .right_div_on
+{
+	position: relative;
+	float: left;
+	height: 100%;
+	padding-top: 10px;
+	margin-right: 2px;
+	margin-top: 1px;
+	background: url('images/on.png');
+}
+
+.menu_div .contextmenu_item_div
+{
+	border-width:0px;
+	position:relative;
+	float:left;   
+	background-color:transparent;
+}
+
+.menu_div .contextmenu_item_div_off
+{
+	border-width:0px;
+	position:relative;
+	float:left;
+}
+
+
+/* 鼠标不处在menu上时的外观 */
+.menu_div .contextmenu_item_caption_off 
+{
+	background-color:transparent;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:3px;
+	height:19px;
+	margin-top:2px;
+	margin-left:2px;
+	margin-right:2px;
+	position: relative;
+	float: left;
+	width: auto;
+}
+
+/* 鼠标处在menu上时的外观 */
+.menu_div .contextmenu_item_caption_on 
+{
+	border:1px solid #F2BA59;
+	background-color:#FFEF87;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:3px;
+	height:19px;
+	margin-top:2px;
+	margin-left:2px;
+	margin-right:2px;
+	cursor: pointer;
+	position: relative;
+	float: left;
+	width: auto;
+}
+
+/* menu禁用时的css */
+.menu_div .contextmenu_item_caption_banned
+{
+	color: gray;
+	background-color:transparent;
+	padding-left:8px;
+	padding-right:8px;
+	padding-top:3px;
+	height:19px;
+	margin-top:2px;
+	margin-left:2px;
+	margin-right:2px;
+	position: relative;
+	float: left;
+	width: auto;
+}
+
+.menu_div .contextmenu_item_left_div_on
+{
+}
+
+.menu_div .contextmenu_item_left_div_off
+{
+}

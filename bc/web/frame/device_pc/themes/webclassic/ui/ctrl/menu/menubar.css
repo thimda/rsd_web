@@ -1,0 +1,197 @@
+.menubar_div
+{	
+	height:41px;
+}
+
+.menubar_div .div_left
+{	
+	height:41px;
+	width:10px;
+	/*background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/menubar_bg_left.png') no-repeat;*/
+}
+
+.menubar_div .div_center
+{	
+	height:41px;
+	/*background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/menubar_bg.png') repeat-x;*/
+}
+
+.menubar_div .div_right
+{	
+	height:41px;
+	width:10px;
+	/*background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/menubar_bg_right.png') no-repeat;*/
+}
+
+/* 和menubar_div同样大小,且是menubar_div的子div */
+.menubar_div .center_div
+{
+	width: 100%;
+	overflow: auto;
+	margin-top:7px;
+}
+
+/* 分隔条 */
+.menubar_div .menuitem_seperator
+{
+	position:relative;
+	float:left;
+	width:3px;
+	height:27px;
+	background:url("/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_cut.png");
+}
+
+.menubar_div .menuitem_seperator_left_on
+{
+	position:relative;
+	float:left;
+	width:3px;
+	height:27px;
+	background:url("/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_cut_press_left.png");
+}
+
+.menubar_div .menuitem_seperator_right_on
+{
+	position:relative;
+	float:left;
+	width:3px;
+	height:27px;
+	background:url("/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_cut_press_right.png");
+}
+
+.menubar_div .divSep{
+	width:6px;
+	height:27px;
+	float:left;
+}
+
+/* menubar中的menu的css */
+.menu_div
+{
+	border-width:0px;
+	position:relative;
+	float:left;
+}
+
+.menu_div .right_div
+{
+	position: relative;
+	float: left;
+	height:27px;
+	/*line-height:28px;*/
+	margin-left:5px;
+}
+
+.menu_div .right_div_on
+{
+	position: relative;
+	float: left;
+	height:27px;
+	/*line-height:28px;*/
+	margin-left:5px;
+}
+
+.menu_div .contextmenu_item_div
+{
+	border-width:0px;
+	position:relative;
+	float:left;   
+	background-color:transparent;
+}
+
+.menu_div .contextmenu_item_div_off
+{
+	border-width:0px;
+	position:relative;
+	float:left;
+}
+
+
+/* 鼠标不处在menu上时的外观 */
+.menu_div .contextmenu_item_caption_off 
+{
+	background-color:transparent;
+	position: relative;
+	float: left;
+	width: auto;
+}
+
+/* 鼠标处在menu上时的外观 */
+.menu_div .contextmenu_item_caption_on 
+{
+	cursor: pointer;
+	position: relative;
+	float: left;
+	width: auto;
+}
+
+/* menu禁用时的css */
+.menu_div .contextmenu_item_caption_banned
+{
+	color: gray;
+	background-color:transparent;
+	position: relative;
+	float: left;
+	width: auto;
+}
+
+.menu_div .contextmenu_item_left_div_on
+{
+}
+
+.menu_div .contextmenu_item_left_div_off
+{
+}
+
+.menu_div .divLeft_off{
+	background: url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_normal_left.png') no-repeat;
+	width:6px;
+	height:27px;
+	float:left;
+}
+.menu_div .divCenter_off{
+	background: url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_normal_center.png') repeat-x;
+	height:27px;
+	float:left;
+	line-height:26px;
+	padding-left:20px;
+	padding-right:14px;
+	color:#61a2cd;
+}
+.menu_div .rightDivCenter_off{
+	background: url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_normal_center.png') repeat-x;
+	height:27px;
+	float:left;
+	line-height:26px;
+}
+.menu_div .divRight_off{
+	background: url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_normal_right.png') no-repeat;
+	width:6px;
+	height:27px;
+	float:left;
+}
+.menu_div .divLeft_on{
+	background: url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_press_left.png') no-repeat;
+	width:6px;
+	height:27px;
+	float:left;
+}
+.menu_div .divCenter_on{
+	background: url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_press_center.png') repeat-x;
+	height:27px;
+	float:left;
+	line-height:26px;
+	padding-left:20px;
+	padding-right:14px;
+	color:#ffffff;
+}
+.menu_div .divRight_on{
+	background: url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/btn_press_right.png') no-repeat;
+	width:6px;
+	height:27px;
+	float:left;
+}
+
+.menu_div .captionTextDiv{
+	float:left;
+}

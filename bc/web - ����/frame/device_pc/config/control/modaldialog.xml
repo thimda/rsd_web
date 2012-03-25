@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>modaldialog</id>
+	<fullname>ui.ctrl.dialog.ModalDialogComp</fullname>
+	<cssfullname>ui.ctrl.dialog.modaldialog</cssfullname>
+	<dependences>button</dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

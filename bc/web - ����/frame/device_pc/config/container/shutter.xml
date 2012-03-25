@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>shutter</id>
+	<fullname>ui.container.OutLookBarComp</fullname>
+	<cssfullname>ui.container.shutter.shutter</cssfullname>
+	<dependences></dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIShutter</uijavaclazz>
+	<serializer></serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIShutterSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCOutlookbarCompRender</uirender>
+	<zone>view,window</zone>
+</plugin>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="nc.uap.lfw.LfwEJB">
+  <public>
+	<component singleton="true" tx="CMT" remote="true">
+		<interface>nc.uap.lfw.core.processor.ITransactionProcessor</interface>
+		<implementation>nc.uap.lfw.core.processor.TransactionProcessorImpl</implementation>
+	</component>
+	
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.login.itf.ILfwSsoQryService</interface>
+		<implementation>nc.uap.lfw.login.impl.LfwSsoQryServiceImpl</implementation>
+	</component>
+	
+	<component singleton="true" tx="CMT" remote="true">
+		<interface>nc.uap.lfw.login.itf.ILfwSsoService</interface>
+		<implementation>nc.uap.lfw.login.impl.LfwSsoServiceImpl</implementation>
+	</component>
+	
+	<component singleton="true" tx="CMT" remote="true">
+		<interface>nc.uap.lfw.file.itf.ILfwFileService</interface>
+		<implementation>nc.uap.lfw.file.impl.LfwFileServiceImpl</implementation>
+	</component>
+		<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.file.itf.ILfwFileQryService</interface>
+		<implementation>nc.uap.lfw.file.impl.LfwFileQryServiceImpl</implementation>
+	</component>
+ 	<component singleton="true" tx="CMT" remote="true" >
+        <interface>nc.uap.lfw.login.itf.IShortCutService</interface>
+        <implementation>nc.uap.lfw.login.impl.ShortCutService</implementation>
+    </component> 
+    <component singleton="true" tx="CMT" remote="true" >
+        <interface>nc.uap.lfw.login.itf.IUserConfigService</interface>
+        <implementation>nc.uap.lfw.login.impl.UserConfigService</implementation>
+    </component>   
+    <component priority="0" remote="true" singleton="true" supportAlias="false" tx="NONE">
+        <interface>nc.uap.lfw.login.itf.IShortCutQueryService</interface>
+        <implementation>nc.uap.lfw.login.impl.ShortCutQueryService</implementation>
+    </component>
+    <component priority="0" remote="true" singleton="true" supportAlias="false" tx="NONE">
+        <interface>nc.uap.lfw.login.itf.IUserConfigQueryService</interface>
+        <implementation>nc.uap.lfw.login.impl.UserConfigQueryService</implementation>
+    </component>
+	<component singleton="true" tx="CMT" remote="true">
+		<interface>nc.uap.lfw.crud.itf.ILfwCudService</interface>
+		<implementation>nc.uap.lfw.crud.impl.LfwCudServiceImpl</implementation>
+	</component>  
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.crud.itf.ILfwQueryService</interface>
+		<implementation>nc.uap.lfw.crud.impl.LfwQueryServiceImpl</implementation>
+	</component> 
+	
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.quickdesk.IMainQryService</interface>
+		<implementation>nc.uap.lfw.quickdesk.MainQryServiceImpl</implementation>
+	</component> 
+	
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.jscompression.itf.IJsCompressionService</interface>
+		<implementation>nc.uap.lfw.jscompression.impl.JsCompressServiceImpl</implementation>
+	</component>  
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.core.ses.IWebSessionService</interface>
+		<implementation>nc.uap.lfw.impl.WebSessionServiceImpl</implementation>
+	</component>  
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.ncfile.INCLfwFileQryService</interface>
+		<implementation>nc.uap.lfw.ncfile.NCLfwFileQryServiceImpl</implementation>
+	</component>  
+	
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.stylemgr.itf.IUwFuncnodeQry</interface>
+		<implementation>nc.uap.lfw.stylemgr.impl.UwFuncnodeQryServiceImpl</implementation>
+	</component>
+	
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.core.model.formular.IEditFormularService</interface>
+		<implementation>nc.uap.lfw.core.model.formular.DefaultEditFormularService</implementation>
+	</component>
+	
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.core.model.file.IFileService</interface>
+		<implementation>nc.uap.lfw.core.model.file.FileServiceImpl</implementation>
+	</component>
+	
+	<component singleton="true" tx="NONE" remote="true">
+		<interface>nc.uap.lfw.ncadapter.qrytemplate.IQryTemplateRpcService</interface>
+		<implementation>nc.uap.lfw.ncadapter.qrytemplate.LfwQueryTemplateServiceImpl</implementation>
+	</component>
+	<component remote="true" singleton="true" tx="NONE">
+	    <interface>nc.uap.lfw.design.itf.IPaEditorService</interface>
+	    <implementation>nc.uap.lfw.impl.PaEditorServiceImpl</implementation>
+	</component>
+	
+	<component remote="true" singleton="true" tx="NONE">
+	    <interface>nc.uap.lfw.design.noexport.IPageMetaBuidlerForDesign</interface>
+	    <implementation>nc.uap.lfw.design.impl.PageMetaBuilderForDesign</implementation>
+	</component>
+	
+	<component remote="true" singleton="true" tx="NONE">
+	    <interface>nc.uap.lfw.core.serializer.IPageElementSerializer</interface>
+	    <implementation>nc.uap.lfw.core.serializer.impl.PageElementSerializer</implementation>
+	</component>
+	
+   </public>
+   <private>
+   </private>
+</module>
+

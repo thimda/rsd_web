@@ -1,0 +1,419 @@
+.grid_div {
+	overflow:hidden;
+	background: #ffffff;
+	position:relative;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.grid_div_HEADERROW_HEIGHT
+{
+	height:21px;
+}
+.grid_div_ROW_HEIGHT
+{
+	height:22px;
+}
+.grid_div_SELECTCOLUM_WIDTH
+{
+	height:30px;
+}
+.grid_div_CELL_BOTTOM_BORDER_WIDTH
+{
+	height:1px;
+	line-height:1px;
+}
+/********************定义JS所需静态常量  end *********************/
+
+.grid_paginationbar {
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	z-Index:100;
+	background: #ffffff;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B7B8B9;
+}	
+
+.grid_div .headerbar_div {
+	left: 0px;
+	position: absolute;
+	overflow:hidden;
+	z-Index:1000;
+}
+
+.grid_div .dynamic_headertable_div {
+	left: 0px;
+	position: absolute;
+}
+
+
+.grid_div .fixed_header_div {
+	top: 0px;
+	position: absolute;
+	z-Index:100;
+}
+
+.grid_div .row_num_header_div {
+	position: absolute;
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#B7B8B9;
+	
+	background:url('../images/grid/gridheader.gif') repeat-x;
+
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B7B8B9;
+	
+	top: 0px;
+	left: 0px;
+	z-Index:100;
+	width: 25px;
+}
+
+.grid_div .row_state_header_div{
+	position: absolute;
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#B7B8B9;
+	background:#F1F2F4 url('../images/grid/setting.gif') no-repeat center center;
+
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B7B8B9;
+	top: -1px;
+	z-Index:100;
+	width: 12px;
+}
+
+.grid_div .row_num_div {
+	position: absolute;
+	padding-top: 3px;
+	background:url('../images/grid/gridheader.gif') repeat-x;
+	width: 100%;
+	left: 0;
+	
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B7B8B9;
+}
+
+.grid_div .row_state_div {
+	position: absolute;
+	background:#fff;
+	width: 100%;
+	left: 0;
+	
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#EDEDED;
+	
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#EDEDED;
+}
+
+.grid_div .row_normal_state {
+	background:#fff url('../images/grid/normal.gif') no-repeat center center;
+}
+
+.grid_div .row_update_state {
+	background:#fff url('../images/grid/update.gif') no-repeat center center;
+}
+
+.grid_div .row_add_state {
+	background:#fff url('../images/grid/newadd.gif') no-repeat center center;
+}	
+
+.grid_div .row_delete_state {
+	background:#fff url('../images/grid/delete.gif') no-repeat center center;
+}	
+
+/*鍥哄畾鍒?鍚堣'div*/
+.sum_div {
+	position: absolute;
+	background:#DFE4C1 url('../images/grid/gridheader.gif') repeat-x;
+	z-index:1000;
+	font:bold;
+	
+	padding-bottom: 1px;
+	
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B7B8B9;
+	
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#B7B8B9;
+	background-color: #E2E2E2;
+}
+
+/* 鍚堣琛宒iv */
+.dynsumrow_div {
+	position: absolute;
+	z-index:1000;
+	
+}
+
+/* 鏀剧疆鍚堣琛岀殑div */
+.dynsumcontainer_div {
+	position: absolute;
+	overflow: hidden;
+	border: solid #E2E2E2 1px;
+}
+
+/*鍔ㄦ€佸悎璁¤鐨勬瘡涓悎璁ell*/
+.dynsumcell_div {
+	float: left;
+	background-color: #E2EFFE;
+	
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#B7B8B9;
+}
+
+.grid_div .headerdiv {
+	float: left;
+	background:#EBECEE url('../images/grid/gridheader.gif') repeat-x;
+	font-family:simsun;
+	font-size:12px;
+	height: 100%;
+	width: 100%;
+	color: #000000;
+	text-align: center;
+	overflow: hidden;
+	cursor:default;
+	border-left:1px solid #D0D0D0;
+	border-bottom:1px solid #D0D0D0;
+}
+
+.grid_div .headerdiv_mouseover {
+	background:#FFEFAF url('../images/grid/gridheader_over.gif') repeat-x;
+}
+
+/* attached to headerdiv*/
+.grid_div .fixedheaderdiv {
+	background:yellow;
+}
+
+.grid_div .header_required {
+	color: #346699;
+}
+
+.grid_div .select_headerdiv {
+	position:absolute;
+	overflow:hidden;
+	top:0px;
+	width:30px;
+	text-align: center;
+	background:#EBECEE url('../images/grid/gridheader.gif') repeat-x;
+
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#B7B8B9;
+
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#B7B8B9;
+}
+
+
+.grid_div .multiheaderdiv {
+	float:left;
+	text-align: center;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor:default;
+	font-size: 9pt;
+	background:#EBECEE url('../images/grid/gridheader.gif') repeat-x;
+
+	border-left-style:solid;
+	border-left-width:1px;
+	border-left-color:#D0D0D0;
+	
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#D0D0D0;
+}
+
+
+.fixedcolum_div {
+	position: absolute;
+	overflow:hidden;
+	z-Index:100;
+	left: 0px;
+}
+
+.grid_div .num_div {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background-color: #F1F2F4;
+	height: 100%;
+
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#D0D0D0;
+}
+
+/*浠庝笂鍒颁笅鐨剆tate div*/
+.grid_div .state_div {
+	position: absolute;
+	height: 100%;
+	overflow:hidden;
+}
+
+.grid_div .data_outer_div {
+	position: absolute;
+	overflow: auto;
+	left: 0px;
+	/* 婊氬姩鏉￠〉闈㈤鑹茶瀹?*/
+	SCROLLBAR-FACE-COLOR: #EAE9F3;
+	/* 婊氬姩鏉℃枩闈㈠拰宸﹂潰棰滆壊璁惧畾 */
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	/* 婊氬姩鏉′笅鏂滈潰鍜屽彸闈㈤鑹茶瀹?*/
+  	SCROLLBAR-SHADOW-COLOR: #c9d095;
+  	/* 婊氬姩鏉′笂杈瑰拰宸﹁竟鐨勮竟娌块鑹茶瀹?*/
+  	SCROLLBAR-3DLIGHT-COLOR: #dbe1b3;
+  	/* 婊氬姩鏉′袱绔澶撮鑹茶瀹?*/
+  	SCROLLBAR-ARROW-COLOR: #424854;
+  	/* 婊氬姩鏉″簳鐗堥鑹茶瀹?*/
+  	SCROLLBAR-TRACK-COLOR: #F1F2F4;
+  	/* 婊氬姩鏉′笅杈瑰拰鍙宠竟鐨勮竟娌块鑹茶瀹?*/
+  	SCROLLBAR-DARKSHADOW-COLOR: #b5b2b5;
+}
+
+.grid_div .dynamic_data_div {
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#EDEDED;
+}
+
+.fixed_selectcolum_checkbox_div_odd {
+	position: absolute;
+	text-align: center;
+	cursor:default;
+	background-color: white;
+	
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#d6e0d0;
+
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#d6e0d0;
+}
+
+.fixed_selectcolum_checkbox_div_even {
+	position: absolute;
+	text-align: center;
+	cursor:default;
+	background-color: white;
+	
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#d6e0d0;
+
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#d6e0d0;
+}
+
+.grid_div .gridcell_odd {
+	position: absolute;
+	white-space: nowrap;
+	left: 0px; 
+
+	border-left-style:solid;
+	border-left-width:1px;
+	border-left-color:#EDEDED;
+	
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#EDEDED;
+	background-color: #FAFAFA;
+}
+
+.grid_div .gridcell_even {
+	position: absolute;
+	white-space: nowrap;
+	left: 0px; 
+
+	border-left-style:solid;
+	border-left-width:1px;
+	border-left-color:#EDEDED;
+	
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#EDEDED;
+	background-color: #FFFFFF;
+}
+
+.grid_div .fixed_gridcell_odd{
+	position: absolute;
+	white-space: nowrap;
+	left: 0px;
+	background-color: #FAFAFA;
+
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#EDEDED;
+
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#EDEDED;
+}
+
+.grid_div .fixed_gridcell_even{
+	position: absolute;
+	white-space: nowrap;
+	left: 0px;
+	background-color: #FFFFFF;
+
+	border-right-style:solid;
+	border-right-width:1px;
+	border-right-color:#EDEDED;
+
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#EDEDED;
+}
+
+.grid_div .gridcell_mouseover {
+	background:#61BFE1;
+}
+
+.grid_div .cell_select {
+	/*border-top: 1px solid #FFFFB0;*/
+	background-color: #FFFFB0;
+}
+
+.grid_div .fixedcell_select {
+}
+
+.grid_div .fixed_select_colum {
+	/*position: absolute;*/
+	position: relative;	
+	overflow: hidden;
+	
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:#EDEDED;
+}
+
+.grid_div .cell_focus {
+	/*border-top: 1px solid #F8B86B;*/
+	background-color: #F8B86B;
+}
+
+.grid_div .cell_error {
+	background-color:red;
+}
+
+.grid_div .sort_img {
+	position: relative;
+	left: 10px;
+}
+

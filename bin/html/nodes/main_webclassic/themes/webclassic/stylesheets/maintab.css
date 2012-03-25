@@ -1,0 +1,223 @@
+.maintab_div
+{
+	overflow:hidden;
+	background:#FFFFFF;
+}
+
+.maintab_div .tab_item_closeicon {
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 5px;
+	right: 2px;
+	background:url('../images/tab/tab-close.png') no-repeat;
+}
+
+.maintab_div .tab_item_closeicon_on {
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 5px;
+	right: 2px;
+	background:url('../images/tab/tab-close-down.png') no-repeat;
+}
+
+.maintab_div .tab_item_closeicon_over {
+	position:absolute;
+	height: 16px;
+	width: 10px;
+	top: 5px;
+	right: 2px;
+	background:url('../images/tab/tab-close-over.png') no-repeat;
+}
+
+.maintab_div .tab_content_div
+{
+	width:100%;
+	overflow:hidden;
+}
+
+.maintab_div .tab_items_bar
+{
+	position:relative;
+	height: 28px;
+    background:url("../images/tab/bar-middle.png") repeat-x scroll center bottom transparent;
+}
+
+.maintab_div .tab_seperator_ver
+{
+	position:relative;
+	top: 1px;
+	float:left;
+	height:23px;
+	width:1px;
+	background:url("../images/tab/seperator_ver.gif");
+}
+
+.maintab_div .left_space
+{
+	position:relative;
+	float:left;
+	height:100%;
+}
+
+.maintab_div .right_space
+{
+	position:relative;
+	float:right;
+	height:100%;
+	overflow:hidden;
+}
+
+.maintab_div .tab_img_div
+{
+ 	float:right;
+    position: relative;
+    height:100%;
+}
+
+.maintab_div .tab_item_div
+{
+ 	position: relative;
+ 	height:25px;
+ 	float:left;
+ 	overflow:hidden;
+	margin-top:3px;
+}
+
+.tab_content_div{
+	 overflow:auto; 
+	 width:100%;
+	 height:100%;  
+	 position:relative;
+}
+
+.maintab_div .tab_item_leftborder_off_0
+{
+    width:7px;
+    float:left;
+    height:100%; /* all browsers */
+    height:25px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.maintab_div .tab_item_leftborder_off_1
+{
+    width:7px;
+    float:left;
+    height:100%; /* all browsers */
+    height:25px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.maintab_div .tab_item_leftborder_off_2
+{
+    width:7px;
+    float:left;
+    height:100%; /* all browsers */
+    height:25px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.maintab_div .tab_item_centerborder_off{
+    height:100%;
+    float:left;
+	padding-top:6px;
+    padding-left:8px;
+    padding-right:8px;
+    font-weight:bold;
+	color:#FFFFFF;
+    white-space:nowrap;
+}
+
+.maintab_div .tab_item_rightborder_off_0
+{
+    height:100%;
+    width:7px;
+    float:left;
+}
+
+.maintab_div .tab_item_rightborder_off_1
+{
+    height:100%;
+    width:7px;
+    float:left;
+}
+
+.maintab_div .tab_item_rightborder_off_2
+{
+    height:100%;
+    width:7px;
+    float:left;
+}
+
+.maintab_div .tab_item_leftborder_on_0
+{
+    background:url('../images/tab/bg-tab-left.png'); 
+    width:7px;
+    float:left;
+    height:100%; /* all browsers */
+    height:25px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.maintab_div .tab_item_leftborder_on_1
+{
+    background:url('../images/tab/bg-tab-left.png'); 
+    width:7px;
+    float:left;
+    height:100%; /* all browsers */
+    height:25px\9; /* IE8 and below */
+	*height:100%; /* IE7 and below */
+}
+
+.maintab_div .tab_item_centerborder_on 
+{
+	background:url('../images/tab/bg-tab-middle.png'); 
+	padding-top:6px;
+    padding-left:8px;
+    padding-right:8px;
+    font-weight:bold;
+	color:#2C6596;
+    height:25px;
+    float:left;
+    white-space:nowrap;
+}
+
+.maintab_div .tab_item_rightborder_on_0
+{
+    background:url('../images/tab/bg-tab-right.png'); 
+    width:7px;
+    height:100%;
+    float:left;
+}
+
+.maintab_div .tab_item_rightborder_on_1 
+{
+    background:url('../images/tab/bg-tab-right.png'); 
+    width:7px;
+    height:100%;
+    float:left;
+}
+
+.maintab_div .left_fixed_space{
+	position:relative;
+	width:6px;
+    height:28px;
+    float:left;
+    background:url("../images/tab/bar-left.png") no-repeat bottom;
+}
+
+.maintab_div .right_fixed_space{
+	position:relative;
+	width:6px;
+    height:28px;
+    float:right;
+    background:url("../images/tab/bar-right.png") no-repeat bottom;
+}
+/**修复IE6下PNG图片透明问题**/
+.pngFix{
+	_FILTER: expression('progid:DXImageTransform.Microsoft.AlphaImageLoader(src='+this.src+')');
+	_width:1px;
+	_height:1px;
+}

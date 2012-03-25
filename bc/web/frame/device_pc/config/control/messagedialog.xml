@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>messagedialog</id>
+	<fullname>ui.ctrl.dialog.MessageDialogComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>modaldialog</dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

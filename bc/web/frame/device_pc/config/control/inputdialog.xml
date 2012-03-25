@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>inputdialog</id>
+	<fullname>ui.ctrl.dialog.InputDialogComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences>modaldialog,label,stringtext,pswtext,integertext,floattext,radiotext,combotext</dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

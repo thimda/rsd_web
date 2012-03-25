@@ -1,0 +1,68 @@
+.panel_div
+{
+	background:url('images/panel_bg.png') repeat-x;
+}
+
+.panel_div_login
+{
+	background-color:#CDDDEE;
+}
+
+
+.panel_div_alpha
+{
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+
+.panel_div .seperator_div
+{
+	
+}
+
+.panel_transparent_div
+{
+	background:url('images/panel_bg.png') repeat;
+}
+
+.panel_transparent_title_img_left_div
+{
+	background:url('images/arrow_down.png') no-repeat;
+	width:11px;
+	height:11px;
+	float:left;
+	margin-left:28px;
+	margin-right:10px;
+	margin-top:8px;
+}
+
+.panel_transparent_title_left_div
+{
+	float:left;
+	margin-top:6px;
+	color:#007dc4;
+	font-weight:bold;
+}
+
+.panel_transparent_title_img_right_div
+{
+	background:url('images/more.png') no-repeat;
+	width:19px;
+	height:19px;
+	float:right;
+	margin-right:20px;
+	margin-top:4px;
+	margin-left:2px;
+}
+
+.panel_transparent_title_right_div
+{
+	float:right;
+	margin-top:4px;
+	color:#666666;
+	font-weight:bold;
+	font-size:12pt;
+}
+

@@ -1,0 +1,92 @@
+.dialog_button_div {
+	background-color:white;
+	margin:0 auto;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.dialog_button_div_BUTTON_HEIGHT
+{
+	height:22px;
+}
+.dialog_button_div_BUTTON_LEFT_WIDTH
+{
+	height:2px;
+	line-height:2px;
+}
+.dialog_button_div_BUTTON_RIGHT_WIDTH
+{
+	height:2px;
+	line-height:2px;
+}
+/********************定义JS所需静态常量   end ***********************/
+
+.dialog_button_div .btn_center {
+	float: left;
+	height:22px;
+}
+
+.dialog_button_div .btn_left_off {
+	float: left;
+	height:22px;
+	width: 2px;
+ 	background:url('../images/button/button_normal_left.gif') no-repeat right center;
+} 
+.dialog_button_div .btn_left_on {
+	float: left;
+	height:22px;
+	width: 2px;
+ 	background:url('../images/button/button_on_left.gif') no-repeat right center;
+}
+.dialog_button_div .btn_left_disabled {
+	float: left;
+	height:22px;
+	width: 2px;
+ 	background:url('../images/button/button_disable_left.gif') no-repeat right center;
+}
+
+.dialog_button_div .btn_right_off {
+	float: right;
+	height:22px;
+	width: 2px;
+ 	background:url('../images/button/button_normal_right.gif') no-repeat left center;
+} 
+.dialog_button_div .btn_right_on {
+	float: right;
+	height:22px;
+	width: 2px;
+ 	background:url('../images/button/button_on_right.gif') no-repeat left center;
+}
+.dialog_button_div .btn_right_disabled {
+	float: right;
+	height:22px;
+	width: 2px;
+ 	background:url('../images/button/button_disable_right.gif') no-repeat left center;
+}
+
+.dialog_button_div .btn_off {
+	border-style:none;
+	height:20px;
+ 	padding-right: 2px;
+ 	padding-left: 2px;
+ 	cursor: pointer;
+ 	padding-top: 0px;
+ 	background:url('../images/button/button_normal.gif') repeat-x;
+} 
+.dialog_button_div .btn_on {
+	border-style:none;
+	height:22px;
+ 	padding-right: 2px;
+ 	padding-left: 2px;
+ 	padding-top: 0px;
+ 	cursor: pointer;
+ 	background:url('../images/button/button_on.gif') repeat-x;
+}
+.dialog_button_div .btn_disabled {
+	border-style:none;
+	height:22px;
+ 	padding-right: 2px;
+ 	padding-left: 2px;
+ 	cursor: pointer;
+ 	padding-top: 0px;
+ 	background:url('../images/button/button_disable.gif') repeat-x;
+}

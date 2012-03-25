@@ -1,0 +1,61 @@
+.tree_div
+{
+	overflow-x: auto;
+}
+
+.tree_div .treeview_div
+{    
+    white-space: nowrap;                    
+    text-overflow: ellipsis;
+    top: 0px;
+    left: 0px;
+    width: auto;
+}
+
+.tree_div .treebg_div
+{
+	width: 100%;
+	height: 100%;	
+}
+
+.tree_div .treenode_div
+{                      
+    position:relative;
+}
+
+.tree_div .treenode_img{
+    top:0px;
+    left:0px;   
+    width:19px;
+    height:23px;
+    cursor: pointer;
+}
+
+.tree_div .treenode_text{        
+	width: auto;
+    font-family: arial;
+    font-size: 12px;    
+    white-space: nowrap;                    
+    text-overflow: ellipsis; 
+    font-weight: normal;    
+    cursor: pointer; 
+}
+
+.tree_div .treenode_textsel{
+	font-family: arial;
+	font-size: 12px;
+	white-space: nowrap;                    
+    text-overflow: ellipsis; 
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tree_div .treenode_nodesel{  
+	font-family: arial; 
+	font-size: 12px;
+	white-space: nowrap;                    
+    text-overflow: ellipsis;
+	font-weight: bold;
+	cursor: pointer;
+}
+

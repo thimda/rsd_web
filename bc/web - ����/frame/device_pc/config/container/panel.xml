@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>panel</id>
+	<fullname>ui.container.PanelComp</fullname>
+	<cssfullname>ui.container.panel.panel</cssfullname>
+	<dependences>image</dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIPanel</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.PanelSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIPanelSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCPanelLayoutRender</uirender>
+	<zone>view,window</zone>
+</plugin>

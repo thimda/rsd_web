@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <FlowvLayout autoFill="0" id="flowv1">
+        <FlowvPanel height="30">
+            <FlowhLayout>
+                <FlowhPanel>
+                </FlowhPanel>
+                <FlowhPanel width="200">
+                    <Label id="label_approvemess" widgetId="main">
+                    </Label>
+                </FlowhPanel>
+                <FlowhPanel>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+        <FlowvPanel height="50">
+            <FlowhLayout>
+                <FlowhPanel>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <TextField id="radiogroup_approve" type="7" widgetId="main">
+                    </TextField>
+                </FlowhPanel>
+                <FlowhPanel>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+        <FlowvPanel height="30">
+            <FlowhLayout>
+                <FlowhPanel>
+                </FlowhPanel>
+                <FlowhPanel width="200">
+                    <Label id="label_appcontents" widgetId="main">
+                    </Label>
+                </FlowhPanel>
+                <FlowhPanel>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+        <FlowvPanel>
+            <TextField id="textarea_appcontents" type="6" widgetId="main">
+            </TextField>
+        </FlowvPanel>
+        <FlowvPanel height="10">
+        </FlowvPanel>
+        <FlowvPanel height="60">
+            <FlowhLayout>
+                <FlowhPanel>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Button id="button_ok" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Button id="button_cancel" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+    </FlowvLayout>
+</UIMeta>

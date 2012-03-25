@@ -1,0 +1,292 @@
+package nc.uap.lfw.pa.paMgr;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import nc.bs.framework.common.NCLocator;
+import nc.uap.lfw.core.ContextResourceUtil;
+import nc.uap.lfw.core.common.WebConstant;
+import nc.uap.lfw.core.data.Dataset;
+import nc.uap.lfw.core.data.Row;
+import nc.uap.lfw.core.event.DataLoadEvent;
+import nc.uap.lfw.core.event.DatasetEvent;
+import nc.uap.lfw.core.event.ctx.LfwPageContext;
+import nc.uap.lfw.core.event.listener.DatasetServerListener;
+import nc.uap.lfw.core.exception.LfwRuntimeException;
+import nc.uap.lfw.core.log.LfwLogger;
+import nc.uap.lfw.core.model.parser.ApplicationParser;
+import nc.uap.lfw.core.model.util.DefaultPageMetaBuilder;
+import nc.uap.lfw.core.page.PageMeta;
+import nc.uap.lfw.core.serializer.impl.SuperVO2DatasetSerializer;
+import nc.uap.lfw.core.uimodel.Application;
+import nc.uap.lfw.core.uimodel.WindowConfig;
+import nc.uap.lfw.pa.PaBusinessException;
+import nc.uap.lfw.pa.itf.IPaFuncnodeLoadService;
+import nc.uap.lfw.stylemgr.itf.IUwTemplateService;
+import nc.uap.lfw.stylemgr.vo.UwTemplateVO;
+import nc.uap.lfw.util.LfwClassUtil;
+import nc.vo.pub.SuperVO;
+import nc.vo.pub.lang.UFBoolean;
+
+public class PaFuncNodeDsListener extends DatasetServerListener{
+
+	public PaFuncNodeDsListener(LfwPageContext pagemeta, String widgetId) {
+		super(pagemeta, widgetId);
+	}
+
+	@Override
+	public void onDataLoad(DataLoadEvent e) {
+		
+		IPaFuncnodeLoadService service = getPaFucnodeServie();
+		List<PaFuncNodeProxyVO> allFuncnodes = service.getFucnodeVOBySpecial(UFBoolean.TRUE);
+		
+		Dataset ds = e.getSource();
+		ds.setCurrentKey(Dataset.MASTER_KEY);
+		
+		int idIndex = ds.nameToIndex("id");
+		int titleIndex = ds.nameToIndex("title");
+		int urlIndex = ds.nameToIndex("url");
+		int pageIdIndex = ds.nameToIndex("pageid");
+		int funcnodIndex = ds.nameToIndex("pk_funcnode");
+		int parentIndex = ds.nameToIndex("pk_parent");
+		int appIdIndex = ds.nameToIndex("appId");
+		
+		Row row = ds.getEmptyRow();
+		if(allFuncnodes != null && allFuncnodes.size() > 0){
+			for(int i = 0; i < allFuncnodes.size(); i++){
+				PaFuncNodeProxyVO node = allFuncnodes.get(i);
+				
+				if(node != null){
+					String url = node.getUrl();
+					if(!isAppNode(url)){
+						String pageId = getPageIdByUrl(url);
+						
+						row = ds.getEmptyRow();
+						row.setValue(pageIdIndex, pageId);
+						row.setValue(funcnodIndex, node.getPk_appsnode());
+						row.setValue(idIndex, node.getId());
+						row.setValue(ds.nameToIndex("windowId"), pageId);
+						row.setValue(titleIndex, node.getTitle());
+						row.setValue(urlIndex, node.getUrl());
+						ds.addRow(row);
+					}
+					else{
+						//通过url获取app的id，并将其设置为父节点
+						String appId = getAppId(url);
+						
+						row = ds.getEmptyRow();
+						row.setValue(funcnodIndex, node.getPk_appsnode());
+						row.setValue(idIndex, appId);
+						row.setValue(titleIndex, appId);
+						ds.addRow(row);
+						
+						
+						File appDefFile = ContextResourceUtil.getFile("/html/applications/" + appId + "/application.app");
+						Application app = ApplicationParser.parse(appDefFile);
+						
+						if(app == null){
+							continue;
+						}
+						List<WindowConfig> winList = app.getWindowList();
+						
+						if(winList != null){
+							int winidIndex = ds.nameToIndex("windowId");
+//							int viewidIndex = ds.nameToIndex("viewId");
+							for(int j = 0; j < winList.size(); j++){
+								WindowConfig win = winList.get(j);
+								String winId = win.getId();
+								
+								PageMeta pm = getPageMetaById(winId);
+								if(pm == null)
+									return;
+								
+								String pmTitle = win.getCaption();
+								
+								
+								row = ds.getEmptyRow();
+								row.setValue(parentIndex, node.getPk_appsnode());
+								row.setValue(appIdIndex, appId);
+								row.setValue(funcnodIndex, node.getPk_appsnode()+ winId);
+								row.setValue(winidIndex, winId);
+								row.setValue(idIndex, winId);
+								row.setValue(titleIndex, pmTitle);
+								ds.addRow(row);
+							
+//								LfwWidget[] widgets = pm.getWidgets();
+//								if(widgets != null && widgets.length > 0){
+//									for(int k = 0; k < widgets.length; k++){
+//										LfwWidget widget = widgets[k];
+//										if(widget != null){
+//											String viewId = widget.getId();
+//											String title = widget.getI18nName();
+//											
+//											row = ds.getEmptyRow();
+//											row.setValue(parentIndex, node.getPk_appsnode() + winId);
+//											
+//											row.setValue(funcnodIndex, node.getPk_appsnode() + winId + viewId);
+//											row.setValue(winidIndex, winId);
+//											row.setValue(viewidIndex, viewId);
+//											row.setValue(titleIndex, title);
+//											row.setValue(idIndex, viewId);
+//											ds.addRow(row);
+//										}
+//									}
+//								}
+								
+							}
+						}
+						
+						  
+						
+//						String winId = getWinId(url);
+//
+//						//设置window
+//						row = ds.getEmptyRow();
+//						row.setValue(pIdIndex, appId);
+//						row.setValue(idIndex, winId);
+//						row.setValue(funcnodIndex, node.getPk_appsnode());
+//						row.setValue(funcnodIndex, "bbbbb");
+//						row.setValue(titleIndex, winId);
+//						ds.addRow(row);
+//						//设置window下的view
+//						
+//						PageMeta pm = null;
+//						DefaultPageMetaBuilder dpb = new DefaultPageMetaBuilder();
+//						Map<String, Object> paramMap = new HashMap<String, Object>();
+//						paramMap.put(WebConstant.PAGE_ID_KEY, winId);		
+//						pm = dpb.buildPageMeta(paramMap);
+//						if(pm != null){
+//							String[] ids = pm.getWidgetIds();
+//							if(ids != null){
+//								
+//								for(String wid : ids){
+//									row = ds.getEmptyRow();
+//									row.setValue(pIdIndex, winId);
+//									row.setValue(idIndex, wid);
+//									row.setValue(titleIndex, wid);
+//									ds.addRow(row);
+//									
+//								}
+//							}
+//						}
+					}
+				}
+			}
+		}
+	}
+	
+	private PageMeta getPageMetaById(String winId) {
+		PageMeta pm = null;
+		DefaultPageMetaBuilder dpb = new DefaultPageMetaBuilder();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put(WebConstant.PAGE_ID_KEY, winId);		
+		pm = dpb.buildPageMeta(paramMap);
+		return pm;
+	}
+
+	private String getPageIdByUrl(String url) {
+		String sub = "pageId=";
+		String subString = null ;
+		int begin = url.indexOf(sub);
+		if(begin != -1){
+			int end = url.indexOf("&", begin);
+			if(end != -1)
+				subString = url.substring(begin+sub.length(), url.indexOf("&", begin));
+			else
+				subString = url.substring(begin + sub.length());
+		}
+		return subString;
+	}
+
+	private String getAppId(String url) {
+		String[] splitUrl = url.split("/");
+		int appIndex = getAppIndex(splitUrl);
+		return splitUrl[appIndex + 1];
+	}
+	
+	private String getWinId(String url){
+		String[] splitUrl = url.split("/");
+		int appIndex = getAppIndex(splitUrl);
+		return splitUrl[appIndex + 2];
+	}
+
+	private int getAppIndex(String[] splitUrl) {
+		for(int i = 0; i < splitUrl.length; i++){
+			String sub = splitUrl[i];
+			if(sub.equals("app")){
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private boolean isAppNode(String url) {
+		if(url.contains("app/"))
+			return true;
+		return false;
+	}
+
+	public IPaFuncnodeLoadService getPaFucnodeServie(){
+		return (IPaFuncnodeLoadService) LfwClassUtil.newInstance("nc.uap.cpb.org.impl.PaFuncnodeLoadServiceImpl");
+	}
+
+	@Override
+	public void onAfterRowSelect(DatasetEvent e) {
+		Dataset ds =  getCurrentContext().getWidget().getViewModels().getDataset("ds_template");
+		Dataset navDs = e.getSource();
+		Row navRow = navDs.getSelectedRow();
+		
+		String pk_funcnode = (String) navRow.getValue(navDs.nameToIndex("pk_funcnode"));
+		String winId = (String) navRow.getValue(navDs.nameToIndex("windowId"));
+		String viewId = (String) navRow.getValue(navDs.nameToIndex("viewId"));
+		String appId = (String) navRow.getValue(navDs.nameToIndex("appId"));
+		if(pk_funcnode != null)
+			pk_funcnode = pk_funcnode.substring(0,20);
+		
+		IUwTemplateService service = NCLocator.getInstance().lookup(IUwTemplateService.class);
+		
+		if(pk_funcnode == null){
+			return;
+		}
+		
+		String con0 = null;
+		if(appId == null){
+			con0 = " and appid IS NULL ";
+		}
+		else{
+			con0 = " and appid = '" + appId + "' ";
+		}
+		
+		String con1 = null;
+		if(winId == null){
+			con1 = " and winid IS NULL ";
+		}
+		else{
+			con1 = " and winid = '" + winId + "' "; 
+		}
+		String con2 = null;
+		if(viewId == null){
+			con2 = " and viewid IS NULL ";
+		}
+		else{
+			con2 = " and viewid = '" + viewId + "' ";
+		}
+		
+	
+		String conditon = "pk_funcnode = '" + pk_funcnode + "' " + con0 + con1 + con2;
+		Collection<UwTemplateVO> tvos;
+		try {
+			tvos = service.getTemplateVOByConditon(conditon);
+			new SuperVO2DatasetSerializer().serialize(tvos.toArray(new SuperVO[0]), ds, Row.STATE_NORMAL);
+		} catch (PaBusinessException e1) {
+			LfwLogger.error(e1.getMessage(), e1);
+			throw new LfwRuntimeException(e1);
+		}
+		
+	}
+	
+}

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" id="main" width="100%">
+    <PlugoutDescs>
+    </PlugoutDescs>
+    <PluginDescs>
+    </PluginDescs>
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="test1" lazyLoad="true">
+                <Fields>
+                    <Field dataType="String" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="name" isPrimaryKey="false" nullAble="true" text="name">
+                    </Field>
+                    <Field dataType="String" id="type" isPrimaryKey="false" nullAble="true" text="type">
+                    </Field>
+                    <Field dataType="UFBoolean" id="visible" isPrimaryKey="false" nullAble="true" text="visible">
+                    </Field>
+                    <Field dataType="UFBoolean" id="editable" isPrimaryKey="false" nullAble="true" text="editable">
+                    </Field>
+                    <Field dataType="UFDateTime" id="dataTime" isPrimaryKey="false" nullAble="true" text="dataTime">
+                    </Field>
+                    <Field dataType="UFTime" id="time" isPrimaryKey="false" nullAble="true" text="time">
+                    </Field>
+                    <Field dataType="String" id="comb" isPrimaryKey="false" nullAble="true" text="comb">
+                    </Field>
+                    <Field dataType="String" id="ref" isPrimaryKey="false" nullAble="true" text="ref">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="test1" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="test2" lazyLoad="true">
+                <Fields>
+                    <Field dataType="String" id="ext1" isPrimaryKey="false" nullAble="true" text="ext1">
+                    </Field>
+                    <Field dataType="String" id="ext2" isPrimaryKey="false" nullAble="true" text="ext2">
+                    </Field>
+                    <Field dataType="String" id="ext3" isPrimaryKey="false" nullAble="true" text="ext3">
+                    </Field>
+                    <Field dataType="String" id="ext4" isPrimaryKey="false" nullAble="true" text="ext4">
+                    </Field>
+                    <Field dataType="String" id="ext5" isPrimaryKey="false" nullAble="true" text="ext5">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="test2" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+        <ComboDatas>
+            <StaticComboData id="combo_test">
+                <ComboItem text="是" value="true">
+                </ComboItem>
+                <ComboItem text="否" value="false">
+                </ComboItem>
+            </StaticComboData>
+        </ComboDatas>
+    </Models>
+    <Components>
+        <GridComp dataset="test1" editable="true" enabled="true" height="100%" id="grid_test1" left="0" multiSelect="false" pagenationTop="false" position="relative" showColInfo="false" showHeader="true" showNumCol="false" showSumRow="false" sortable="true" top="0" visible="true" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="id" fixedHeader="false" id="id" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="id" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="name" fixedHeader="false" id="name" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="name" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="type" fixedHeader="false" id="type" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="type" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="UFBoolean" editable="true" editorType="CheckBox" field="visible" fixedHeader="false" id="visible" imageOnly="false" nullAble="true" renderType="BooleanRender" sortable="true" sumCol="false" text="visible" textAlign="center" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="UFBoolean" editable="true" editorType="CheckBox" field="editable" fixedHeader="false" id="editable" imageOnly="false" nullAble="true" renderType="BooleanRender" sortable="true" sumCol="false" text="editable" textAlign="center" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="UFDateTime" editable="true" editorType="DateTimeText" field="dataTime" fixedHeader="false" id="dataTime" imageOnly="false" nullAble="true" renderType="DateTimeRender" sortable="true" sumCol="false" text="dataTime" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="UFTime" editable="true" editorType="DateText" field="time" fixedHeader="false" id="time" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="time" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="Reference" field="comb" fixedHeader="false" id="comb" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="comb" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="Reference" field="ref" fixedHeader="false" id="ref" imageOnly="false" nullAble="true" refComboData="combo_test" renderType="DefaultRender" sortable="true" sumCol="false" text="ref" textAlign="left" visible="true" width="120">
+            </Column>
+        </GridComp>
+        <TreeViewComp dragEnable="false" enabled="true" height="100%" id="tree_test" left="0" position="relative" rootOpen="true" top="0" visible="true" width="100%" withCheckBox="false" withRoot="true">
+            <SimpleTreeLevel dataset="test1" id="level1" labelFields="name" masterKeyField="id">
+            </SimpleTreeLevel>
+        </TreeViewComp>
+        <FormComp columnCount="2" dataset="test2" enabled="true" id="form_test2" labelMinWidth="0" left="0" position="relative" renderHiddenEle="false" renderType="2" rowHeight="22" top="0" visible="true" width="100%">
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="ext1" height="22" id="ext1" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="字段一" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="ext2" height="22" id="ext2" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="字段二" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="ext3" height="22" id="ext3" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="字段三" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="ext4" height="22" id="ext4" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="字段四" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="ext5" height="22" id="ext5" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="字段五" visible="true" width="">
+            </Element>
+        </FormComp>
+        <ButtonComp align="left" enabled="true" height="22" id="button2" left="0" position="relative" text="测试二" top="0" visible="true" width="60">
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="button3" left="0" position="relative" text="测试三" top="0" visible="true" width="60">
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="button1" left="0" position="relative" text="测试一" top="0" visible="true" width="60">
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+        <MenuBarComp id="menu_test">
+        </MenuBarComp>
+    </Menus>
+</Widget>

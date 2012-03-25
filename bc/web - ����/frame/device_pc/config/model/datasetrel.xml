@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>datasetrel</id>
+	<fullname>ui.model.ViewModel</fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.data.DatasetRelation</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.DatasetRelationSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

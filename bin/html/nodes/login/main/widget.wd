@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+        </Datasets>
+        <ComboDatas>
+            <DynamicComboData className="nc.uap.lfw.login.login.AccountDatas" id="accounts">
+            </DynamicComboData>
+        </ComboDatas>
+        <RefNodes>
+         </RefNodes>
+    </Models>
+    <Components>
+        <LabelComp enabled="true" height="28" id="tiplabel" left="0" position="relative" top="0" visible="false" width="230">
+        </LabelComp>
+        <TextComp editorType="PwdText" focus="false" i18nName="NcLoginPageModel-000003" langDir="lfw" text="密码"  textWidth="40" height="22" id="password" textAlign="left" visible="true" width="206">
+            <Listeners>
+                <KeyListener id="passwordKeyListener">
+                    <Events>
+                        <Event async="true" name="onEnter" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>keyEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[var comp = pageUI.getWidget("main").getComponent("submitBtn");
+	// 触发登录按钮
+	if (IS_FF) {
+		var evt = document.createEvent("MouseEvents");
+		evt.initEvent("click", true, true);
+		comp.Div_gen.dispatchEvent(evt);
+	} else {
+		comp.Div_gen.click();
+	}
+	stopAll(keyEvent.event);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </KeyListener>
+            </Listeners>
+        </TextComp>
+        <ComBoBoxComp editorType="ComboBox" focus="false" langDir="lfw" i18nName="NcLoginPageModel-000002" text="系统"  height="28" id="accountcode" refComboData="accounts" selectOnly="true" textAlign="left" textWidth="40" visible="true" width="206">
+            <Listeners>
+                <KeyListener id="accountKeyListener">
+                    <Events>
+                        <Event async="true" name="onEnter" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>keyEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[var comp = pageUI.getWidget("main").getComponent("userid");
+	//comp.setFocus();
+	comp.input.select();
+ 	stopAll(keyEvent.event);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </KeyListener>
+            </Listeners>
+        </ComBoBoxComp>
+        <TextComp editorType="StringText"  text="用户名"  i18nName="lfwLoginPageModel-000002" langDir="lfw" forcus="false" height="22" id="userid"  textWidth="40" textAlign="left" visible="true" width="206">
+            <Listeners>
+                <KeyListener id="userIdKeyListener">
+                    <Events>
+                        <Event async="true" name="onEnter" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>keyEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[var comp = pageUI.getWidget("main").getComponent("password");
+	//comp.setFocus();
+	comp.input.select();
+	stopAll(keyEvent.event);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </KeyListener>
+            </Listeners>
+        </TextComp> 
+        <ButtonComp align="left" className="login_button_div"  text=""  enabled="true" height="51" id="submitBtn" visible="true" width="101">
+            <Listeners>
+                <MouseListener id="loginListener" serverClazz="nc.uap.lfw.login.listener.LfwLoginMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+                <MouseListener id="loginJsListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value>
+                                    </Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[//$ge("progressdiv").style.display = "block";]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

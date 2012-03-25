@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>menubar</id>
+	<fullname>ui.ctrl.menu.MenuBarComp</fullname>
+	<cssfullname>ui.ctrl.menu.menubar</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.MenubarComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIMenubarComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.MenuCompSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIMenubarSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCMenubarCompRender</uirender>
+	<zone>view</zone>
+</plugin>

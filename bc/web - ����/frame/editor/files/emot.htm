@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Strict//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>插入表情图标</title>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+
+<script src='../../script/basic/BrowserSniffer.js'></script>
+<script src='../../script/basic/EventUtil.js'></script>
+<script src='../../script/basic/JsExtensions.js'></script>
+<style type=text/css>
+body {
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px
+}
+
+img {
+	cursor: pointer;
+}
+</style>
+<script language=JavaScript>
+function emotclick(e){
+	e = EventUtil.getEvent();
+	if ("IMG" == e.target.tagName.toUpperCase()) {
+		window.returnValue = "<img src='" + e.target.src + "' ></img>";
+		window.close();
+	}
+}
+document.onclick = emotclick;
+</script>
+
+</head>
+<body bgColor="menu">
+<table cellSpacing="2" align="left" border="0px">
+	<tbody>
+		<tr>
+			<td><input
+				onclick="document.getElementById('emot').style.display='block';document.getElementById('emot1').style.display='none';document.getElementById('emot2').style.display='none';"
+				type="button" value="表情一" name="" /><br />
+			<br />
+			<input
+				onclick="document.getElementById('emot').style.display='none';document.getElementById('emot1').style.display='block';document.getElementById('emot2').style.display='none';"
+				type="button" value="表情二" name="" /><br />
+			<br />
+			<input
+				onclick="document.getElementById('emot').style.display='none';document.getElementById('emot1').style.display='none';document.getElementById('emot2').style.display='block';"
+				type="button" value="表情三" name="" /><br />
+			<br />
+			<input onclick=window.close(); type=button value=" 关闭 " name="" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table id="emot" cellSpacing="5" style="margin-left:110px;" border="0px">
+	<tbody>
+		<tr>
+			<td><img src="emot_files/face1.gif"></td>
+			<td><img src="emot_files/face2.gif"></td>
+			<td><img src="emot_files/face3.gif"></td>
+			<td><img src="emot_files/face4.gif"></td>
+			<td><img src="emot_files/face5.gif"></td>
+			<td><img src="emot_files/face6.gif"></td>
+			<td><img src="emot_files/face7.gif"></td>
+			<td><img src="emot_files/face8.gif"></td>
+			<td><img src="emot_files/face9.gif"></td>
+			<td><img src="emot_files/face10.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/face11.gif"></td>
+			<td><img src="emot_files/face12.gif"></td>
+			<td><img src="emot_files/face13.gif"></td>
+			<td><img src="emot_files/face14.gif"></td>
+			<td><img src="emot_files/face15.gif"></td>
+			<td><img src="emot_files/face16.gif"></td>
+			<td><img src="emot_files/face17.gif"></td>
+			<td><img src="emot_files/face18.gif"></td>
+			<td><img src="emot_files/face19.gif"></td>
+			<td><img src="emot_files/face20.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/face21.gif"></td>
+			<td><img src="emot_files/face22.gif"></td>
+			<td><img src="emot_files/face23.gif"></td>
+			<td><img src="emot_files/face24.gif"></td>
+			<td><img src="emot_files/face25.gif"></td>
+			<td><img src="emot_files/face26.gif"></td>
+			<td><img src="emot_files/face27.gif"></td>
+			<td><img src="emot_files/face28.gif"></td>
+			<td><img src="emot_files/face29.gif"></td>
+			<td><img src="emot_files/face30.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/face31.gif"></td>
+			<td><img src="emot_files/face32.gif"></td>
+			<td><img src="emot_files/face33.gif"></td>
+			<td><img src="emot_files/face34.gif"></td>
+			<td><img src="emot_files/face35.gif"></td>
+			<td><img src="emot_files/face36.gif"></td>
+			<td><img src="emot_files/face37.gif"></td>
+			<td><img src="emot_files/face38.gif"></td>
+			<td><img src="emot_files/face39.gif"></td>
+			<td><img src="emot_files/face40.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/face41.gif"></td>
+			<td><img src="emot_files/face42.gif"></td>
+			<td><img src="emot_files/face43.gif"></td>
+			<td><img src="emot_files/face44.gif"></td>
+			<td><img src="emot_files/face45.gif"></td>
+			<td><img src="emot_files/face46.gif"></td>
+			<td><img src="emot_files/face47.gif"></td>
+			<td><img src="emot_files/face48.gif"></td>
+			<td><img src="emot_files/face49.gif"></td>
+			<td><img src="emot_files/face50.gif"></td>
+		</tr>
+	</tbody>
+</table>
+<table id="emot1" style="margin-left:80px;display:none;" cellSpacing="5" border="0px">
+	<tbody>
+		<tr>
+			<td><img src="emot_files/1.gif"></td>
+			<td><img src="emot_files/2.gif"></td>
+			<td><img src="emot_files/3.gif"></td>
+			<td><img src="emot_files/4.gif"></td>
+			<td><img src="emot_files/5.gif"></td>
+			<td><img src="emot_files/6.gif"></td>
+			<td><img src="emot_files/7.gif"></td>
+			<td><img src="emot_files/8.gif"></td>
+			<td><img src="emot_files/9.gif"></td>
+			<td><img src="emot_files/50.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/11.gif"></td>
+			<td><img src="emot_files/12.gif"></td>
+			<td><img src="emot_files/13.gif"></td>
+			<td><img src="emot_files/14.gif"></td>
+			<td><img src="emot_files/15.gif"></td>
+			<td><img src="emot_files/16.gif"></td>
+			<td><img src="emot_files/17.gif"></td>
+			<td><img src="emot_files/18.gif"></td>
+			<td><img src="emot_files/19.gif"></td>
+			<td><img src="emot_files/20.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/21.gif"></td>
+			<td><img src="emot_files/22.gif"></td>
+			<td><img src="emot_files/23.gif"></td>
+			<td><img src="emot_files/24.gif"></td>
+			<td><img src="emot_files/25.gif"></td>
+			<td><img src="emot_files/26.gif"></td>
+			<td><img src="emot_files/27.gif"></td>
+			<td><img src="emot_files/28.gif"></td>
+			<td><img src="emot_files/29.gif"></td>
+			<td><img src="emot_files/30.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/31.gif"></td>
+			<td><img src="emot_files/32.gif"></td>
+			<td><img src="emot_files/33.gif"></td>
+			<td><img src="emot_files/34.gif"></td>
+			<td><img src="emot_files/35.gif"></td>
+			<td><img src="emot_files/36.gif"></td>
+			<td><img src="emot_files/37.gif"></td>
+			<td><img src="emot_files/38.gif"></td>
+			<td><img src="emot_files/39.gif"></td>
+			<td><img src="emot_files/40.gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files/41.gif"></td>
+			<td><img src="emot_files/42.gif"></td>
+			<td><img src="emot_files/43.gif"></td>
+			<td><img src="emot_files/44.gif"></td>
+			<td><img src="emot_files/45.gif"></td>
+			<td><img src="emot_files/46.gif"></td>
+			<td><img src="emot_files/47.gif"></td>
+			<td><img src="emot_files/48.gif"></td>
+			<td><img src="emot_files/49.gif"></td>
+			<td><img src="emot_files/10.gif"></td>
+		</tr>
+	</tbody>
+</table>
+<table id="emot2" style="margin-left:110px;display:none;" cellSpacing="5" border="0px">
+	<tbody>
+		<tr>
+			<td><img src="emot_files\1(1).gif"></td>
+			<td><img src="emot_files\2(1).gif"></td>
+			<td><img src="emot_files\3(1).gif"></td>
+			<td><img src="emot_files\4(1).gif"></td>
+			<td><img src="emot_files\5(1).gif"></td>
+			<td><img src="emot_files\6(1).gif"></td>
+			<td><img src="emot_files\7(1).gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files\8(1).gif"></td>
+			<td><img src="emot_files\9(1).gif"></td>
+			<td><img src="emot_files\10(1).gif"></td>
+			<td><img src="emot_files\11(1).gif"></td>
+			<td><img src="emot_files\12(1).gif"></td>
+			<td><img src="emot_files\13(1).gif"></td>
+			<td><img src="emot_files\14(1).gif"></td>
+		</tr>
+		<tr>
+			<td><img src="emot_files\15(1).gif"></td>
+			<td><img src="emot_files\16(1).gif"></td>
+			<td><img src="emot_files\17(1).gif"></td>
+			<td><img src="emot_files\18(1).gif"></td>
+			<td><img src="emot_files\19(1).gif"></td>
+			<td><img src="emot_files\20(1).gif"></td>
+			<td></td>
+		</tr>
+		<tr></tr>
+	</tbody>
+</table>
+</body>
+</html>

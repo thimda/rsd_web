@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="true" controlwidgetopeStatus="true" enabled="false" id="ds_funcnode" lazyLoad="false" voMeta="nc.uap.lfw.stylemgr.vo.UwFuncNodeVO">
+                <Fields>
+                    <Field dataType="String" field="pk_funcnode" id="pk_funcnode" isPrimaryKey="false" nullAble="true" precision="0" text="pk_funcnode">
+                    </Field>
+                    <Field dataType="String" field="funcnodename" id="funcnodename" isPrimaryKey="false" nullAble="true" precision="0" text="funcnodename">
+                    </Field>
+                    <Field dataType="String" field="pk_parent" id="pk_parent" isPrimaryKey="false" nullAble="true" precision="0" text="pk_parent">
+                    </Field>
+                    <Field dataType="String" field="url" id="url" isPrimaryKey="false" nullAble="true" precision="0" text="url">
+                    </Field>
+                    <Field dataType="String" field="pageid" id="pageid" isPrimaryKey="false" nullAble="true" precision="0" text="pageid">
+                    </Field>
+                    <Field dataType="String" field="funcnodedesc" id="funcnodedesc" isPrimaryKey="false" nullAble="true" precision="0" text="funcnodedesc">
+                    </Field>
+                    <Field dataType="Integer" field="dr" id="dr" isPrimaryKey="false" nullAble="true" precision="0" text="dr">
+                    </Field>
+                    <Field dataType="UFDate" field="ts" id="ts" isPrimaryKey="false" nullAble="true" precision="0" text="ts">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_funcnode" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value></Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_funcnode" type="ds_current_page">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value></Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <GridComp dataset="ds_funcnode" editable="true" enabled="true" height="100%" id="grid_funcnode" left="0" multiSelect="false" pagenationTop="false" position="relative" showColInfo="false" showHeader="true" showNumCol="false" showSumRow="false" sortable="true" top="0" visible="true" width="100%">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_funcnode" fixedHeader="false" id="pk_funcnode" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="pk_funcnode" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="funcnodename" fixedHeader="false" id="funcnodename" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="funcnodename" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_parent" fixedHeader="false" id="pk_parent" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="pk_parent" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="url" fixedHeader="false" id="url" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="url" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pageid" fixedHeader="false" id="pageid" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="pageid" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="funcnodedesc" fixedHeader="false" id="funcnodedesc" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="funcnodedesc" textAlign="left" visible="true" width="120">
+            </Column>
+        </GridComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

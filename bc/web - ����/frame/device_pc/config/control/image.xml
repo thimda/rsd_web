@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>image</id>
+	<fullname>ui.ctrl.image.ImageComp</fullname>
+	<cssfullname>ui.ctrl.image.image</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.ImageComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIImageComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.ImageSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIImageSeirliazer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCImageCompRender</uirender>
+	<zone>view</zone>
+</plugin>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+        <TextAreaComp editorType="TextArea" enabled="true" focus="false" height="100%" id="output" left="0" position="relative" textAlign="left" textWidth="0" top="0" visible="true" width="100%">
+        </TextAreaComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

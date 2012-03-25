@@ -1,0 +1,10 @@
+.link_div{
+}
+
+.link_div .link_normal {
+}
+
+.link_div .link_over {        
+}
+a:active{font-weight:bold;olor:#2C6596;}
+a:link{color:#2C6596;}

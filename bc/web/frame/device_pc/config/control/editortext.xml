@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>editortext</id>
+	<fullname>ui.ctrl.text.EditorComp,ui.editor.ckeditor</fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.EditorComp</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.EditorCompSerializer</serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+	<compress>false</compress>
+</plugin>

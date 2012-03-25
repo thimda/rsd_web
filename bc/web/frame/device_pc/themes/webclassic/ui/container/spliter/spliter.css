@@ -1,0 +1,80 @@
+.spliter_div 
+{
+}
+
+.spliter_div .spliter_div1 {        
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+.spliter_div .spliter_div2 {       
+    position:absolute;
+}
+
+.spliter_div .spliter_bar_h
+{
+	position:absolute;
+	width:5px;
+	background-color: white;
+	border:1px outset gray;
+}
+
+.spliter_div .spliter_bar_v
+{
+	position:absolute;
+	height:3px;
+	background-color: #CDDDEE;
+}
+
+.spliter_div .spliter_bar_h_hide
+{
+	position:absolute;
+	background:transparent;
+	width:3px;
+}
+
+.spliter_div .spliter_bar_v_hide
+{
+	position:absolute;
+	background:transparent;
+	height:3px;
+}
+
+.spliter_div .spliter_bar_onetouch
+{
+	position:absolute;
+	height:3px;
+	background-color:#CDDDEE;
+}
+
+.spliter_div .spliter_dragdiv{
+	position:absolute;
+	left:0px;  
+}
+
+.spliter_div .spliter_flow_div {       
+    position:absolute;
+    right:0px;
+	width:220px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/spliter/images/right_panel_bg.png') repeat;
+}
+
+.spliter_div .spliter_btn{
+	position:absolute;
+	right:15px;
+	top:50%;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/spliter/images/arrow.png') no-repeat center center;
+	width:45px;
+	height:45px;
+	cursor:pointer;
+}
+
+.spliter_div .spliter_feel_div{
+	position:absolute;
+	right:0px;
+	top:0px;
+	width:60px;
+	height:100%;
+}
+

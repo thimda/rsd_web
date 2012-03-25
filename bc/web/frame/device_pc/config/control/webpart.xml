@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>webpart</id>
+	<fullname>ui.ctrl.webpart.HtmlContentComp</fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.WebPartComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIPartComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.WebpartSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIButtonSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCPartCompRender</uirender>
+	<zone>view</zone>
+</plugin>

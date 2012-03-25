@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget controllerClazz="a.ChartviewControl" dialog="false" id="main" refId="main" sourcePackage="bcu/src/test/">
+    <PlugoutDescs>
+    </PlugoutDescs>
+    <PluginDescs>
+    </PluginDescs>
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

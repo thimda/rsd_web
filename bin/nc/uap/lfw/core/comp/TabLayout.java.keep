@@ -1,0 +1,189 @@
+package nc.uap.lfw.core.comp;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import nc.uap.lfw.core.comp.ctx.BaseContext;
+import nc.uap.lfw.core.comp.ctx.TabContext;
+import nc.uap.lfw.core.event.conf.JsListenerConf;
+import nc.uap.lfw.core.event.conf.TabListener;
+import nc.uap.lfw.core.exception.LfwRuntimeException;
+//import net.sourceforge.retroweaver.harmony.runtime.java.lang.Deprecated;
+
+/**
+ * Tab控件配置
+ *
+ *	废弃，使用UITabComp
+ */
+@Deprecated
+public class TabLayout extends WebComponent {
+	
+	private static final long serialVersionUID = -3972504625546912753L;
+	
+	private int currentIndex = 0;
+	private List<TabItem> itemList = new ArrayList<TabItem>();
+	//设置是否一个tab 隐藏（nc行为）
+	private boolean oneTabHide = false;
+	
+	public TabLayout() {
+		super();
+	}
+	
+	public TabLayout(String id) {
+		super(id);
+	}
+	
+	public TabItem getCurrentItem() {
+		return itemList.get(currentIndex);
+	}
+	/**
+	 * 根据设定的当前Tab Name返回index，查找不到返回 -1.如果没有指定，则认为是第一个
+	 * @return
+	 */
+	public int getCurrentIndex()
+	{
+		return currentIndex;
+	}
+	
+	public int getItemIndex(String tab)
+	{
+		for (int i = 0; i < itemList.size(); i++) {
+			if(itemList.get(i).getId().equals(tab))
+				return i;
+		}
+		return -1;
+	}
+	
+	public List<TabItem> getItemList() {
+		return itemList;
+	}
+	public void setItemList(List<TabItem> itemList) {
+		this.itemList = itemList;
+		if(itemList != null && itemList.size() > 0){
+			Iterator<TabItem> it = itemList.iterator();
+			while(it.hasNext()){
+				TabItem item = it.next();
+				item.setTabLayout(this);
+			}
+		}
+		
+	}
+	
+	public void addTabItem(TabItem item)
+	{
+		itemList.add(item);
+		item.setTabLayout(this);
+	}
+	
+	public TabItem getItem(int index)
+	{
+		return itemList.get(index);
+	}
+	
+	public TabItem getItem(String id)
+	{
+		for (int i = 0; i < itemList.size(); i++) {
+			if(itemList.get(i).getId().equals(id))
+				return itemList.get(i);
+		}
+		return null;
+	}
+	
+	public Object clone()
+	{
+		TabLayout tab = (TabLayout) super.clone();
+		if(this.itemList != null)
+		{
+			tab.itemList = new ArrayList<TabItem>();
+			Iterator<TabItem> it = this.itemList.iterator();
+			while(it.hasNext())
+				tab.addTabItem((TabItem) it.next().clone());
+		}
+		return tab;
+	}
+	public boolean isOneTabHide() {
+		return oneTabHide;
+	}
+	public void setOneTabHide(boolean oneTabHide) {
+		if (this.oneTabHide != oneTabHide){
+			this.oneTabHide = oneTabHide;
+			setCtxChanged(true);
+		}
+	}
+	
+	public void mergeProperties(WebElement ele) {
+		throw new LfwRuntimeException("not implemented");
+	}
+
+	@Override
+	public BaseContext getContext() {
+		TabContext ctx = new TabContext();
+		ctx.setId(getId());
+		ctx.setCurrentIndex(this.getCurrentIndex());
+		ctx.setOneTabHide(this.isOneTabHide());
+		int size = getItemList().size();
+		String[] ids = new String[size];
+		String[] names = new String[size];
+		boolean[] enables = new boolean[size];
+		boolean[] visibles = new boolean[size];
+		boolean[] showIcons = new boolean[size];
+		Iterator<TabItem> it = getItemList().iterator();
+		int i = 0;
+		while(it.hasNext()){
+			TabItem item = it.next();
+			ids[i] = item.getId();
+			names[i] = item.getText();
+			enables[i] = !item.isDisabled();
+			showIcons[i] = item.isShowCloseIcon();
+			visibles[i] = item.isVisible();
+			i++;
+		}
+		
+		ctx.setTabItemIds(ids);
+		ctx.setTabItemTexts(names);
+		ctx.setTabItemEnables(enables);
+		ctx.setShowCloseIcons(showIcons);
+		ctx.setTabItemVisibles(visibles);
+		
+		return ctx;
+	}
+
+	@Override
+	public void setContext(BaseContext ctx) {
+		TabContext tabCtx = (TabContext) ctx;
+		setId(tabCtx.getId());
+		setCurrentIndex(tabCtx.getCurrentIndex());
+		this.setOneTabHide(tabCtx.isOneTabHide());
+		String[] ids = tabCtx.getTabItemIds();
+		String[] names = tabCtx.getTabItemTexts();
+		boolean[] enables = tabCtx.getTabItemEnables();
+		boolean[] visibles = tabCtx.getTabItemVisibles();
+		boolean[] showIcons = tabCtx.getShowCloseIcons();
+		for (int i = 0; i < ids.length; i++) {
+			TabItem item = new TabItem();
+			item.setId(ids[i]);
+			item.setText(names[i]);
+			item.setDisabled(!enables[i]);
+			item.setShowCloseIcon(showIcons[i]);
+			item.setVisible(visibles[i]);
+			this.addTabItem(item);
+		}
+		setCtxChanged(false);
+		super.setContext(ctx);
+	}
+
+	public void setCurrentIndex(int currentIndex) {
+		if (this.currentIndex != currentIndex) {
+			this.currentIndex = currentIndex;
+			setCtxChanged(true);
+		}
+	}
+
+	@Override
+	public List<Class<? extends JsListenerConf>> createAcceptListeners() {
+		List<Class<? extends JsListenerConf>> list = new ArrayList<Class<? extends JsListenerConf>>();
+		list.add(TabListener.class);
+		return list;
+	}
+}

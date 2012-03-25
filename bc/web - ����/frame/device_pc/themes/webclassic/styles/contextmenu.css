@@ -1,0 +1,151 @@
+.contextmenu_div
+{
+	overflow: hidden;
+	border-style:solid;
+    border-width:1px;
+    border-color:#6E8098;
+    /*padding:1px;*/
+    padding-top: 1px;
+    padding-bottom: 1px;
+	background-color:#ffffff;
+}
+
+.menuitem_div
+{
+	border-width:0px;
+}
+
+.menuitem_div .right_div
+{
+	position:relative;
+	float: right;
+	height: 100%;
+	width: 8px;
+	display: inline;
+	background-color:#FFF;
+}
+
+.menuitem_div .right_div_on
+{
+	position:relative;
+	float: right;
+	height: 100%;
+	width: 8px;
+	display: inline;
+	background-color:#e5ebcc;
+}
+
+.menuitem_div .contextmenu_item_div
+{
+	border-width:0px;
+	background:#ffffff;
+}
+
+.menuitem_div .contextmenu_item_div_off
+{
+	border-width:0px;
+	background-color:#ffffff;
+}
+
+.menuitem_div .contextmenu_item_div_on
+{
+	border-style:solid;
+    border-width:1px;
+    border-color:#6E8098;
+    background-color:#ffffff;
+}
+
+.menuitem_div .contextmenu_item_left_div_off
+{
+    width:22px;
+    height:100%;
+	background-color:#E6E6E6;
+	
+	position:relative;
+	float:left;
+}
+
+.menuitem_div .contextmenu_item_left_div_on
+{
+    width:22px;
+    height:100%;
+	background-color:#e5ebcc;
+	cursor: default;
+	
+	position:relative;
+	float:left;
+}
+
+.menuitem_div .contextmenu_item_caption_off 
+{
+	color: #233C5D;
+	background: #FAFAFA;
+	padding-top:4px;
+	font-family: arial;
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-moz-binding: url('../images/ff/ellipsis.xml#ellipsis');
+	white-space: nowrap;
+	
+	position:relative;
+	float:left;
+	width: auto;
+	height: 100%;
+}
+
+.menuitem_div .contextmenu_item_caption_on 
+{
+	color:#233C5D;
+	background: #e5ebcc;
+	padding-top:4px;
+	font-family: arial;
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-moz-binding: url('../images/ff/ellipsis.xml#ellipsis');
+	white-space: nowrap;
+	cursor: default;
+	
+	position:relative;
+	float:left;
+	width: auto;
+	height: 100%;
+}
+
+.menuitem_div .contextmenu_item_caption_banned
+{
+	color: gray;
+	background-color:#FAFAFA;
+	padding-top:4px;
+	font-family: arial;
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-moz-binding: url('../images/ff/ellipsis.xml#ellipsis');
+	white-space: nowrap;
+	
+	position: relative;
+	float: left;
+	width: auto;
+	height: 100%;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.menuitem_div_SEP_HEIGHT
+{
+	height:10px;
+}
+/********************定义JS所需静态常量   end ***********************/
+
+.menuitem_div .contextmenu_sep_caption
+{
+	color: #233C5D;
+	background: #FAFAFA;
+	overflow: hidden;
+	background: url('../images/menuitem/sep.gif') repeat-x;
+	position:relative;
+	float:left;
+	width: auto;
+	height: 100%;
+}

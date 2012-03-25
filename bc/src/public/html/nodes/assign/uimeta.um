@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+    <BorderLayout>
+        <BorderPanel position="center">
+            <Widget id="main">
+            </Widget>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

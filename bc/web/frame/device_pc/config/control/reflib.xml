@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>reflib</id>
+	<fullname>ui.ctrl.ref.refscript,ui.ctrl.ref.reftree,ui.ctrl.ref.refgrid,ui.ctrl.ref.refgridtree</fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

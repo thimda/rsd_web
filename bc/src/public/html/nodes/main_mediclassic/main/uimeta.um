@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+    <BorderLayout>
+        <BorderPanel position="center">
+            <FlowvLayout autoFill="0" id="null" widgetId="null">
+                <FlowvPanel height="30">
+                    <ToolBarComp id="head" widgetId="main"></ToolBarComp>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel>
+                            <ToolBarComp id="shortcut_toolbar" widgetId="main">
+                            </ToolBarComp>
+                        </FlowhPanel>
+                        <FlowhPanel width="110">
+                            <ToolBarComp id="btn_toolbar" widgetId="main">
+                            </ToolBarComp>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

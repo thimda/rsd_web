@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" id="main" refId="main">
+    <PlugoutDescs>
+    </PlugoutDescs>
+    <PluginDescs>
+    </PluginDescs>
+    <Models>
+        <Datasets>
+            <DatasetRelations>
+                <DatasetRelation detailDataset="ds_template" detailForeignKey="pk_funcnode" id="ds_funcnode_ds_template" masterDataset="ds_funcnode" masterKeyField="pk_funcnode">
+                </DatasetRelation>
+            </DatasetRelations>
+            <Dataset controloperatorStatus="true" controlwidgetopeStatus="true" enabled="false" id="ds_template" lazyLoad="true" voMeta="nc.uap.lfw.stylemgr.vo.UwTemplateVO">
+                <Fields>
+                    <Field dataType="String" field="pk_template" id="pk_template" nullAble="true" precision="0" primaryKey="true" text="pk_template">
+                    </Field>
+                    <Field dataType="String" field="templatename" id="templatename" nullAble="true" precision="0" primaryKey="false" text="templatename">
+                    </Field>
+                    <Field dataType="String" field="windowid" id="windowid" nullAble="true" precision="0" primaryKey="false" text="windowid">
+                    </Field>
+                    <Field dataType="UFBoolean" field="isactive" id="isactive" nullAble="true" precision="0" primaryKey="false" text="isactive">
+                    </Field>
+                    <Field dataType="String" field="appid" id="appid" nullAble="true" precision="0" primaryKey="false" text="appid">
+                    </Field>
+                    <Field dataType="Integer" field="priority" id="priority" nullAble="true" precision="0" primaryKey="false" text="priority">
+                    </Field>
+                    <Field dataType="String" field="pk_group" id="pk_group" nullAble="true" precision="0" primaryKey="false" text="pk_group">
+                    </Field>
+                    <Field dataType="String" field="pk_funcnode" id="pk_funcnode" nullAble="true" precision="0" primaryKey="false" text="pk_funcnode">
+                    </Field>
+                    <Field dataType="Integer" field="dr" id="dr" nullAble="true" precision="0" primaryKey="false" text="dr">
+                    </Field>
+                    <Field dataType="UFDate" field="ts" id="ts" nullAble="true" precision="0" primaryKey="false" text="ts">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="loadDsListener" serverClazz="nc.uap.lfw.core.event.deft.DefaultDatasetServerListener">
+                        <Events>
+                            <Event async="true" name="onBeforeRowSelect" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_template" type="ds_current_line">
+                                        </Dataset>
+                                        <Dataset id="ds_funcnode" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dsIndexEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_template" type="ds_current_line">
+                                        </Dataset>
+                                        <Dataset id="ds_funcnode" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_template" type="ds_current_line">
+                                        </Dataset>
+                                        <Dataset id="ds_funcnode" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="true" enabled="false" id="ds_funcnode" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" id="id" nullAble="true" primaryKey="false" text="id">
+                    </Field>
+                    <Field dataType="String" id="title" nullAble="true" primaryKey="false" text="title">
+                    </Field>
+                    <Field dataType="String" id="pk_funcnode" nullAble="true" primaryKey="false" text="pk_funcnode">
+                    </Field>
+                    <Field dataType="String" id="pk_parent" nullAble="true" primaryKey="false" text="pk_parent">
+                    </Field>
+                    <Field dataType="String" id="pk_group" nullAble="true" primaryKey="false" text="pk_group">
+                    </Field>
+                    <Field dataType="String" id="url" nullAble="true" primaryKey="false" text="url">
+                    </Field>
+                    <Field dataType="String" id="i18nname" nullAble="true" primaryKey="false" text="i18nname">
+                    </Field>
+                    <Field dataType="String" id="windowId" nullAble="true" primaryKey="false" text="windowId">
+                    </Field>
+                    <Field dataType="String" id="appId" nullAble="true" primaryKey="false" text="appId">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="loadfuncnodDsListener" serverClazz="nc.uap.lfw.pa.paMgr.PaFuncNodeDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_funcnode" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_funcnode" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <GridComp dataset="ds_template" editable="true" enabled="true" id="grid_template" multiSelect="false" pagenationTop="false" showColInfo="false" showHeader="true" showNumCol="false" showSumRow="false" sortable="true" visible="true">
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_template" fixedHeader="false" id="pk_template" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="模板主键" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="templatename" fixedHeader="false" id="templatename" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="模板名称" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="windowid" fixedHeader="false" id="windowid" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="window的id" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="UFBoolean" editable="true" editorType="CheckBox" field="isactive" fixedHeader="false" id="isactive" imageOnly="false" nullAble="true" renderType="BooleanRender" sortable="true" sumCol="false" text="是否激活" textAlign="center" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="appid" fixedHeader="false" id="appid" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="app的id" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="Integer" editable="true" editorType="IntegerText" field="priority" fixedHeader="false" id="priority" imageOnly="false" nullAble="true" renderType="IntegerRender" sortable="true" sumCol="false" text="优先级" textAlign="right" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_group" fixedHeader="false" id="pk_group" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="集团主键" textAlign="left" visible="true" width="120">
+            </Column>
+            <Column autoExpand="false" dataType="String" editable="true" editorType="StringText" field="pk_funcnode" fixedHeader="false" id="pk_funcnode" imageOnly="false" nullAble="true" renderType="DefaultRender" sortable="true" sumCol="false" text="节点主键" textAlign="left" visible="true" width="120">
+            </Column>
+        </GridComp>
+        <TreeViewComp dragEnable="false" enabled="true" id="tree_funcnode" rootOpen="true" visible="true" withCheckBox="false" withRoot="true">
+            <RecursiveTreeLevel dataset="ds_funcnode" id="level1" labelFields="id,title" masterKeyField="pk_funcnode" recursiveKeyField="pk_funcnode" recursivePKeyField="pk_parent">
+            </RecursiveTreeLevel>
+        </TreeViewComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

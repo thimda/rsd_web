@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <FlowvLayout autoFill="0" id="flowv1">
+        <FlowvPanel height="30" id="fvpanel1">
+            <Menubar id="menu_template">
+            </Menubar>
+        </FlowvPanel>
+        <FlowvPanel id="fvpanel2">
+            <Widget id="main">
+            </Widget>
+        </FlowvPanel>    
+    </FlowvLayout>
+</UIMeta>

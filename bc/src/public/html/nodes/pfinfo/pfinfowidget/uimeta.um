@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta>
+    <BorderLayout>
+        <BorderPanel position="center">
+            <FlowvLayout autoFill="1" >
+                <FlowvPanel height="26">
+                    <FlowhLayout>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                        <FlowhPanel width="100">
+                            <Label id="flowHistoryLabel" widgetId="pfinfowidget">
+                            </Label>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel height="150">
+                    <Border bottomWidth="1" leftWidth="1" rightWidth="1" topWidth="1" width="1">
+                        <BorderTrue>
+                            <GridComp id="flowHistoryGrid" widgetId="pfinfowidget">
+                            </GridComp>
+                        </BorderTrue>
+                    </Border>
+                </FlowvPanel>
+                <FlowvPanel height="250">
+                    <Image id="wfimage" widgetId="pfinfowidget">
+                    </Image>
+                </FlowvPanel>
+                <FlowvPanel height="40">
+                    <FlowhLayout>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                        <FlowhPanel width="100">
+                            <Button id="closebutton" widgetId="pfinfowidget">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

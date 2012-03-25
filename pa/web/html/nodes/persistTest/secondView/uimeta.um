@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <FlowhLayout id="flowh1" widgetId="secondView">
+        <FlowhPanel id="flowh02" widgetId="secondView">
+            <Button id="newButton" widgetId="secondView">
+            </Button>
+        </FlowhPanel>
+        <FlowhPanel id="flowh03" widgetId="secondView">
+        </FlowhPanel>
+    </FlowhLayout>
+</UIMeta>

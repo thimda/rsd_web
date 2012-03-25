@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Strict//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>超级链接属性</title>
+<meta http-equiv=Content-Type content="text/html; charset=GB2312">
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<link href="pop.css" type=text/css rel=stylesheet>
+<script src='../../script/basic/BrowserSniffer.js'></script>
+<script src='../../script/basic/EventUtil.js'></script>
+<script>
+	var URLParams = new Object();
+	var aParams = document.location.search.substr(1).split('&');
+	for (i=0; i < aParams.length; i++) {
+		var aParam = aParams[i].split('=');
+		URLParams[aParam[0]] = aParam[1];
+	}
+	var sAction = URLParams['action'];
+	var oRange = null;
+	var oRange2 = null
+	var rangeText = null;
+	var rangeHtmlText = null;
+	var sType;
+	var oSel;
+	var sUrl = "http://";
+	var sProtocol = "http://";
+	var sTarget = "";
+
+	if (IS_IE) {
+		switch (sAction) {	
+			case "other":
+				sUrl = dialogArguments.objLink.Href;
+				sTarget = dialogArguments.objLink.Target;
+				sProtocol = getProtocol(sUrl);
+				break;
+			default:
+				if(!dialogArguments.$oblog_selection){
+					var editorOwner = dialogArguments.$editorWindow;
+					dialogArguments.$oblog_selection = editorOwner.document.selection;					
+				}
+				oRange = dialogArguments.$oblog_selection.createRange().duplicate();
+				oRange2	= dialogArguments.EditorComp.oRangeBak(oRange);						
+				sType = dialogArguments.$oblog_selection.type;
+				oRange.select();
+				if (sType == "Control") {
+					oSel = oRange(0).parentNode;
+				}else{
+					oSel = oRange.parentElement();
+				}
+			
+				if (oSel.tagName.toUpperCase() == "A"){
+					sTarget = oSel.target;
+					sUrl = oSel.getAttribute("href",2);
+					sProtocol = getProtocol(sUrl);
+				}
+				break;
+		}
+	} else {  
+		//TODO guoweic
+	}
+
+	// 从地址取协议
+	function getProtocol(url) {
+		var re=/(.+:\/*)(.*)/gi;
+		return url.replace(re,"$1");
+	}
+	
+	// 改变协议
+	function changeProtocol(index) {
+		sProtocol=document.getElementById("d_protocol").options[index].value;
+		sUrl = document.getElementById("d_url").value;
+		var re = /(.+:\/*)/gi;
+		sUrl = sUrl.replace(re, "");
+		document.getElementById("d_url").value = sProtocol + sUrl;
+	}
+
+	// 初始值
+	function InitDocument() {
+		SearchSelectValue(document.getElementById("d_protocol"), sProtocol.toLowerCase());
+		SearchSelectValue(document.getElementById("d_target"), sTarget.toLowerCase());
+		getAnchors();
+		document.getElementById("d_url").value = sUrl;
+	}
+
+	// 取所有的锚
+	function getAnchors() {
+		var oD_anchor = document.getElementById("d_anchor");
+		oD_anchor.options.length = 1;
+		var allLinks;
+		if(dialogArguments.$editorWindow.document){
+			allLinks = dialogArguments.$editorWindow.document.body.getElementsByTagName("A");
+		}else{
+			allLinks = dialogArguments.EditorComp.iframe.contentWindow.document.body.getElementsByTagName("A");
+		}
+		for (i=0; i < allLinks.length; i++) {
+			if (allLinks[i].href.toUpperCase() == "") {
+				oD_anchor.options[oD_anchor.options.length] = new Option(allLinks[i].name,"#"+allLinks[i].name);
+			}
+		}
+	}
+
+	// 搜索下拉框值与指定值匹配，并选择匹配项
+	function SearchSelectValue(o_Select, s_Value) {
+		for (var i=0;i<o_Select.length;i++){
+			if (o_Select.options[i].value == s_Value) {
+				o_Select.selectedIndex = i;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+</script>
+
+<script>
+
+	function createLink(text,sUrl,sTarget){
+		return "<a href='"+sUrl+"' target='"+sTarget+"'>"+text+"</a>"
+	}
+	
+	function okFunc() {
+		
+		sUrl = document.getElementById("d_url").value;
+		var oD_protocol = document.getElementById("d_protocol");
+		var oD_target = document.getElementById("d_target");
+		sProtocol = oD_protocol.options[oD_protocol.selectedIndex].value;
+		sTarget = oD_target.options[oD_target.selectedIndex].value;
+		if (sUrl != "") {
+			switch (sAction) {
+			case "other":
+				break;
+			default:
+				if (IS_IE) {
+					if(oRange == null){
+						if(!dialogArguments.$oblog_selection){
+							var editorOwner = dialogArguments.$editorWindow;
+							dialogArguments.$oblog_selection = editorOwner.document.selection;
+						}
+						oRange = dialogArguments.$oblog_selection.createRange();
+						oRange2	= dialogArguments.EditorComp.oRangeBak(oRange);	
+					}
+					//选择区域与备份的选择区域是否相同，若不相同，则启用备份的选择区域进行矫正
+					//因为刚开始获得选择区域正确，但是后来执行插入链接后，选择区域发生了变化，此处
+					//对其进行还原
+					if(oRange.text != oRange2.text){	
+						oRange = dialogArguments.$editorWindow.document.body.createTextRange();
+						var flag = false;
+						while(true){
+							flag = oRange.findText(oRange2.text);
+							if(flag){
+								if(dialogArguments.EditorComp.isRangeEqual(oRange,oRange2)){
+									oRange.select();
+									break;
+								}else{
+									oRange.collapse(false);
+								}
+							}else{
+								flag = false;
+								break;
+							}
+						}						
+					}
+					oRange.execCommand("CreateLink", false, sUrl);
+					if (sType == "Control") {
+						oSel = oRange(0).parentNode;
+					} else {
+						oSel = oRange.parentElement();
+					}
+					if(oSel){
+						if(oSel.tagName && oSel.tagName.toUpperCase() == "A"){
+							if (sTarget != "") {
+								oSel.target = sTarget;
+							} else {
+								oSel.removeAttribute("target");
+							}
+						}else{
+							var childNodes = oSel.childNodes;
+							if(childNodes){
+								var length = childNodes.length;
+								for(i=0;i<length;i++){
+									if(childNodes[i].outerHTML && oRange.htmlText.indexOf(childNodes[i].outerHTML) > -1 ){
+										if (sTarget != "") {
+											childNodes[i].target = sTarget;
+										} else {
+											childNodes[i].removeAttribute("target");
+										}
+									}
+								}
+							}
+						}
+						
+					}
+					
+					break;
+				} else {
+					if(dialogArguments.$editorWindow.document){
+						dialogArguments.$editorWindow.document.execCommand("CreateLink", false, sUrl);
+					}else{
+						dialogArguments.EditorComp.iframe.contentWindow.document.execCommand("CreateLink", false, sUrl);
+					}
+					dialogArguments.$editorWindow.focus();
+					
+					//window.returnValue = sUrl;
+					break;
+				}
+			}
+		} else {
+			alert("链接地址不能为空");
+			document.getElementById("d_url").focus();
+			return;
+		}
+		window.close();
+	}
+</script>
+
+<meta content="MSHTML 6.00.3790.2666" name="GENERATOR">
+</head>
+<body bgColor="menu" onload="InitDocument()">
+<BR>
+<table cellSpacing="0" cellPadding="0" align="center" border="0px">
+	<tbody>
+		<tr>
+			<td>
+			<fieldset><legend>超级链接信息</legend>
+			<table cellSpacing="0" cellPadding="0" border="0">
+				<tbody>
+					<tr>
+						<td colSpan="9" height="5px"></td>
+					</tr>
+					<tr>
+						<td width="7px"></td>
+						<td noWrap>链接类型:</td>
+						<td width="5px"></td>
+						<td><select id="d_protocol" style="WIDTH: 72px"
+							onchange="changeProtocol(this.selectedIndex)">
+							<option value="" selected>其它</option>
+							<option value=file: //>file:</option>
+							<option value=ftp: //>ftp:</option>
+							<option value=gopher: //>gopher:</option>
+							<option value=http: //>http:</option>
+							<option value=https: //>https:</option>
+							<option value=mailto:>mailto:</option>
+							<option value=news:>news:</option>
+							<option value=telnet:>telnet:</option>
+							<option value=wais:>wais:</option>
+						</select></td>
+						<td width="40px"></td>
+						<td noWrap>链接目标:</td>
+						<td width="5px"></td>
+						<td><select id="d_target" style="WIDTH: 72px">
+							<option value="" selected>默认(无)</option>
+							<option value="_self">相同框架</option>
+							<option value="_top">整页</option>
+							<option value="_blank">新建窗口</option>
+							<option value="_parent">父框架</option>
+						</select></td>
+						<td width="7px"></td>
+					</tr>
+					<tr>
+						<td colSpan="9" height="5px"></td>
+					</tr>
+					<tr>
+						<td width="7px"></td>
+						<td>链接地址:</td>
+						<td width="5px"></td>
+						<td colSpan="5"><input id="d_url" style="WIDTH: 243px" size="38"></td>
+						<td width="7px"></td>
+					</tr>
+					<tr>
+						<td colSpan="9" height="5px"></td>
+					</tr>
+					<tr>
+						<td width="7px"></td>
+						<td>书签链接:</td>
+						<td width="5px"></td>
+						<td colSpan="5"><select id="d_anchor"
+							onchange="d_url.value=this.options[this.selectedIndex].value">
+							<option value="" selected>默认(无)</option>
+						</select></td>
+						<td width="7px"></td>
+					</tr>
+					<tr>
+						<td colSpan="9" height="5px"></td>
+					</tr>
+				</tbody>
+			</table>
+			</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td height="5"></td>
+		</tr>
+		<tr>
+			<td align="right"><input id="Ok" type="submit" onclick="okFunc();" value="确定">
+			&nbsp;&nbsp; <input onclick="window.close();" type="button" value="取消"></td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

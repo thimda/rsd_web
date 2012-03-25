@@ -1,0 +1,128 @@
+.button_div {
+	background-color:white;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.button_div_BUTTON_HEIGHT
+{
+	height:23px;
+}
+.button_div_BUTTON_LEFT_WIDTH
+{
+	height:4px;
+	line-height:2px;
+}
+.button_div_BUTTON_RIGHT_WIDTH
+{
+	height:4px;
+	line-height:2px;
+}
+/********************定义JS所需静态常量   end ***********************/
+
+.button_div .btn_center {
+	float: left;
+	height:22px;
+}
+
+.button_div .btn_left_off {
+	float: left;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_normal_left.png') no-repeat right center;
+} 
+.button_div .btn_left_on {
+	float: left;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_normal_left.png') no-repeat right center;
+}
+.button_div .btn_left_down {
+	float: left;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_press_left.png') no-repeat right center;
+}
+.button_div .btn_left_focus {
+	float: left;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_highlight_left.png') no-repeat right center;
+}
+.button_div .btn_left_disabled {
+	float: left;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_disable_left.png') no-repeat right center;
+}
+
+.button_div .btn_right_off {
+	float: right;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_normal_right.png') no-repeat left center;
+} 
+.button_div .btn_right_on {
+	float: right;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_normal_right.png') no-repeat left center;
+}
+.button_div .btn_right_down {
+	float: left;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_press_right.png') no-repeat right center;
+}
+.button_div .btn_right_focus {
+	float: left;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_highlight_right.png') no-repeat right center;
+}
+.button_div .btn_right_disabled {
+	float: right;
+	height:23px;
+	width: 4px;
+ 	background:url('../images/button/btn_disable_right.png') no-repeat left center;
+}
+
+.button_div .btn_off {
+	border-style:none;
+	height:23px;
+ 	cursor: pointer;
+ 	padding-top: 0px;
+ 	background:url('../images/button/btn_normal_center.png') repeat-x;
+ 	color:#4d4d4d;
+} 
+.button_div .btn_on {
+	border-style:none;
+	height:23px;
+ 	padding-top: 0px;
+ 	cursor: pointer;
+ 	background:url('../images/button/btn_normal_center.png') repeat-x;
+ 	color:#0086b2;
+}
+.button_div .btn_down {
+	border-style:none;
+	height:23px;
+ 	padding-top: 0px;
+ 	cursor: pointer;
+ 	background:url('../images/button/btn_press_center.png') repeat-x;
+ 	color:#4d4d4d;
+}
+.button_div .btn_focus {
+	border-style:none;
+	height:23px;
+ 	padding-top: 0px;
+ 	cursor: pointer;
+ 	background:url('../images/button/btn_highlight_center.png') repeat-x;
+ 	color:#0086b2;
+}
+.button_div .btn_disabled {
+	border-style:none;
+	height:23px;
+ 	cursor: pointer;
+ 	padding-top: 0px;
+ 	background:url('../images/button/btn_disable.png') repeat-x;
+ 	color:#666666;
+}

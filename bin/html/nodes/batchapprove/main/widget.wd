@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+        </Datasets>
+        <ComboDatas>
+            <StaticComboData id="combo_approvemess">
+                <ComboItem text="批准" value="0">
+                </ComboItem>
+                <ComboItem text="不批准" value="1">
+                </ComboItem>
+                <ComboItem text="驳回到制单人" value="2">
+                </ComboItem>
+            </StaticComboData>
+        </ComboDatas>
+    </Models>
+    <Components>
+        <LabelComp enabled="true" height="22" id="label_appcontents" left="0" position="relative" text="审批内容" top="0" visible="true" width="100">
+        </LabelComp>
+        <LabelComp enabled="true" height="22" id="label_approvemess" left="0" position="relative" text="审批意见" top="0" visible="true" width="100">
+        </LabelComp>
+        <TextAreaComp editorType="TextArea" enabled="true" focus="false" height="100%" id="textarea_appcontents" left="0" position="relative" text="批示内容" textAlign="left" textWidth="0" top="0" visible="true" width="100%">
+        </TextAreaComp>
+        <RadioGroupComp comboDataId="combo_approvemess" editorType="RadioGroup" enabled="true" focus="false" height="22" id="radiogroup_approve" index="0" left="0" position="relative" sepWidth="0" tabIndex="0" textAlign="left" textWidth="0" visible="true" width="100%">
+        </RadioGroupComp>
+        <ButtonComp align="left" enabled="true" height="22" id="button_ok" left="0" position="relative" text="确定" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="okListener" serverClazz="nc.uap.lfw.pfinfoapprove.BatchApproveMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" enabled="true" height="22" id="button_cancel" left="0" position="relative" text="取消" top="0" visible="true" width="60">
+            <Listeners>
+                <MouseListener id="cancleListener" serverClazz="nc.uap.lfw.pfinfoapprove.BatchApproveMouseListener">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

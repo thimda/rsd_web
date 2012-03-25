@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+          
+            <Dataset controloperatorStatus="true" controlwidgetopeStatus="true" enabled="true" id="ds_middle" lazyLoad="true" voMeta="nc.uap.lfw.stylemgr.vo.UwIncrementVO">
+                <Fields>
+                    <Field dataType="String" id="string_ext1" isPrimaryKey="false" nullAble="true" text="string_ext1">
+                    </Field>
+                    <Field dataType="String" id="string_ext2" isPrimaryKey="false" nullAble="true" text="string_ext2">
+                    </Field>
+                    <Field dataType="String" id="string_ext3" isPrimaryKey="false" nullAble="true" text="string_ext3">
+                    </Field>
+                    <Field dataType="String" id="string_ext4" isPrimaryKey="false" nullAble="true" text="string_ext4">
+                    </Field>
+                    <Field dataType="String" id="string_ext5" isPrimaryKey="false" nullAble="true" text="string_ext5">
+                    </Field>
+                    <Field dataType="String" id="string_ext6" isPrimaryKey="false" nullAble="true" text="string_ext6">
+                    </Field>
+                    <Field dataType="String" id="string_ext7" isPrimaryKey="false" nullAble="true" text="string_ext7">
+                    </Field>
+                    <Field dataType="String" id="string_ext8" isPrimaryKey="false" nullAble="true" text="string_ext8">
+                    </Field>
+                    <Field dataType="String" id="string_ext9" isPrimaryKey="false" nullAble="true" text="string_ext9">
+                    </Field>
+                    <Field dataType="String" id="string_ext10" isPrimaryKey="false" nullAble="true" text="string_ext10">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext1" isPrimaryKey="false" nullAble="true" text="integer_ext1">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext2" isPrimaryKey="false" nullAble="true" text="integer_ext2">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext3" isPrimaryKey="false" nullAble="true" text="integer_ext3">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext4" isPrimaryKey="false" nullAble="true" text="integer_ext4">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext5" isPrimaryKey="false" nullAble="true" text="integer_ext5">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext6" isPrimaryKey="false" nullAble="true" text="integer_ext6">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext7" isPrimaryKey="false" nullAble="true" text="integer_ext7">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext8" isPrimaryKey="false" nullAble="true" text="integer_ext8">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext9" isPrimaryKey="false" nullAble="true" text="integer_ext9">
+                    </Field>
+                    <Field dataType="Integer" id="integer_ext10" isPrimaryKey="false" nullAble="true" text="integer_ext10">
+                    </Field>
+                    <Field dataType="String" id="combo_ext1" isPrimaryKey="false" nullAble="true" text="combo_ext1">
+                    </Field>
+                    <Field dataType="String" id="combo_ext2" isPrimaryKey="false" nullAble="true" text="combo_ext2">
+                    </Field>
+                    <Field dataType="String" id="combo_ext3" isPrimaryKey="false" nullAble="true" text="combo_ext3">
+                    </Field>
+                    <Field dataType="String" id="combo_ext4" isPrimaryKey="false" nullAble="true" text="combo_ext4">
+                    </Field>
+                    <Field dataType="String" id="combo_ext5" isPrimaryKey="false" nullAble="true" text="combo_ext5">
+                    </Field>
+                    <Field dataType="String" id="string_ext11" isPrimaryKey="false" nullAble="true" text="string_ext11">
+                    </Field>
+                    <Field dataType="String" id="string_ext12" isPrimaryKey="false" nullAble="true" text="string_ext12">
+                    </Field>
+                    <Field dataType="String" id="string_ext13" isPrimaryKey="false" nullAble="true" text="string_ext13">
+                    </Field>
+                    <Field dataType="String" id="string_ext14" isPrimaryKey="false" nullAble="true" text="string_ext14">
+                    </Field>
+                    <Field dataType="String" id="string_ext15" isPrimaryKey="false" nullAble="true" text="string_ext15">
+                    </Field>
+                    <Field dataType="String" id="string_ext16" isPrimaryKey="false" nullAble="true" text="string_ext16">
+                    </Field>
+                    <Field dataType="String" id="string_ext17" isPrimaryKey="false" nullAble="true" text="string_ext17">
+                    </Field>
+                    <Field dataType="String" id="string_ext18" isPrimaryKey="false" nullAble="true" text="string_ext18">
+                    </Field>
+                    <Field dataType="String" id="string_ext19" isPrimaryKey="false" nullAble="true" text="string_ext19">
+                    </Field>
+                    <Field dataType="String" id="string_ext20" isPrimaryKey="false" nullAble="true" text="string_ext20">
+                    </Field>
+                    <Field dataType="String" id="comptype" isPrimaryKey="false" nullAble="true" text="comptype">
+                    </Field>
+                    <Field dataType="String" id="string_ext21" isPrimaryKey="false" nullAble="true" text="string_ext21">
+                    </Field>
+                    <Field dataType="String" id="combo_ext6" isPrimaryKey="false" nullAble="true" text="combo_ext6">
+                    </Field>
+                    <Field dataType="String" id="combo_ext7" isPrimaryKey="false" nullAble="true" text="combo_ext7">
+                    </Field>
+                    <Field dataType="String" id="combo_ext8" isPrimaryKey="false" nullAble="true" text="combo_ext8">
+                    </Field>
+                    <Field dataType="String" id="combo_ext9" isPrimaryKey="false" nullAble="true" text="combo_ext9">
+                    </Field>
+                    <Field dataType="String" id="combo_ext10" isPrimaryKey="false" nullAble="true" text="combo_ext10">
+                    </Field>
+                    <Field dataType="String" id="combo_ext11" isPrimaryKey="false" nullAble="true" text="combo_ext11">
+                    </Field>
+                    <Field dataType="String" id="combo_ext12" isPrimaryKey="false" nullAble="true" text="combo_ext12">
+                    </Field>
+                    <Field dataType="String" id="combo_ext13" isPrimaryKey="false" nullAble="true" text="combo_ext13">
+                    </Field>
+                    <Field dataType="String" id="combo_ext14" isPrimaryKey="false" nullAble="true" text="combo_ext14">
+                    </Field>
+                    <Field dataType="String" id="combo_ext15" isPrimaryKey="false" nullAble="true" text="combo_ext15">
+                    </Field>
+                    <Field dataType="String" id="string_ext22" isPrimaryKey="false" nullAble="true" text="string_ext22">
+                    </Field>
+                    <Field dataType="String" id="string_ext23" isPrimaryKey="false" nullAble="true" text="string_ext23">
+                    </Field>
+                    <Field dataType="String" id="string_ext24" isPrimaryKey="false" nullAble="true" text="string_ext24">
+                    </Field>
+                    <Field dataType="String" id="string_ext25" isPrimaryKey="false" nullAble="true" text="string_ext25">
+                    </Field>
+                    <Field dataType="String" id="ds_state" isPrimaryKey="false" nullAble="true" text="ds_state">
+                    </Field>
+                    <Field dataType="String" id="parentid" isPrimaryKey="false" nullAble="true" text="parentid">
+                    </Field>
+                    <Field dataType="String" id="childid" isPrimaryKey="false" nullAble="true" text="childid">
+                    </Field>
+                    <Field dataType="String" id="childtype" isPrimaryKey="false" nullAble="true" text="childtype">
+                    </Field>
+                    <Field dataType="String" id="string_ext26" isPrimaryKey="false" nullAble="true" text="string_ext26">
+                    </Field>
+                    <Field dataType="String" id="string_ext27" isPrimaryKey="false" nullAble="true" text="string_ext27">
+                    </Field>
+                    <Field dataType="String" id="string_ext28" isPrimaryKey="false" nullAble="true" text="string_ext28">
+                    </Field>
+                    <Field dataType="String" id="string_ext29" isPrimaryKey="false" nullAble="true" text="string_ext29">
+                    </Field>
+                    <Field dataType="String" id="string_ext30" isPrimaryKey="false" nullAble="true" text="string_ext30">
+                    </Field>
+                </Fields>
+              
+                <Events>
+			<Event async="true" name="onAfterDataChange" methodName="onAfterDataChange" onserver="true" controllerClazz="nc.uap.lfw.pa.setting.PaSettingDsListener" jsEventClaszz="nc.uap.lfw.core.event.conf.DatasetListener">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="settings" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_middle" type="ds_all_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataChangeEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <!--<Event async="true" name="onAfterRowSelect" methodName="onAfterRowSelect" onserver="true" controllerClazz="nc.uap.lfw.pa.setting.PaSettingDsListener" jsEventClaszz="nc.uap.lfw.core.event.conf.DatasetListener">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="settings" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_middle" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+			    -->
+                        </Events>
+                   
+            </Dataset>
+        </Datasets>
+        <ComboDatas>
+            <StaticComboData id="align">
+                <ComboItem text="left" value="left">
+                </ComboItem>
+                <ComboItem text="center" value="center">
+                </ComboItem>
+                <ComboItem text="right" value="right">
+                </ComboItem>
+            </StaticComboData>
+            <StaticComboData id="combo_ext10">
+            </StaticComboData>
+            <StaticComboData id="combo_ext9">
+            </StaticComboData>
+            <StaticComboData id="combo_ext15">
+            </StaticComboData>
+            <StaticComboData id="combo_ext8">
+            </StaticComboData>
+            <StaticComboData id="positions">
+                <ComboItem text="relative" value="relative">
+                </ComboItem>
+                <ComboItem text="positive" value="positive">
+                </ComboItem>
+            </StaticComboData>
+            <StaticComboData id="combo_ext11">
+            </StaticComboData>
+            <StaticComboData id="combo_ext12">
+            </StaticComboData>
+            <StaticComboData id="combo_ext13">
+            </StaticComboData>
+            <StaticComboData id="combo_ext14">
+            </StaticComboData>
+            <StaticComboData id="combo_ext1">
+            </StaticComboData>
+            <StaticComboData id="combo_ext3">
+            </StaticComboData>
+            <StaticComboData id="combo_ext2">
+            </StaticComboData>
+            <StaticComboData id="combo_ext5">
+            </StaticComboData>
+            <StaticComboData id="combo_ext4">
+            </StaticComboData>
+            <StaticComboData id="combo_ext7">
+            </StaticComboData>
+            <StaticComboData id="combo_ext6">
+            </StaticComboData>
+        </ComboDatas>
+    </Models>
+    <Components>
+        <FormComp columnCount="1" dataset="ds_middle" enabled="true" id="adhintform" labelMinWidth="0" left="0" position="relative" renderHiddenEle="false" renderType="1" rowHeight="22" top="0" visible="true" width="100%">
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext1" height="22" id="string_ext1" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext1" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext2" height="22" id="string_ext2" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext2" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext3" height="22" id="string_ext3" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext3" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext4" height="22" id="string_ext4" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext4" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext5" height="22" id="string_ext5" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext5" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext6" height="22" id="string_ext6" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext6" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext7" height="22" id="string_ext7" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext7" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext8" height="22" id="string_ext8" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext8" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext9" height="22" id="string_ext9" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext9" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext10" height="22" id="string_ext10" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext10" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext11" height="22" id="string_ext11" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext11" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext12" height="22" id="string_ext12" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext12" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext13" height="22" id="string_ext13" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext13" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext14" height="22" id="string_ext14" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext14" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext15" height="22" id="string_ext15" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext15" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext1" height="22" id="integer_ext1" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext1" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext2" height="22" id="integer_ext2" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext2" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext3" height="22" id="integer_ext3" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext3" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext4" height="22" id="integer_ext4" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext4" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext5" height="22" id="integer_ext5" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext5" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext6" height="22" id="integer_ext6" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext6" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext7" height="22" id="integer_ext7" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext7" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext8" height="22" id="integer_ext8" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext8" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext9" height="22" id="integer_ext9" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext9" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="IntegerText" enabled="true" field="integer_ext10" height="22" id="integer_ext10" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="integer_ext10" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext1" height="22" id="combo_ext1" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext1" rowSpan="1" selectOnly="true" text="combo_ext1" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext2" height="22" id="combo_ext2" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext2" rowSpan="1" selectOnly="true" text="combo_ext2" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext3" height="22" id="combo_ext3" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext3" rowSpan="1" selectOnly="true" text="combo_ext3" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext4" height="22" id="combo_ext4" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext4" rowSpan="1" selectOnly="true" text="combo_ext4" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext5" height="22" id="combo_ext5" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext5" rowSpan="1" selectOnly="true" text="combo_ext5" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext6" height="22" id="combo_ext6" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext6" rowSpan="1" selectOnly="true" text="combo_ext6" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext7" height="22" id="combo_ext7" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext7" rowSpan="1" selectOnly="true" text="combo_ext7" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext8" height="22" id="combo_ext8" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext8" rowSpan="1" selectOnly="true" text="combo_ext8" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext9" height="22" id="combo_ext9" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext9" rowSpan="1" selectOnly="true" text="combo_ext9" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext10" height="22" id="combo_ext10" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext10" rowSpan="1" selectOnly="true" text="combo_ext10" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext11" height="22" id="combo_ext11" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext11" rowSpan="1" selectOnly="true" text="combo_ext11" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext12" height="22" id="combo_ext12" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext12" rowSpan="1" selectOnly="true" text="combo_ext12" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext13" height="22" id="combo_ext13" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext13" rowSpan="1" selectOnly="true" text="combo_ext13" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext14" height="22" id="combo_ext14" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext14" rowSpan="1" selectOnly="true" text="combo_ext14" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="ComboBox" enabled="true" field="combo_ext15" height="22" id="combo_ext15" imageOnly="false" nextLine="false" nullAble="true" refComboData="combo_ext15" rowSpan="1" selectOnly="true" text="combo_ext15" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext16" height="22" id="string_ext16" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext16" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext17" height="22" id="string_ext17" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext17" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext18" height="22" id="string_ext18" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext18" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext19" height="22" id="string_ext19" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext19" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext20" height="22" id="string_ext20" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext20" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext21" height="22" id="string_ext21" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext21" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="comptype" height="22" id="comptype" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="comptype" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext22" height="22" id="string_ext22" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext22" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext23" height="22" id="string_ext23" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext23" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext24" height="22" id="string_ext24" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext24" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext25" height="22" id="string_ext25" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext25" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="ds_state" height="22" id="ds_state" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="ds_state" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="parentid" height="22" id="parentid" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="parentid" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="childid" height="22" id="childid" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="childid" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="childtype" height="22" id="childtype" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="childtype" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext26" height="22" id="string_ext26" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext26" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext27" height="22" id="string_ext27" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext27" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext28" height="22" id="string_ext28" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext28" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext29" height="22" id="string_ext29" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext29" visible="true" width="">
+            </Element>
+            <Element attachNext="false" colSpan="1" editable="true" editorType="StringText" enabled="true" field="string_ext30" height="22" id="string_ext30" imageOnly="false" nextLine="false" nullAble="true" rowSpan="1" selectOnly="true" text="string_ext30" visible="true" width="">
+            </Element>
+        </FormComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

@@ -1,0 +1,28 @@
+.list_div
+{
+	border: 1px solid #83a5eb;
+}
+
+.list_option_div
+{
+	
+}
+
+.list_option_text
+{
+	font-family: arial;
+	font-size: 12px;
+	color: #83a5eb;
+}
+.option_click
+{
+	background-color:#83a5eb;
+}
+.list_new
+{
+	background-color:#FFFFFF;
+}
+.option_unsel
+{
+	background-color:#FFFFFF;
+}

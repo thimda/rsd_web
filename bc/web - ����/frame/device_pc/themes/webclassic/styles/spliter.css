@@ -1,0 +1,55 @@
+.spliter_div 
+{
+}
+
+.spliter_div .spliter_div1 {        
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+.spliter_div .spliter_div2 {       
+    position:absolute;
+}
+
+.spliter_div .spliter_bar_h
+{
+	position:absolute;
+	width:5px;
+	background-color: white;
+	border:1px outset gray;
+}
+
+.spliter_div .spliter_bar_v
+{
+	position:absolute;
+	height:3px;
+	background-color: #CDDDEE;
+}
+
+.spliter_div .spliter_bar_h_hide
+{
+	position:absolute;
+	background:transparent;
+	width:3px;
+}
+
+.spliter_div .spliter_bar_v_hide
+{
+	position:absolute;
+	background:transparent;
+	height:3px;
+}
+
+.spliter_div .spliter_bar_onetouch
+{
+	position:absolute;
+	height:3px;
+	background-color:#CDDDEE;
+}
+
+.spliter_div .spliter_dragdiv{
+	position:absolute;
+	left:0px;  
+}
+

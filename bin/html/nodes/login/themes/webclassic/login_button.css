@@ -1,0 +1,117 @@
+.login_button_div {
+	background-color: transparent;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.login_button_div_BUTTON_HEIGHT
+{
+	height:25px;
+}
+.login_button_div_BUTTON_LEFT_WIDTH
+{
+	height:0px;
+}
+.login_button_div_BUTTON_RIGHT_WIDTH
+{
+	height:0px;
+}
+/********************定义JS所需静态常量   end ***********************/
+
+.login_button_div .btn_center {
+	float: left;
+	height:25px;
+}
+
+.login_button_div .btn_left_disabled {
+	float: left;
+	height:22px;
+	width: 0px;
+}
+
+.login_button_div .btn_right_off {
+	float: right;
+	height:22px;
+	width: 0px;
+} 
+.login_button_div .btn_right_on {
+	float: right;
+	height:22px;
+ 
+}
+.login_button_div .btn_right_disabled {
+	float: right;
+	height:22px;
+	width: 0px;
+}
+
+.login_button_div .btn_off {
+	border-style:none;
+	background-image: url(images/login-1.png);
+	_background-image :none;
+	_FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/login-1.png);
+	border: 0px;
+	height:25px;
+	font-size: 12px;
+	color: #FFF;
+	font-weight: bold;
+	background-color: transparent;
+	cursor: pointer;
+} 
+.login_button_div .btn_on {
+	border-style:none;
+	background-image: url(images/login.png);
+	_background-image :none;
+	_FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/login.png);
+	border: 0px;
+	height:25px;
+	font-size: 12px;
+	color: #FFF;
+	font-weight: bold;
+	background-color: transparent;
+	cursor: pointer;
+}
+.login_button_div .btn_disabled {
+	border-style:none;
+	height:25px;
+ 	padding-right: 2px;
+ 	padding-left: 2px;
+ 	cursor: pointer;
+ 	padding-top: 0px;
+}
+.text_div {
+	background-color:#FFFFFF;
+	height:18px;
+	border-top:1px solid #7198B5;
+	border-left:1px solid #7198B5;
+	border-bottom:1px solid #C2D0D9;
+	border-right:1px solid #C2D0D9;
+}
+
+/**修复IE6下PNG图片透明问题**/
+.pngFix{
+	_FILTER: expression('progid:DXImageTransform.Microsoft.AlphaImageLoader(src='+this.src+')');
+	_width:1px;
+	_height:1px;
+}
+.foot_opacity{
+	position:absolute;
+	width:100%;
+	height: 49px;
+	background-color:#dceaef;
+	filter:alpha(opacity=70);
+	-moz-opacity:0.70;
+	-khtml-opacity: 0.70;
+	opacity: 0.70;
+
+}
+.copyright_div{
+	position:absolute;
+	text-align: center;
+	width:100%;
+	display: block;
+	height: 49px;
+	vertical-align: middle; 
+	line-height: 49px;
+	color:#79b9a7;
+	font-size:12px;
+}

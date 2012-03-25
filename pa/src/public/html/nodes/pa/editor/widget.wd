@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+        <IframeComp enabled="true" height="100%" id="iframe_tmp" left="0" position="relative" scrolling="" top="0" visible="true" width="100%">
+        </IframeComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

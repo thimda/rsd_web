@@ -1,0 +1,27 @@
+.checkbox_div
+{
+	
+}
+
+.checkbox_div .checkbox_label
+{
+	font-size: 11pt;
+    font-family: Arial;
+    color: black;
+    text-align: left;
+    font-weight: normal;   
+}
+
+.checkbox_div .checkbox_box
+{
+	background-color: transparent;
+}
+
+.checkbox_div .text_input
+{
+	
+}
+
+.checkbox_div .inactive_bgcolor{
+    background-color:#F0F1F0;
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd" version="2.0">
+	<description>Multi Lang EL EXPRESSION</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>ELFunctionTaglib</short-name>
+	<uri>http://www.ufida.com/lfwtool</uri>
+	<function>
+		<description>get element info</description>
+		<name>getInfo</name>
+		<function-class>nc.uap.lfw.core.util.LfwElTool</function-class>
+		<function-signature>java.lang.String getInfo(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>get theme element</description>
+		<name>getThemeElement</name>
+		<function-class>nc.uap.lfw.core.util.LfwElTool</function-class>
+		<function-signature>java.lang.String themeElement(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<description>get background</description>
+		<name>background</name>
+		<function-class>nc.uap.lfw.core.util.LfwElTool</function-class>
+		<function-signature>java.lang.String getBackground()</function-signature>
+	</function>
+	<function>
+		<description>get component background</description>
+		<name>compBackground</name>
+		<function-class>nc.uap.lfw.core.util.LfwElTool</function-class>
+		<function-signature>java.lang.String getCompBackground()</function-signature>
+	</function>
+	<function>
+		<description>get border color</description>
+		<name>borderColor</name>
+		<function-class>nc.uap.lfw.core.util.LfwElTool</function-class>
+		<function-signature>java.lang.String getBorderColor()</function-signature>
+	</function>
+	<function>
+		<description>get spliter zone border color</description>
+		<name>spliterBorderColor</name>
+		<function-class>nc.uap.lfw.core.util.LfwElTool</function-class>
+		<function-signature>java.lang.String getSpliterZoneBorderColor()</function-signature>
+	</function>
+</taglib>

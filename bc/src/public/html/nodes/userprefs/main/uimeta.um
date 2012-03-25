@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+    <BorderLayout>
+        <BorderPanel position="center">
+            <Border bottomWidth="" leftWidth="" rightWidth="" topWidth="" width="1">
+                <BorderTrue>
+                    <FlowvLayout autoFill="0">
+                        <FlowvPanel>
+                            <TreeViewComp id="userprefstree" widgetId="main">
+                            </TreeViewComp>
+                        </FlowvPanel>
+                        <FlowvPanel height="40">
+                            <FlowhLayout>
+                                <FlowhPanel>
+                                    <FlowhLayout>
+                                        <FlowhPanel>
+                                        </FlowhPanel>
+                                        <FlowhPanel>
+                                            <Button id="okbutton" widgetId="main">
+                                            </Button>
+                                        </FlowhPanel>
+                                        <FlowhPanel>
+                                        </FlowhPanel>
+                                    </FlowhLayout>
+                                </FlowhPanel>
+                            </FlowhLayout>
+                        </FlowvPanel>
+                    </FlowvLayout>
+                </BorderTrue>
+            </Border>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

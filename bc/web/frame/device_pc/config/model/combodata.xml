@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>combodata</id>
+	<fullname></fullname>
+	<cssfullname></cssfullname>
+	<dependences>viewmodel</dependences>
+	<javaclazz>nc.uap.lfw.core.combodata.ComboData</javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.ComboDataSeiralizer</serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

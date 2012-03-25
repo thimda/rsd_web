@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Theme id="webclassic" name="Classic主题" i18nName="">
+	<Element id="LFW_BORDER_COLOR" value="#7F9DB9"/>
+	<Element id="LFW_BACKGROUND_COLOR" value="#FFFFFF"/>
+	<Element id="LFW_COMP_BACKGROUND_COLOR" value="#7A8A99"/>
+	<Element id="LFW_SPLITER_BORDER_COLOR" value="#A2A9BD"/>
+</Theme>

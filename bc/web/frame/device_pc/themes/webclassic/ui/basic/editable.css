@@ -1,0 +1,63 @@
+.editable{
+	border-color:black;
+	border-width:1px;
+	border-style:dotted;
+	margin:0px;
+	padding:0px;
+}
+
+.editable_vPanel{
+	border-bottom:1px dotted black;
+	margin:0px;
+	padding:0px;
+}
+
+.editable_hPanel{
+	border-right:1px dotted black;
+	margin:0px;
+	padding:0px;
+}
+
+.editable_parent{
+	border:1px dotted black;
+	margin:0px;
+	padding:0px;
+}
+
+
+.edit_component{
+	border: 0 none;
+}
+
+.edit_component_selected{
+	border:1px dotted red;
+	margin:0px;
+	padding:0px;	
+}
+
+.edit_selected{
+	border:1px dotted red;
+	margin:0px;
+	padding:1px;	
+}
+
+
+
+.edit_gridLayout_cell{
+	border-bottom : 1px dotted;
+	border-right : 1px dotted;
+	border-top : 0px;
+	border-left : 0px;
+}
+
+.edit_gridLayout{
+	border: 1px dotted;
+	margin:0px;
+	padding:0px;
+}
+
+.edit_gridLayout_selected{
+	border: 1px dotted red;
+	margin:0px;
+	padding:1px;
+}

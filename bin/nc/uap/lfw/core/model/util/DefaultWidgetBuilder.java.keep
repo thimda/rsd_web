@@ -1,0 +1,410 @@
+package nc.uap.lfw.core.model.util;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+import nc.bs.framework.common.RuntimeEnv;
+import nc.uap.lfw.core.AbstractPresentPlugin;
+import nc.uap.lfw.core.ContextResourceUtil;
+import nc.uap.lfw.core.LfwRuntimeEnvironment;
+import nc.uap.lfw.core.cache.ILfwCache;
+import nc.uap.lfw.core.cache.LfwCacheManager;
+import nc.uap.lfw.core.common.WebConstant;
+import nc.uap.lfw.core.data.Dataset;
+import nc.uap.lfw.core.data.MdDataset;
+import nc.uap.lfw.core.data.PubDataset;
+import nc.uap.lfw.core.exception.LfwParseException;
+import nc.uap.lfw.core.exception.LfwRuntimeException;
+import nc.uap.lfw.core.log.LfwLogger;
+import nc.uap.lfw.core.model.IDatasetBuilder;
+import nc.uap.lfw.core.model.IOtherWidgetBuilder;
+import nc.uap.lfw.core.model.IWidgetBuilder;
+import nc.uap.lfw.core.model.parser.WidgetParser;
+import nc.uap.lfw.core.page.LfwWidget;
+import nc.uap.lfw.core.page.ViewModels;
+import nc.uap.lfw.core.page.config.DatasetConf;
+import nc.uap.lfw.core.page.config.LfwWidgetConf;
+import nc.uap.lfw.core.page.config.PageMetaConfig;
+import nc.uap.lfw.core.page.manager.PoolObjectManager;
+import nc.uap.lfw.core.refnode.RefNode;
+import nc.uap.lfw.core.util.PageNodeUtil;
+import nc.uap.lfw.util.LfwClassUtil;
+
+public class DefaultWidgetBuilder implements IWidgetBuilder {
+	private static final String CONF_POSTFIX = "_$conf";
+	private static final String WIDGET_PRE = "WIDGET_";
+	
+	/**
+	 * 构建片段
+	 */
+	public LfwWidget buildWidget(PageMetaConfig pm, LfwWidgetConf conf, String metaId, Map<String, Object> paramMap) {
+		LfwWidget widget = parseWidget(pm, conf, metaId, paramMap);
+		widget.setId(conf.getId());
+		return widget;
+	}
+	
+	/**
+	 * 获取配置文件的路径
+	 * @param conf
+	 * @param projectPath
+	 * @param metaId
+	 * @return
+	 */
+	protected String getLfwWidgetConfPath(LfwWidgetConf conf, String metaId, Map<String, Object> paramMap)
+	{
+		String confPath = "/html/nodes/";
+		if(LfwRuntimeEnvironment.isFromLfw())
+			confPath = WebConstant.TEMP_FROM_LFW_PATH + confPath;
+		
+		String pagePath = PageNodeUtil.getPageNodeDir(metaId);
+		if(pagePath == null)
+			pagePath = metaId.replaceAll("\\.", "/");
+		confPath += (pagePath + "/" + conf.getRefId().replaceAll("\\.", "/"));
+		confPath += "/widget.wd";
+		return confPath;
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected LfwWidget parseWidget(PageMetaConfig pm, LfwWidgetConf conf, String metaId, Map<String, Object> paramMap) {
+		//不区分数据源的缓存
+		ILfwCache cache = LfwCacheManager.getStrongCache(WebConstant.LFW_CORE_CACHE, null);
+		Map<String, LfwWidget> widgetPool = (Map<String, LfwWidget>) cache.get(WebConstant.WIDGET_POOL_KEY);
+		
+		//创建缓存池
+		if(widgetPool == null){
+			widgetPool = new HashMap<String, LfwWidget>();
+			cache.put(WebConstant.WIDGET_POOL_KEY, widgetPool);
+		}
+		
+		//获得配置缓存key
+		String cacheId = metaId + "_$_" + conf.getId();
+		
+		LfwWidget widget = null;
+		//处理来自公共池中片段
+		if(conf.getRefId() != null && conf.getRefId().startsWith("..")){
+			//如果片段来自公共池需要合并。
+			String refWidgetID = conf.getRefId().substring(3);
+			conf.setSourcePackage(conf.getRefId());
+//			conf.setRefId(conf.getId());
+//			LfwWidget sourceWidget = parseConfigWidget(pm, conf, metaId, cacheId, widgetPool, paramMap);
+			widget = fetchWidgetFromPool(refWidgetID);
+			widget.setRefId(conf.getRefId());
+		}
+		else
+			//从配置文件中获取最新片段
+			widget = parseConfigWidget(pm, conf, metaId, cacheId, widgetPool, paramMap);
+		//从真正来源获取片段
+		return parseSourceWidget(pm, paramMap, widgetPool, cacheId, widget);
+	}
+
+	/**
+	 * 从真正的来源获取片段信息，比如NC模板
+	 * @param pm
+	 * @param paramMap
+	 * @param widgetPool
+	 * @param cacheId
+	 * @param confWidget
+	 * @return
+	 */
+	private LfwWidget parseSourceWidget(PageMetaConfig pm, Map<String, Object> paramMap, Map<String, LfwWidget> widgetPool, String cacheId, LfwWidget confWidget) {
+		try{
+			LfwWidget resultWidget = null;
+			if(confWidget.getFrom() != null && !confWidget.getFrom().equals("")){
+				//获取真正来源构建起
+				IOtherWidgetBuilder builder = getOtherWidgetBuilder(confWidget.getFrom(), paramMap);
+				//构建真正的片段内容
+				LfwWidget otherWidget = builder.buildWidget(pm, confWidget, paramMap);
+				if(!LfwRuntimeEnvironment.getMode().equals(WebConstant.MODE_DESIGN)){
+					//从缓存中获取上次已经融合的配置片段及模板片段
+					LfwWidget widgetSaved = widgetPool.get(cacheId);
+					//检查缓存的片段的最终TS与最终
+					if(widgetSaved != null){
+						String ts = (String) widgetSaved.getExtendAttributeValue(LfwWidget.UNIQUE_TS);
+						String confTs = (String) confWidget.getExtendAttributeValue(LfwWidget.MODIFY_TS);
+						String sourceTs = (String) otherWidget.getExtendAttributeValue(LfwWidget.MODIFY_TS);
+						String newestTs = getNewestTs(confTs, sourceTs);
+						if(compareTs(ts, newestTs)){
+							String uniId = (String) otherWidget.getExtendAttributeValue(LfwWidget.UNIQUE_ID);
+							String sUniId = (String) widgetSaved.getExtendAttributeValue(LfwWidget.UNIQUE_ID);
+//							if(uniId == null && sUniId == null)
+//								return widgetSaved;
+							if(uniId != null && sUniId != null &&  uniId.equals(sUniId))
+								return widgetSaved;
+						}
+						otherWidget.setExtendAttribute(LfwWidget.UNIQUE_TS, newestTs);
+					}
+				}
+				
+				LfwWidgetMergeUtil.merge(otherWidget, confWidget);
+				resultWidget = otherWidget;
+				//confWidget.setExtendAttribute(LfwWidget.MODIFY_TS, otherWidget.getExtendAttributeValue(LfwWidget.MODIFY_TS));
+			}
+			else
+				resultWidget = confWidget;
+			if(confWidget.getViewModels() != null){
+				processViewModels(resultWidget, paramMap);
+			}
+			if(confWidget.getViewComponents() != null){
+				processViewComponents(resultWidget, paramMap);
+			}
+			widgetPool.put(cacheId, resultWidget);
+			return (LfwWidget) resultWidget.clone();
+		}
+		catch(Exception e){
+			LfwLogger.error(e.getMessage(), e);
+			if(e instanceof LfwRuntimeException)
+				throw new LfwRuntimeException(e);
+			throw new LfwParseException("解析Widget出现问题!" + e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * 从公共池中获取片段
+	 * @param confWidget
+	 * @return
+	 */
+	public LfwWidget fetchWidgetFromPool(String refWidgetID) {
+		LfwWidget resultWidget =  PoolObjectManager.getWidget(refWidgetID);
+//		if(resultWidget != null){
+//			resultWidget = (LfwWidget)resultWidget.clone();
+//			if(widget != null){
+//				resultWidget.setId(widget.getId());
+////				resultWidget.setHeight(widget.getHeight());
+////				resultWidget.setWidth(widget.getWidth());
+//				resultWidget.setDialog(widget.isDialog());
+//			}
+//		}
+		return resultWidget;
+	}
+
+	private boolean compareTs(String ts, String newestTs) {
+		return ts.compareTo(newestTs) == 0;
+	}
+
+	private String getNewestTs(String confTs, String sourceTs) {
+		if(confTs == null)
+			return sourceTs;
+		if(sourceTs == null)
+			return confTs;
+		return confTs.compareTo(sourceTs) > 0 ? confTs : sourceTs;
+	}
+	
+	
+	/**
+	 * 获取配置文件中的片段
+	 * @param pm
+	 * @param conf
+	 * @param metaId
+	 * @param cacheId
+	 * @param widgetPool
+	 * @param paramMap
+	 * @return
+	 * @throws LfwParseException
+	 */
+	private LfwWidget parseConfigWidget(PageMetaConfig pm, LfwWidgetConf conf,
+			String metaId, String cacheId, Map<String, LfwWidget> widgetPool, Map<String, Object> paramMap) throws LfwParseException{
+		
+		//从缓存中获取片段
+		LfwWidget widget = (LfwWidget) widgetPool.get(cacheId + CONF_POSTFIX);
+		
+		//获取片段配置路径
+		String configPath = getLfwWidgetConfPath(conf, metaId, paramMap);
+		
+		//获取上次修改时间
+		String lastModified = getLastModified(configPath);
+		
+		//如果片段第一次初始化或者已经更新
+		if(widget == null || !lastModified.equals(widget.getExtendAttributeValue(LfwWidget.MODIFY_TS))){
+			widget = fetchWidget(conf, metaId, cacheId, widgetPool, configPath, lastModified);
+			widgetPool.put(cacheId + CONF_POSTFIX, widget);
+		}
+		else
+			widget = (LfwWidget) widget.clone();
+		return widget;
+	}
+
+	/**
+	 * 获取最新版本片段
+	 * @param conf
+	 * @param metaId
+	 * @param cacheId
+	 * @param widgetPool
+	 * @param configPath
+	 * @param lastModified
+	 * @return
+	 */
+	private LfwWidget fetchWidget(LfwWidgetConf conf, String metaId,
+			String cacheId, Map<String, LfwWidget> widgetPool, String configPath, String lastModified) {
+		InputStream input = null;
+		LfwWidget widget = null;
+		try{
+			input = getWidgetInput(configPath);
+			if(input == null){
+				if(configPath.contains("/html/nodes")){
+					configPath = configPath.substring(0, configPath.indexOf("/html/nodes"));
+					configPath = RuntimeEnv.getInstance().getNCHome() + "/hotwebs/" + configPath.substring(configPath.lastIndexOf("/") + 1);
+					configPath = configPath + "/pagemeta/public/widgetpool/" + conf.getSourcePackage().substring(3) + "/" + "widget.wd";
+				}else{
+					configPath = "/pagemeta/public/widgetpool/" + conf.getSourcePackage().substring(3) + "/" + "widget.wd";
+				}
+				input = getWidgetInput(configPath);
+			}
+			if(input == null){
+				throw new LfwParseException("没有找到Widget配置，metaId=" + metaId + ",widgetId=" + conf.getId());
+			}
+			widget = WidgetParser.parse(input, null);
+			widget.setId(conf.getId());
+			if(!lastModified.equals("-1")){
+				widget.setExtendAttribute(LfwWidget.MODIFY_TS, lastModified);
+				widget.setExtendAttribute(LfwWidget.UNIQUE_TS, lastModified);
+			}
+			
+			int endIndex = configPath.length() - "/widget.wd".length();
+			widget.setFoldPath(configPath.substring(0, endIndex));
+			widgetPool.put(cacheId + CONF_POSTFIX, (LfwWidget) widget.clone());
+		}
+		catch(Exception e){
+			LfwLogger.error(e.getMessage(), e);
+			if(e instanceof LfwRuntimeException)
+				throw (LfwRuntimeException)e;
+			throw new LfwParseException("解析Widget出现问题!" + e.getMessage(), e);
+		}
+		finally {
+			try{
+				if(input != null)
+					input.close();
+			}
+			catch(Exception e){
+				LfwLogger.error(e.getMessage(), e);
+			}
+		}
+		return widget;
+	}
+
+	/**
+	 * 获取配置文件的最后修改时间，如果是设计态，则始终返回 -1
+	 * @param widget
+	 * @param configPath
+	 * @return
+	 */
+	protected String getLastModified(String configPath) {
+		String lastModified = null;
+		if(LfwRuntimeEnvironment.getMode().equals(WebConstant.MODE_DESIGN))
+			lastModified = "-1";
+		else
+			lastModified = ContextResourceUtil.getFile(configPath).lastModified() + "";
+		
+		return lastModified;
+	}
+	
+	private void processViewComponents(LfwWidget widget, Map<String, Object> paramMap) {
+	}
+
+	/**
+	 * 获取其它片段构建器
+	 * @param refId
+	 * @return
+	 */
+	private IOtherWidgetBuilder getOtherWidgetBuilder(String refId, Map<String, Object> paramMap) {
+		String clazz = null;
+		String id = WIDGET_PRE + refId;
+		if(LfwRuntimeEnvironment.getMode().equals(WebConstant.MODE_DESIGN))
+			clazz = LfwRuntimeEnvironment.getServerConfig().get(id);
+		else{
+			//取本页面的加载类
+			String pageId = (String) paramMap.get(WebConstant.PAGE_ID_KEY);
+			String pagePath = PageNodeUtil.getPageNodeDir(pageId);
+			String nodePath = "html/nodes/" + pagePath + "/node.properties";
+			Properties props = AbstractPresentPlugin.loadNodePropertie(nodePath);
+			if(props != null){
+				clazz = props.getProperty(id);
+			}
+			if(clazz == null)
+				clazz = LfwRuntimeEnvironment.getModelServerConfig().getConfigValue(id);
+		}
+		if(clazz == null)
+			clazz = LfwRuntimeEnvironment.getServerConfig().get(id);
+		if(clazz == null || clazz.equals(""))
+			throw new LfwParseException("没有找到对应的配置，Widget refid:" + refId);
+		return (IOtherWidgetBuilder) LfwClassUtil.newInstance(clazz);
+	}
+
+	/**
+	 * 获取widget文件的输入流
+	 * @param confPath
+	 * @return
+	 */
+	protected InputStream getWidgetInput(String confPath)
+	{
+		return ContextResourceUtil.getResourceAsStream(confPath);
+	}
+	
+	private void processViewModels(LfwWidget widget, Map<String, Object> paramMap) {
+		ViewModels viewModel = widget.getViewModels();
+		Dataset[] dss = viewModel.getDatasets();
+		Map<String, Dataset> refDsMap = new HashMap<String, Dataset>();
+		for (int i = 0; i < dss.length; i++) {
+			Dataset ds = dss[i];
+			if(ds instanceof DatasetConf){
+				DatasetConf conf = (DatasetConf)ds;
+				Dataset genDs = null;
+				if(conf.getFrom() != null && !conf.getFrom().equals("")){
+					//IDatasetBuilder builder = getOtherDatasetBuidler(conf.getFrom());
+				}
+				else
+					genDs = conf;
+				
+				if(genDs != null)
+					refDsMap.put(genDs.getId(), genDs);
+			}
+			// 引用来自公共池的ds
+			else if(ds instanceof PubDataset)
+			{
+				PubDataset pubDs = (PubDataset)ds;
+				PubDataset genDs = null;
+				if(LfwRuntimeEnvironment.getMode().equals(WebConstant.MODE_DESIGN)){
+					//设计态，解除依赖
+					IDatasetBuilder builder = (IDatasetBuilder) LfwClassUtil.newInstance("nc.uap.lfw.design.impl.RefDatasetBuilderForDesign");
+					genDs = (PubDataset) builder.buildDataset(pubDs, paramMap);
+				}
+				else
+					genDs = (PubDataset) new DefaultRefDatasetBuilder().buildDataset(pubDs, null);
+				
+				if(genDs != null)
+					refDsMap.put(genDs.getId(), genDs);
+			}
+			else if(ds instanceof MdDataset)
+			{
+				//new DefaultMdDatasetBuilder().buildDataset(ds, null);
+				refDsMap.put(ds.getId(), ds);
+			}
+		}
+		
+		//非设计态
+		if(!LfwRuntimeEnvironment.getMode().equals(WebConstant.MODE_DESIGN)){
+			//如果是离线模式，强制参照为使用客户端数据
+			if(LfwRuntimeEnvironment.isClientMode()){
+				RefNode[] rfs = (RefNode[]) widget.getViewModels().getRefNodes();
+				for (int i = 0; i < rfs.length; i++) {
+					rfs[i].setClientCache(true);
+				}
+			}
+		}
+		viewModel.addDatasets(refDsMap);	
+	}
+
+
+	/**
+	 * 获取引用的公共ds
+	 * @param dsId
+	 * @return
+	 */
+	protected Dataset getRefDataset(String dsId, String projectPath)
+	{
+		return PoolObjectManager.getDataset(dsId);
+	}
+
+
+}

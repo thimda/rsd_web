@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+    <BorderLayout>
+        <BorderPanel position="center">
+            <FlowvLayout autoFill="0">
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel>
+                            <FlowvLayout autoFill="0">
+                                <FlowvPanel>
+                                    <FlowvLayout autoFill="0">
+                                        <FlowvPanel height="10">
+                                        </FlowvPanel>
+                                        <FlowvPanel>
+                                            <FlowhLayout>
+                                                <FlowhPanel width="10">
+                                                </FlowhPanel>
+                                                <FlowhPanel width="70">
+                                                    <Label id="oldlabel" widgetId="password">
+                                                    </Label>
+                                                </FlowhPanel>
+                                                <FlowhPanel>
+                                                    <TextField id="oldpassword" type="1" widgetId="password">
+                                                    </TextField>
+                                                </FlowhPanel>
+                                                <FlowhPanel width="10">
+                                                </FlowhPanel>
+                                            </FlowhLayout>
+                                        </FlowvPanel>
+                                    </FlowvLayout>
+                                </FlowvPanel>
+                            </FlowvLayout>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel>
+                            <FlowhLayout>
+                                <FlowhPanel width="10">
+                                </FlowhPanel>
+                                <FlowhPanel width="70">
+                                    <Label id="newlable" widgetId="password">
+                                    </Label>
+                                </FlowhPanel>
+                                <FlowhPanel>
+                                    <TextField id="newpassword" type="1" widgetId="password">
+                                    </TextField>
+                                </FlowhPanel>
+                                <FlowhPanel width="10">
+                                </FlowhPanel>
+                            </FlowhLayout>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel>
+                            <FlowhLayout>
+                                <FlowhPanel width="10">
+                                </FlowhPanel>
+                                <FlowhPanel width="70">
+                                    <Label id="confirmnewlabel" widgetId="password">
+                                    </Label>
+                                </FlowhPanel>
+                                <FlowhPanel>
+                                    <TextField id="confirmnewpassword" type="1" widgetId="password">
+                                    </TextField>
+                                </FlowhPanel>
+                                <FlowhPanel width="10">
+                                </FlowhPanel>
+                            </FlowhLayout>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+                <FlowvPanel>
+                    <FlowhLayout>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                        <FlowhPanel width="100">
+                            <Button id="passokbutton" widgetId="password">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel width="100">
+                            <Button id="passcancelbutton" widgetId="password">
+                            </Button>
+                        </FlowhPanel>
+                        <FlowhPanel>
+                        </FlowhPanel>
+                    </FlowhLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+        </BorderPanel>
+    </BorderLayout>
+</UIMeta>

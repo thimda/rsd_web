@@ -1,0 +1,267 @@
+package nc.uap.lfw.core.model.formular;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import nc.bs.pub.formulaparse.FormulaParse;
+import nc.uap.lfw.core.LfwRuntimeEnvironment;
+import nc.uap.lfw.core.WebContext;
+import nc.uap.lfw.core.WebSession;
+import nc.uap.lfw.core.common.StringDataTypeConst;
+import nc.uap.lfw.core.log.LfwLogger;
+import nc.uap.lfw.core.page.PageMeta;
+import nc.uap.lfw.core.refnode.RefNode;
+import nc.uap.lfw.core.serializer.impl.LfwJsonSerializer;
+import nc.uap.lfw.reference.base.ILfwRefModel;
+import nc.uap.lfw.reference.util.LfwRefUtil;
+import nc.uap.lfw.util.JsURLDecoder;
+import nc.vo.pub.formulaset.VarryVO;
+import nc.vo.pub.lang.UFBoolean;
+import nc.vo.pub.lang.UFDate;
+import nc.vo.pub.lang.UFDateTime;
+import nc.vo.pub.lang.UFDouble;
+import nc.vo.pub.lang.UFTime;
+
+/**
+ * 编辑公式服务
+ * @author dengjt
+ *
+ */
+public class DefaultEditFormularService implements IEditFormularService{
+	private static final long serialVersionUID = 3976703218362359382L;
+	private  transient FormulaParse fp = new FormulaParse();
+	private Map<String,String> dtMap = new HashMap<String,String>();
+	
+	public DefaultEditFormularService() {
+	}
+	
+	 
+	/**
+	 * 执行公式，根据客户端操作的特性，每次仅执行一个公式。
+	 * @param valueMap 包含当前操作行的所有值对。
+	 * @param exp 表达式
+	 * @return 返回执行结果值对。格式（key:key, value:value)
+	 */
+	public Map executeFormular(HashMap valueMap, String exp, HashMap dataTypeMap){
+		initDataType(dataTypeMap);
+		fp.setExpress(exp);
+		VarryVO[] varryVOs = fp.getVarryArray();
+		Map<String, String> resultMap = new HashMap<String, String>();
+		for(VarryVO vo : varryVOs){
+			String[] keys = vo.getVarry();
+			if(keys != null){
+				for(String key : keys){
+					//客户端将.替换成了_$_,所以这边也进行替换取值
+					Object value = valueMap.get(key.replaceAll("\\.", "_$_"));
+					fp.addVariable(key, convertDataType(key, (String) value));
+				}
+			}
+			resultMap.put("formular_key", vo.getFormulaName());
+		}
+		
+		String value = fp.getValue(); 
+		if(value == null || value.equals(""))
+			value = "$NULL$";
+		resultMap.put("formular_value", value);
+		return resultMap;
+	}
+	private Object convertDataType(String key,String value){
+		try{
+			return convertDataType2(value, dtMap.get(key));
+		}catch(Exception e){
+			LfwLogger.error("编辑公式处理时,转换类型有异常: ", e);
+		}
+		return null;
+	}
+	
+	private void initDataType(HashMap dataTypeMap){
+		for(Iterator it = dataTypeMap.keySet().iterator();it.hasNext();){
+			String key = (String) it.next();
+			String value = (String) dataTypeMap.get(key);
+			dtMap.put(key.replaceAll("\\.", "_$_"), value);
+		}
+		
+	}
+	
+	private Object convertDataType2(String value, String dataType)
+	{
+		if(dataType == null || value == null)
+			return value;
+		if(dataType.equals(StringDataTypeConst.STRING)){
+			return value;
+		}else if(dataType.equals(StringDataTypeConst.INTEGER)){
+			return Integer.valueOf((String) value);
+		}
+		else if(dataType.equals(StringDataTypeConst.INT)){
+			 return value.equals("")? 0: Integer.parseInt((String) value);
+		}
+		else if(dataType.equals(StringDataTypeConst.DOUBLE)){
+			return value.equals("")? 0 : Double.parseDouble(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.dOUBLE)){
+			
+		}
+		else if(dataType.equals(StringDataTypeConst.UFDOUBLE)){
+			if(!"".equals(value) && value != null)
+				return new UFDouble(value);
+			else 
+				return null;
+		}
+		else if(dataType.equals(StringDataTypeConst.FLOATE)){
+			return value.equals("")? 0 : Float.parseFloat(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.fLOATE)){
+			
+		}
+		else if(dataType.equals(StringDataTypeConst.BYTE)){
+			return value.equals("")? 0 : Byte.parseByte(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.bYTE)){
+		}
+		else if(dataType.equals(StringDataTypeConst.BOOLEAN)){
+		}
+		else if(dataType.equals(StringDataTypeConst.bOOLEAN)){
+			value = value.toLowerCase();
+		    return value.equals("true")?true:(value.equals("1")?true:(value.equals("y")?true:false));
+		}
+		else if(dataType.equals(StringDataTypeConst.UFBOOLEAN)){
+			UFBoolean uf = UFBoolean.FALSE;
+			if(value.equals("y") || value.equals("1") || value.equals("true"))
+				uf = UFBoolean.TRUE;
+			return uf;
+		}
+		else if(dataType.equals(StringDataTypeConst.DATE)){
+			 return new Date(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.BIGDECIMAL)){
+			 return BigDecimal.valueOf(Double.parseDouble(value));
+		}
+		else if(dataType.equals(StringDataTypeConst.LONG)){
+			 return Long.parseLong(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.lONG)){
+		}
+		else if(dataType.equals(StringDataTypeConst.CHAR)){
+		}
+		else if(dataType.equals(StringDataTypeConst.CHARACTER)){
+			return value.charAt(0);
+		}
+		else if(dataType.equals(StringDataTypeConst.UFDATETIME)){
+			 return new UFDateTime(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.UFDATE)){
+			 return value.equals("")? null: new UFDate(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.UFTIME)){
+			 return UFTime.getValidUFTimeString(value);
+		}
+		else if(dataType.equals(StringDataTypeConst.UFNUMBERFORMAT)){
+		}
+		else if(dataType.equals(StringDataTypeConst.Decimal)){
+		}
+		else if(dataType.equals(StringDataTypeConst.ENTITY)){
+		}
+		else if(dataType.equals(StringDataTypeConst.OBJECT)){
+		}
+		return value;
+	}
+	
+	/**
+	 * 执行验证公式
+	 * @return
+	 */
+	public Map executeVatelitionFormular(String expStr,String valueStr){
+		LfwJsonSerializer instance =  LfwJsonSerializer.getInstance();
+		ArrayList expsList = (ArrayList) instance.fromJsObject(expStr);
+		ArrayList valueMapList = (ArrayList) instance.fromJsObject(valueStr);;
+		
+		for(int i=0;i<valueMapList.size();i++){
+			HashMap valueMap = (HashMap) valueMapList.get(i);
+			for(int k=0;k<expsList.size();k++){
+				String exps = (String) expsList.get(k);
+				String[] expArr = JsURLDecoder.decode(exps,"UTF-8").split(";");
+				for(String exp : expArr){
+					Map<String,String> map = executeFormular(valueMap,exp, null);
+					String value = map.get("formular_value"); 
+					if(value != null && !"$NULL$".equals(value)){
+						return map;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+
+	public String[] matchRefPk(String value, String pageUniqueId, String widgetId, String refNodeId) {
+		WebContext ctx = LfwRuntimeEnvironment.getWebContext();
+		ctx.setPageUniqueId(pageUniqueId);
+		WebSession ws = ctx.getWebSession();
+		PageMeta pageMeta = (PageMeta) ws.getAttribute(WebContext.PAGEMETA_KEY);
+		RefNode rf = pageMeta.getWidget(widgetId).getViewModels().getRefNode(refNodeId);
+		ILfwRefModel rm = LfwRefUtil.getRefModel(rf);
+		String rfStr = rf.getReadFields();
+		String[] rfs = rfStr.split(",");
+		String returnField = null;
+		String pkField = rm.getRefPkField();
+		String codeField = rm.getRefCodeField();
+		String nameField = rm.getRefNameField();
+		int returnIndex = -1;
+		int pkIndex = -1;
+		for (int i = 0; i < rfs.length; i++) {
+			if(!rfs[i].equals(pkField)){
+				if(rfs[i].equals(codeField) || rfs[i].equals(nameField)){
+					returnField = rfs[i];
+					returnIndex = i;
+					break;
+				}
+			}
+			else{
+				pkIndex = i;
+			}
+		}
+		
+//		if(pkIndex == -1 || returnIndex == -1){
+//			throw new LfwRuntimeException("参照必须配置读入主键及编码或者名称字段");
+//		}
+		
+		String wpk = null;
+		String wfield = null;
+		
+		String wfStr = rf.getWriteFields();
+		if(wfStr != null && !wfStr.equals("")){
+			String[] wfs = wfStr.split(",");
+			if(pkIndex != -1)
+				wpk = wfs[pkIndex];
+			if(returnIndex != -1)
+				wfield = wfs[returnIndex];
+		}
+//		if(returnField == null){
+//			returnField = nameField;
+//			returnIndex 
+//		}
+		String[] rt = rm.matchRefPk(value, returnField);
+		if(rt == null){
+			rt = new String[]{null, null};
+		}
+		// 获取读入字段的值
+		List<Object> readFieldValues = rm.getReadFieldValues(value, rfs);
+		
+		String[] result = new String[4 + (readFieldValues == null ? 0 : readFieldValues.size())];
+		result[0] = rt[0];
+		result[1] = rt[1];
+		result[2] = wpk;
+		result[3] = wfield;
+		if (readFieldValues != null) {
+			for (int i = 0, n = readFieldValues.size(); i < n; i++) {
+				result[i + 4] = readFieldValues.get(i) == null ? null : String.valueOf(readFieldValues.get(i));
+			}
+		}
+		return result;
+	}
+}

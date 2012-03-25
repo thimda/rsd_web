@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding='gb2312'?>
+<module name="nc.uap.lfw.PaEJB">
+    <public>  
+    	
+		<component remote="true" singleton="true" tx="CMT">
+		    <interface>nc.uap.lfw.pa.itf.IPaPersistService</interface>
+		    <implementation>nc.uap.lfw.pa.impl.PaPersistServiceImpl</implementation>
+		</component>
+		<component remote="true" singleton="true" tx="CMT">
+		    <interface>nc.uap.lfw.stylemgr.itf.IUwTemplateService</interface>
+		    <implementation>nc.uap.lfw.stylemgr.impl.UwTemplateServiceImpl</implementation>
+		</component>
+	</public>
+    <private>
+    </private>
+</module>

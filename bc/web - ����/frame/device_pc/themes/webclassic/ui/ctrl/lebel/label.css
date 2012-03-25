@@ -1,0 +1,13 @@
+.label_div{
+}
+
+.label_div .label_normal {        
+    font-size: 9pt;
+    font-family: Arial;
+    color: black;
+    text-align: left;
+    font-weight: normal;       
+}
+.label_div .label_inactive{
+	color:#BBBBBB;
+}

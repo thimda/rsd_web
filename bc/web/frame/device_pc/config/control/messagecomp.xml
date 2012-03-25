@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>messagecomp</id>
+	<fullname>ui.ctrl.message.MessageComp</fullname>
+	<cssfullname>ui.ctrl.message.message</cssfullname>
+	<dependences>button</dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

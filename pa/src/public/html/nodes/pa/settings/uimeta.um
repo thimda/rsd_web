@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0" flowmode="false" id="settings_um">
+    <FlowvLayout autoFill="0" id="flowv1">
+        <FlowvPanel id="ffvp2">
+            <TabLayout currentItem="0" id="tab2" oneTabHide="false" widgetId="settings">
+                <TabItem i18nName="" id="item_set" text="属性">
+                    <FormComp id="adhintform" widgetId="settings"></FormComp>
+                </TabItem>
+            </TabLayout>
+        </FlowvPanel>
+    </FlowvLayout>
+</UIMeta>

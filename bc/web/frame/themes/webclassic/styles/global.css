@@ -1,0 +1,56 @@
+*{
+	font-family:simsun;
+	font-size:12px;
+	font-color:#424141;
+}
+
+img{
+	border:0;
+}
+
+.unselectable{
+	-moz-user-select:none;
+	user-select:none;
+	gn:expression(this.onselectstart=function(){return false;});
+}
+body 
+{
+	
+	margin:0px;
+	padding:0px;
+	overflow-y:hidden;
+	SCROLLBAR-FACE-COLOR: #D4D0C8;
+	SCROLLBAR-HIGHLIGHT-COLOR: #FFFFFF;
+	SCROLLBAR-SHADOW-COLOR: #808080;
+	SCROLLBAR-3DLIGHT-COLOR: #FFFFFF;
+	SCROLLBAR-ARROW-COLOR: #000000;
+	SCROLLBAR-DARKSHADOW-COLOR: #FFFFFF;
+}
+
+html {
+	overflow-x: hidden; 
+	overflow-y: hidden;
+	font-size:12px;
+}
+html,body {
+	height:100%;
+}
+
+.gridLayout{
+	border : 0px;
+}
+
+.gridLayout td{
+	border : 0px;
+}
+
+
+
+.table_red{
+	border:1px solid red;
+}
+
+.table_red td{
+	border:1px solid red;
+}
+

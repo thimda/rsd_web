@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="1" jsEditor="0" jsExcel="0" flowmode="false" id="pa_um">
+    <Splitter boundMode="0" divideSize="75" hideBar="false" id="spliter1" inverse="0" oneTouch="false" orientation="h" spliterWidth="4">
+        <SplitterOne>
+            <Widget id="editor">
+            </Widget>
+        </SplitterOne>
+        <SplitterTwo>
+            <Splitter boundMode="0" divideSize="50" hideBar="true" id="spliter2" inverse="0" oneTouch="false" orientation="v" spliterWidth="4">
+                <SplitterOne>
+                    <Widget id="data">
+                    </Widget>
+                </SplitterOne>
+                <SplitterTwo>
+                    <Widget id="settings">
+                    </Widget>
+                </SplitterTwo>
+            </Splitter>
+        </SplitterTwo>
+    </Splitter>
+</UIMeta>

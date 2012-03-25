@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>editor</id>
+	<fullname>ui.ctrl.ButtonComp1</fullname>
+	<cssfullname>ui.ctrl.button1</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.ButtonComp1</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIButton1</uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<zone>view</zone>
+</plugin>

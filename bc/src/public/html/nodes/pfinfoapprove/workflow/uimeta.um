@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0">
+      <FlowvLayout id="flowv1a">
+        <FlowvPanel>
+            <Image id="wfimage" widgetId="workflow">
+            </Image>
+        </FlowvPanel>
+    </FlowvLayout>
+</UIMeta>

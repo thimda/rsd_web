@@ -1,0 +1,62 @@
+.fullcanvas{
+	width:100%;
+	height:39px;
+}
+
+.fullcanvas .leftborder
+{
+	height:39px;
+	width:8px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/canvas/images/bg_left.png') no-repeat;
+}
+
+.fullcanvas .rightborder{
+	height:39px;
+	width:8px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/canvas/images/bg_right.png') no-repeat;
+}
+
+.fullcanvas .centercontent{
+	height:39px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/canvas/images/bg_center.png')  repeat-x;
+}
+
+.leftcanvas{
+	width:100%;
+	height:39px;
+}
+
+.leftcanvas .leftborder{
+	height:39px;
+	width:8px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/canvas/images/bg_left.png') no-repeat;
+}
+
+.leftcanvas .centercontent{
+	height:39px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/canvas/images/bg_center.png') repeat-x;
+}
+
+.leftcanvas .canvas_title{
+	padding-left:10px;
+	padding-top:9px;
+}
+
+.rightcanvas{
+	width:100%;
+	height:39px;
+}
+
+.rightcanvas .rightborder{
+	height:39px;
+	width:8px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/canvas/images/bg_right.png') no-repeat;
+}
+
+.rightcanvas .centercontent{
+	height:39px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/container/canvas/images/bg_center.png')  repeat-x;
+}
+
+.nonecanvas{
+}

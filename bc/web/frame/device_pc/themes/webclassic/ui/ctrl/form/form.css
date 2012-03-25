@@ -1,0 +1,157 @@
+.text_form_div {
+   	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-bottom-color:#A0B3C6;
+	height:18px;
+	background-color: #FFFFFF;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.text_form_div_COMPHEIGHT
+{
+	height:22px;
+}
+
+/********************定义JS所需静态常量   end ***********************/
+
+.text_form_div .text_area {
+	border:1px solid #A0B3C6;
+	overflow:auto;
+	height:18px;
+}
+
+.text_form_div .text_div_inactive {
+   	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-bottom-color:#D4D4D4;
+	height:18px;
+}
+
+.text_form_div .text_button {
+	position:absolute;
+	top:0px;
+	width:16px;
+	height:17px;
+	padding-top:1px;
+}
+
+.text_form_div .text_input
+{
+	/*position:absolute*/;
+	position:relative;
+	border:0px;
+	height:18px;
+	left:0px;
+	background-color: #FFFFFF;
+	/** 禁用ios上的阴影 **/
+	-webkit-appearance:none;
+}
+
+
+.text_form_div .text_input_inactive{
+	position:relative;
+	border:0px;
+	height:18px;
+	left:0px;
+	font-size: 12px;
+	color:#003;
+	background-color: #FFFFFF;
+	/** 禁用ios上的阴影 **/
+	-webkit-appearance:none;
+}
+
+.text_form_div_inactive_bgcolor{
+	background-color: #FFFFFF;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-bottom-color:#D4D4D4;
+}
+
+.text_form_div .input_highlight_center_bg{
+	height:22px;
+	width: 1px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/text/images/input_highlight__center.png') repeat-x;
+ 	float:left;
+}
+
+.text_form_div .input_highlight_left_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/text/images/input_highlight__left.png') no-repeat;
+ 	float:left;
+}
+
+.text_form_div .input_highlight_right_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/text/images/input_highlight__right.png') no-repeat;
+ 	float:left;
+}
+
+.text_form_div .input_normal_center_bg{
+	height:22px;
+	width: 1px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/text/images/input_normal__center.png') repeat-x;
+ 	float:left;
+}
+
+.text_form_div .input_normal_left_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/text/images/input_normal__left.png') no-repeat;
+ 	float:left;
+}
+
+.text_form_div .input_normal_right_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/text/images/input_normal__right.png') no-repeat;
+ 	float:left;
+}
+
+.text_form_div_focus_bgcolor{
+	margin-left: 0px;
+	margin-top: 0px;
+	border:2px solid #76C4DF;
+}
+
+.text_form_div_error_bgcolor{
+	margin-left: 0px;
+	margin-top: 0px;
+	border:2px solid red;
+}
+
+.text_form_div .text_alpha {
+    font-size:8pt;
+    color:black;
+    text-align:left;
+}
+
+.text_form_div .text_integer {
+    font-size:8pt;
+    color:black;
+    text-align:center;
+}
+
+.text_form_div .text_num {
+	font-size:8pt;
+    color:black;
+    text-align:center;
+}
+
+.text_form_div .text_date {
+    font-size:8pt;
+    color:black;
+    text-align:center;
+}
+
+.text_form_div .label_normal {        
+    font-size: 9pt;
+    color: black;
+    text-align: left;
+    font-weight: normal;       
+}
+
+.text_form_div .label_inactive{
+	color:#BBBBBB;
+}

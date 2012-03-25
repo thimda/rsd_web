@@ -1,0 +1,359 @@
+.dialog_div
+{
+	position:absolute;
+}
+
+.dialog_div .dialog_titlebar
+{
+	height:48px;
+	cursor:move;
+	overflow:hidden;
+}
+
+.dialog_div .leftheadborderdiv{
+	width:18px;
+	height:48px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_left_top.png') no-repeat;
+}
+
+.dialog_div .rightheadborderdiv{
+	width:18px;
+	height:48px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_right_top.png') no-repeat;
+}
+
+.dialog_div .centerheaddiv{
+	height:48px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_top_center.png') repeat-x;
+}
+
+.dialog_div .leftbodyborderdiv{
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_left_center.png') repeat-y;
+}
+
+.dialog_div .centerbodydiv{
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_center.png') repeat-x bottom;
+}
+
+.dialog_div .rightbodyborderdiv{
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_right_center.png') repeat-y;
+}
+
+.dialog_div .bottomdiv{
+	height:18px;
+	width:100%;
+}
+
+.dialog_div .leftbottomborderdiv{
+	width:18px;
+	height:18px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_left_bottom.png') no-repeat;
+}
+
+.dialog_div .rightbottomborderdiv{
+	width:18px;
+	height:18px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_right_bottom.png') no-repeat;
+}
+
+.dialog_div .centerbottomdiv{
+	height:18px;
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/dw_bottom_center.png') repeat-x;
+}
+
+
+.dialog_div .closebt_off{
+	width:33px;
+	float:right;
+	height:25px;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/off.png');
+	background-repeat:no-repeat;
+	margin-top:13px;
+	margin-right:10px;
+	cursor:pointer;
+}
+
+.dialog_div .closebt_click{
+	width:33px;
+	float:right;
+	height:25px;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/off_over.png');
+	background-repeat:no-repeat;
+	margin-top:13px;
+	margin-right:10px;
+	cursor:pointer;
+}
+
+.dialog_div .closebt_on{
+	width:33px;
+	float:right;
+	height:25px;
+	background-image:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/dialog/images/off_over.png');
+	background-repeat:no-repeat;
+	margin-top:13px;
+	margin-right:10px;
+	cursor:pointer;
+}
+
+.dialog_div .dialog_title
+{
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 13px;
+	padding-top: 18px;
+	padding-left: 15px;
+	height: 22px;
+	float:left;
+}
+
+.dialog_div .dialog_content
+{
+	height:100%;
+}
+
+.dialog_div .progress_contentdiv{
+	width:100%;
+	height:100%;
+	background:#FFFFFF;
+}
+
+.dialog_div .progress_leftdiv{
+	float:left;
+	width:80px;
+	height:100px;
+	padding-left:10px;
+	padding-top:40px;
+}
+
+.dialog_div .progress_rightdiv{
+	float:left;
+	height:100px;
+	line-height:100px;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+
+
+.dialog_div .confirm_contentdiv{
+	width:100%;
+	height:100px;
+}
+
+.dialog_div .confirm_leftdiv{
+	float:left;
+	width:80px;
+	padding-left:10px;
+	padding-top:35px;
+}
+
+.dialog_div .confirm_rightdiv{
+	float:left;
+	height:100%;
+	line-height:100%;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+
+.dialog_div .confirm_bottomdiv{
+	float:left;
+	height:35px;
+	width:100%;
+}
+
+.dialog_div .confirm_okbtdiv{
+	float:right;
+	width:46%;
+	text-align:right;
+	padding-right:10px;
+	padding-top:10px;
+}
+
+.dialog_div .confirm_cancelbtdiv{
+	float:right;
+	width:46%;
+	text-align:left;
+	padding-left:10px;
+	padding-top:10px;
+}
+
+
+.dialog_div .message_contentdiv{
+	width:100%;
+	height:100px;
+}
+
+.dialog_div .message_leftdiv{
+	float:left;
+	width:80px;
+	padding-left:20px;
+	padding-top:15px;
+}
+
+.dialog_div .message_rightdiv{
+	/*float:left;*/
+	height:100%;
+	word-break:break-all;
+	word-wrap:break-word;
+	overflow-y:auto;
+}
+
+.dialog_div .message_bottomdiv{
+	float:left;
+	height:35px;
+	width:100%;
+}
+
+.dialog_div .message_okbtdiv{
+	float:left;
+	width:100%;
+	text-align:center;
+	padding-top:10px;
+}
+
+
+.dialog_div .warning_contentdiv{
+	width:100%;
+	height:125px;
+}
+
+.dialog_div .warning_leftdiv{
+	float:left;
+	width:80px;
+	height:100px;
+	padding-left:20px;
+	padding-top:45px;
+}
+
+.dialog_div .warning_rightdiv{
+	float:left;
+	height:100%;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+
+.dialog_div .warning_bottomdiv{
+	float:left;
+	height:35px;
+	width:100%;
+}
+
+.dialog_div .warning_okbtdiv{
+	float:left;
+	width:100%;
+	text-align:center;
+	padding-top:10px;
+}
+
+
+.dialog_div .error_contentdiv{
+	width:100%;
+	height:125px;
+}
+
+
+.dialog_div .error_leftdiv{
+	float:left;
+	width:80px;
+	height:100px;
+	padding-left:20px;
+	padding-top:45px;
+}
+
+.dialog_div .error_rightdiv{
+	float:left;
+	height:100%;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+
+.dialog_div .error_bottomdiv{
+	float:left;
+	height:35px;
+	width:100%;
+}
+
+.dialog_div .error_okbtdiv{
+	float:left;
+	width:100%;
+	text-align:center;
+	padding-top:10px;
+}
+
+
+
+.warningdialog_text_node
+{        
+    color: black;
+    overflow: hidden;
+    word-break:break-all;
+}
+
+
+
+
+.dialog_div .input_contentdiv{
+	width:100%;
+	height:10px;
+}
+
+.dialog_div .input_itemdiv{
+	width:100%;
+	min-height:30px;
+}
+
+.dialog_div .input_leftdiv{
+	float:left;
+	height:100%;
+	width:80px;
+}
+
+.dialog_div .input_rightdiv{
+	float:left;
+	height:100%;
+}
+.dialog_div .input_mustdiv{
+	float:left;
+	height:20px;
+	width:10px;
+	padding-top:8px;
+}
+
+.dialog_div .input_bottomdiv{
+	float:left;
+	height:35px;
+	width:100%;
+}
+
+.dialog_div .input_okbtdiv{
+	float:left;
+	width:46%;
+	text-align:right;
+	padding-right:10px;
+	padding-top:10px;
+}
+
+.dialog_div .input_cancelbtdiv{
+	float:right;
+	width:46%;
+	text-align:left;
+	padding-left:10px;
+	padding-top:10px;
+}
+
+.dialog_div .input_1btdiv{
+	float:left;
+	padding-left:40px;
+	padding-top:10px;
+}
+
+.dialog_div .input_2btdiv{
+	float:left;
+	padding-left:10px;
+	padding-top:10px;
+}
+
+.dialog_div .input_3btdiv{
+	float:left;
+	padding-left:10px;
+	padding-top:10px;
+}

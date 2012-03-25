@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta flowmode="true" id="pamgr_um" jquery="0">
+    <FlowhLayout id="flowhlayout3697">
+        <FlowhPanel id="panelh03697" width="240">
+            <FlowvLayout autoFill="0" id="flowvlayout2853">
+                <FlowvPanel id="panelv02853">
+                    <Widget id="leftView">
+                    </Widget>
+                </FlowvPanel>
+                <FlowvPanel id="panelv12853">
+                	<PanelLayout id="panel0" title="当前组织">
+						<PanelPanel>
+								
+							</PanelPanel>
+					</PanelLayout>
+                </FlowvPanel>
+                <FlowvPanel id="panelv22853">
+                	<PanelLayout id="panel1" title="查询计划">
+						<PanelPanel>
+							
+						</PanelPanel>
+					</PanelLayout>
+                </FlowvPanel>
+                <FlowvPanel id="panelv32853">
+               		<PanelLayout id="panel2" title="快速查询">
+						<PanelPanel>
+							
+						</PanelPanel>
+					</PanelLayout>
+                </FlowvPanel>
+            </FlowvLayout>
+        </FlowhPanel>
+        <FlowhPanel id="panelh13697">
+        	<Widget id="main">
+		    </Widget>
+        </FlowhPanel>
+    </FlowhLayout>
+</UIMeta>

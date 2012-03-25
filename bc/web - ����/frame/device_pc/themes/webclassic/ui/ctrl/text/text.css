@@ -1,0 +1,220 @@
+.text_div {
+   	border-width:0px;
+	border-style:solid;
+	border-color:#A0B3C6;
+	background-color: #ffffff;
+}
+
+.text_div .text_area {
+	border-width:1px;
+	border-style:solid;
+	border-color:#A0B3C6;
+	background-color: #ffffff;
+}
+
+.text_div .text_area_readonly
+{
+	border-width:1px;
+	border-style:solid;
+	border-color:#A0B3C6;
+	background-color: #E1E1E1;
+}
+
+.text_div .text_div_inactive{
+   	border-width:1px;
+	border-style:solid;
+	border-color:#A0B3C6;
+	height:18px;
+}
+
+/** 只读样式 **/
+.text_div_readonly{
+   	border-width:1px;
+	border-style:solid;
+	border-color:#A0B3C6;
+	height:18px;
+	background-color: #E1E1E1;
+}
+
+.text_div .text_button {
+	position:absolute;
+}
+
+.text_div .text_input
+{
+	position:relative;
+	border:0px;
+	height:100%;
+	width:106px;
+	left:0px;
+	background-color: #FFFFFF;
+	margin-left:2px;
+	color:#4d4d4d;
+}
+
+.text_div .text_input_readonly
+{
+	background-color: #E1E1E1;
+}
+
+.text_div .text_input_inactive{
+	position:relative;
+	border:0px;
+	height:100%;
+	width:106px;
+	left:0px;
+	color:#808080;
+	background-color: #FFFFFF;
+	margin-left:2px;
+}
+
+
+/*各种输入控件禁用时的背景色*/
+.text_div_inactive_bgcolor {
+}
+
+/*textarea控件禁用时的背景色*/
+.inactive_bgcolor {
+	background-color: #FFFFFF;
+}
+
+
+.text_div .text_alpha {
+    font-size:8pt;
+    font-family:Arial;
+    color:black;
+    text-align:left;
+}
+
+.text_div .text_integer {
+    font-size:8pt;
+    font-family:Arial;
+    color:black;
+    text-align:center;
+}
+
+.text_div .text_num {
+	font-size:8pt;
+    font-family:Arial;
+    color:black;
+    text-align:center;
+}
+
+.text_div .text_date {
+    font-size:8pt;
+    font-family:Arial;
+    color:black;
+    text-align:center;
+}
+
+.text_div .input_highlight_center_bg{
+	height:22px;
+	width: 1px;
+ 	background:url('images/input_highlight__center.png') repeat-x;
+ 	float:left;
+}
+
+.text_div .input_highlight_left_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('images/input_highlight__left.png') no-repeat;
+ 	float:left;
+}
+
+.text_div .input_highlight_right_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('images/input_highlight__right.png') no-repeat;
+ 	float:left;
+}
+
+.text_div .input_normal_center_bg{
+	height:22px;
+	width: 1px;
+ 	background:url('images/input_normal__center.png') repeat-x;
+ 	float:left;
+}
+
+.text_div .input_normal_left_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('images/input_normal__left.png') no-repeat;
+ 	float:left;
+}
+
+.text_div .input_normal_right_bg{
+	height:22px;
+	width: 3px;
+ 	background:url('images/input_normal__right.png') no-repeat;
+ 	float:left;
+}
+
+/*不符合校验规则的字段边框样式*/
+.checkedborder {
+	border-width:2px;
+	border-style:dotted;
+	border-color:red;
+}
+
+
+
+
+/*radio按钮label的css*/
+.text_div .label_normal {        
+    font-size: 9pt;
+    font-family: Arial;
+    color: black;
+    text-align: left;
+    font-weight: normal;       
+}
+
+.text_div .label_inactive{
+	color:#BBBBBB;
+}
+
+.combobox_data_div {
+	background-color: #ffffff;
+	border-width:1px;
+	border-style:solid;
+	border-color:#A0B3C6;
+	border-top:none;
+	
+	/* 滚动条页面颜色设定 */
+	SCROLLBAR-FACE-COLOR: #e7ebcf;
+	/* 滚动条斜面和左面颜色设定 */
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	/* 滚动条下斜面和右面颜色设定 c9d095*/
+  	SCROLLBAR-SHADOW-COLOR: #ffffff;
+  	/* 滚动条上边和左边的边沿颜色设定 */
+  	SCROLLBAR-3DLIGHT-COLOR: #dbe1b3;
+  	/* 滚动条两端箭头颜色设定 */
+  	SCROLLBAR-ARROW-COLOR: #424854;
+  	/* 滚动条底版颜色设定 */
+  	SCROLLBAR-TRACK-COLOR: #ececec;
+  	/* 滚动条下边和右边的边沿颜色设定 */
+  	SCROLLBAR-DARKSHADOW-COLOR: #b5b2b5;
+}
+
+.reference_data_div {
+	background-color: #ffffff;
+	border-width:1px;
+	border-style:solid;
+	border-color:#A0B3C6;
+	
+	/* 滚动条页面颜色设定 */
+	SCROLLBAR-FACE-COLOR: #e7ebcf;
+	/* 滚动条斜面和左面颜色设定 */
+	SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+	/* 滚动条下斜面和右面颜色设定 c9d095*/
+  	SCROLLBAR-SHADOW-COLOR: #ffffff;
+  	/* 滚动条上边和左边的边沿颜色设定 */
+  	SCROLLBAR-3DLIGHT-COLOR: #dbe1b3;
+  	/* 滚动条两端箭头颜色设定 */
+  	SCROLLBAR-ARROW-COLOR: #424854;
+  	/* 滚动条底版颜色设定 */
+  	SCROLLBAR-TRACK-COLOR: #ececec;
+  	/* 滚动条下边和右边的边沿颜色设定 */
+  	SCROLLBAR-DARKSHADOW-COLOR: #b5b2b5;
+}
+
+

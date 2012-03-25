@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>progress</id>
+	<fullname>ui.ctrl.progress.ProgressBarComp</fullname>
+	<cssfullname>ui.ctrl.progress.progress</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.ProgressBarComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIProgressBar</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.ProgressbarSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIProgressBarSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCProgressBarRender</uirender>
+	<zone>view</zone>
+</plugin>

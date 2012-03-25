@@ -1,0 +1,35 @@
+.message_div {
+	background-color:#fff1a8;
+	border-style:solid;
+	border-color:#f1b10b;
+	border-width:1px;
+	position: absolute;
+	width:169px;
+	height:32px;
+}
+
+/********************定义JS所需静态常量   start *********************/
+.message_div_DEFAULT_HEIGHT
+{
+	height:25px;
+}
+/********************定义JS所需静态常量   end ***********************/
+
+.message_div .message_text_div {
+	width: 95%;
+	top: 5px;
+	text-align: center;
+	position: relative;
+	font-weight: bold;
+}
+
+.message_div .message_close_img {
+	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/message/images/message_close.png') no-repeat right center;
+	height: 15px;
+	width: 15px;
+	top: 5px;
+	right: 5px;
+	position: absolute;
+	z-index: 99;
+	cursor: point;
+}

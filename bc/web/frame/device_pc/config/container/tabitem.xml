@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>tabitem</id>
+	<fullname></fullname>
+	<cssfullname></cssfullname>
+	<dependences>image</dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UITabItem</uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCTabItemRender</uirender>
+	<zone>view,window</zone>
+</plugin>

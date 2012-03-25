@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" flowmode="false" id="" jquery="0" jsEditor="0" jsExcel="0">
+    <Splitter boundMode="0" divideSize="30" hideBar="true" id="spliter1" inverse="0" oneTouch="false" orientation="h" spliterWidth="4">
+        <SplitterOne id="splitter01">
+            <TreeViewComp height="100%" id="tree_funcnode" left="0" position="relative" top="0" widgetId="main" width="100%"></TreeViewComp>
+        </SplitterOne>
+        <SplitterTwo id="splitter02">
+            <GridComp height="100%" id="grid_template" left="0" position="relative" top="0" widgetId="main" width="100%"></GridComp>
+        </SplitterTwo>
+    </Splitter>
+</UIMeta>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta chart="0" jquery="0" jsEditor="0" jsExcel="0">
+    <FlowvLayout autoFill="0" id="flowv1">
+        <FlowvPanel height="30">
+            <FlowhLayout>
+                <FlowhPanel>
+                    <Button id="startBtn" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Button id="endBtn" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+        <FlowvPanel>
+            <FormComp id="logInfo" widgetId="main">
+            </FormComp>
+        </FlowvPanel>
+    </FlowvLayout>
+</UIMeta>

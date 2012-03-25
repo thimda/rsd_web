@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>jquery</id>
+	<fullname>ui.ext.jquery</fullname>
+	<cssfullname></cssfullname>
+	<dependences></dependences>
+	<javaclazz></javaclazz>
+	<uijavaclazz></uijavaclazz>
+	<serializer></serializer>
+	<uiserializer></uiserializer>
+	<uirender></uirender>
+	<compress>false</compress>
+	<zone>view</zone>
+</plugin>

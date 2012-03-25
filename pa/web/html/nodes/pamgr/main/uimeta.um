@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<UIMeta flowmode="true" id="main_um" jquery="0">
+    <FlowvLayout autoFill="0" id="flowvlayout1683" widgetId="main">
+        <FlowvPanel id="panelv01683" widgetId="main">
+            <Menubar height="100%" id="menu_template" left="0" position="relative" top="0" widgetId="main" width="100%">
+            </Menubar>
+        </FlowvPanel>
+        <FlowvPanel id="panelv11683" widgetId="main">
+            <GridComp height="100%" id="grid_template" left="0" position="relative" top="0" widgetId="main" width="100%">
+            </GridComp>
+        </FlowvPanel>
+    </FlowvLayout>
+</UIMeta>

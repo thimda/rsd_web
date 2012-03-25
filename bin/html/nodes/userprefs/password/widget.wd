@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="true" height="200" i18nName="lfw_prefs005" langDir="lfw" width="280">
+    <Models>
+        <Datasets>
+        </Datasets>
+    </Models>
+    <Components>
+        <LabelComp enabled="true" heigth="22" id="confirmnewlabel" left="0" position="relative" text="确认新密码" top="0" visible="true" i18nName="lfw_pswcomp003" langDir="lfw" width="100">
+        </LabelComp>
+        <LabelComp enabled="true" heigth="22" id="oldlabel" left="0" position="right" text="原密码" i18nName="lfw_pswcomp001" langDir="lfw" top="0" visible="true" width="50">
+        </LabelComp>
+        <LabelComp enabled="true" heigth="22" id="newlable" left="0" position="center" text="新密码" i18nName="lfw_pswcomp002" langDir="lfw" top="0" visible="true" width="100">
+        </LabelComp>
+        <TextComp editorType="PwdText" focus="false" height="100%" i18nName="旧密码" id="oldpassword" textAlign="left" visible="true" width="100%">
+        </TextComp>
+        <TextComp editorType="PwdText" focus="false" height="100%" id="confirmnewpassword" textAlign="left" visible="true" width="100%">
+        </TextComp>
+        <TextComp editorType="PwdText" focus="false" height="100%" id="newpassword" textAlign="left" visible="true" width="100%">
+        </TextComp>
+        <ButtonComp align="left" height="22" id="passcancelbutton" text="取消" i18nName="lfwPreferenceHandler-000012" langDir="lfw" width="60">
+            <Listeners>
+                <MouseListener id="passcancelListener">
+                    <Events>
+                        <Event async="false" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[pageUI.getWidget("password").setVisible(false);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+        <ButtonComp align="left" height="22" id="passokbutton" text="确定" i18nName="lfwPreferenceHandler-000011" langDir="lfw" width="60">
+            <Listeners>
+                <MouseListener id="passokListener" serverClazz="nc.uap.lfw.main.prefs.ModifyPasswordListener">
+                    <Events>
+                        <Event async="false" name="onclick" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="password" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </ButtonComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+    </Menus>
+</Widget>

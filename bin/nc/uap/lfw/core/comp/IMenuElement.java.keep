@@ -1,0 +1,13 @@
+package nc.uap.lfw.core.comp;
+
+import nc.uap.lfw.core.comp.ctx.MenuItemContext;
+import nc.uap.lfw.core.page.LfwWidget;
+
+public interface IMenuElement extends Cloneable{
+	public Object clone();
+	public void setWidget(LfwWidget widget);
+	public void setParentItem(MenuItem menuItem);
+	public String getId();
+	public void setContext(MenuItemContext itemCtx);
+	public MenuItemContext getContext();
+}

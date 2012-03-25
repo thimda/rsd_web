@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" id="WebApp">
+	<display-name>Lfw Web Application</display-name>
+	
+	<context-param>
+		<param-name>ctxPath</param-name>
+		<param-value>/lfw</param-value>
+	</context-param>
+
+	
+	<context-param>
+		<param-name>errorPage</param-name>
+		<param-value>/html/nodes/lfw_error.jsp</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>
+			nc.uap.lfw.core.servlet.dft.LfwDefaultContextLoadListener
+		</listener-class>
+	</listener>
+		
+	<listener>
+		<listener-class>
+			nc.uap.lfw.core.servlet.dft.LfwDefaultSessionListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			nc.uap.lfw.core.servlet.dft.LfwDefaultRequestListener
+		</listener-class>
+	</listener>
+
+	<!-- Servlet Filter config-->
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>
+			nc.uap.lfw.core.servlet.SetCharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<servlet-name>ClientCacheServlet</servlet-name>
+	</filter-mapping>
+
+
+	<filter>
+		<filter-name>HttpResponseFilter</filter-name>
+		<filter-class>
+			nc.uap.lfw.core.servlet.ResponseHeaderFilter
+		</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>max-age=3600</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.gif</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HttpResponseFilter</filter-name>
+		<url-pattern>*.png</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>nc.uap.lfw.login.filter.LfwLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+		<servlet-class>
+			nc.uap.lfw.core.servlet.LfwDispatcherServlet
+		</servlet-class>
+		<!--
+		<init-param>
+			<param-name>module</param-name>
+			<param-value>uapweb</param-value>
+		</init-param>
+		<init-param>
+			<param-name>target</param-name>
+			<param-value>nc.uap.lfw.core.servlet.LfwDispatcherServlet</param-value>
+		</init-param>
+		-->
+		<init-param>
+			<param-name>namespace</param-name>
+			<param-value>conf/lfw-servlet</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ctxpath</param-name>
+			<param-value>/core</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>LightPrintServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.core.uif.delegator.PrintTemplateFileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LightPrintServlet</servlet-name>
+		<url-pattern>*.pdf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>LfwDispatcherServlet</servlet-name>
+    	<url-pattern>/securitycheck</url-pattern>
+  	</servlet-mapping>
+	<servlet>
+		<servlet-name>WorkflowServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.finance.filter.WorkflowPngServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkflowServlet</servlet-name>
+		<url-pattern>/wfimg</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>chartgen</servlet-name>
+		<servlet-class>nc.uap.lfw.chart.ChartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>chartgen</servlet-name>
+		<url-pattern>/chart</url-pattern>
+	</servlet-mapping>
+	
+	<!-- for PF chart-->
+	<servlet>
+		<servlet-name>LfwPFServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.core.servlet.LfwPFServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LfwPFServlet</servlet-name>
+		<url-pattern>/pfchart</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CodeServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.core.servlet.CodeServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LfwDispatcherServlet</servlet-name>
+		<url-pattern>/core/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>CodeServlet</servlet-name>
+		<url-pattern>/code/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ClientCacheServlet</servlet-name>
+		<servlet-class>nc.uap.lfw.core.servlet.ClientCacheServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ClientCacheServlet</servlet-name>
+		<url-pattern>/cache</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	  	<servlet-name>LfwFileServlet</servlet-name>
+	  	<servlet-class>nc.uap.lfw.billtemplate.servlet.LfwFileServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LfwFileServlet</servlet-name>
+		<url-pattern>/lfwfile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	  	<servlet-name>LfwFileUploadServlet</servlet-name>
+	  	<servlet-class>nc.uap.lfw.core.servlet.LfwFileUploadServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LfwFileUploadServlet</servlet-name>
+		<url-pattern>/fileupload</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>180</session-timeout>
+	</session-config>
+	
+	<!--@EJBREF@-->
+	
+	<jsp-config>
+		
+	</jsp-config>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<error-page>   
+        <error-code>302</error-code>   
+        <location>/error.jsp</location>   
+    </error-page>   
+	<error-page>   
+        <error-code>404</error-code>   
+        <location>/error.jsp</location>   
+    </error-page>   
+     <error-page>   
+        <error-code>400</error-code>   
+        <location>/error.jsp</location>   
+    </error-page>   
+    <error-page>   
+        <error-code>500</error-code>   
+        <location>/error.jsp</location>   
+	</error-page>
+</web-app>
+

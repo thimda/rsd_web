@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" id="data" refId="data">
+    <PlugoutDescs>
+    </PlugoutDescs>
+    <PluginDescs>
+    </PluginDescs>
+    <Models>
+        <Datasets>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="ctrlds" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="name" isPrimaryKey="false" nullAble="true" text="name">
+                    </Field>
+                    <Field dataType="String" id="type" isPrimaryKey="false" nullAble="true" text="type">
+                    </Field>
+                    <Field dataType="String" id="type2" isPrimaryKey="false" nullAble="true" text="type2">
+                    </Field>
+                    <Field dataType="String" id="pid" isPrimaryKey="false" nullAble="true" text="pid">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.pa.PaPalletDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ctrlds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[var masterSelecteRow = rowSelectEvent.currentRow;	
+	var masterDs =  masterSelecteRow.dataset;
+	//获取触发行
+	
+	if(masterSelecteRow == null)
+		return;
+
+	var event = {};
+	event.componentId = masterSelecteRow.getCellValue(masterDs.nameToIndex("id"));
+	event.type="start";
+	event.text = masterSelecteRow.getCellValue(masterDs.nameToIndex("name"));
+	event.compType = masterSelecteRow.getCellValue(masterDs.nameToIndex("type"));
+	event.compType2 = masterSelecteRow.getCellValue(masterDs.nameToIndex("type2"));
+	//通知IFrame
+	if(!(event.componentId == " " || event.componentId == "  "))
+		document.getElementById("iframe_tmp").contentWindow.dropEventHandler(event);]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="layoutds" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="name" isPrimaryKey="false" nullAble="true" text="name">
+                    </Field>
+                    <Field dataType="String" id="type" isPrimaryKey="false" nullAble="true" text="type">
+                    </Field>
+                    <Field dataType="String" id="pid" isPrimaryKey="false" nullAble="true" text="pid">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.pa.PaPalletDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="layoutds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[var masterSelecteRow = rowSelectEvent.currentRow;	
+	var masterDs =  masterSelecteRow.dataset;
+	//获取触发行
+	
+	if(masterSelecteRow == null)
+		return;
+
+	var event = {};
+	event.componentId = masterSelecteRow.getCellValue(masterDs.nameToIndex("id"));
+	event.type="start";
+	event.text = masterSelecteRow.getCellValue(masterDs.nameToIndex("name"));
+	event.compType = masterSelecteRow.getCellValue(masterDs.nameToIndex("type"));
+	//通知IFrame
+	document.getElementById("iframe_tmp").contentWindow.dropEventHandler(event);]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="bindds" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="name" isPrimaryKey="false" nullAble="true" text="name">
+                    </Field>
+                    <Field dataType="String" id="type" isPrimaryKey="false" nullAble="true" text="type">
+                    </Field>
+                    <Field dataType="String" id="pid" isPrimaryKey="false" nullAble="true" text="pid">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.pa.PaPalletDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="bindds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[var masterSelecteRow = rowSelectEvent.currentRow;	
+	var masterDs =  masterSelecteRow.dataset;
+	//获取触发行
+	
+	if(masterSelecteRow == null)
+		return;
+
+	var event = {};
+	event.componentId = masterSelecteRow.getCellValue(masterDs.nameToIndex("id"));
+	event.type="start";
+	event.text = masterSelecteRow.getCellValue(masterDs.nameToIndex("name"));
+	event.compType = masterSelecteRow.getCellValue(masterDs.nameToIndex("type"));
+	//通知IFrame
+	if(!(event.componentId == " " || event.componentId == "  "))
+		document.getElementById("iframe_tmp").contentWindow.dropEventHandler(event);]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="ds_struct" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="type" isPrimaryKey="false" nullAble="true" text="type">
+                    </Field>
+                    <Field dataType="String" id="name" isPrimaryKey="false" nullAble="true" text="name">
+                    </Field>
+                    <Field dataType="String" id="pid" isPrimaryKey="false" nullAble="true" text="pid">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.pa.PaStructDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_struct" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_struct" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="entityds" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" id="uuid" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="name" isPrimaryKey="false" nullAble="true" text="name">
+                    </Field>
+                    <Field dataType="String" id="type" isPrimaryKey="false" nullAble="true" text="type">
+                    </Field>
+                    <Field dataType="String" id="pid" isPrimaryKey="false" nullAble="true" text="pid">
+                    </Field>
+                    <Field dataType="String" id="isdrag" isPrimaryKey="false" nullAble="true" text="isdrag">
+                    </Field>
+                    <Field dataType="String" id="source" isPrimaryKey="false" nullAble="true" text="source">
+                    </Field>
+                    <Field dataType="String" id="dsid" isPrimaryKey="false" nullAble="true" text="source">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.pa.PaEntityDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="entityds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[var masterSelecteRow = rowSelectEvent.currentRow;	
+	var masterDs =  masterSelecteRow.dataset;
+	//获取触发行
+	
+	if(masterSelecteRow == null)
+		return;
+	var isDrag = masterSelecteRow.getCellValue(masterDs.nameToIndex("isdrag"));
+	var event = {};
+	event.componentId = masterSelecteRow.getCellValue(masterDs.nameToIndex("id"));
+	event.type="start";
+	event.text = masterSelecteRow.getCellValue(masterDs.nameToIndex("dsid"));
+	event.compType = "DATASET";
+	//通知IFrame
+	if(isDrag != "0")
+		document.getElementById("iframe_tmp").contentWindow.dropEventHandler(event);]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+            <Dataset controloperatorStatus="false" controlwidgetopeStatus="false" enabled="false" id="currds" lazyLoad="false">
+                <Fields>
+                    <Field dataType="String" id="id" isPrimaryKey="false" nullAble="true" text="id">
+                    </Field>
+                    <Field dataType="String" id="name" isPrimaryKey="false" nullAble="true" text="name">
+                    </Field>
+                    <Field dataType="String" id="type" isPrimaryKey="false" nullAble="true" text="type">
+                    </Field>
+                    <Field dataType="String" id="pid" isPrimaryKey="false" nullAble="true" text="pid">
+                    </Field>
+                </Fields>
+                <Listeners>
+                    <DatasetListener id="defaultDsListener" serverClazz="nc.uap.lfw.pa.PaPalletDsListener">
+                        <Events>
+                            <Event async="true" name="onDataLoad" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="currds" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>dataLoadEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                            <Event async="true" name="onAfterRowSelect" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>rowSelectEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[var masterSelecteRow = rowSelectEvent.currentRow;	
+	var masterDs =  masterSelecteRow.dataset;
+	//获取触发行
+	
+	if(masterSelecteRow == null)
+		return;
+
+	var event = {};
+	event.componentId = masterSelecteRow.getCellValue(masterDs.nameToIndex("id"));
+	event.type="start";
+	event.text = masterSelecteRow.getCellValue(masterDs.nameToIndex("name"));
+	event.compType = masterSelecteRow.getCellValue(masterDs.nameToIndex("type"));
+	//通知IFrame
+	if(!(event.componentId == " " || event.componentId == "  "))
+		document.getElementById("iframe_tmp").contentWindow.dropEventHandler(event);]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </DatasetListener>
+                </Listeners>
+            </Dataset>
+        </Datasets>
+    </Models>
+    <Components>
+        <TreeViewComp dragEnable="false" enabled="true" id="entitytree" rootOpen="true" text="数据集" visible="true" withCheckBox="false" withRoot="false">
+            <RecursiveTreeLevel dataset="entityds" id="level1" labelFields="name,id" masterKeyField="uuid" recursiveKeyField="uuid" recursivePKeyField="pid">
+            </RecursiveTreeLevel>
+        </TreeViewComp>
+        <TreeViewComp contextMenu="rightMenu" dragEnable="false" enabled="true" id="structtree" rootOpen="true" text="页面结构" visible="true" withCheckBox="false" withRoot="false">
+            <RecursiveTreeLevel contextMenu="rightMenu" dataset="ds_struct" id="level1" labelFields="id,type,name" masterKeyField="id" recursiveKeyField="id" recursivePKeyField="pid">
+            </RecursiveTreeLevel>
+            <Listeners>
+                <MouseListener id="contentMenuEvent">
+                    <Events>
+                        <Event async="true" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Value></Value>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                <![CDATA[document.getElementById("iframe_tmp").contentWindow.contextMenuRender(event);]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                </MouseListener>
+            </Listeners>
+        </TreeViewComp>
+        <TreeViewComp dragEnable="false" enabled="true" id="ctrltree" rootOpen="true" visible="true" withCheckBox="false" withRoot="false">
+            <RecursiveTreeLevel dataset="ctrlds" id="level1" labelFields="name,id" masterKeyField="id" recursiveKeyField="id" recursivePKeyField="pid">
+            </RecursiveTreeLevel>
+        </TreeViewComp>
+        <TreeViewComp dragEnable="false" enabled="true" id="currtree" rootOpen="true" visible="true" withCheckBox="false" withRoot="false">
+            <RecursiveTreeLevel dataset="currds" id="level1" labelFields="name,id" masterKeyField="id" recursiveKeyField="id" recursivePKeyField="pid">
+            </RecursiveTreeLevel>
+        </TreeViewComp>
+        <TreeViewComp dragEnable="false" enabled="true" id="layouttree" rootOpen="true" visible="true" withCheckBox="false" withRoot="false">
+            <RecursiveTreeLevel dataset="layoutds" id="level1" labelFields="name" masterKeyField="id" recursiveKeyField="id" recursivePKeyField="pid">
+            </RecursiveTreeLevel>
+        </TreeViewComp>
+        <TreeViewComp dragEnable="false" enabled="true" id="bindtree" rootOpen="true" visible="true" withCheckBox="false" withRoot="false">
+            <RecursiveTreeLevel dataset="bindds" id="level1" labelFields="name,id" masterKeyField="id" recursiveKeyField="id" recursivePKeyField="pid">
+            </RecursiveTreeLevel>
+        </TreeViewComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+        <MenuBarComp id="menu_set">
+            <MenuItem id="menu_self_save" modifiers="2" text="保存">
+                <Listeners>
+                    <MouseListener id="menu_item_selfsave_listener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[triggerSaveEvent();]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+            </MenuItem>
+        </MenuBarComp>
+        <ContextMenuComp id="rightMenu">
+            <MenuItem id="deleteDs" modifiers="2" text="删除">
+                <Listeners>
+                    <MouseListener id="menu_item_deleteDs_listener" serverClazz="nc.uap.lfw.pa.PaStructDeleteContentMenuListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_struct" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+            </MenuItem>
+            <MenuItem id="addDs" modifiers="2" text="增加">
+                <Listeners>
+                    <MouseListener id="menu_item_daddDs_listener" serverClazz="nc.uap.lfw.pa.PaStructAddContentMenuListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="data" panelSubmit="false" tabSubmit="false">
+                                        <Dataset id="ds_struct" type="ds_current_line">
+                                        </Dataset>
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+            </MenuItem>
+        </ContextMenuComp>
+    </Menus>
+</Widget>

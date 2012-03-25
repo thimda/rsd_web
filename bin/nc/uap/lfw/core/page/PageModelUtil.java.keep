@@ -1,0 +1,33 @@
+package nc.uap.lfw.core.page;
+
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+
+import nc.uap.lfw.core.AbstractPresentPlugin;
+import nc.uap.lfw.core.LfwRuntimeEnvironment;
+import nc.uap.lfw.core.WebContext;
+import nc.uap.lfw.core.util.PageNodeUtil;
+
+/**
+ * 获取当前节点的modelClass工具类
+ * @author zhangxya
+ *
+ */
+public class PageModelUtil {
+
+	public static String getPageModelCalss() {
+		WebContext ctx = LfwRuntimeEnvironment.getWebContext();
+		HttpServletRequest req = ctx.getRequest();
+		String className = req.getParameter("model");
+		if(className != null && !"".equals(className))
+			return className;
+		String pageId = req.getParameter("pageId");;
+		String pagePath = PageNodeUtil.getPageNodeDir(pageId);
+		String nodePath = "html/nodes/" + pagePath + "/node.properties";
+		Properties props = AbstractPresentPlugin.loadNodePropertie(nodePath);
+		if(props != null)
+			return props.getProperty("model");
+		return className;
+	}
+}

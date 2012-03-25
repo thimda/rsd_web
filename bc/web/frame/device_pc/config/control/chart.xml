@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="gb2312"?>
+<plugin>
+	<id>chart</id>
+	<!-- 
+	<fullname>ui.ctrl.chart.fusionchart.FusionCharts,ui.ctrl.chart.fusionchart.FusionChartsExportComponent,ui.ctrl.chart.fusionchart.FusionCharts$jqueryplugin,ui.ctrl.chart.ChartComp,ui.ctrl.chart.ChartConvertor,ui.ctrl.chart.ChartModel</fullname>
+	 
+	 <fullname>ui.ctrl.chart.fusionchart.jquery-1$4$2$min,ui.ctrl.chart.fusionchart.FusionCharts,ui.ctrl.chart.fusionchart.FusionCharts$jqueryplugin,ui.ctrl.chart.ChartModel,ui.ctrl.chart.ChartConvertor,ui.ctrl.chart.ChartComp</fullname>
+	 <fullname>ui.ctrl.chart.fusionchart.FusionCharts,ui.ctrl.chart.fusionchart.FusionCharts$jqueryplugin,ui.ctrl.chart.ChartModel,ui.ctrl.chart.ChartConvertor,ui.ctrl.chart.ChartComp</fullname>
+	 -->
+	 <fullname>ui.ctrl.chart.fusionchart.FusionCharts,ui.ctrl.chart.ChartModel,ui.ctrl.chart.ChartConvertor,ui.ctrl.chart.ChartComp</fullname>
+	<cssfullname>ui.ctrl.chart.chart</cssfullname>
+	<dependences></dependences>
+	<javaclazz>nc.uap.lfw.core.comp.ChartComp</javaclazz>
+	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIChartComp</uijavaclazz>
+	<serializer>nc.uap.lfw.core.ctrlfrm.seria.ChartSerializer</serializer>
+	<uiserializer>nc.uap.lfw.core.ctrlfrm.uiseria.UIChartSerializer</uiserializer>
+	<uirender>nc.uap.lfw.ra.render.pc.PCChartCompRender</uirender>
+	<zone>view</zone>
+</plugin>

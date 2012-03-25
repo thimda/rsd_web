@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Models>
+        <Datasets>
+        </Datasets>
+        <ComboDatas>
+            <StaticComboData id="group_combodata">
+            </StaticComboData>
+        </ComboDatas>
+    </Models>
+    <Components>
+        <ToolBarComp enabled="true" height="100%" id="headerToolBar" left="0" position="relative" top="0" transparent="true" visible="true" width="100%">
+            <ToolBarItem align="right" id="watchLogBtn" modifiers="2" refImg="top/1.png" i18nName="lfw_logging" langDir="lfw" text="日志" tip="获取日志" type="button" width="100%" withSep="true">
+                <Listeners>
+                    <MouseListener id="watchLogMouseListener" serverClazz="nc.uap.lfw.logout.listener.LfwLogoutMouseListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[var url = window.corePath + "/uimeta.um?pageId=watchlog";
+                                    //showDialog(url, "获取日志", 360, 160, "watchLogDialog", false);
+                                    window.open(url, "获取日志", "height=300,width=600,status=no,resizable=no,");]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+            </ToolBarItem>
+            <ToolBarItem align="right" id="logoutBtn" modifiers="2" refImg="top/2.png" i18nName="lfw_logout" langDir="lfw" text="注销" tip="注销登录" type="button" width="100%" withSep="true">
+                <Listeners>
+                    <MouseListener id="logoutMouseListener" serverClazz="nc.uap.lfw.logout.listener.LfwLogoutMouseListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="mainwidget" panelSubmit="false" tabSubmit="false">
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+            </ToolBarItem>
+            <ToolBarItem align="right" id="settingBtn" modifiers="2" refImg="top/3.png" i18nName="lfw_setting" langDir="lfw" text="设置" tip="系统配置" type="button" width="100%" withSep="true">
+                <Listeners>
+                    <MouseListener id="usersetMouseListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="false">
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>                                    <![CDATA[var url = window.corePath + "/uimeta.um?pageId=userprefs";
+                                   window.open(url, "系统配置", "height=300,width=350,status=no,resizable=no,");]]>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+            </ToolBarItem>
+            <ToolBarTitle bold="false" color="black">
+            </ToolBarTitle>
+        </ToolBarComp>
+        <ComBoBoxComp allowExtendValue="false" editorType="ComboBox" enabled="true" focus="false" height="22" id="grouptext" left="0" position="relative" refComboData="group_combodata" selectOnly="true" textAlign="left" textWidth="0" top="0" visible="true" width="120">
+            <Listeners>
+                <TextListener id="grouptextListener" serverClazz="nc.uap.lfw.quickdesk.GroupTextListener">
+                    <Events>
+                        <Event async="true" name="valueChanged" onserver="true">
+                            <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                <Widget cardSubmit="false" id="mainwidget" panelSubmit="false" tabSubmit="false">
+                                </Widget>
+                            </SubmitRule>
+                            <Params>
+                                <Param>
+                                    <Name>valueChangeEvent</Name>
+                                    <Desc>                                        <![CDATA[]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>
+                            </Action>
+                        </Event>
+                    </Events>
+                </TextListener>
+            </Listeners>
+        </ComBoBoxComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+        <MenuBarComp id="groupmenu">
+            <MenuItem id="defaultgroup" modifiers="2" text="defaultgroup">
+            </MenuItem>
+        </MenuBarComp>
+    </Menus>
+</Widget>

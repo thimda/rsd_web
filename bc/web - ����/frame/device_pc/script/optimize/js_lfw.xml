@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nc.uap.lfw.jsutil.jstools.vo.ConfObject>
+	<groupList>
+<nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>basic</name>
+<path>basic</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Ajax.js</name>
+ <path>basic/Ajax.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ArgumentsUtil.js</name>
+ <path>basic/ArgumentsUtil.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Listener.js</name>
+ <path>basic/Listener.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>BaseComponent.js</name>
+ <path>basic/BaseComponent.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Boot.js</name>
+ <path>basic/Boot.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>BrowserSniffer.js</name>
+ <path>basic/BrowserSniffer.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Cache.js</name>
+ <path>basic/Cache.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Event.js</name>
+ <path>basic/Event.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>EventUtil.js</name>
+ <path>basic/EventUtil.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Formater.js</name>
+ <path>basic/Formater.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>HashMap.js</name>
+ <path>basic/HashMap.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>JsExtensions.js</name>
+ <path>basic/JsExtensions.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Logger.js</name>
+ <path>basic/Logger.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Measures.js</name>
+ <path>basic/Measures.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Singleton.js</name>
+ <path>basic/Singleton.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+ <nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>binding</name>
+<path>binding</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>GridAssistant.js</name>
+ <path>binding/GridAssistant.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>GridComp.js</name>
+ <path>binding/GridComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>TreeLevel.js</name>
+ <path>binding/TreeLevel.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>TreeViewComp.js</name>
+ <path>binding/TreeViewComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>MaskerMeta.js</name>
+ <path>masker/MaskerMeta.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Maskers.js</name>
+ <path>masker/Maskers.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>MaskerUtil.js</name>
+ <path>masker/MaskerUtil.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+ <nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>containers</name>
+<path>containers</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>FloatingPanelComp.js</name>
+ <path>containers/FloatingPanelComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<!-- 
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>FrameComp.js</name>
+ <path>containers/FrameComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+-->
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>OutLookBarComp.js</name>
+ <path>containers/OutLookBarComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>PanelComp.js</name>
+ <path>containers/PanelComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>SpliterComp.js</name>
+ <path>containers/SpliterComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>TabComp.js</name>
+ <path>containers/TabComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>FlowGridLayout.js</name>
+ <path>containers/FlowGridLayout.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>FixedGridLayout.js</name>
+ <path>containers/FixedGridLayout.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>layout</name>
+<path>layout</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>LayoutSupport.js</name>
+ <path>layout/LayoutSupport.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+ <nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>dialog</name>
+<path>dialog</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ConfirmDialogComp.js</name>
+ <path>dialog/ConfirmDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ErrorDialogComp.js</name>
+ <path>dialog/ErrorDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ExceptionDialog.js</name>
+ <path>dialog/ExceptionDialog.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>FloatingDialogComp.js</name>
+ <path>dialog/FloatingDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>InputDialogComp.js</name>
+ <path>dialog/InputDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>MessageDialogComp.js</name>
+ <path>dialog/MessageDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ModalDialogComp.js</name>
+ <path>dialog/ModalDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ProgressDialogComp.js</name>
+ <path>dialog/ProgressDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>WarningDialogComp.js</name>
+ <path>dialog/WarningDialogComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>menu</name>
+<path>menu</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ContextMenuComp.js</name>
+ <path>menu/ContextMenuComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>MenuBarComp.js</name>
+ <path>menu/MenuBarComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>MenuBarGroup.js</name>
+ <path>menu/MenuBarGroup.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+ <nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>mvc</name>
+<path>mvc</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>AutoFormComp.js</name>
+ <path>mvc/AutoFormComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ButtonManager.js</name>
+ <path>mvc/ButtonManager.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>CardLayout.js</name>
+ <path>mvc/CardLayout.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>CommonCommand.js</name>
+ <path>mvc/CommonCommand.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>DatasetRuleChecker.js</name>
+ <path>mvc/DatasetRuleChecker.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>DsRelationLogic.js</name>
+ <path>mvc/DsRelationLogic.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>IBillOperate.js</name>
+ <path>mvc/IBillOperate.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>IBillStatus.js</name>
+ <path>mvc/IBillStatus.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>IDatasetConstant.js</name>
+ <path>mvc/IDatasetConstant.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>PageUtil.js</name>
+ <path>mvc/PageUtil.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>PaginationComp.js</name>
+ <path>mvc/PaginationComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ViewModel.js</name>
+ <path>mvc/ViewModel.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>WebDataset.js</name>
+ <path>mvc/WebDataset.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>WebDatasetEvent.js</name>
+ <path>mvc/WebDatasetEvent.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>Widget.js</name>
+ <path>mvc/Widget.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+ <nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+<name>normal</name>
+<path>normal</path>
+<itemList>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>TextComp.js</name>
+ <path>normal/TextComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ButtonComp.js</name>
+ <path>normal/ButtonComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>CalendarComp.js</name>
+ <path>normal/CalendarComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>CheckboxComp.js</name>
+ <path>normal/CheckboxComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>CheckboxGroupComp.js</name>
+ <path>normal/CheckboxGroupComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ComboComp.js</name>
+ <path>normal/ComboComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>DateTextComp.js</name>
+ <path>normal/DateTextComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>FloatTextComp.js</name>
+ <path>normal/FloatTextComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>IFrameComp.js</name>
+ <path>normal/IFrameComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ImageButtonComp.js</name>
+ <path>normal/ImageButtonComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ImageComp.js</name>
+ <path>normal/ImageComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>IntegerTextComp.js</name>
+ <path>normal/IntegerTextComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>LabelComp.js</name>
+ <path>normal/LabelComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>LinkComp.js</name>
+ <path>normal/LinkComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>LoadingBarComp.js</name>
+ <path>normal/LoadingBarComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>MessageComp.js</name>
+ <path>normal/MessageComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>OptionComp.js</name>
+ <path>normal/OptionComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ProgressBarComp.js</name>
+ <path>normal/ProgressBarComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>PswTextComp.js</name>
+ <path>normal/PswTextComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>RadioComp.js</name>
+ <path>normal/RadioComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>RadioGroupComp.js</name>
+ <path>normal/RadioGroupComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ReferenceTextComp.js</name>
+ <path>normal/ReferenceTextComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>SelfDefComp.js</name>
+ <path>normal/SelfDefComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>SelfDefElementComp.js</name>
+ <path>normal/SelfDefElementComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>StringTextComp.js</name>
+ <path>normal/StringTextComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>TextAreaComp.js</name>
+ <path>normal/TextAreaComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<nc.uap.lfw.jsutil.jstools.vo.CompItem>
+<name>ToolBarComp.js</name>
+ <path>normal/ToolBarComp.js</path>
+<checked>true</checked>
+</nc.uap.lfw.jsutil.jstools.vo.CompItem>
+</itemList>
+</nc.uap.lfw.jsutil.jstools.vo.CompGroup>
+  </groupList>
+  <isScript>true</isScript>
+  <path>frame/script</path>
+</nc.uap.lfw.jsutil.jstools.vo.ConfObject>

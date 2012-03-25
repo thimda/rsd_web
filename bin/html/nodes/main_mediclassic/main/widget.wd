@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<Widget dialog="false" height="100%" width="100%">
+    <Attributes>
+        <Attribute>
+            <Key>$MODIFY_TS</Key>
+            <Value>-1</Value>
+        </Attribute>
+    </Attributes>
+    <Models>
+        <Datasets>
+        </Datasets>
+        <ComboDatas>
+            <MDComboDataConf fullclassName="a2b612f3-9152-485a-b925-bcec09e89b9b" id="combo_ds_1_type">
+            </MDComboDataConf>
+            <MDComboDataConf fullclassName="0432ae2a-9abd-42b9-9867-eb67967fd8f3" id="combo_ds_1_xuexing">
+            </MDComboDataConf>
+            <MDComboDataConf fullclassName="a34def4c-92b4-452f-93e4-336e78d64646" id="combo_ds_1_sex">
+            </MDComboDataConf>
+        </ComboDatas>
+    </Models>
+    <Components>
+        <ToolBarComp contextMenu="delShortCutMenu" enabled="true" heigth="100%" id="shortcut_toolbar" left="0" top="0" transparent="true" visible="true" width="100%">
+        </ToolBarComp>
+        <ToolBarComp enabled="true" heigth="100%" id="btn_toolbar" left="0" top="0" transparent="true" visible="true" width="100%">
+            <ToolBarItem align="right" id="gj" modifiers="2" refImg="gj.gif" type="button" width="40" withSep="false">
+            <Listeners>
+                    <MouseListener id="usersetMouseListener">
+                        <Events>
+                        <Event async="true" name="onclick" onserver="false">
+                            <Params>
+                                <Param>
+                                    <Name>mouseEvent</Name>
+                                    <Desc>                                        
+                                    	<![CDATA[
+                                    	]]>
+                                    </Desc>
+                                </Param>
+                            </Params>
+                            <Action>                                
+                            	<![CDATA[
+                            		var url = window.corePath + "/uimeta.um?pageId=userprefs";
+                                    window.open(url, "系统配置", "height=300,width=280,status=no,resizable=no,");
+                            	]]>
+                            </Action>
+                        </Event>
+                    </Events>
+                    </MouseListener>
+                </Listeners>
+            </ToolBarItem>
+            <ToolBarItem align="right" id="fh" modifiers="2" refImg="fh.gif" type="button" width="40" withSep="false">
+                <Listeners>
+                    <MouseListener id="logoutMouseListener" serverClazz="nc.uap.lfw.logout.listener.LfwLogoutMouseListener">
+                        <Events>
+                            <Event async="true" name="onclick" onserver="true">
+                                <SubmitRule cardSubmit="false" panelSubmit="false" tabSubmit="false">
+                                    <Widget cardSubmit="false" id="main" panelSubmit="false" tabSubmit="false">
+                                    </Widget>
+                                </SubmitRule>
+                                <Params>
+                                    <Param>
+                                        <Name>mouseEvent</Name>
+                                        <Value>
+                                        </Value>
+                                        <Desc>                                            <![CDATA[]]>
+                                        </Desc>
+                                    </Param>
+                                </Params>
+                                <Action>
+                                </Action>
+                            </Event>
+                        </Events>
+                    </MouseListener>
+                </Listeners>
+            </ToolBarItem>
+            <ToolBarTitle bold="false" color="black">
+            </ToolBarTitle>
+        </ToolBarComp>
+        <ToolBarComp enabled="true" heigth="100%" id="head" left="0" top="0" transparent="false" visible="true" width="100%">
+            <ToolBarTitle bold="false" color="green" i18nName="菜单" menuId="mainMenu" refImg1="logo_1.png" refImg2="logo_2.png" text="菜单">
+            </ToolBarTitle>
+        </ToolBarComp>
+    </Components>
+    <Containers>
+    </Containers>
+    <Menus>
+        <ContextMenuComp contextMenu="addShortCutMenu" id="mainMenu">
+        </ContextMenuComp>
+        <ContextMenuComp id="addShortCutMenu">
+            <MenuItem id="addShortCutItem" modifiers="2" text="增加至快捷按钮">
+                <Listeners>
+                </Listeners>
+            </MenuItem>
+        </ContextMenuComp>
+        <ContextMenuComp id="delShortCutMenu">
+            <MenuItem id="item_1" modifiers="2" text="删除快捷按钮">
+                <Listeners>
+                </Listeners>
+            </MenuItem>
+        </ContextMenuComp>
+    </Menus>
+</Widget>
