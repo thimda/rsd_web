@@ -326,8 +326,46 @@ ComboComp.prototype.manageSelf = function() {
 		this.divButton.style.visibility="hidden";
 	}
 
+	//add by chouhl 2012-3-27
+	this.comboDiv = $ce("DIV");
+	this.comboDiv.className = 'combo_div';
+	
+	this.comboLeftTopDiv = $ce("DIV");
+	this.comboLeftTopDiv.className = 'combo_left_top_div';
+	this.comboCenterTopDiv = $ce("DIV");
+	this.comboCenterTopDiv.className = 'combo_center_top_div';
+	this.comboRightTopDiv = $ce("DIV");
+	this.comboRightTopDiv.className = 'combo_right_top_div';
+	
+	this.comboLeftCenterDiv = $ce("DIV");
+	this.comboLeftCenterDiv.className = 'combo_left_center_div';
+	this.comboCenterDiv = $ce("DIV");
+	this.comboCenterDiv.className = 'combo_center_div';
+	this.comboRightCenterDiv = $ce("DIV");
+	this.comboRightCenterDiv.className = 'combo_right_center_div';
+	
+	this.comboLeftBottomDiv = $ce("DIV");
+	this.comboLeftBottomDiv.className = 'combo_left_bottom_div';
+	this.comboCenterBottomDiv = $ce("DIV");
+	this.comboCenterBottomDiv.className = 'combo_center_bottom_div';
+	this.comboRightBottomDiv = $ce("DIV");
+	this.comboRightBottomDiv.className = 'combo_right_bottom_div';
+	
+	this.comboDiv.appendChild(this.comboLeftTopDiv);
+	this.comboDiv.appendChild(this.comboCenterTopDiv);
+	this.comboDiv.appendChild(this.comboRightTopDiv);
+	
+	this.comboDiv.appendChild(this.comboLeftCenterDiv);
+	this.comboDiv.appendChild(this.comboCenterDiv);
+	this.comboDiv.appendChild(this.comboRightCenterDiv);
+	
+	this.comboDiv.appendChild(this.comboLeftBottomDiv);
+	this.comboDiv.appendChild(this.comboCenterBottomDiv);
+	this.comboDiv.appendChild(this.comboRightBottomDiv);
+
 	// 创建显示数据的下拉区
 	this.dataDiv = $ce("DIV");
+	//this.comboCenterDiv.appendChild(this.dataDiv);
 	this.dataDiv.id = this.id + "comb_data_div";
 	this.dataDiv.className = "combobox_data_div";
 //dingrf 111121 改用 Measures.js中的 getZIndex()方法。
@@ -341,6 +379,8 @@ ComboComp.prototype.manageSelf = function() {
 	this.dataDiv.style.overflow = "auto";
 	this.dataDiv.style.display = "none";
 	this.dataDiv.style.position = "absolute";
+
+	this.dataDiv.appendChild(this.comboDiv);
 
 	// 初始设置禁用
 	if (this.disabled == true) {
@@ -500,7 +540,8 @@ ComboComp.prototype.createOption = function(caption, value, refImg, selected,
 		var index = this.options.push(option);
 		option.setParentOwner(this);
 		option.setIndex(index - 1);
-		this.dataDiv.appendChild(option.Div_gen);
+		//this.dataDiv.appendChild(option.Div_gen);
+		this.comboCenterDiv.appendChild(option.Div_gen);
 		if (selected)
 			this.setSelectedItem(index - 1);
 //		else
@@ -693,7 +734,8 @@ ComboComp.prototype.getOptions = function() {
 ComboComp.prototype.clearOptions = function() {
 	if (this.options == null)
 		return;
-	this.dataDiv.innerHTML = "";
+	//this.dataDiv.innerHTML = "";
+	this.comboCenterDiv.innerHTML = "";
 
 	this.options = null;
 	this.options = new Array();
@@ -715,7 +757,8 @@ ComboComp.prototype.clearOption = function(value) {
 	if (options != null && options.length > 0) {
 		for ( var i = 0; i < options.length; i++) {
 			if (options[i].value == value) {
-				this.dataDiv.removeChild(options[i].Div_gen);
+				//this.dataDiv.removeChild(options[i].Div_gen);
+				this.comboCenterDiv.removeChild(options[i].Div_gen);
 				this.options.splice(i, 0, 1);
 				this.shownOptions.removeEle(options[i]);
 				return;

@@ -7255,7 +7255,7 @@ public void wildcardAssignment(TypeBinding variableType, TypeBinding expressionT
 public void wildcardInvocation(ASTNode location, TypeBinding receiverType, MethodBinding method, TypeBinding[] arguments) {
 	TypeBinding offendingArgument = null;
 	TypeBinding offendingParameter = null;
-	int length = method.parameters.length;
+	int length = method.parameters == null ? 0 : method.parameters.length;
 	for (int i = 0; i < length; i++) {
 		TypeBinding parameter = method.parameters[i];
 		if (parameter.isWildcard() && (((WildcardBinding) parameter).boundKind != Wildcard.SUPER)) {
@@ -7264,7 +7264,8 @@ public void wildcardInvocation(ASTNode location, TypeBinding receiverType, Metho
 			break;
 		}
 	}
-	
+	if (offendingArgument == null || offendingParameter == null)
+		return;
     if (method.isConstructor()) {
 		this.handle(
 			IProblem.WildcardConstructorInvocation,

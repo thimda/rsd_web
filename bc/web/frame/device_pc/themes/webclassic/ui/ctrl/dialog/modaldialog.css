@@ -141,39 +141,41 @@
 
 .dialog_div .confirm_leftdiv{
 	float:left;
-	width:80px;
-	padding-left:10px;
-	padding-top:35px;
+	width:64px;
+	height:64px;
+	margin-left:110px;
+	margin-right:10px;
+	margin-top:30px;
 }
 
 .dialog_div .confirm_rightdiv{
-	float:left;
 	height:100%;
-	line-height:100%;
 	word-break:break-all;
 	word-wrap:break-word;
+	overflow-y:auto;
+	color:#4eb5e7;
+	font-size:12px;
+	font-weight:bold;
+	margin-right:20px;
 }
 
 .dialog_div .confirm_bottomdiv{
 	float:left;
 	height:35px;
 	width:100%;
+	margin-top:2px;
 }
 
 .dialog_div .confirm_okbtdiv{
 	float:right;
-	width:46%;
 	text-align:right;
-	padding-right:10px;
-	padding-top:10px;
+	margin-right:10px;
 }
 
 .dialog_div .confirm_cancelbtdiv{
 	float:right;
-	width:46%;
 	text-align:left;
-	padding-left:10px;
-	padding-top:10px;
+	margin-right:20px;
 }
 
 
@@ -184,9 +186,11 @@
 
 .dialog_div .message_leftdiv{
 	float:left;
-	width:80px;
-	padding-left:20px;
-	padding-top:15px;
+	width:64px;
+	height:64px;
+	margin-left:110px;
+	margin-right:10px;
+	margin-top:30px;
 }
 
 .dialog_div .message_rightdiv{
@@ -195,19 +199,23 @@
 	word-break:break-all;
 	word-wrap:break-word;
 	overflow-y:auto;
+	color:#4eb5e7;
+	font-size:12px;
+	font-weight:bold;
+	margin-right:20px;
 }
 
 .dialog_div .message_bottomdiv{
 	float:left;
 	height:35px;
 	width:100%;
+	margin-top:2px;
 }
 
 .dialog_div .message_okbtdiv{
-	float:left;
-	width:100%;
+	float:right;
 	text-align:center;
-	padding-top:10px;
+	margin-right:20px;
 }
 
 
@@ -235,6 +243,7 @@
 	float:left;
 	height:35px;
 	width:100%;
+	margin-top:2px;
 }
 
 .dialog_div .warning_okbtdiv{
@@ -270,6 +279,7 @@
 	float:left;
 	height:35px;
 	width:100%;
+	margin-top:2px;
 }
 
 .dialog_div .error_okbtdiv{
@@ -341,19 +351,19 @@
 }
 
 .dialog_div .input_1btdiv{
-	float:left;
-	padding-left:40px;
-	padding-top:10px;
+	float:right;
+	text-align:center;
+	margin-right:10px;
 }
 
 .dialog_div .input_2btdiv{
-	float:left;
-	padding-left:10px;
-	padding-top:10px;
+	float:right;
+	text-align:center;
+	margin-right:10px;
 }
 
 .dialog_div .input_3btdiv{
-	float:left;
-	padding-left:10px;
-	padding-top:10px;
+	float:right;
+	text-align:center;
+	margin-right:10px;
 }

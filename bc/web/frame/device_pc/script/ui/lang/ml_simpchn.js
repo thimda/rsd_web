@@ -33,7 +33,7 @@ function trans(key){
 		window.transMap.ml_four = "四";
 		window.transMap.ml_five = "五";
 		window.transMap.ml_six = "六";
-		window.transMap.ml_seven = "七";
+		window.transMap.ml_seven = "日";
 		
 		window.transMap.ml_thevaluebeyondthemaxlength = "输入值超过了最大长度限制!";
 		

@@ -13,7 +13,7 @@
  * 2.修改event对象的获�?. guoweic <b>modified</b>
  * 3.修正显示混乱问题（以适应多浏览器�? guoweic <b>modified</b>
  */
-MenuBarComp.menuHeight = 41;
+MenuBarComp.menuHeight = 27;
 MenuBarComp.opeWidth = 25;
 
 MenuBarComp.prototype = new BaseComponent;

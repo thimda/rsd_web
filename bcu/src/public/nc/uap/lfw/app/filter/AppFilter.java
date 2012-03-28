@@ -29,6 +29,14 @@ public class AppFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
+		String url = makeAppURL(req);
+//		if(winId != null)
+//			url += "?winId=" + winId;
+		RequestDispatcher disp = LfwRuntimeEnvironment.getServletContext().getRequestDispatcher(url);
+		disp.forward(request, response);
+	}
+
+	protected String makeAppURL(HttpServletRequest req) {
 		String[] params = req.getRequestURI().split("/");
 		String appId = params[3];
 		String winId = null;
@@ -42,10 +50,7 @@ public class AppFilter implements Filter {
 		String url = "/core/"+appId+".app?" + AppConsts.PARAM_WIN_ID + "=" + winId;
 		if(opeId != null)
 			url += "&" + AppConsts.PARAM_WIN_OPE + "=" + opeId;
-//		if(winId != null)
-//			url += "?winId=" + winId;
-		RequestDispatcher disp = LfwRuntimeEnvironment.getServletContext().getRequestDispatcher(url);
-		disp.forward(request, response);
+		return url;
 	}
 
 	@Override

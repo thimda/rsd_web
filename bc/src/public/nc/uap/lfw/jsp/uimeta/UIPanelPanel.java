@@ -6,6 +6,6 @@ public class UIPanelPanel extends UILayoutPanel {
 	public UIPanelPanel() {
 		super();
 		setTopPadding("20");
-		setBottomPadding("15");
+		setBottomPadding("10");
 	}
 }

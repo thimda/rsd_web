@@ -1,13 +1,6 @@
 .contextmenu_div
 {
 	overflow: hidden;
-	border-style:solid;
-    border-width:1px;
-    border-color:#6E8098;
-    /*padding:1px;*/
-    padding-top: 1px;
-    padding-bottom: 1px;
-	background-color:#ffffff;
 }
 
 .menuitem_div
@@ -57,30 +50,25 @@
 
 .menuitem_div .contextmenu_item_left_div_off
 {
-    width:22px;
+    width:16px;
     height:100%;
-	background-color:#E6E6E6;
-	
 	position:relative;
 	float:left;
 }
 
 .menuitem_div .contextmenu_item_left_div_on
 {
-    width:22px;
+    width:16px;
     height:100%;
 	background-color:#e5ebcc;
 	cursor: default;
-	
 	position:relative;
 	float:left;
 }
 
 .menuitem_div .contextmenu_item_caption_off 
 {
-	color: #233C5D;
-	background: #FAFAFA;
-	padding-top:4px;
+	color:#0086b2;
 	font-family: arial;
 	font-size: 12px;
 	overflow: hidden;
@@ -95,9 +83,8 @@
 
 .menuitem_div .contextmenu_item_caption_on 
 {
-	color:#233C5D;
+	color:#4d4d4d;
 	background: #e5ebcc;
-	padding-top:4px;
 	font-family: arial;
 	font-size: 12px;
 	overflow: hidden;
@@ -145,4 +132,75 @@
 	float:left;
 	width: auto;
 	height: 100%;
+}
+/*×Ó²Ëµ¥£¬ÓÒ¼ü²Ëµ¥±³¾°*/
+.contextmenu_div .left_top_div{
+	position:absolute;
+	background: url('images/drop_left_top.png') no-repeat;
+	width:11px;
+	height:11px;
+	left:0px;
+	top:0px;
+}
+
+.contextmenu_div .center_top_div{
+	position:absolute;
+	background: url('images/drop_top_center.png') repeat-x;
+	height:11px;
+	left:11px;
+	right:11px;
+	top:0px;
+}
+.contextmenu_div .right_top_div{
+	position:absolute;
+	background: url('images/drop_right_top.png') no-repeat;
+	width:11px;
+	height:11px;
+	right:0px;
+	top:0px;
+}
+.contextmenu_div .left_center_div{
+	position:absolute;
+	background: url('images/drop_left_center.png') repeat-y;
+	width:11px;
+	left:0px;
+	top:11px;
+	bottom:11px;
+}
+.contextmenu_div .center_div{
+	position:relative;
+	background: url('images/drop_center.png') repeat;
+	margin:11px;
+}
+.contextmenu_div .right_center_div{
+	position:absolute;
+	background: url('images/drop_right_center.png') repeat-y;
+	width:11px;
+	right:0px;
+	top:11px;
+	bottom:11px;
+}
+.contextmenu_div .left_bottom_div{
+	position:absolute;
+	background: url('images/drop_left_bottom.png') no-repeat;
+	width:11px;
+	height:11px;
+	left:0px;
+	bottom:0px;
+}
+.contextmenu_div .center_bottom_div{
+	position:absolute;
+	background: url('images/drop_bottom_center.png') repeat-x;
+	height:11px;
+	left:11px;
+	right:11px;
+	bottom:0px;
+}
+.contextmenu_div .right_bottom_div{
+	position:absolute;
+	background: url('images/drop_right_bottom.png') no-repeat;
+	width:11px;
+	height:11px;
+	right:0px;
+	bottom:0px;
 }

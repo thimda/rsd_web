@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import nc.uap.lfw.core.common.DataTypeTranslator;
 import nc.uap.lfw.core.common.IntDataTypeConst;
 import nc.uap.lfw.core.comp.IDetachable;
@@ -197,7 +198,10 @@ public class Dataset extends WidgetElement implements IDetachable {
 		return count;
 	}
 	public Row getSelectedRow() {
-		RowData rowData = getCurrentRowSet().getCurrentRowData();
+		RowSet rowSet = getCurrentRowSet();
+		if(rowSet == null)
+			return null;
+		RowData rowData = rowSet.getCurrentRowData();
 		if (null != rowData)
 			return getCurrentRowSet().getCurrentRowData().getSelectedRow();
 		else
@@ -240,7 +244,10 @@ public class Dataset extends WidgetElement implements IDetachable {
 		return rowList.toArray(new Row[0]);
 	}
 	public Row[] getSelectedRows() {
-		RowData rowData = getCurrentRowSet().getCurrentRowData();
+		RowSet rowSet = getCurrentRowSet();
+		if(rowSet == null)
+			return null;
+		RowData rowData = rowSet.getCurrentRowData();
 		if (null != rowData)
 			return getCurrentRowSet().getCurrentRowData().getSelectedRows();
 		else

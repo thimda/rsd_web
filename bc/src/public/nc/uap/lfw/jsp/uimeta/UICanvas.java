@@ -12,7 +12,7 @@ public class UICanvas extends UILayout {
 	public static final String LEFTCANVAS = "leftcanvas";
 	public static final String RIGHTCANVAS = "rightcanvas";
 	public static final String FULLCANVAS = "fullcanvas";
-	
+	public static final String CENTERCANVAS = "centercanvas";
 	public static final String TITLE = "title";
 	public static final String I18NNAME = "i18nName";
 

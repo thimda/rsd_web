@@ -278,7 +278,7 @@ public class LayoutPanelTag extends WebElementTag implements IContainerElementTa
 			Integer itemIndex = (Integer) parent.getAttribute("itemIndex");
 			if(itemIndex == null)
 			{
-				itemIndex = new Integer(0);
+				itemIndex = Integer.valueOf(0);
 				parent.setAttribute("itemIndex", itemIndex);
 			}
 			StringBuffer buf = new StringBuffer();

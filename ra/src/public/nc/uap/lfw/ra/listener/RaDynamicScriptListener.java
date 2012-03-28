@@ -1,6 +1,7 @@
 package nc.uap.lfw.ra.listener;
 
 import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +58,8 @@ import nc.uap.lfw.jsp.uimeta.UIElementFinder;
 import nc.uap.lfw.jsp.uimeta.UIFormElement;
 import nc.uap.lfw.jsp.uimeta.UIGridLayout;
 import nc.uap.lfw.jsp.uimeta.UIGridPanel;
+import nc.uap.lfw.jsp.uimeta.UIGridRowLayout;
+import nc.uap.lfw.jsp.uimeta.UIGridRowPanel;
 import nc.uap.lfw.jsp.uimeta.UILayout;
 import nc.uap.lfw.jsp.uimeta.UILayoutPanel;
 import nc.uap.lfw.jsp.uimeta.UIMeta;
@@ -543,7 +546,10 @@ public class RaDynamicScriptListener extends ScriptServerListener {
 			UIElement child = null;
 			if (currentDropObjType.equals(LfwPageContext.SOURCE_TYPE_WIDGT)) {// widget的特殊处理
 				UIWidget uiWidget = new UIWidget();
+				LifeCyclePhase pa = RequestLifeCycleContext.get().getPhase();
+				RequestLifeCycleContext.get().setPhase(LifeCyclePhase.nullstatus);
 				uiWidget.setId(currentDropObjId);
+				RequestLifeCycleContext.get().setPhase(pa);
 				String pageId = LfwRuntimeEnvironment.getWebContext().getPageId();
 				uiWidget.setUimeta(this.createUIMeta(pageMeta, pageId, currentDropObjId));
 				child = uiWidget;
@@ -1095,8 +1101,28 @@ public class RaDynamicScriptListener extends ScriptServerListener {
 		WebElement webEle = null;
 		if(compId.indexOf(".") != -1){
 			String[] ids = compId.split("\\.");
-			uiEle = UIElementFinder.findElementById(uiMeta, ids[0], ids[1]);
-			webEle = UIElementFinder.findWebElementById(pageMeta, viewId, ids[0], ids[1]);
+			if("gridpanel".equals(param.getCompType())){
+				UIGridLayout grid = (UIGridLayout) UIElementFinder.findElementById(uiMeta, ids[0]);
+				Iterator<UILayoutPanel> it = grid.getPanelList().iterator();
+				while(it.hasNext()){
+					UIGridRowPanel panel = (UIGridRowPanel) it.next();
+					UIGridRowLayout layout = panel.getRow();
+					Iterator<UILayoutPanel> cit = layout.getPanelList().iterator();
+					while(cit.hasNext()){
+						UIGridPanel gp = (UIGridPanel) cit.next();
+						if(ids[1].equals(gp.getId())){
+							uiEle = gp;
+							break;
+						}
+					}
+					if(uiEle != null)
+						break;
+				}
+			}
+			else{
+				uiEle = UIElementFinder.findElementById(uiMeta, ids[0], ids[1]);
+				webEle = UIElementFinder.findWebElementById(pageMeta, viewId, ids[0], ids[1]);
+			}
 		}
 		else{
 			uiEle = UIElementFinder.findElementById(uiMeta, compId);

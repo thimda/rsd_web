@@ -126,7 +126,7 @@ function externalInit() {
 		toolbar_1.getButton("imageReset").addListener(imageResetMouseListener);
 	
 		/* 收藏夹 */
-		var toolbar_2 = new ToolBarComp(document.getElementById("favoritDiv"),
+		var toolbar_2 = new ToolBarComp(document.getElementById("$d_main_favoritDiv"),
 				"savedConditionToolbar", 0, 0, "100%", "", "relative", null, false);
 		toolbar_2.addButton("imageFolder", "", "生成文件夹", window.themeGlobalPath
 				+ "/html/themes/" + window.themeId

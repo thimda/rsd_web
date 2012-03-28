@@ -1,0 +1,21 @@
+#Tue Jul 20 10:24:54 CST 2010
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/resources=resources/
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/cli_ncui=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/client=modules/uapweb/client/classes/
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/ncpatch=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/nocompile=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/patch_5x=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pri_5x=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/private=modules/uapweb/META-INF/classes/
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_5x=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_basic=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_core=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_design=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_json=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_login=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_login_5x=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_ncadapter=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/pub_ncadapter5x=
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/public=modules/uapweb/classes/
+NCPatchPropertyStore.SOURCE_DEST_LOCATION_KEY///webuap/src/test=
+eclipse.preferences.version=1

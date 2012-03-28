@@ -1899,7 +1899,7 @@ GridComp.prototype.initPaginationBar = function() {
 	this.paginationText4.className = "paginationText";
 	
 	this.paginationMessage.appendChild(this.paginationText1);
-	this.paginationInput = new IntegerTextComp(this.paginationMessage, 'paginationInput', 0, 3, 35, "relative");
+	this.paginationInput = new IntegerTextComp(this.paginationMessage, 'paginationInput', 0, 4, 35, "relative");
 	this.paginationInput.Div_gen.className = "paginationText";
 	this.paginationMessage.appendChild(this.paginationText2);
 	this.paginationMessage.appendChild(this.paginationText3);
@@ -1989,9 +1989,11 @@ GridComp.prototype.processPaginationInfo = function(pageIndex, rowCount,
 	}
 	this.pageIndex = pageIndex;
 	this.paginationContent.innerHTML = "";
-	if(pageCount == 0){
+	if(pageCount <= 1){
+		this.paginationMessage.style.display = "none";
 		return;
 	}
+	this.paginationMessage.style.display = "";
 	
 	var preDiv = $ce("div");
 	preDiv.className = "pre";
@@ -2021,7 +2023,7 @@ GridComp.prototype.processPaginationInfo = function(pageIndex, rowCount,
 	this.paginationContent.appendChild(smartCutDivFirst);
 
 	var classNamePre = "un";
-	//if(pageCount <= 8){
+	if(pageCount <= 8){
 		for(var i = 0; i < pageCount; i ++){
 			var a = $ce("A");
 			a.onclick = GridComp.pageNavgate;
@@ -2052,12 +2054,63 @@ GridComp.prototype.processPaginationInfo = function(pageIndex, rowCount,
 			}
 			this.paginationContent.appendChild(a);
 		}
-	//}else{
-	//	var showPageCount = 0;
-	//	for(var i = 0; i < pageCount; i++){
-			
-	//	}
-	//}
+	}else{
+		var beginIndex = 0;
+		var endIndex = 0;
+		if(pageIndex <= 1){
+			beginIndex = 0;
+		}else{
+			beginIndex = pageIndex - 2;
+		}
+		endIndex = beginIndex + 4;
+		if(pageIndex >= pageCount - 6){
+			beginIndex = pageCount - 8;
+			endIndex = beginIndex + 7;
+		}
+		if(pageIndex >= pageCount - 2){
+			beginIndex = 0;
+			endIndex = beginIndex + 4;
+		}
+		for(var i = 0; i < pageCount; i++){
+			if((i >= beginIndex && i <= endIndex) || (i >= pageCount - 2)){
+				var a = $ce("A");
+				a.onclick = GridComp.pageNavgate;
+				a.href = "#";
+				a.pageIndex = i;
+				a.gridId = this.id;
+				if(i == pageIndex){
+					classNamePre = "";
+				}else{
+					classNamePre = "un";
+				}
+				if(i + 1 <= 99){
+					var selectedDiv = $ce("div");
+					selectedDiv.className = classNamePre + "selected";
+					selectedDiv.innerHTML = (i + 1);
+					a.appendChild(selectedDiv);
+				}else{
+					var selectedLeftDiv = $ce("div");
+					var selectedCenterDiv = $ce("div");
+					var selectedRightDiv = $ce("div");
+					selectedLeftDiv.className = classNamePre + "selectedleft";
+					selectedCenterDiv.className = classNamePre + "selectedcenter";
+					selectedRightDiv.className = classNamePre + "selectedright";
+					selectedCenterDiv.innerHTML = (i + 1);
+					a.appendChild(selectedLeftDiv);
+					a.appendChild(selectedCenterDiv);
+					a.appendChild(selectedRightDiv);
+				}
+				this.paginationContent.appendChild(a);
+			}else if(i == endIndex + 1){
+				var a = $ce("A");
+				var selectedDiv = $ce("div");
+				selectedDiv.className = "unselected";
+				selectedDiv.innerHTML = "...";
+				a.appendChild(selectedDiv);
+				this.paginationContent.appendChild(a);
+			}
+		}
+	}
 	
 	var smartCutDivLast = $ce("div");
 	smartCutDivLast.className = "smartcut";
@@ -2085,8 +2138,7 @@ GridComp.prototype.processPaginationInfo = function(pageIndex, rowCount,
 	nextA.pageIndex = pageIndex;
 	nextA.appendChild(nextDiv);
 	this.paginationContent.appendChild(nextA);
-	
-	this.paginationContent.style.width = this.paginationContent.offsetWidth + "px";
+
 	this.paginationPanel.style.width = (this.paginationContent.offsetWidth + 25 + 20 + 300) + "px";
 	return;
 };
@@ -2697,7 +2749,7 @@ GridComp.prototype.initHeaderTable = function(header) {
 		}
 		tempDiv.appendChild(header.textNode);
 		if (header.required){
-			header.textNode.innerHTML = '<span style="color:red;margin-right:3px;">*</span>';
+			//header.textNode.innerHTML = '<span style="color:red;margin-right:3px;">*</span>';
 		}
 		if (selectBox != null) {
 			// 只有header的高度为2倍表头高度以上才设置此时padding
@@ -3772,6 +3824,7 @@ GridComp.initEditCompsForGrid = function(gridId) {
 			stringInited = true;
 		}
 		if(comp){
+			comp.Div_gen.style.height = "50px";
 			comp.Div_gen.style.paddingTop = "3px";
 		}
 		GridComp.addCompListener(oThis, comp, i);

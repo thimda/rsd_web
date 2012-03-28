@@ -1,63 +1,59 @@
 <?xml version="1.0" encoding='UTF-8'?>
 <UIMeta chart="0" jquery="0">
-    <BorderLayout>
-        <BorderPanel position="center">
-            <FlowvLayout autoFill="0" id="flowv1">
-                <FlowvPanel height="300">
-                    <FlowhLayout>
-                        <FlowhPanel>
-                            <Border id="border3" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
-                                <BorderTrue>
-                                    <GridComp id="leftgrid" widgetId="main">
-                                    </GridComp>
-                                </BorderTrue>
-                            </Border>
-                        </FlowhPanel>
-                        <FlowhPanel width="50">
-                            <Border id="border2" leftWidth="0" rightWidth="0" showBottom="true" showLeft="false" showRight="false" showTop="true" width="1">
-                                <BorderTrue>
-                                    <FlowvLayout autoFill="0" id="flowv2">
-                                        <FlowvPanel>
-                                        </FlowvPanel>
-                                        <FlowvPanel>
-                                            <Button id="rightbutton" widgetId="main">
-                                            </Button>
-                                        </FlowvPanel>
-                                        <FlowvPanel>
-                                            <Button id="leftbutton" widgetId="main">
-                                            </Button>
-                                        </FlowvPanel>
-                                        <FlowvPanel>
-                                        </FlowvPanel>
-                                    </FlowvLayout>
-                                </BorderTrue>
-                            </Border>
-                        </FlowhPanel>
-                        <FlowhPanel>
-                            <Border id="border4" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
-                                <BorderTrue>
-                                    <GridComp id="rightgrid" widgetId="main">
-                                    </GridComp>
-                                </BorderTrue>
-                            </Border>
-                        </FlowhPanel>
-                    </FlowhLayout>
-                </FlowvPanel>
-                <FlowvPanel>
-                    <FlowhLayout>
-                        <FlowhPanel width="150">
-                        </FlowhPanel>
-                        <FlowhPanel>
-                            <Button id="assignokButton" widgetId="main">
-                            </Button>
-                        </FlowhPanel>
-                        <FlowhPanel>
-                            <Button id="assingCancelButton" widgetId="main">
-                            </Button>
-                        </FlowhPanel>
-                    </FlowhLayout>
-                </FlowvPanel>
-            </FlowvLayout>
-        </BorderPanel>
-    </BorderLayout>
+    <FlowvLayout autoFill="0" id="flowv1">
+        <FlowvPanel height="300">
+            <FlowhLayout>
+                <FlowhPanel>
+                    <Border id="border3" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
+                        <BorderTrue>
+                            <GridComp id="leftgrid" widgetId="main">
+                            </GridComp>
+                        </BorderTrue>
+                    </Border>
+                </FlowhPanel>
+                <FlowhPanel width="50">
+                    <Border id="border2" leftWidth="0" rightWidth="0" showBottom="true" showLeft="false" showRight="false" showTop="true" width="1">
+                        <BorderTrue>
+                            <FlowvLayout autoFill="0" id="flowv2">
+                                <FlowvPanel>
+                                </FlowvPanel>
+                                <FlowvPanel>
+                                    <Button id="rightbutton" widgetId="main">
+                                    </Button>
+                                </FlowvPanel>
+                                <FlowvPanel>
+                                    <Button id="leftbutton" widgetId="main">
+                                    </Button>
+                                </FlowvPanel>
+                                <FlowvPanel>
+                                </FlowvPanel>
+                            </FlowvLayout>
+                        </BorderTrue>
+                    </Border>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Border id="border4" showBottom="true" showLeft="true" showRight="true" showTop="true" width="1">
+                        <BorderTrue>
+                            <GridComp id="rightgrid" widgetId="main">
+                            </GridComp>
+                        </BorderTrue>
+                    </Border>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+        <FlowvPanel>
+            <FlowhLayout>
+                <FlowhPanel width="150">
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Button id="assignokButton" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+                <FlowhPanel>
+                    <Button id="assingCancelButton" widgetId="main">
+                    </Button>
+                </FlowhPanel>
+            </FlowhLayout>
+        </FlowvPanel>
+    </FlowvLayout>
 </UIMeta>

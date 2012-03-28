@@ -171,12 +171,6 @@
 }
 
 .combobox_data_div {
-	background-color: #ffffff;
-	border-width:1px;
-	border-style:solid;
-	border-color:#A0B3C6;
-	border-top:none;
-	
 	/* 滚动条页面颜色设定 */
 	SCROLLBAR-FACE-COLOR: #e7ebcf;
 	/* 滚动条斜面和左面颜色设定 */
@@ -213,6 +207,106 @@
   	SCROLLBAR-TRACK-COLOR: #ececec;
   	/* 滚动条下边和右边的边沿颜色设定 */
   	SCROLLBAR-DARKSHADOW-COLOR: #b5b2b5;
+}
+
+/*下拉框样式*/
+
+.combo_div{
+	position:relative;
+	width:100%;
+	height:100%;
+}
+
+.combo_div .combo_left_top_div{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_left_top.png') no-repeat;
+}
+
+.combo_div .combo_center_top_div{
+	position:absolute;
+	left:11px;
+	right:11px;
+	top:0px;
+	height:11px;
+	background:url('images/drop_top_center.png') repeat-x;
+}
+
+.combo_div .combo_right_top_div{
+	position:absolute;
+	right:0px;
+	top:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_right_top.png') no-repeat;
+}
+
+.combo_div .combo_left_center_div{
+	position:absolute;
+	left:0px;
+	top:11px;
+	bottom:11px;
+	width:11px;
+	background:url('images/drop_left_center.png') repeat-y;
+}
+
+.combo_div .combo_center_div{
+	position:absolute;
+	left:11px;
+	right:11px;
+	top:11px;
+	bottom:11px;
+	background:url('images/drop_center.png') repeat;
+	padding:1px 2px 3px 2px;
+}
+
+.combo_div .combo_right_center_div{
+	position:absolute;
+	right:0px;
+	top:11px;
+	bottom:11px;
+	width:11px;
+	background:url('images/drop_right_center.png') repeat-y;
+}
+
+.combo_div .combo_left_bottom_div{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_left_bottom.png') no-repeat;
+}
+
+.combo_div .combo_center_bottom_div{
+	position:absolute;
+	left:11px;
+	right:11px;
+	bottom:0px;
+	height:11px;
+	background:url('images/drop_bottom_center.png') repeat-x;
+}
+
+.combo_div .combo_right_bottom_div{
+	position:absolute;
+	right:0px;
+	bottom:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_right_bottom.png') no-repeat;
+}
+
+.combo_div .option_unsel{
+	color:#0086b2;
+	cursor:default;
+}
+
+.combo_div .option_sel{
+	color:#000000;
+	cursor:default;
 }
 
 

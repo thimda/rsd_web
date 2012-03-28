@@ -640,7 +640,7 @@ ToolBarComp.prototype.showLastItemDiv = function() {
  * @private
  */
 ToolBarComp.prototype.checkArrow = function() {
-	if (this.toLeftDiv.className == this.baseClassName + "_toleft_div")
+	if (this.toLeftDiv && this.toLeftDiv.className == this.baseClassName + "_toleft_div")
 		return true;
 	return false;
 };

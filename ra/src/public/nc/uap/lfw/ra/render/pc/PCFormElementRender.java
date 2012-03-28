@@ -111,8 +111,9 @@ public class PCFormElementRender extends UINormalComponentRender<UIFormElement, 
 			}
 			String widgetId = this.getWidget() == null ? "" : this.getWidget();
 			String uiid = this.getUiElement() == null ? "" : (String) this.getUiElement().getId();
-			String eleid = form.getId() == null ? "" : form.getId();
-			String subeleid = this.getWebElement().getId() == null ? "" : this.getWebElement().getId();
+			String eleid = this.getWebElement().getId() == null ? "" : this.getWebElement().getId();
+//			String subuiId = this.getUiElement() == null ? "" : (String) this.getUiElement().getId();
+//			String subeleid = this.getWebElement().getId() == null ? "" : this.getWebElement().getId();
 			String type = this.getRenderType(this.getWebElement());
 			if (type == null)
 				type = "";
@@ -120,7 +121,7 @@ public class PCFormElementRender extends UINormalComponentRender<UIFormElement, 
 			if (getDivId() == null) {
 				LfwLogger.error("div id is null!" + this.getClass().getName());
 			} else {
-				buf.append("var params = {widgetid:'" + widgetId + "',uiid:'" + uiid + "',eleid:'" + eleid + "',type:'" + type + "',subeleid:'" + subeleid + "',renderType:'"
+				buf.append("var params = {widgetid:'" + widgetId + "',uiid:'" + uiid + "',eleid:'" + eleid + "',type:'" + type + "',subeleid:'', subuiid:'',renderType:'"
 						+ 4 + "'};\n");
 				buf.append("new EditableListener(document.getElementById('" + getDivId() + "'),params,'component');\n");
 			}
@@ -503,9 +504,10 @@ public class PCFormElementRender extends UINormalComponentRender<UIFormElement, 
 				return "";
 			}
 			String widgetId = this.getWidget() == null ? "" : this.getWidget();
+//			String uiid = this.getParentRender().getId();
+//			String eleid = this.getParentRender().getId();
 			String uiid = this.getUiElement() == null ? "" : (String) this.getUiElement().getId();
-			String eleid = form.getId() == null ? "" : form.getId();
-			String subeleid = this.getWebElement().getId() == null ? "" : this.getWebElement().getId();
+			String eleid = this.getWebElement().getId() == null ? "" : this.getWebElement().getId();
 			String renderType = "4";
 			String type = this.getRenderType(this.getWebElement());
 			if (type == null)
@@ -515,7 +517,7 @@ public class PCFormElementRender extends UINormalComponentRender<UIFormElement, 
 				LfwLogger.error("div id is null!" + this.getClass().getName());
 				throw new LfwRuntimeException("div id is null!" + this.getClass().getName());
 			} else {
-				buf.append("var params = {widgetid:'" + widgetId + "',uiid:'" + uiid + "',eleid:'" + eleid + "',type:'" + type + "',subeleid:'" + subeleid + "',renderType:'"
+				buf.append("var params = {widgetid:'" + widgetId + "',uiid:'" + uiid + "',eleid:'" + eleid + "',type:'" + type + "',subeleid:'',subuiid:'',renderType:'"
 						+ renderType + "'};\n");
 				buf.append("new EditableListener(" + this.getDivId() + ",params,'component');\n");
 			}

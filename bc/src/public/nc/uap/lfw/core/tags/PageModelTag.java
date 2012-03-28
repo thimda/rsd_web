@@ -48,7 +48,7 @@ public class PageModelTag extends WebElementTag {
 	@SuppressWarnings("unchecked")
 	protected void doRender() throws JspException, IOException {
 		
-		ConcurrentMap<String, StringBuffer> bodyScriptMap = null;
+//		ConcurrentMap<String, StringBuffer> bodyScriptMap = null;
 		HttpServletRequest request = (HttpServletRequest) ((PageContext)getJspContext()).getRequest();
 		PageModel model = (PageModel) request.getAttribute("pageModel");
 		modelId = model.getPageModelId();
@@ -209,8 +209,8 @@ public class PageModelTag extends WebElementTag {
 		} 
 		catch (Exception e) {
 			//ÊÍ·Åµô´íÎóµÄ½Å±¾
-			if(bodyScriptMap != null)
-				bodyScriptMap.remove(modelId);
+//			if(bodyScriptMap != null)
+//				bodyScriptMap.remove(modelId);
 			LfwLogger.error(e.getMessage(), e);
 			if(model != null)
 				model.destroy();

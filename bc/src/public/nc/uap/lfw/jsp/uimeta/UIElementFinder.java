@@ -480,8 +480,10 @@ public final class UIElementFinder {
 		if (ele == null || id == null)
 			return null;
 		UIElement uiEle = findElementById(ele, pid);
+
 		if(!(uiEle instanceof UILayout))
 			return null;
+		
 		Iterator<UILayoutPanel> it = ((UILayout)uiEle).getPanelList().iterator();
 		while(it.hasNext()){
 			UILayoutPanel panel = it.next();

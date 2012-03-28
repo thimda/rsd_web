@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+import nc.uap.lfw.core.model.BasePageModel;
 import nc.uap.lfw.core.model.PageModel;
 
 /**
@@ -28,7 +29,7 @@ public class PageTag extends SimpleTagWithAttribute {
 	protected void doRender() throws JspException, IOException {
 		ConcurrentMap<String, StringBuffer> bodyScriptMap = null;
 		HttpServletRequest request = (HttpServletRequest) ((PageContext)getJspContext()).getRequest();
-		PageModel model = (PageModel) request.getAttribute("pageModel");
+		BasePageModel model = (BasePageModel) request.getAttribute("pageModel");
 		getJspContext().setAttribute("pageModel", model);
 		getJspBody().invoke(getJspContext().getOut());
 	}

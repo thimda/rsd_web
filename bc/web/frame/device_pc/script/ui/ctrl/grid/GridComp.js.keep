@@ -17,7 +17,7 @@ GridComp.SELECTCOLUM_WIDTH = 30;
 // 单元格底边高度
 GridComp.CELL_BOTTOM_BORDER_WIDTH = 1;
 // grid分页条的高度
-GridComp.PAGEBAR_HEIGHT = 25;
+GridComp.PAGEBAR_HEIGHT = 32;
 // 列的左边界宽
 GridComp.COLUMN_LEFT_BORDER_WIDTH = 0;
 // 合计单元格的padding
@@ -30,6 +30,9 @@ GridComp.MULTISEL_COLUMN_WIDTH = 30;
 GridComp.SUMROW_DIV_WIDTH = 34;
 GridComp.COlUMWIDTH_DEFAULT = 70;
 GridComp.SCROLLBAE_HEIGHT = 17;
+//cell单元格左padding
+GridComp.CELL_LEFT_PADDING = 10;
+GridComp.CELL_RIGHT_PADDING = 10;
 GridComp.prototype = new BaseComponent;
 GridComp.prototype.componentType = "GRIDCOMP";
 /**
@@ -157,19 +160,17 @@ GridComp.prototype.componentType = "GRIDCOMP";
  *            是否显示表头
  */
 function GridComp(parent, name, left, top, width, height, position, editable,
-		isMultiSelWithBox, isShowNumCol, isShowSumRow, paginationObj,
+		isMultiSelWithBox, isShowNumCol, isShowSumRow, attr,
 		groupHeaderIds, sortable, className, isPagenationTop, showColInfo,
-		oddType, isGroupWithCheckbox, isShowHeader, rowRender) {
+		oddType, isGroupWithCheckbox, isShowHeader, extendCellEditor, rowRender) {
 	
 	this.base = BaseComponent;
 	this.base(name, left, top, width, height);
 	this.parent = parent;
 	this.position = getString(position, "absolute");
 	this.className = getString(className, "grid_div");
-	if (rowRender == null)
-		this.rowRender = DefaultRowRender;
-	else 	
-		this.rowRender = rowRender;
+	this.rowRender = rowRender == null ? DefaultRowRender : rowRender;
+	this.extendCellEditor = extendCellEditor == null ? CellEditor : extendCellEditor;
 
 	if (IS_IE7 || IS_IE9)
 		GridComp.ROWSTATE_COLUMN_WIDTH = 14;
@@ -221,11 +222,12 @@ function GridComp(parent, name, left, top, width, height, position, editable,
 	this.sortable = getBoolean(sortable, true);
 
 	this.pageSize = -1;
-	// 是否简易分页条,这种分页条显示时去掉了"刷新","转到","设置"等按钮
-	this.simplePageBar = false;
+
+	this.flowmode = false;
 	// 解析grid分页对象
-	if (paginationObj != null) {
-		this.pageSize = getInteger(paginationObj.pageSize, this.pageSize);
+	if (attr != null) {
+		this.pageSize = getInteger(attr.pageSize, this.pageSize);
+		this.flowmode = attr.flowmode;
 	}
 
 	// 翻页条是否在上面
@@ -782,6 +784,13 @@ GridComp.prototype.attachEvents = function() {
 					* (-1))
 					+ "px";
 		}
+		
+		if(!oThis.flowmode){
+			var scrollTop = src.scrollTop;
+			if(oThis.selectColumDiv){
+				oThis.selectColumDiv.style.top = (-1 * scrollTop) + "px";
+			}
+		}
 
 		e.triggerObj = null;
 		clearEventSimply(e);
@@ -831,7 +840,8 @@ GridComp.gridResize = function(gridId) {
 	
 	if (grid == null)
 		return;
-	var outerDiv = grid.outerDiv, barHeight = GridComp.SCROLLBAE_HEIGHT;
+	var outerDiv = grid.outerDiv;
+	var barHeight = GridComp.SCROLLBAE_HEIGHT;
 	if(outerDiv.style.height != '100%'){
 		outerDiv.style.height = "100%";
 	}
@@ -847,6 +857,13 @@ GridComp.gridResize = function(gridId) {
 		var cond2 = (grid.constant.outerDivHeight != null && grid.constant.outerDivHeight == outerDiv.offsetHeight);
 		if (cond1 && cond2)
 			return;
+			
+		if(!grid.flowmode){
+			if(grid.pageSize != -1)
+				grid.dataOuterDiv.style.height = (grid.outerDiv.offsetHeight - GridComp.HEADERROW_HEIGHT - GridComp.PAGEBAR_HEIGHT) + "px";
+			else
+				grid.dataOuterDiv.style.height = (grid.outerDiv.offsetHeight - GridComp.HEADERROW_HEIGHT) + "px";
+		}
 
 		grid.constant.outerDivWidth = outerDiv.offsetWidth;
 		grid.constant.outerDivHeight = outerDiv.offsetHeight;
@@ -855,7 +872,8 @@ GridComp.gridResize = function(gridId) {
 		if (grid.width.indexOf("%") != -1) {
 			var fixedHeaderWidth = grid.constant.fixedHeaderDivWidth;
 			var currWidth = grid.constant.outerDivWidth;
-			grid.dataOuterDiv.style.width = currWidth + "px";// - 1;
+			var fixedColumDivWidth = grid.fixedColumDiv.offsetWidth;
+			grid.dataOuterDiv.style.width = (currWidth - fixedColumDivWidth) + "px";// - 1;
 
 			// 垂直滚动
 			if (grid.isVScroll()) {
@@ -866,7 +884,8 @@ GridComp.gridResize = function(gridId) {
 				if (dynHeaderWidth > 0)
 					grid.dynamicHeaderDiv.style.width = dynHeaderWidth + "px";
 				grid.dynamicHeaderDiv.defaultWidth = dynHeaderWidth;
-			} else {
+			} 
+			else {
 				grid.headerDiv.style.width = currWidth + "px";// - 2;
 				grid.headerDiv.defaultWidth = currWidth;// - 2;
 
@@ -910,29 +929,11 @@ GridComp.gridResize = function(gridId) {
 		grid.stForAutoExpand = setTimeout(
 				"GridComp.processAutoExpandHeadersWidth('" + gridId + "')", 100);
 
-		// 重新调整翻页工具条位置
-		GridComp.adjustPaginationBar(grid);
 	} catch (e) {
 
 	}
 };
 
-/**
- * grid重新调整翻页工具条位置
- * 
- * @private
- */
-GridComp.adjustPaginationBar = function(grid) {
-//	if (grid.pageSize > 0 && !grid.isPagenationTop) {
-//		var tempH = grid.dataOuterDiv.style.height;
-//		if (tempH != "") {
-//			tempH = tempH.replace("px", "");
-//			grid.dataOuterDiv.style.height = tempH - 15 + "px";
-//		}
-//		grid.paginationBar.style.top = grid.outerDiv.offsetHeight
-//				- GridComp.PAGEBAR_HEIGHT - 15 + "px";
-//	}
-};
 
 /**
  * 得到真正的cell对象(render的时候用户可能在cell中加上自己的div，所以点击的不一定是cell)
@@ -1191,32 +1192,49 @@ GridComp.prototype.setCellSelected = function(cell, ctrl, shift) {
 GridComp.prototype.setCellActive = function(cell, ctrl) {
 	if (this.editable == false)
 		return;
-
 	if (ctrl)
 		return;
-
 	// 记录选中cell为当前cell
 	this.selectedCell = cell;
 	var rowIndex = this.getCellRowIndex(cell);
 	var colIndex = cell.colIndex;
 	// 用户自定义editor
-	if (this.getCellEditor(cell, rowIndex, colIndex) != null) {
-		var comp = this.getCellEditor(cell, rowIndex, colIndex);
-		comp
-				.setBounds(compOffsetLeft(cell, document.body) + 1,
-						compOffsetTop(cell, document.body), cell.offsetWidth
-								- 1, GridComp.ROW_HEIGHT);
-		comp.setValue(this.model.getCellValueByIndex(rowIndex, colIndex));
-		comp.showV();
-		comp.setFocus();
+	var extendComp = null;
+	if (this.extendCellEditor !== null){
+		var row = this.model.rows[rowIndex];
+	 	extendComp = this.extendCellEditor.call(this, document.body, row, colIndex);
+	}
+	if (extendComp){
+		this.compsMap.put("extend$" + colIndex, extendComp);
+		GridComp.addCompListener(this, extendComp, colIndex);
+		extendComp.setBounds(compOffsetLeft(cell, document.body) + GridComp.CELL_LEFT_PADDING, compOffsetTop(cell, document.body), cell.offsetWidth
+								- GridComp.CELL_RIGHT_PADDING - 1, GridComp.ROW_HEIGHT);
+		extendComp.setValue(this.model.getCellValueByIndex(rowIndex, colIndex));
+		extendComp.showV();
+		extendComp.setFocus();
 		this.currActivedCell = cell;
-		this.showComp = comp;
-	} else {
+		this.showComp = extendComp;
+		this.showComp.extend = true;
+		this.showComp.Div_gen.style.zIndex = getZIndex();
+	}
+//	if (this.getCellEditor(cell, rowIndex, colIndex) != null) {
+//		var comp = this.getCellEditor(cell, rowIndex, colIndex);
+//		comp
+//				.setBounds(compOffsetLeft(cell, document.body) + 1,
+//						compOffsetTop(cell, document.body), cell.offsetWidth
+//								- 1, GridComp.ROW_HEIGHT);
+//		comp.setValue(this.model.getCellValueByIndex(rowIndex, colIndex));
+//		comp.showV();
+//		comp.setFocus();
+//		this.currActivedCell = cell;
+//		this.showComp = comp;
+//	} 
+	else {
 		// 如果comp为null,得到stringtext
 		if (cell.editorType == null || cell.editorType == "") {
 			var comp = this.compsMap.get(EditorType.STRINGTEXT);
-			comp.setBounds(compOffsetLeft(cell, document.body) + 1,
-					compOffsetTop(cell, document.body), cell.offsetWidth - 1,
+			comp.setBounds(compOffsetLeft(cell, document.body) + GridComp.CELL_LEFT_PADDING,
+					compOffsetTop(cell, document.body), cell.offsetWidth - GridComp.CELL_RIGHT_PADDING - 1,
 					cell.offsetHeight);
 			// 将真实值设置到编辑控件中
 			comp.setValue(this.model.getCellValueByIndex(rowIndex, colIndex));
@@ -1246,8 +1264,8 @@ GridComp.prototype.setCellActive = function(cell, ctrl) {
 				comp.setIntegerMinValue(header.integerMinValue);
 				comp.setIntegerMaxValue(header.integerMaxValue);
 			}
-			comp.setBounds(compOffsetLeft(cell, document.body) + 1,
-					compOffsetTop(cell, document.body), cell.offsetWidth - 1,
+			comp.setBounds(compOffsetLeft(cell, document.body) + GridComp.CELL_LEFT_PADDING,
+					compOffsetTop(cell, document.body), cell.offsetWidth - GridComp.CELL_RIGHT_PADDING - 1,
 					cell.offsetHeight);
 			comp.setValue(this.model.getCellValueByIndex(rowIndex, colIndex));
 			comp.showV();
@@ -1259,8 +1277,8 @@ GridComp.prototype.setCellActive = function(cell, ctrl) {
 		else if (cell.editorType == EditorType.COMBOBOX) {
 			var comp = this.compsMap.get(cell.editorType + colIndex);
 			var header = this.basicHeaders[colIndex];
-			comp.setBounds(compOffsetLeft(cell, document.body) + 1,
-					compOffsetTop(cell, document.body), cell.offsetWidth - 1,
+			comp.setBounds(compOffsetLeft(cell, document.body) + GridComp.CELL_LEFT_PADDING,
+					compOffsetTop(cell, document.body), cell.offsetWidth - GridComp.CELL_RIGHT_PADDING - 1,
 					cell.offsetHeight);
 			// 将记录的上次的旧值清空
 			if (comp.oldValue)
@@ -1283,8 +1301,8 @@ GridComp.prototype.setCellActive = function(cell, ctrl) {
 		// 处理参照
 		else if (cell.editorType == EditorType.REFERENCE) {
 			var comp = this.compsMap.get(cell.editorType + cell.colIndex);
-			comp.setBounds(compOffsetLeft(cell, document.body) + 1,
-					compOffsetTop(cell, document.body), cell.offsetWidth - 1,
+			comp.setBounds(compOffsetLeft(cell, document.body) + GridComp.CELL_LEFT_PADDING,
+					compOffsetTop(cell, document.body), cell.offsetWidth - GridComp.CELL_RIGHT_PADDING - 1,
 					cell.offsetHeight);
 			comp.setValue(this.model.getCellValueByIndex(rowIndex, colIndex));
 			comp.showV();
@@ -1295,8 +1313,8 @@ GridComp.prototype.setCellActive = function(cell, ctrl) {
 		// 文本域类型
 		else if (cell.editorType == EditorType.TEXTAREA) {
 			var comp = this.compsMap.get(cell.editorType);
-			comp.setBounds(compOffsetLeft(cell, document.body) + 1,
-					compOffsetTop(cell, document.body) - 1, cell.offsetWidth
+			comp.setBounds(compOffsetLeft(cell, document.body) + GridComp.CELL_LEFT_PADDING,
+					compOffsetTop(cell, document.body) - 1, cell.offsetWidth - GridComp.CELL_RIGHT_PADDING
 							- 1, cell.offsetHeight);
 			comp.setValue(this.model.getCellValueByIndex(rowIndex, colIndex));
 			comp.showV();
@@ -1308,9 +1326,13 @@ GridComp.prototype.setCellActive = function(cell, ctrl) {
 		else if (cell.editorType == EditorType.CHECKBOX) {
 			var comp = this.compsMap.get(cell.editorType);
 			comp.setBounds(compOffsetLeft(cell, document.body)
-					+ parseInt(cell.offsetWidth / 2) - 10, compOffsetTop(cell,
+					+ 10, compOffsetTop(cell,
 					document.body)
-					+ 1, cell.offsetWidth - 1, cell.offsetHeight);
+					+ 1, cell.offsetWidth - 10 - 1, cell.offsetHeight);
+//			comp.setBounds(compOffsetLeft(cell, document.body)
+//					+ parseInt(cell.offsetWidth / 2) - 10, compOffsetTop(cell,
+//					document.body)
+//					+ 1, cell.offsetWidth - 1, cell.offsetHeight);
 			var header = this.basicHeaders[cell.colIndex];
 			if (header.valuePair != null)
 				comp.setValuePair(header.valuePair);
@@ -1543,8 +1565,6 @@ GridComp.prototype.initDivs = function() {
 	}
 	if (this.pageSize > 0)
 		this.initPaginationBar();
-	// 重新调整翻页工具条位置
-	GridComp.adjustPaginationBar(this);
 };
 
 /**
@@ -1671,7 +1691,7 @@ GridComp.processAutoExpandHeadersWidth = function(gridId) {
 						var tempCell = autoHeaders[i].dataDiv.cells[j];
 						if (tempCell) {
 							// 修正当有列设置为autoExpand="true"时，该元素宽度的显示问题
-							tempCell.style.width = autoHeaders[i].width - 5
+							tempCell.style.width = autoHeaders[i].width - GridComp.CELL_LEFT_PADDING - GridComp.CELL_RIGHT_PADDING 
 									+ "px"; // 5为左右padding加上border的宽
 						}
 					}
@@ -1832,6 +1852,8 @@ GridComp.prototype.initOuterDiv = function() {
 	this.outerDiv.style.left = this.left;
 	this.outerDiv.style.top = this.top;
 	this.outerDiv.style.width = this.width;
+	if(!this.flowmode)
+		this.outerDiv.style.height = "100%";
 };
 
 /**
@@ -1846,11 +1868,49 @@ GridComp.prototype.initPaginationBar = function() {
 	this.paginationBar.style.width = "100%";
 	this.outerDiv.appendChild(this.paginationBar);
 	
+	this.paginationPanel = $ce("DIV");
+	this.paginationPanel.className = "paginationPanel";
+	this.paginationBar.appendChild(this.paginationPanel);
+	
 	this.paginationContent = $ce("div");
 	this.paginationContent.id = "grid_paginationcontent";
 	this.paginationContent.className = "pageinationbgcenter";
-	this.paginationBar.appendChild(this.paginationContent);
+	this.paginationPanel.appendChild(this.paginationContent);
 	this.paginationBar.style.width = this.constant.outerDivWidth + "px";
+	
+	this.paginationMessage = $ce("DIV");
+	this.paginationMessage.className = "paginationMessage";
+	
+	this.paginationText1 = $ce("DIV");
+	this.paginationText1.innerHTML = "跳转到";
+	this.paginationText1.className = "paginationText";
+	this.paginationText1.style.marginRight = "5px";
+	this.paginationText2 = $ce("DIV");
+	this.paginationText2.innerHTML = "页";
+	this.paginationText2.className = "paginationText";
+	this.paginationText2.style.marginLeft = "5px";
+	this.paginationText2.style.marginRight = "20px";
+	this.paginationText3 = $ce("DIV");
+	this.paginationText3.innerHTML = "共" + this.model.dataset.getAllRowCount() + "条";
+	this.paginationText3.className = "paginationText";
+	this.paginationText3.style.marginRight = "20px";
+	this.paginationText4 = $ce("DIV");
+	this.paginationText4.innerHTML = "每页显示" + "<span style='color:#0086b2;'>" + this.pageSize + "</span>" + "项";
+	this.paginationText4.className = "paginationText";
+	
+	this.paginationMessage.appendChild(this.paginationText1);
+	this.paginationInput = new IntegerTextComp(this.paginationMessage, 'paginationInput', 0, 4, 35, "relative");
+	this.paginationInput.Div_gen.className = "paginationText";
+	this.paginationMessage.appendChild(this.paginationText2);
+	this.paginationMessage.appendChild(this.paginationText3);
+	this.paginationMessage.appendChild(this.paginationText4);
+	
+	this.paginationPanel.appendChild(this.paginationMessage);
+	
+	this.paginationInput.onenter = function(e){
+		var pageIndex = parseInt(this.input.value, 10) - 1;
+		GridComp.pageNavgate(e, pageIndex, oThis.id);
+	}
 	
 //	this.firstPage = $ce("BUTTON");
 ////	this.firstPage.style[CSSFLOAT] = "left";
@@ -1924,11 +1984,16 @@ GridComp.prototype.setPaginationInfo = function() {
  */
 GridComp.prototype.processPaginationInfo = function(pageIndex, rowCount,
 		pageCount, pageRowCount) {
+	if(this.paginationText3){
+		this.paginationText3.innerHTML = "共" + rowCount + "条";
+	}
 	this.pageIndex = pageIndex;
 	this.paginationContent.innerHTML = "";
-	if(pageCount == 0){
+	if(pageCount <= 1){
+		this.paginationMessage.style.display = "none";
 		return;
 	}
+	this.paginationMessage.style.display = "";
 	
 	var preDiv = $ce("div");
 	preDiv.className = "pre";
@@ -1958,35 +2023,93 @@ GridComp.prototype.processPaginationInfo = function(pageIndex, rowCount,
 	this.paginationContent.appendChild(smartCutDivFirst);
 
 	var classNamePre = "un";
-	for(var i = 0; i < pageCount; i ++){
-		var a = $ce("A");
-		a.onclick = GridComp.pageNavgate;
-		a.href = "#";
-		a.pageIndex = i;
-		a.gridId = this.id;
-		if(i == pageIndex){
-			classNamePre = "";
-		}else{
-			classNamePre = "un";
+	if(pageCount <= 8){
+		for(var i = 0; i < pageCount; i ++){
+			var a = $ce("A");
+			a.onclick = GridComp.pageNavgate;
+			a.href = "#";
+			a.pageIndex = i;
+			a.gridId = this.id;
+			if(i == pageIndex){
+				classNamePre = "";
+			}else{
+				classNamePre = "un";
+			}
+			if(i + 1 <= 99){
+				var selectedDiv = $ce("div");
+				selectedDiv.className = classNamePre + "selected";
+				selectedDiv.innerHTML = (i + 1);
+				a.appendChild(selectedDiv);
+			}else{
+				var selectedLeftDiv = $ce("div");
+				var selectedCenterDiv = $ce("div");
+				var selectedRightDiv = $ce("div");
+				selectedLeftDiv.className = classNamePre + "selectedleft";
+				selectedCenterDiv.className = classNamePre + "selectedcenter";
+				selectedRightDiv.className = classNamePre + "selectedright";
+				selectedCenterDiv.innerHTML = (i + 1);
+				a.appendChild(selectedLeftDiv);
+				a.appendChild(selectedCenterDiv);
+				a.appendChild(selectedRightDiv);
+			}
+			this.paginationContent.appendChild(a);
 		}
-		if(i + 1 <= 99){
-			var selectedDiv = $ce("div");
-			selectedDiv.className = classNamePre + "selected";
-			selectedDiv.innerHTML = (i + 1);
-			a.appendChild(selectedDiv);
+	}else{
+		var beginIndex = 0;
+		var endIndex = 0;
+		if(pageIndex <= 1){
+			beginIndex = 0;
 		}else{
-			var selectedLeftDiv = $ce("div");
-			var selectedCenterDiv = $ce("div");
-			var selectedRightDiv = $ce("div");
-			selectedLeftDiv.className = classNamePre + "selectedleft";
-			selectedCenterDiv.className = classNamePre + "selectedcenter";
-			selectedRightDiv.className = classNamePre + "selectedright";
-			selectedCenterDiv.innerHTML = (i + 1);
-			a.appendChild(selectedLeftDiv);
-			a.appendChild(selectedCenterDiv);
-			a.appendChild(selectedRightDiv);
+			beginIndex = pageIndex - 2;
 		}
-		this.paginationContent.appendChild(a);
+		endIndex = beginIndex + 4;
+		if(pageIndex >= pageCount - 6){
+			beginIndex = pageCount - 8;
+			endIndex = beginIndex + 7;
+		}
+		if(pageIndex >= pageCount - 2){
+			beginIndex = 0;
+			endIndex = beginIndex + 4;
+		}
+		for(var i = 0; i < pageCount; i++){
+			if((i >= beginIndex && i <= endIndex) || (i >= pageCount - 2)){
+				var a = $ce("A");
+				a.onclick = GridComp.pageNavgate;
+				a.href = "#";
+				a.pageIndex = i;
+				a.gridId = this.id;
+				if(i == pageIndex){
+					classNamePre = "";
+				}else{
+					classNamePre = "un";
+				}
+				if(i + 1 <= 99){
+					var selectedDiv = $ce("div");
+					selectedDiv.className = classNamePre + "selected";
+					selectedDiv.innerHTML = (i + 1);
+					a.appendChild(selectedDiv);
+				}else{
+					var selectedLeftDiv = $ce("div");
+					var selectedCenterDiv = $ce("div");
+					var selectedRightDiv = $ce("div");
+					selectedLeftDiv.className = classNamePre + "selectedleft";
+					selectedCenterDiv.className = classNamePre + "selectedcenter";
+					selectedRightDiv.className = classNamePre + "selectedright";
+					selectedCenterDiv.innerHTML = (i + 1);
+					a.appendChild(selectedLeftDiv);
+					a.appendChild(selectedCenterDiv);
+					a.appendChild(selectedRightDiv);
+				}
+				this.paginationContent.appendChild(a);
+			}else if(i == endIndex + 1){
+				var a = $ce("A");
+				var selectedDiv = $ce("div");
+				selectedDiv.className = "unselected";
+				selectedDiv.innerHTML = "...";
+				a.appendChild(selectedDiv);
+				this.paginationContent.appendChild(a);
+			}
+		}
 	}
 	
 	var smartCutDivLast = $ce("div");
@@ -2015,9 +2138,8 @@ GridComp.prototype.processPaginationInfo = function(pageIndex, rowCount,
 	nextA.pageIndex = pageIndex;
 	nextA.appendChild(nextDiv);
 	this.paginationContent.appendChild(nextA);
-	
-	this.paginationContent.style.width = this.paginationContent.offsetWidth + "px";
-	
+
+	this.paginationPanel.style.width = (this.paginationContent.offsetWidth + 25 + 20 + 300) + "px";
 	return;
 };
 
@@ -2626,6 +2748,9 @@ GridComp.prototype.initHeaderTable = function(header) {
 					EditableListener.COMPOMENT_TYPE);
 		}
 		tempDiv.appendChild(header.textNode);
+		if (header.required){
+			//header.textNode.innerHTML = '<span style="color:red;margin-right:3px;">*</span>';
+		}
 		if (selectBox != null) {
 			// 只有header的高度为2倍表头高度以上才设置此时padding
 			// if (cell.offsetHeight > GridComp.HEADERROW_HEIGHT * 2)
@@ -2702,18 +2827,18 @@ GridComp.prototype.initHeaderTable = function(header) {
 						this.sortImg = $ce("img");
 						this.sortImg.className = "sort_img";
 						this.sortImg.src = window.themePath
-								+ "/images/grid/sort_up.gif";
+								+ "/ui/ctrl/grid/images/sort_up.gif";
 						tempDiv.appendChild(this.sortImg);
 						// 记录当前的排序方向
 						header.ascending = -1;
 					} else {
 						if (header.ascending == -1) {
 							this.sortImg.src = window.themePath
-									+ "/images/grid/sort_down.gif";
+									+ "/ui/ctrl/grid/images/sort_down.gif";
 							header.ascending = 1;
 						} else if (header.ascending == 1) {
 							this.sortImg.src = window.themePath
-									+ "/images/grid/sort_up.gif";
+									+ "/ui/ctrl/grid/images/sort_up.gif";
 							header.ascending = -1;
 						}
 					}
@@ -2853,22 +2978,22 @@ GridComp.prototype.initHeaderTable = function(header) {
 	// headers最后一个加右边界
 	if (header == this.getLastFixedVisibleHeader()
 			|| header == this.getLastDynamicVisibleHeader()) {
-		var bottomWidth = getStyleAttribute(cell,
-				"border-bottom-width");
-		var bottomStyle = getStyleAttribute(cell,
-				"border-bottom-style");
-		var bottomColor = getStyleAttribute(cell,
-				"border-bottom-color");
-		if (bottomWidth)
-			cell.style.borderRightWidth = bottomWidth;
-		if (bottomStyle)
-			cell.style.borderRightStyle = bottomStyle;
-		if (bottomColor)
-			cell.style.borderRightColor = bottomColor;
-		
-		cell.style.borderRightColor = "#D1DFE4";
-		cell.style.borderRightStyle = "solid";
-		cell.style.borderRightWidth = "1px";
+//		var bottomWidth = getStyleAttribute(cell,
+//				"border-bottom-width");
+//		var bottomStyle = getStyleAttribute(cell,
+//				"border-bottom-style");
+//		var bottomColor = getStyleAttribute(cell,
+//				"border-bottom-color");
+//		if (bottomWidth)
+//			cell.style.borderRightWidth = bottomWidth;
+//		if (bottomStyle)
+//			cell.style.borderRightStyle = bottomStyle;
+//		if (bottomColor)
+//			cell.style.borderRightColor = bottomColor;
+//		
+//		cell.style.borderRightColor = "#D1DFE4";
+//		cell.style.borderRightStyle = "solid";
+//		cell.style.borderRightWidth = "1px";
 		tempDiv.style.borderRightWidth = "0px";
 	}
 };
@@ -3155,7 +3280,16 @@ GridComp.prototype.initDataOuterDiv = function() {
 	this.dataOuterDiv = $ce("div");
 	this.outerDiv.appendChild(this.dataOuterDiv);
 	this.dataOuterDiv.className = "data_outer_div";
+	this.dataOuterDiv.style.zIndex = 101;
 	this.dataOuterDiv.style.width = this.constant.outerDivWidth + "px";// - 2;
+//	if(!this.flowmode){
+//		var height = this.outerDiv.offsetHeight - GridComp.HEADERROW_HEIGHT - GridComp.PAGEBAR_HEIGHT;
+//		if (height > 0)
+//			this.dataOuterDiv.style.height = height + "px";
+//		else	
+//			this.dataOuterDiv.style.height = "100%";
+//	}
+	this.dataOuterDiv.style.left = this.constant.fixedColumDivWidth + "px";
 };
 
 /**
@@ -3173,8 +3307,11 @@ GridComp.prototype.initFixedColumDiv = function() {
 	this.adjustFixedColumDivHeight();
 	// 宽度和表头固定区一样
 	this.fixedColumDiv.style.width = this.constant.fixedHeaderDivWidth + "px";
+	this.fixedColumDiv.style.height = "100%";
 	// 将固定列的宽度放入常量对象
 	this.constant.fixedColumDivWidth = this.constant.fixedHeaderDivWidth;
+	if(!this.flowmode)
+		this.fixedColumDiv.style.overflow = "hidden";
 };
 
 /**
@@ -3189,6 +3326,21 @@ GridComp.prototype.adjustFixedColumDivHeight = function() {
 		this.fixedColumDiv.style.top = (h + GridComp.PAGEBAR_HEIGHT) + "px";
 	else
 		this.fixedColumDiv.style.top = h + "px";
+	
+	if(!this.flowmode){
+		var height = 0;
+		if(this.pageSize == -1)
+			height = this.outerDiv.offsetHeight - GridComp.HEADERROW_HEIGHT ;
+		else
+			height = this.outerDiv.offsetHeight - GridComp.HEADERROW_HEIGHT - GridComp.PAGEBAR_HEIGHT;
+//			
+//		if(this.isDataDivScroll())
+//			height -= 10;	
+		if (height > 0)
+			this.fixedColumDiv.style.height = height + "px";
+		else	
+			this.fixedColumDiv.style.height = "100%";
+	}
 };
 
 /**
@@ -3275,7 +3427,7 @@ GridComp.prototype.initSumRowDataDiv = function() {
 	var cont = this.dynSumRowContentDiv;
 	cont.className = "dynsumcontainer_div";
 	this.outerDiv.appendChild(cont);
-	// this.dataOuterDiv.appendChild(cont);
+	// this.Div.appendChild(cont);
 	if (this.dynamicHeaderDiv.defaultWidth + 4 > 0)
 		cont.style.width = (this.dynamicHeaderDiv.defaultWidth + 4) + "px";
 	else
@@ -3334,8 +3486,8 @@ GridComp.prototype.initSumRowCells = function() {
 			else
 				cell.style.width = this.defaultDynamicHeaders[i].width - 5
 						+ "px";
-			cell.style.paddingLeft = "2px";
-			cell.style.paddingRight = "2px";
+			cell.style.paddingLeft = "10px";
+			cell.style.paddingRight = "10px";
 		}
 	}
 };
@@ -3361,6 +3513,9 @@ GridComp.prototype.initSelectColumDiv = function() {
 	var rowNum = this.getRowsNum();
 	// 存放所有cells索引的数组
 	this.selectColumDiv.cells = new Array(rowNum);
+	
+	if(!this.flowmode)
+		this.selectColumDiv.style.position = "absolute";
 };
 
 /**
@@ -3379,7 +3534,7 @@ GridComp.prototype.initDynamicColumDataDiv = function() {
 	// this.dynamicColumDataDiv.style.border = "solid black 1px";
 
 //	this.dynamicColumDataDiv.style.top = this.constant.headerHeight + "px";
-	this.dynamicColumDataDiv.style.left = iOffsetWidth + "px";
+	//this.dynamicColumDataDiv.style.left = iOffsetWidth + "px";
 	// 保存数据区真正的宽度值,动态表格区真正的宽度值
 	var dynamicDataDivRealWidth = this.getDynamicTableDivRealWidth(true);
 	this.realWidth = dynamicDataDivRealWidth + iOffsetWidth;
@@ -3516,16 +3671,18 @@ GridComp.prototype.setEditable = function(isEditable) {
 		var header = this.basicHeaders[i];
 		if (header.renderType == BooleanRender) {
 			if (isEditable) {
-				if (header.selectBox != null) {
+				if (header.selectBox != null)
 					header.selectBox.disabled = false;
+				if (header.dataDiv != null && header.dataDiv.cells != null){
 					for (var j = 0; j < header.dataDiv.cells.length; j++) {
 						if (header.dataDiv.cells[j])
 							header.dataDiv.cells[j].firstChild.disabled = false;
 					}
 				}
 			} else {
-				if (header.selectBox != null) {
+				if (header.selectBox != null) 
 					header.selectBox.disabled = true;
+				if (header.dataDiv != null && header.dataDiv.cells != null){
 					for (var j = 0; j < header.dataDiv.cells.length; j++) {
 						if (header.dataDiv.cells[j])
 							header.dataDiv.cells[j].firstChild.disabled = true;
@@ -3666,41 +3823,50 @@ GridComp.initEditCompsForGrid = function(gridId) {
 			oThis.compsMap.put(EditorType.STRINGTEXT, comp);
 			stringInited = true;
 		}
-		if (comp != null) {
-			comp.ingrid = true;
-			comp.colIndex = i;
-			var compKeyListener = new KeyListener();
-			// compKeyListener.onEnter = function(keyEvent) {
-			// GridComp.compEnterFun(oThis);
-			// stopAll(keyEvent.event);
-			// };
-			compKeyListener.onKeyDown = function(keyEvent) {
-				GridComp.compKeyDownFun(oThis, keyEvent.event);
-			};
-			comp.addListener(compKeyListener);
-			comp.hideV();
-			// // 下拉框和参照的值改变事件，修改DS内容
-			// if (comp.componentType == "COMBOBOX" || comp.componentType ==
-			// "REFERENCETEXT") {
-			// 数据改变事件
-			var textListener = new TextListener();
-			textListener.valueChanged = function(valueChangeEvent) {
-				GridComp.compValueChangeFun(oThis, valueChangeEvent);
-			};
-			comp.addListener(textListener);
-			// }
-			// 焦点移出事件
-			var compFocusListener = new FocusListener();
-			compFocusListener.onBlur = function(keyEvent) {
-				GridComp.compBlurFun(oThis, keyEvent);
-			};
-			comp.addListener(compFocusListener);
+		if(comp){
+			comp.Div_gen.style.height = "50px";
+			comp.Div_gen.style.paddingTop = "3px";
 		}
+		GridComp.addCompListener(oThis, comp, i);
 	}
 
 		// 标示控件已经被初始化过
 		// oThis.compsInited = true;
 };
+
+/**
+ * 对控件增加事件
+ * 
+ * @param {} grid
+ * @param {} comp
+ * @param {} colIndex
+ */
+GridComp.addCompListener = function(grid, comp, colIndex){
+	if (comp != null) {
+		comp.ingrid = true;
+		comp.colIndex = colIndex;
+		var compKeyListener = new KeyListener();
+		compKeyListener.onKeyDown = function(keyEvent) {
+			GridComp.compKeyDownFun(grid, keyEvent.event);
+		};
+		comp.addListener(compKeyListener);
+		comp.hideV();
+		
+		// 数据改变事件
+		var textListener = new TextListener();
+		textListener.valueChanged = function(valueChangeEvent) {
+			GridComp.compValueChangeFun(grid, valueChangeEvent);
+		};
+		comp.addListener(textListener);
+		
+		// 焦点移出事件
+		var compFocusListener = new FocusListener();
+		compFocusListener.onBlur = function(keyEvent) {
+			GridComp.compBlurFun(grid, keyEvent);
+		};
+		comp.addListener(compFocusListener);
+	}
+}
 
 /**
  * 失去焦点时事件处理
@@ -3827,13 +3993,12 @@ GridComp.prototype.getCellRowIndex = function(cell){
  */
 GridComp.prototype.hiddenComp = function() {
 	if (this.showComp != null) {
-		var tempComp = this.showComp;
-		this.showComp.hideV();
+			this.showComp.hideV();
+		if  (this.showComp.extend)
+			this.showComp.destroySelf();
 		this.showComp = null;
 		// 将激活控件的记录变量设为null(只有编辑控件真正的隐藏才会设置当前的激活cell为null)
 		this.currActivedCell = null;
-		// if (!IS_IE)
-		// tempComp.input.blur();
 	}
 };
 
@@ -3914,6 +4079,8 @@ GridComp.prototype.isDataDivScroll = function() {
  * @private
  */
 GridComp.prototype.isVScroll = function() {
+	if(this.flowmode)
+		return false;
 	var num = this.getRowsNum();
 	if (num > 0) {
 		// 是否竖直滚动
@@ -4025,16 +4192,17 @@ GridComp.prototype.fireRowInserted = function(index) {
  */
 GridComp.prototype.andLineStateAndColNum = function(rowCount, index, rowHeight,
 		row) {
-
+	var isOdd = this.isOdd(index);
 	// 增加数字行号
 	if (this.isShowNumCol) {
 		var $n = $ce("div");
-		$n.className = "row_num_div";
+		$n.className = isOdd ? "gridcell_odd" : "gridcell_even";
 		var style = $n.style;
 		$n.id = "numline" + rowCount;
 		$n.rowIndex = rowCount;
-		style.height = rowHeight + "px";
-		$n.innerHTML = "<center>" + rowCount + "</ceter>";
+		style.height = (rowHeight - GridComp.CELL_BOTTOM_BORDER_WIDTH) + "px";
+		style.lineHeight = (rowHeight - GridComp.CELL_BOTTOM_BORDER_WIDTH) + "px";
+		$n.innerHTML = "<center>" + (index + 1) + "</ceter>";
 		this.rowNumDiv.appendChild($n);
 	}
 
@@ -4198,6 +4366,10 @@ GridComp.prototype.addOneRow = function(row, index, scrollLeft, rowHeight, rowCo
 		var cell = $ce("div");
 		rowCells.push(cell);
 		cell.rowIndex = index;
+		if(row.level != null)
+			cell.level = row.level;
+		if(row.hasChildren && row.hasChildren != null)
+			cell.hasChildren = row.hasChildren;
 		// 记录cell对应ds中的第几列
 		cell.colIndex = i;
 		cell.editorType = header.editorType;
@@ -4218,10 +4390,10 @@ GridComp.prototype.addOneRow = function(row, index, scrollLeft, rowHeight, rowCo
 		// 在div中只有一行的情况下设置行距等于div高度,可以使div中的文字距中,从而不需要设置paddingTop
 		cellStyle.lineHeight = rowHeight - GridComp.CELL_BOTTOM_BORDER_WIDTH
 				+ "px";
-		cellStyle.paddingLeft = "2px";
-		cellStyle.paddingRight = "2px";
+		cellStyle.paddingLeft = GridComp.CELL_LEFT_PADDING + "px";
+		cellStyle.paddingRight = GridComp.CELL_RIGHT_PADDING +  "px";
 		// 根据header中textAlign属性设置文字在cell中的位置
-		cellStyle.textAlign = header.textAlign;
+		cellStyle.textAlign = "left";//header.textAlign;
 		//cellStyle.color = "#0086b2";
 		if(parentRowIndex != null){
 			cell.parentCell = header.dataDiv.childNodes[parentRowIndex];
@@ -4233,11 +4405,10 @@ GridComp.prototype.addOneRow = function(row, index, scrollLeft, rowHeight, rowCo
 		else{
 			header.dataDiv.insertBefore(cell, header.dataDiv.childNodes[index]);
 		}
-		// guoweic: add start 2009-10-29
 		if (header.dataDivWidth != null)
-			cellStyle.width = (header.dataDivWidth - 4) + "px"; // 4为左右padding
+			cellStyle.width = (header.dataDivWidth - GridComp.CELL_LEFT_PADDING - GridComp.CELL_RIGHT_PADDING) + "px";
 		else
-			cellStyle.width = (header.dataDiv.offsetWidth - 4) + "px"; // 4为左右padding
+			cellStyle.width = (header.dataDiv.offsetWidth - GridComp.CELL_LEFT_PADDING - GridComp.CELL_RIGHT_PADDING) + "px";
 		// 如果分组显示,新分组开始的标示
 		var newGroupBegin = false;
 		// 如果分组显示,新分组结束的标示
@@ -4284,9 +4455,9 @@ GridComp.prototype.addOneRow = function(row, index, scrollLeft, rowHeight, rowCo
 						if (header.isGroupBy) {
 						} else {
 							if (header.dataDivWidth != null)
-								cellStyle.width = (header.dataDivWidth - 5) + "px"; // 5为左右padding加上border的宽
+								cellStyle.width = (header.dataDivWidth - GridComp.CELL_LEFT_PADDING - GridComp.CELL_RIGHT_PADDING - 1) + "px"; //最后一列border为1 
 							else
-								cellStyle.width = (header.dataDiv.offsetWidth - 5) + "px"; // 5为左右padding加上border的宽
+								cellStyle.width = (header.dataDiv.offsetWidth - GridComp.CELL_LEFT_PADDING - GridComp.CELL_RIGHT_PADDING - 1) + "px"; //最后一列border为1 
 							var bottomWidth = getStyleAttribute(cell,
 									"border-bottom-width");
 							var bottomStyle = getStyleAttribute(cell,
@@ -4588,7 +4759,7 @@ GridComp.prototype.scrollToSelectedRow = function(index) {
  * 
  * @private
  */
-GridComp.prototype.paintZone = function(key, rowIndex, hasParent) {
+GridComp.prototype.paintZone = function(key, rowIndex, hasParent, currCell) {
 	if (this.model == null)
 		return;
 	if (this.needPaintRows != null && this.needPaintRows == true) {
@@ -4607,8 +4778,12 @@ GridComp.prototype.paintZone = function(key, rowIndex, hasParent) {
 		var rowHeihgt = this.rowHeight;
 		var rowCount = this.model.getRowsCount();
 		for (var i = 0; i < modelLen; i++) {
-			if(hasParent)
-				this.addOneRow(rows[i], rowIndex + i, scrollLeft, rowHeihgt, rowCount, rowIndex - 1);
+			if(hasParent){
+				if(currCell.level != null){
+					rows[i].level = currCell.level + 1;
+					this.addOneRow(rows[i], rowIndex + i, scrollLeft, rowHeihgt, rowCount, rowIndex - 1);
+				}
+			}
 			else
 				this.addOneRow(rows[i], rowIndex + i, scrollLeft, rowHeihgt, rowCount, null);
 		}
@@ -4652,7 +4827,7 @@ GridComp.prototype.showChildRows = function(rowIndex){
 };
 
 GridComp.prototype.loadChild = function(fk, rowIndex, currCell) {
-	this.paintChild(fk, rowIndex, true);
+	this.paintChild(fk, rowIndex, true, currCell);
 };
 
 /**
@@ -5469,9 +5644,9 @@ GridComp.prototype.setModel = function(model) {
 };
 
 
-GridComp.prototype.paintChild = function(key, rowIndex, hasParent) {
+GridComp.prototype.paintChild = function(key, rowIndex, hasParent, currCell) {
 	this.model.initUIRows(rowIndex, null, key);
-	this.paintZone(key, rowIndex, hasParent);
+	this.paintZone(key, rowIndex, hasParent, currCell);
 };
 
 /**
@@ -6671,6 +6846,7 @@ GridCompModel.prototype.initUIRows = function(startIndex, count, key) {
 			row.relation = bindRelation;
 			this.rows.splice(startIndex + i, 0, row);
 			mrows[i] = row;
+			mrows[i].hasChildren = this.hasChildren(this.dataset, dsRows[i]);
 		}
 		
 		if(key != null){
@@ -6692,8 +6868,6 @@ GridCompModel.prototype.initUIRows = function(startIndex, count, key) {
 
 
 GridCompModel.prototype.filterRows = function(ds, key){
-	if(this.containsPks == null)
-		this.containsPks = new HashMap();
 	if(this.treeLevel == null){
 		alert("不是树表，不支持此方法");
 		return;
@@ -6702,30 +6876,48 @@ GridCompModel.prototype.filterRows = function(ds, key){
 		key = "";
 	var ppkField = this.treeLevel.recursivePKeyField;
 	var index = ds.nameToIndex(ppkField);
-	var pkField = this.treeLevel.recursiveKeyField;
-	var pkIndex = ds.nameToIndex(pkField);
+
+
 	var rows = this.dataset.getRows();
 	if(rows == null)
 		return null;
 	var rowArr = [];
-	var pkValue = null;
+
 	for(var i = 0; i < rows.length; i ++){
 		var ppkValue = rows[i].getCellValue(index);
 		if(ppkValue == null)
 			ppkValue = "";
 		if(key == ppkValue){
 			rowArr.push(rows[i]);
-			pkValue = rows[i].getCellValue(pkIndex); 
-			this.containsPks.put(pkValue);
-		}else{
-			pkValue = rows[i].getCellValue(pkIndex); 
-			if(!this.containsPks.containsKey(ppkValue) && !this.containsPks.containsKey(pkValue) ){
-				rowArr.push(rows[i]);
-				this.containsPks.put(pkValue);
-			}
 		}
 	}
+	
 	return rowArr;
+
+};
+
+
+GridCompModel.prototype.hasChildren = function(ds, row){
+	if(!this.treeLevel)
+		return false;
+	var ppkField = this.treeLevel.recursivePKeyField;
+	var parentIndex = ds.nameToIndex(ppkField);
+
+	var pkField = this.treeLevel.recursiveKeyField;
+	var index = ds.nameToIndex(pkField);
+
+	var rows = this.dataset.getRows();
+	if(rows == null)
+		return false;
+	var rowArr = [];
+
+	var pk_parent = row.getCellValue(index);
+	for(var i = 0; i < rows.length; i ++){
+		var ppkValue = rows[i].getCellValue(parentIndex);
+		if(ppkValue == pk_parent)
+			return true;
+	}
+	return false;
 };
 
 /**
@@ -7727,6 +7919,30 @@ GridCompRow.prototype.setBindRelation = function(relation) {
 };
 
 /**
+ * 根据字段名返回value
+ * @param {} name
+ */
+GridCompRow.prototype.getCellValueByFieldName = function(name){
+	var dataset = this.rowData.dataset;
+	var dsIndex = dataset.nameToIndex(name);
+	return this.rowData.getCellValue(dsIndex);
+};
+
+/**
+ *根据字段名返回row中对应的列index 
+ * @param {} name
+ */
+GridCompRow.prototype.getColIndexByFieldName = function(name){
+	var dataset = this.rowData.dataset;
+	var dsIndex = dataset.nameToIndex(name);
+	for (var i = 0; i< this.relation.length ; i++){
+		if (this.relation[i] == dsIndex)
+		return i;
+	}
+	return -1;
+}
+
+/**
  * 根据指定的grid中的index返回dataset中实际列位置的值
  */
 GridCompRow.prototype.getCellValue = function(index) {
@@ -7897,11 +8113,16 @@ GridComp.preMouseOut = function(e){
 	this.className = 'pre';
 };
 
-GridComp.pageNavgate = function(e) {
+GridComp.pageNavgate = function(e, index, gridId) {
 	var event = EventUtil.getEvent(e);
 	stopAll(event);
-	var index = this.pageIndex;
-	var grid = window.objects[this.gridId];
+	if(this.pageIndex){
+		index = this.pageIndex;
+	}
+	if(this.gridId){
+		gridId = this.gridId;
+	}
+	var grid = window.objects[gridId];;
 	if(index == grid.pageIndex)
 		return;
 	grid.processServerPagination(index);
@@ -7923,7 +8144,7 @@ GridComp.pageFirst = function(e){
 	if(grid.pageIndex == 0)
 		return;
 	grid.processServerPagination(0);
-}
+};
 
 GridComp.pageNext = function(e) {
 	var event = EventUtil.getEvent(e);

@@ -58,7 +58,7 @@ public class PCCanvasLayoutRender extends UILayoutRender<UICanvas, WebElement> {
 		
 		buf.append("{");
 		String title = panel.getTitle();
-		if(title != null && !title.equals(""))
+		if(title != null)
 			buf.append("title:'").append(title).append("'");
 		buf.append("}");
 		buf.append(",'").append(panel.getClassName()).append("');\n");

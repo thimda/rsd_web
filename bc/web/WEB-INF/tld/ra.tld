@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"
+version="2.0">
+
+<description>The Web Framework's tld</description>
+<tlib-version>1.1</tlib-version>
+<short-name>ra</short-name>
+<uri>http://www.ufida.com/ra</uri>
+<tag>
+	<description>Lfw Page Body Tag</description>
+	<name>pageBody</name>
+	<tag-class>nc.uap.lfw.ra.render.pc.tag.RaPageBodyTag</tag-class>
+	<body-content>scriptless</body-content>
+</tag>
+
+<tag>
+	<description>Lfw Widget Tag</description>
+	<name>widget</name>
+	<tag-class>nc.uap.lfw.ra.render.pc.tag.RaWidgetTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Grid Tag</description>
+	<name>grid</name>
+	<tag-class>nc.uap.lfw.ra.render.pc.tag.RaGridCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widgetId</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Menubar Tag</description>
+	<name>menubar</name>
+	<tag-class>nc.uap.lfw.ra.render.pc.tag.RaMenubarCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widgetId</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>Lfw Button Tag</description>
+	<name>button</name>
+	<tag-class>nc.uap.lfw.ra.render.pc.tag.RaButtonCompTag</tag-class>
+	<body-content>scriptless</body-content>
+	<attribute>
+		<name>id</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>widgetId</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+</taglib>

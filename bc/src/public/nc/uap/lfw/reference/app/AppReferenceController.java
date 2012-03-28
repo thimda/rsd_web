@@ -24,6 +24,7 @@ import nc.uap.lfw.core.event.TextEvent;
 import nc.uap.lfw.core.event.TreeNodeEvent;
 import nc.uap.lfw.core.page.LfwWidget;
 import nc.uap.lfw.core.page.PageMeta;
+import nc.uap.lfw.core.refnode.NCRefNode;
 import nc.uap.lfw.core.refnode.RefNode;
 import nc.uap.lfw.core.serializer.impl.List2DatasetSerializer;
 import nc.uap.lfw.reference.ReferenceConstant;
@@ -202,7 +203,6 @@ public class AppReferenceController {
 	
 	
 	public void onAfterRowSelect(DatasetEvent se) {
-
 		Dataset masterDs = (Dataset) se.getSource();
 		Row masterSelecteRow = masterDs.getSelectedRow();
 		ViewContext widgetCtx =  AppLifeCycleContext.current().getWindowContext().getCurrentViewContext();
@@ -231,8 +231,26 @@ public class AppReferenceController {
 					PageMeta parentPm = LfwRuntimeEnvironment.getWebContext().getParentPageMeta();
 					RefNode rfnode = (RefNode) parentPm.getWidget(widgetId).getViewModels().getRefNode(refNodeId);
 					BaseRefModel baseRefModel = (BaseRefModel) LfwRefUtil.getRefModel(rfnode);
+					String pk_org = null;
+					if(rfnode instanceof NCRefNode){
+						boolean orgs = ((NCRefNode)rfnode).isOrgs();
+						if(orgs){
+							ReferenceComp reftext = (ReferenceComp) widget.getViewComponents().getComponent("refcomp_org");
+							if(reftext != null){
+								pk_org = reftext.getValue(); 
+								//根据参数设置VO条件
+								
+							}
+						}
+					}
 					if(baseRefModel instanceof TreeGridRefModel){
 						TreeGridRefModel refModel = (TreeGridRefModel)baseRefModel;
+						if(pk_org != null && !pk_org.equals("")){
+							if(baseRefModel instanceof NcAdapterTreeGridRefModel){
+								AbstractRefModel ncModel = ((NcAdapterTreeGridRefModel)baseRefModel).getNcModel();
+								ncModel.setPk_org(pk_org);
+							}
+						}
 						processTreeSelWherePart(masterDs, rfnode, refModel);
 						//如果是通过第一级树与masterDs建立的关系
 						if(dr.getId().equals("master_slave_rel1")){

@@ -337,13 +337,6 @@ function hideWarningDialog() {
 };
 
 /**
- * 显示信息对话框
- */
-function showMessageDialog(msg) {
-	require('messagedialog', function(){MessageDialogComp.showDialog(msg)});
-};
-
-/**
  * 隐藏信息对话框
  */
 function hideMessageDialog() {
@@ -508,7 +501,7 @@ function showDialog(pageUrl, title, width, height, id, refresh, clearState, refD
 				if (typeof (window["$modalDialogFrame" + id].contentWindow) == "unknown") return;
 				if(window["$modalDialogFrame" + id].contentWindow == null) return;
 				var pageui = window["$modalDialogFrame" + id].contentWindow.pageUI;
-				if(pageui)
+				if(pageui && window[dialogName])
 					return pageui.showCloseConfirm(window[dialogName]);
 			};
 			window[dialogName].addListener(dls);
@@ -765,9 +758,11 @@ function handleExceptionByDoc(doc, exception, ajaxArgs, ajaxObj, xmlHttpReq) {
 		}
 		else if (interationInfo.type == "MESSAGE_DIALOG") {
 			var msg = interationInfo.msg;
+			var title = interactionInfo.title;
+			var btnText = interactionInfo.btnText;
 			rePostReq.ajaxObj = ajaxObj;
 			rePostReq.okReturn = interationInfo.okReturn;
-			showMessageDialog(msg, rePostOk);
+			showMessageDialog(msg, rePostOk, title, btnText);
 		}
 		else if(interationInfo.type == "INPUT_DIALOG") {
 			var items = interationInfo.items;
@@ -930,22 +925,13 @@ function hideExceptionDialog() {
  * 
  * @param func 点击对话框确认按钮要执行的函数
  */
-function showMessageDialog(msg, func, left, top) {
+ 
+function showMessageDialog(msg, func, title, okBtnText) {
 	require("messagedialog", function(){
-		var dialog = MessageDialogComp.showDialog(msg);
-		if (left != null) {
-			var leftValue = parseInt(left);
-			dialog.modaldialog.divdialog.style.left = leftValue;
-		}
-		if (top != null) {
-			var topValue = parseInt(top);
-			dialog.modaldialog.divdialog.style.top = topValue;
-		}
-	
+		var dialog = MessageDialogComp.showDialog(msg, title, okBtnText);
 		if (func != null)
 			dialog.onclick = func;
 	});
-//	return dialog;
 };
 
 /**

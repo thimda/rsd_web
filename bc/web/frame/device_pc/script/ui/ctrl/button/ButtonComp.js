@@ -16,11 +16,11 @@ ButtonComp.prototype.componentType = "BUTTON";
 
 // 按钮大小默认值
 // 高度
-ButtonComp.BUTTON_HEIGHT = 22;
+ButtonComp.BUTTON_HEIGHT = 23;
 // 左边宽度
-ButtonComp.BUTTON_LEFT_WIDTH = 0;
+ButtonComp.BUTTON_LEFT_WIDTH = 4;
 // 右边宽度
-ButtonComp.BUTTON_RIGHT_WIDTH = 0;
+ButtonComp.BUTTON_RIGHT_WIDTH = 4;
 // 按钮默认宽度
 ButtonComp.WIDTH = 90;
 
@@ -65,12 +65,7 @@ function ButtonComp(parent, name, left, top, width, height, text, tip, refImg,
  * @private
  */
 ButtonComp.prototype.initStaticConstant = function() {
-	ButtonComp.BUTTON_HEIGHT = getCssHeight(this.className + "_BUTTON_HEIGHT");
-	ButtonComp.BUTTON_LEFT_WIDTH = getCssHeight(this.className + "_BUTTON_LEFT_WIDTH");
-	ButtonComp.BUTTON_RIGHT_WIDTH = getCssHeight(this.className + "_BUTTON_RIGHT_WIDTH");
-	ButtonComp.BUTTON_HEIGHT = ButtonComp.BUTTON_HEIGHT == 0 ? 22 : ButtonComp.BUTTON_HEIGHT;  
-	ButtonComp.BUTTON_LEFT_WIDTH = ButtonComp.BUTTON_LEFT_WIDTH == 0 ? 2 : ButtonComp.BUTTON_LEFT_WIDTH;
-	ButtonComp.BUTTON_RIGHT_WIDTH = ButtonComp.BUTTON_RIGHT_WIDTH == 0 ? 2 : ButtonComp.BUTTON_RIGHT_WIDTH;
+	  
 };
 
 /**
@@ -220,8 +215,9 @@ ButtonComp.prototype.create = function() {
 		ButtonComp.btnResize(oThis.id);
 	});
 
-	if (this.Div_gen.offsetWidth > 0)
+	if (this.Div_gen.offsetWidth > 0){
 		this.btnCenterDiv.style.width = this.Div_gen.offsetWidth - ButtonComp.BUTTON_LEFT_WIDTH - ButtonComp.BUTTON_RIGHT_WIDTH + "px";  // 20为左右DIV的宽度	
+	}
 	
 };
 
@@ -231,6 +227,10 @@ ButtonComp.prototype.create = function() {
  */
 ButtonComp.prototype.manageSelf = function() {
 	this.textNode = document.createTextNode(this.text);
+
+	this.textNodeDiv = $ce("DIV");
+	this.textNodeDiv.style.marginBottom = "3px";
+	this.textNodeDiv.appendChild(this.textNode);
 
 	if (this.refImg != "") {
 		this.imgNode = $ce("img");
@@ -245,19 +245,19 @@ ButtonComp.prototype.manageSelf = function() {
 
 			// 文字位于图片之左
 			if (this.align == "left") {
-				this.butt.appendChild(this.textNode);
+				this.butt.appendChild(this.textNodeDiv);
 				this.butt.appendChild(this.imgNode);
 			}
 
 			// 文字位于图片之右
 			if (this.align == "right") {
 				this.butt.appendChild(this.imgNode);
-				this.butt.appendChild(this.textNode);
+				this.butt.appendChild(this.textNodeDiv);
 			}
 
 			// 文字位于图片之上
 			if (this.align == "top") {
-				this.butt.appendChild(this.textNode);
+				this.butt.appendChild(this.textNodeDiv);
 				this.butt.appendChild(brNode);
 				this.butt.appendChild(this.imgNode);
 			}
@@ -266,11 +266,11 @@ ButtonComp.prototype.manageSelf = function() {
 			if (this.align == "bottom") {
 				this.butt.appendChild(this.imgNode);
 				this.butt.appendChild(brNode);
-				this.butt.appendChild(this.textNode);
+				this.butt.appendChild(this.textNodeDiv);
 			}
 		}
 	} else {
-		this.butt.appendChild(this.textNode);
+		this.butt.appendChild(this.textNodeDiv);
 	}
 };
 
@@ -282,8 +282,9 @@ ButtonComp.btnResize = function(id){
 };
 
 ButtonComp.prototype.adjustSelf = function() {
-	if (this.Div_gen.offsetWidth > 0)
+	if (this.Div_gen.offsetWidth > 0){
 		this.btnCenterDiv.style.width = this.Div_gen.offsetWidth - ButtonComp.BUTTON_LEFT_WIDTH - ButtonComp.BUTTON_RIGHT_WIDTH + "px";  // 20为左右DIV的宽度
+	}
 };
 
 /**
@@ -305,7 +306,7 @@ ButtonComp.prototype.changeImage = function(imgPath) {
  */
 ButtonComp.prototype.changeText = function(text) {
 	var newNode = document.createTextNode(text);
-	this.butt.replaceChild(newNode, this.textNode);
+	this.textNodeDiv.replaceChild(newNode, this.textNode);
 	this.textNode = newNode;
 	this.text = text;
 };

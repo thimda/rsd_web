@@ -1,10 +1,11 @@
 .link_div{
+	color:#0086b2;
+	font-size:12px;
 }
 
 .link_div .link_normal {
+	text-decoration:underline;
 }
 
 .link_div .link_over {        
 }
-a:active{font-weight:bold;olor:#2C6596;}
-a:link{color:#2C6596;}

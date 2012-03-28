@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding='UTF-8'?>
 <UIMeta chart="0" jquery="1" jsEditor="0" jsExcel="0">
-    <Splitter boundMode="0" divideSize="75" hideBar="false" id="spliter1" inverse="0" oneTouch="false" orientation="h" spliterWidth="4">
+    <Splitter boundMode="0" divideSize="75" hideBar="false" id="spliter1" inverse="0" oneTouch="true" orientation="h" spliterWidth="4">
         <SplitterOne id="spliter1">
             <Widget id="editor">
             </Widget>

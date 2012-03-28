@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import nc.bs.logging.Logger;
 import nc.uap.lfw.core.common.WebConstant;
 import nc.uap.lfw.core.log.LfwLogger;
+import nc.uap.lfw.core.model.BasePageModel;
 import nc.uap.lfw.core.model.PageModel;
 import nc.uap.lfw.core.page.LifeCyclePhase;
 import nc.uap.lfw.core.page.RequestLifeCycleContext;
@@ -80,7 +81,7 @@ public class PageControlPlugin implements ControlPlugin {
 				req.setAttribute(WebConstant.NODE_STYLE_PATH, nodeStyleSheetPath);
 				req.setAttribute(WebConstant.NODE_IMAGE_PATH, nodeImagePath);
 				
-				PageModel pageModel = (PageModel) req.getAttribute("pageModel");
+				BasePageModel pageModel = (BasePageModel) req.getAttribute("pageModel");
 				pageModel.getPageMeta().setNodeImagePath(nodeImagePath);
 				LfwLogger.debug("从路径" + targetJsp + "中找到模板文件");
 				
@@ -112,7 +113,7 @@ public class PageControlPlugin implements ControlPlugin {
 		String pageId = req.getParameter("pageId");;
 		
 		Logger.debug("PageModelTag类获取的modelClazz=" + className);
-		PageModel model = (PageModel) LfwClassUtil.newInstance(className);
+		BasePageModel model = (BasePageModel) LfwClassUtil.newInstance(className);
 		String pagePath = PageNodeUtil.getPageNodeDir(pageId);
 		if(pagePath != null){
 			String nodePath = "html/nodes/" + pagePath + "/node.properties";

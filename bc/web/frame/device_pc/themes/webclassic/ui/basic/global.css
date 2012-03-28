@@ -2,6 +2,25 @@ img{
 	border:0;
 }
 
+a{
+	color:#0086b2;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#0086b2;
+	text-decoration:underline;
+}
+
+a:active{
+	color:#0086b2;
+	text-decoration:underline;
+}
+
+a:link{
+	color:#0086b2;
+	text-decoration:none;
+}
 
 /* body中去掉此样式，解决流式布局下，gird数据量大时，body无滚动条，下面数据看不全问题
 overflow-y:hidden;

@@ -46,7 +46,7 @@ public class IFrameSerializer extends BaseSerializer<IFrameComp> implements IVie
 			frameNode.setAttribute("frameborder", frame.getFrameBorder());
 //		if(isNotNullString(frame.getClassName()))
 //			frameNode.setAttribute("className", frame.getClassName());
-		if(isNotNullString(frame.getScrolling()));
+		if(isNotNullString(frame.getScrolling()))
 			frameNode.setAttribute("scrolling", frame.getScrolling());
 		Map<String, JsListenerConf> jsListeners = frame.getListenerMap();
 		if(jsListeners != null && jsListeners.size() > 0)

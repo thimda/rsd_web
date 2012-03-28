@@ -2,7 +2,7 @@
 	background: #ffffff;
 	position:relative;
 	overflow:hidden;
-	min-height:100px;
+	min-height:50px;
 }
 
 /********************定义JS所需静态常量   start *********************/

@@ -53,6 +53,7 @@ public class TreeSerializer extends BaseSerializer<TreeViewComp> implements IVie
 			treeNode.setAttribute("enabled", String.valueOf(tree.isEnabled()));
 			treeNode.setAttribute("dragEnable", String.valueOf(tree.isDragEnable()));
 			treeNode.setAttribute("checkBoxModel", String.valueOf(tree.getCheckBoxModel()));
+			treeNode.setAttribute("canEdit", String.valueOf(tree.isCanEdit()));
 //			if(isNotNullString(tree.getClassName()))
 //				treeNode.setAttribute("className", tree.getClassName());
 			TreeLevel level = tree.getTopLevel();

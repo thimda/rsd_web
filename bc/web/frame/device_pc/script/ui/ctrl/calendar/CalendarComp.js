@@ -13,13 +13,13 @@ CalendarComp.prototype.componentType = "CALENDAR";
 CalendarComp.imagePath = window.themePath + "/ui/ctrl/calendar/images/";
 CalendarComp.prototype.upImagePath = CalendarComp.imagePath + "up.gif";
 CalendarComp.prototype.downImagePath = CalendarComp.imagePath + "down.gif";
-CalendarComp.prototype.leftImagePath = CalendarComp.imagePath + "left.gif";
-CalendarComp.prototype.rightImagePath = CalendarComp.imagePath + "right.gif";
+CalendarComp.prototype.leftImagePath = CalendarComp.imagePath + "arrow_left.png";
+CalendarComp.prototype.rightImagePath = CalendarComp.imagePath + "arrow_right.png";
 
 var MONTHS = new Array("January", "February", "March", "April", "May", "June",
 		"July", "August", "September", "October", "November", "December");
-var WEEKDAYS_FULL = new Array("Monday", "Tuesday", "Wednesday", "Thursday",
-		"Friday", "Saturday", "Sunday");
+var WEEKDAYS_FULL = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+		"Friday", "Saturday");
 var WEEKDAYS = null;
 var MONTH_DAY_COUNT = new Array("31", "28", "31", "30", "31", "30", "31", "31",
 		"30", "31", "30", "31");
@@ -32,9 +32,9 @@ var DimanchePaques = false;
  */
 function CalendarComp(isState, parent) {
 	if (WEEKDAYS == null)
-		WEEKDAYS = new Array(trans("ml_one"), trans("ml_two"),
+		WEEKDAYS = new Array(trans("ml_seven"), trans("ml_one"), trans("ml_two"),
 				trans("ml_three"), trans("ml_four"), trans("ml_five"),
-				trans("ml_six"), trans("ml_seven"));
+				trans("ml_six"));
 	this.getInstance = Singleton;
 	this.isState = getBoolean(isState, false);
 	if (!this.isState) {
@@ -47,6 +47,7 @@ function CalendarComp(isState, parent) {
 			this.day = this.dateObject.getDate();
 			this.month = this.dateObject.getMonth() + 1;
 			this.year = this.dateObject.getFullYear();
+			this.weekDay = this.dateObject.getDay();
 			this.parentOwner = document.body;
 			this.create();
 		}
@@ -57,6 +58,7 @@ function CalendarComp(isState, parent) {
 		this.day = this.dateObject.getDate();
 		this.month = this.dateObject.getMonth() + 1;
 		this.year = this.dateObject.getFullYear();
+		this.weekDay = this.dateObject.getDay();
 		this.parentOwner = document.body;
 		this.oldDayCell = null;
 		this.oldDayCellColor = null;
@@ -88,7 +90,52 @@ CalendarComp.prototype.create = function() {
 		clearEventSimply(e);
 	};
 	
+	this.bgDiv();
 };
+
+/**
+ * 背景
+ */
+CalendarComp.prototype.bgDiv = function(){
+	//add by chouhl 2012-3-28
+	this.bgDiv = $ce("DIV");
+	this.bgDiv.className = 'background_div';
+	
+	this.bgLeftTopDiv = $ce("DIV");
+	this.bgLeftTopDiv.className = 'bg_left_top_div';
+	this.bgCenterTopDiv = $ce("DIV");
+	this.bgCenterTopDiv.className = 'bg_center_top_div';
+	this.bgRightTopDiv = $ce("DIV");
+	this.bgRightTopDiv.className = 'bg_right_top_div';
+	
+	this.bgLeftCenterDiv = $ce("DIV");
+	this.bgLeftCenterDiv.className = 'bg_left_center_div';
+	this.bgCenterDiv = $ce("DIV");
+	this.bgCenterDiv.className = 'bg_center_div';
+	this.bgRightCenterDiv = $ce("DIV");
+	this.bgRightCenterDiv.className = 'bg_right_center_div';
+	
+	this.bgLeftBottomDiv = $ce("DIV");
+	this.bgLeftBottomDiv.className = 'bg_left_bottom_div';
+	this.bgCenterBottomDiv = $ce("DIV");
+	this.bgCenterBottomDiv.className = 'bg_center_bottom_div';
+	this.bgRightBottomDiv = $ce("DIV");
+	this.bgRightBottomDiv.className = 'bg_right_bottom_div';
+	
+	this.bgDiv.appendChild(this.bgLeftTopDiv);
+	this.bgDiv.appendChild(this.bgCenterTopDiv);
+	this.bgDiv.appendChild(this.bgRightTopDiv);
+	
+	this.bgDiv.appendChild(this.bgLeftCenterDiv);
+	this.bgDiv.appendChild(this.bgCenterDiv);
+	this.bgDiv.appendChild(this.bgRightCenterDiv);
+	
+	this.bgDiv.appendChild(this.bgLeftBottomDiv);
+	this.bgDiv.appendChild(this.bgCenterBottomDiv);
+	this.bgDiv.appendChild(this.bgRightBottomDiv);
+	
+	this.Div_gen.appendChild(this.bgDiv);
+}
 
 /**
  * CalendarComp二级回调函数
@@ -98,44 +145,47 @@ CalendarComp.prototype.manageSelf = function() {
 	// 操作菜单栏
 	var oThis = this;
 	this.opBar = $ce("DIV");
-	this.opBar.style.backgroundColor = "#e9f2f9";
-	this.opBar.style.width = "100%";
-	this.opBar.style.border = "solid #b6cae1 1px";
-	this.opBar.style.height = "30px";
-	this.opBar.style.top = "0px";
-	this.opBar.style.left = "0px";
-	this.Div_gen.appendChild(this.opBar);
-
+	this.opBar.className = "opBar";
+	this.bgCenterDiv.appendChild(this.opBar);
+	this.weekBar = $ce("DIV");
+	this.weekBar.className = "weekBar";
+	this.bgCenterDiv.appendChild(this.weekBar);
+	
+	var marginLeft = 30;
 	// 年份选择框
-	this.yearInput = $ce("input");
+	this.preYearDiv = $ce("DIV");
+	this.preYearDiv.className = "preDiv";
+	this.preYearDiv.style.left = marginLeft + "px";
+	this.opBar.appendChild(this.preYearDiv);
+
+	this.yearInput = $ce("INPUT");
 	this.yearInput.className = "calendar_bar_input";
+	this.yearInput.style.left = marginLeft + 10 + "px";
 	this.opBar.appendChild(this.yearInput);
-
-	this.yearDiv = $ce("DIV");
-	this.yearDiv.style.position = "absolute";
-	this.yearDiv.className = "calendar_bar_img_div";
-	this.opBar.appendChild(this.yearDiv);
-
-	this.nextYearImg = $ce("img");
-	this.nextYearImg.src = this.upImagePath;
-	this.nextYearImg.className = "calendar_bar_imgup";
-	this.yearDiv.appendChild(this.nextYearImg);
-
-	this.preYearImg = $ce("img");
-	this.preYearImg.src = this.downImagePath;
-	this.preYearImg.className = "calendar_bar_imgdown";
-	this.yearDiv.appendChild(this.preYearImg);
-
+	
+	this.nextYearDiv = $ce("DIV");
+	this.nextYearDiv.className = "nextDiv";
+	this.nextYearDiv.style.left = marginLeft + 70 + "px";
+	this.opBar.appendChild(this.nextYearDiv);
+	
 	this.yearInput.onchange=function(e){ 
-		var currYear=this.value.replace("年","");
-		oThis.changeDate(parseInt(currYear), oThis.month);
+		var currYear=this.value.replace(trans("ml_year"),"");
+		oThis.changeDate(parseInt(currYear, 10), oThis.month);
 		e = EventUtil.getEvent();
 		stopEvent(e);
 		// 删除事件对象（用于清除依赖关系）
 		clearEventSimply(e);
 	};
 	
-	this.nextYearImg.onclick = function(e) {
+	this.preYearDiv.onclick = function(e) {
+		e = EventUtil.getEvent();
+		oThis.changeDate(oThis.year - 1, oThis.month);
+		stopEvent(e);
+		// 删除事件对象（用于清除依赖关系）
+		clearEventSimply(e);
+	};
+	
+	this.nextYearDiv.onclick = function(e) {
 		e = EventUtil.getEvent();
 		// 首先调用用户函数获取任务数据
 		oThis.changeDate(oThis.year + 1, oThis.month);
@@ -144,62 +194,41 @@ CalendarComp.prototype.manageSelf = function() {
 		clearEventSimply(e);
 	};
 
-	this.preYearImg.onclick = function(e) {
-		e = EventUtil.getEvent();
-		oThis.changeDate(oThis.year - 1, oThis.month);
-		stopEvent(e);
-		// 删除事件对象（用于清除依赖关系）
-		clearEventSimply(e);
-	};
+	// 创建月份选择
+	
+	// 创建上一月按钮
+	this.preMonButt = $ce("DIV");
+	this.preMonButt.className = "preDiv";
+	this.preMonButt.style.left = marginLeft + 85 + "px";
+	this.opBar.appendChild(this.preMonButt);
 
-	// 创建月份选择下拉框
-	this.monthComb = new ComboComp(this.opBar, "monthcomb", 85, 6, "55",
-			"absolute", false, {"stopHideDiv" : true}, null);
-//dingrf 111121 改用 Measures.js中的 getZIndex()方法。			
-//	this.monthComb.dataDiv.style.zIndex = BaseComponent.STANDARD_ZINDEX + 1000001; 
-	this.monthComb.dataDiv.style.zIndex = getZIndex(); 
-
-	for ( var i = 0; i < 12; i++) {
-		var selected = false;
-		if (i + 1 == this.month)
-			selected = true;
-		this.monthComb.createOption((i + 1) + trans("ml_month"), (i + 1), "",
-				selected, null);
-	}
-
-	this.monthComb.valueChanged = function(newValue, oldValue) {
-		if (oThis.year && newValue != null)
-			oThis.changeDate(oThis.year, newValue);
-	};
-
-	var oParent = this.opBar;
-
-	// 创建分割左右箭头和左侧其他按钮的竖杠
-	var sep = $ce("div");
-	sep.style.width = "1px";
-	sep.style.height = "18px";
-	sep.style.position = "absolute";
-	sep.style.backgroundColor = "b6cae1";
-	sep.style.left = this.opBar.offsetWidth - 42 - 7 + "px";
-	sep.style.top = "3px";
-	oParent.appendChild(sep);
-
+	this.monthInput = $ce("INPUT");
+	this.monthInput.className = "calendar_bar_input";
+	this.monthInput.style.left = marginLeft + 95 + "px";
+	this.monthInput.style.width = "20px";
+	this.opBar.appendChild(this.monthInput);
+	
 	// 创建下一月按钮
-	var tmpLeft = this.opBar.offsetWidth - 22;
-	this.nextMonButt = new ImageComp(oParent, trans("ml_nextmonth"),
-			this.rightImagePath, tmpLeft, 9, "",
-			"", trans("ml_nextmonth"), this.rightImagePath, null);
+	this.nextMonButt = $ce("DIV");
+	this.nextMonButt.className = "nextDiv";
+	this.nextMonButt.style.left = marginLeft + 138 + "px";
+	this.opBar.appendChild(this.nextMonButt);
+
+	this.preMonButt.onclick = function() {
+		oThis.changeDate(oThis.year, oThis.month - 1);
+	};
+
 	this.nextMonButt.onclick = function() {
 		oThis.changeDate(oThis.year, oThis.month + 1);
 	};
-
-	// 创建上一月按钮
-	tmpLeft -= 20;
-	this.preMonButt = new ImageComp(oParent, trans("ml_lastmonth"),
-			this.leftImagePath, tmpLeft, 9, "", "",
-			trans("ml_lastmonth"), this.leftImagePath, null);
-	this.preMonButt.onclick = function() {
-		oThis.changeDate(oThis.year, oThis.month - 1);
+	
+	this.monthInput.onchange=function(e){ 
+		var currMonth = this.value.replace(trans("ml_month"),"");
+		oThis.changeDate(oThis.year, parseInt(currMonth, 10));
+		e = EventUtil.getEvent();
+		stopEvent(e);
+		// 删除事件对象（用于清除依赖关系）
+		clearEventSimply(e);
 	};
 
 	// 创建星期显示的每个div
@@ -207,8 +236,11 @@ CalendarComp.prototype.manageSelf = function() {
 		var divWeekday = $ce("DIV");
 		divWeekday.id = "calendar_day";
 		divWeekday.className = "calendar_day";
-		divWeekday.style.left = (5 + (j * 30)) + 15 + "px";
-		this.opBar.appendChild(divWeekday);
+		divWeekday.style.left = (j * 30) + "px";
+		if(j == this.weekDay){
+			divWeekday.className += " calendar_current_day";
+		}
+		this.weekBar.appendChild(divWeekday);
 		divWeekday.appendChild(document.createTextNode(WEEKDAYS[j]));
 	}
 
@@ -222,14 +254,11 @@ CalendarComp.prototype.manageSelf = function() {
 	sepBelowDivWeek.style.left = "18px";
 	sepBelowDivWeek.style.color = "#c6d6e9";
 	sepBelowDivWeek.size = 1;
-	this.opBar.appendChild(sepBelowDivWeek);
+	//this.opBar.appendChild(sepBelowDivWeek);
 
 	div_Calendar = $ce("DIV");
-	div_Calendar.style.width = "100%";
-	div_Calendar.style.position = "absolute";
-	div_Calendar.style.top = "50px";
-	div_Calendar.style.left = "0px";
-	this.Div_gen.appendChild(div_Calendar);
+	div_Calendar.className = "calendarDiv";
+	this.bgCenterDiv.appendChild(div_Calendar);
 
 	this.resetCalendar();
 };
@@ -310,21 +339,23 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 	if (showTimeBar) {
 		if (this.timeBar == null) {
 			this.timeBar = $ce("DIV");
-			this.Div_gen.appendChild(this.timeBar);
-			this.timeBar.style.backgroundColor = "#e9f2f9";
+			this.bgCenterDiv.appendChild(this.timeBar);
+			//this.timeBar.style.backgroundColor = "#e9f2f9";
 			this.timeBar.style.position = "absolute";
 			this.timeBar.style.width = "100%";
-			this.timeBar.style.border = "solid #b6cae1 1px";
+			//this.timeBar.style.border = "solid #b6cae1 1px";
 			this.timeBar.style.height = "30px";
-			this.timeBar.style.top = (this.Div_gen.offsetHeight - 34) + "px";
+			this.timeBar.style.top = (this.Div_gen.offsetHeight - 50) + "px";
 			this.timeBar.style.left = "0px";
 			this.timeBar.style.visibility = "hidden";
 //			this.dateObject = new Date();
 
+			var marginLeft = 10;
 			/* 小时输入框 */
 			this.hourInput = $ce("input");
 			this.hourInput.className = "calendar_bar_input";
-			this.hourInput.style.width = "30px";
+			this.hourInput.style.width = "20px";
+			this.hourInput.style.left = marginLeft + "px";
 			this.hourInput.value = this.dateObject.getHours();
 			this.timeBar.appendChild(this.hourInput);
 			this.hourInput.onclick = function(e) {
@@ -336,7 +367,7 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			this.hourDiv = $ce("DIV");
 			this.hourDiv.style.position = "absolute";
 			this.hourDiv.className = "calendar_bar_img_div";
-			this.hourDiv.style.left = "40px";
+			this.hourDiv.style.left = marginLeft + 36 + "px";
 			this.timeBar.appendChild(this.hourDiv);
 			// 上一小时
 			this.preHourImg = $ce("img");
@@ -387,7 +418,7 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			hourText.style.position = "absolute";
 			this.timeBar.appendChild(hourText);
 			hourText.style.width = "10px";
-			hourText.style.left = "57px";
+			hourText.style.left = marginLeft + 53 + "px";
 			hourText.style.top = "8px";
 //			hourText.innerHTML = trans("ml_hour");
 			hourText.innerHTML = "时";
@@ -395,8 +426,8 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			/* 分钟输入框  */
 			this.minInput = $ce("input");
 			this.minInput.className = "calendar_bar_input";
-			this.minInput.style.width = "30px";
-			this.minInput.style.left = "72px";
+			this.minInput.style.width = "20px";
+			this.minInput.style.left = marginLeft + 68 + "px";
 			this.minInput.value = this.dateObject.getMinutes();
 			this.timeBar.appendChild(this.minInput);
 			this.minInput.onclick = function(e) {
@@ -408,7 +439,7 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			this.minDiv = $ce("DIV");
 			this.minDiv.style.position = "absolute";
 			this.minDiv.className = "calendar_bar_img_div";
-			this.minDiv.style.left = "102px";
+			this.minDiv.style.left = marginLeft + 104 + "px";
 			this.timeBar.appendChild(this.minDiv);
 
 			// 上一分钟
@@ -460,7 +491,7 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			minText.style.position = "absolute";
 			this.timeBar.appendChild(minText);
 			minText.style.width = "10px";
-			minText.style.left = "119px";
+			minText.style.left = marginLeft + 121 + "px";
 			minText.style.top = "8px";
 //			minText.innerHTML = trans("ml_min");
 			minText.innerHTML = "分";
@@ -468,8 +499,8 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			/* 秒输入框  */
 			this.secInput = $ce("input");
 			this.secInput.className = "calendar_bar_input";
-			this.secInput.style.width = "30px";
-			this.secInput.style.left = "134px";
+			this.secInput.style.width = "20px";
+			this.secInput.style.left = marginLeft + 136 + "px";
 			this.secInput.value = this.dateObject.getSeconds();
 			this.timeBar.appendChild(this.secInput);
 			this.secInput.onclick = function(e) {
@@ -481,7 +512,7 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			this.secDiv = $ce("DIV");
 			this.secDiv.style.position = "absolute";
 			this.secDiv.className = "calendar_bar_img_div";
-			this.secDiv.style.left = "164px";
+			this.secDiv.style.left = marginLeft + 172 + "px";
 			this.timeBar.appendChild(this.secDiv);
 
 			// 上一秒钟
@@ -534,7 +565,7 @@ CalendarComp.prototype.show = function(left, top, showTimeBar, dateValue) {
 			secText.style.position = "absolute";
 			this.timeBar.appendChild(secText);
 			secText.style.width = "10px";
-			secText.style.left = "181px";
+			secText.style.left = marginLeft + 190 + "px";
 			secText.style.top = "8px";
 //			secText.innerHTML = trans("ml_sec");
 			secText.innerHTML = "秒";
@@ -652,10 +683,9 @@ CalendarComp.prototype.hide = function() {
  */
 CalendarComp.prototype.resetCalendar = function() {
 	div_Calendar.innerHTML = "";
-	this.yearInput.value = this.year + trans("ml_year");
-	if (this.monthComb.getSelectedIndex() != (this.month - 1))
-		this.monthComb.setSelectedItem(this.month - 1);
-
+	this.yearInput.value = this.year;
+	this.monthInput.value = this.month;
+	
 	var tmpDate = new Date(this.year, (this.month) - 1);
 	this.currDay = tmpDate.getDay();
 	if (this.currDay == 0) {
@@ -670,43 +700,48 @@ CalendarComp.prototype.resetCalendar = function() {
 
 	var day = 0;
 
-	if (((this.currDay == 6) && ((MONTH_DAY_COUNT[(this.month) - 1]) == 31)
+	/*if (((this.currDay == 6) && ((MONTH_DAY_COUNT[(this.month) - 1]) == 31)
 			|| (this.currDay == 7)
 			&& ((MONTH_DAY_COUNT[(this.month) - 1]) == 30) || (this.currDay == 7)
-			&& ((MONTH_DAY_COUNT[(this.month) - 1]) == 31))) {
+			&& ((MONTH_DAY_COUNT[(this.month) - 1]) == 31))) */
+	if(((MONTH_DAY_COUNT[(this.month) - 1]) == 31 && tmpDate.getDay() >= 5) || ((MONTH_DAY_COUNT[(this.month) - 1]) == 30 && tmpDate.getDay() >= 6)){//6行
 		if (this.showTimeBar == true)
-			this.Div_gen.style.height = "245px";
+			this.Div_gen.style.height = "260px";
 		else
+			this.Div_gen.style.height = "230px";
+	}else if(((MONTH_DAY_COUNT[(this.month) - 1]) == 28 && tmpDate.getDay() == 0)){//4行
+		if (this.showTimeBar == true)
 			this.Div_gen.style.height = "220px";
-	} else {
-		if (this.showTimeBar == true)
-			this.Div_gen.style.height = "225px";
 		else
-			this.Div_gen.style.height = "200px";
+			this.Div_gen.style.height = "190px";
+	} else {//5行
+		if (this.showTimeBar == true)
+			this.Div_gen.style.height = "240px";
+		else
+			this.Div_gen.style.height = "210px";
 	}
 	if (this.timeBar)
-		this.timeBar.style.top = (this.Div_gen.offsetHeight - 34) + "px";
+		this.timeBar.style.top = (this.Div_gen.offsetHeight - 50) + "px";
 
 	var oThis = this;
 	for (s = 0; s < 6; s++) {
 		for (j = 0; j < 7; j++) {
-			day = 7 * s + j - this.currDay + 2;
+			day = 7 * s + j - this.currDay + 1;
 			var dayCell = $ce("DIV");
 			dayCell.id = "dayCell";
 			dayCell.className = "calendar_day_cell";
-			dayCell.style.position = "absolute";
-			dayCell.style.left = (5 + (j * 30)) + 15 + "px"; // 将每个cell像右移动15px
-			dayCell.style.top = (s * 24) + 20 + "px";
-			dayCell.style.width = "30px";
-			dayCell.style.height = "22px";
-
+			dayCell.style.left = (j * 30) + "px";
+			if(7 - this.currDay > 0){
+				dayCell.style.top = (s * 24) + "px";	
+			}else{
+				dayCell.style.top = ((s-1) * 24) + "px";
+			}
 			if (isWeekEnd(j)) {
-				dayCell.style.color = "#89abbe";
+				dayCell.className = dayCell.className + " calendar_rest_day_cell";
 			}
 
-			div_Calendar.appendChild(dayCell);
-			if ((7 * s + j >= this.currDay - 1)
-					&& (day <= MONTH_DAY_COUNT[(this.month) - 1])) {
+			if (day > 0 && (day <= MONTH_DAY_COUNT[(this.month) - 1])) {
+				div_Calendar.appendChild(dayCell);
 				dayCell.appendChild(document.createTextNode(day));
 				dayCell.onclick = function(e) {
 					e = EventUtil.getEvent();
@@ -730,7 +765,7 @@ CalendarComp.prototype.resetCalendar = function() {
 			if ((day == (this.dateObject.getDate()))
 					&& (this.month == (this.dateObject.getMonth() + 1))
 					&& (this.year == (this.dateObject.getFullYear()))) {
-				dayCell.style.border = "solid #ff9955 1px";
+				dayCell.className = dayCell.className + " calendar_current_day_cell";
 			}
 		}
 		if (day >= MONTH_DAY_COUNT[(this.month) - 1]) {
@@ -753,5 +788,5 @@ function isRunNian(year) {
  * @private
  */
 function isWeekEnd(day) {
-	return (((day == 5) || (day == 6)) ? true : false);
+	return (((day == 0) || (day == 6)) ? true : false);
 };

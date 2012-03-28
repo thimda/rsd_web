@@ -10,10 +10,10 @@
  */
 
 ErrorDialogComp.prototype.componentType = "ERRORDIALOG";
-ErrorDialogComp.HEIGHT = 180;
-ErrorDialogComp.WIDTH = 350;
+ErrorDialogComp.HEIGHT = 230;
+ErrorDialogComp.WIDTH = 482;
 
-ErrorDialogComp.refImgPath = "/ui/ctrl/dialog/images/error_dialog.gif";
+ErrorDialogComp.refImgPath = "/ui/ctrl/dialog/images/tip1.png";
 
 ErrorDialogComp.prototype = new ListenerUtil;
 
@@ -88,7 +88,7 @@ ErrorDialogComp.prototype.create = function() {
 	this.rightDiv.className = "message_rightdiv";
 //	this.rightDiv.innerHTML = "<table style='height:100%;width:100%'><tr><td valign='top'></td></tr></table>";
 //	this.msgTd = this.rightDiv.firstChild.rows[0].cells[0];
-	this.rightDiv.innerHTML = "<div style='height:100%;width:100%;position:relative;overflow-y:auto;'></div>";
+	this.rightDiv.innerHTML = "<div style='margin-top:52px;width:100%;position:relative;overflow-y:auto;'></div>";
 	this.msgTd = this.rightDiv.firstChild;
 	this.contentDiv.appendChild(this.leftDiv);
 	this.imgNode = $ce("img");
@@ -102,7 +102,7 @@ ErrorDialogComp.prototype.create = function() {
 	this.leftDiv.appendChild(this.imgNode);
 	this.contentDiv.appendChild(this.rightDiv);
 //	if (!IS_IE || IS_IE8) {
-	this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2+ "px";
+	//this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2+ "px";
 //	}
 	this.bottomDiv = $ce("DIV");
 	this.modaldialog.getContentPane().appendChild(this.bottomDiv);
@@ -116,7 +116,7 @@ ErrorDialogComp.prototype.create = function() {
 
 	// 生成确定按钮
 	this.okBt = new ButtonComp(this.okBtDiv, "okBt", 0, 0, "74", "23",
-			trans("ml_ok"), "", '', "relative", "", false, "button_div");
+			trans("ml_ok"), "", '', "relative", "", false, "blue_button_div");
 	if (IS_IE8)
 		this.okBt.Div_gen.style.margin = "0 auto";
 	this.okBt.onclick = function(e) {
@@ -136,7 +136,11 @@ ErrorDialogComp.prototype.create = function() {
  */
 ErrorDialogComp.prototype.changeMsg = function(msg) {
 	this.msg = msg;
-	this.msgTd.innerHTML = "<div style='top:20px;position:relative;'>" + this.msg + "</div>";
+	this.msgTd.innerHTML = this.msg;
+	var height = getTextHeight(this.msg, "message_rightdiv");
+	if(height > 0){
+		this.msgTd.style.marginTop = (52 - (height - 14)/2) + "px";
+	}
 };
 
 /**
@@ -159,7 +163,7 @@ ErrorDialogComp.prototype.show = function() {
 //};
 
 ErrorDialogComp.prototype.adjustContentdivWidth = function(){
-	this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2 + "px";	
+	//this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2 + "px";	
 };
 
 /**

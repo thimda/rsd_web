@@ -45,7 +45,7 @@ public class PCFlowvLayoutRender extends UILayoutRender<UIFlowvLayout, WebElemen
 			height = "";
 		}
 //		if (autoFill == false) // 子项自动填充
-		buf.append("<div id=\"" + getNewDivId() + "\" style=\"width:100%;" + height + "overflow:visible;position:relative;\">\n");
+		buf.append("<div id=\"" + getNewDivId() + "\" style=\"width:100%;" + height + "overflow:visible;position:relative;\" name='flowv'>\n");
 //		else
 //			buf.append("<div id=\"" + getNewDivId() + "\" style=\"width:100%;" + height + "overflow:hidden;position:relative;\">\n");
 		buf.append(this.generalEditableHeadHtml());

@@ -1075,9 +1075,9 @@ public abstract class UIRender<T extends UIElement, K extends WebElement> implem
 	 */
 	public String generalEditableTailScript() {
 		if (isEditMode()) {
-			if(this.getWidget() != null && LfwRuntimeEnvironment.isWindowEditorMode()){
-				return "";
-			}
+//			if(this.getWidget() != null && LfwRuntimeEnvironment.isWindowEditorMode()){
+//				return "";
+//			}
 			String widgetId = this.getWidget() == null ? "" : this.getWidget();
 			String uiid = null;
 			String subuiid = null;
@@ -1103,6 +1103,8 @@ public abstract class UIRender<T extends UIElement, K extends WebElement> implem
 			}
 			
 			String type = this.getRenderType(webElement);
+			if(uiElement instanceof UIWidget)
+				type = LfwPageContext.SOURCE_TYPE_WIDGT;
 			if (type == null)
 				type = "";
 			StringBuffer buf = new StringBuffer();

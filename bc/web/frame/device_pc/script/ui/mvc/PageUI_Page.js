@@ -663,7 +663,7 @@ PageUI.prototype.undo = function() {
 /**
  * 显示关闭页面的提示信息
  */
-PageUI.prototype.showCloseConfirm = function() {
+PageUI.prototype.showCloseConfirm = function(obj) {
 	if (this.hasChanged == true) {
 		if(!window.SaveAndExit){
 			require("confirmdialog", function(){ConfirmDialogComp.showDialog("确定关闭窗口", PageUI.okClose,null, obj, null)});
@@ -679,6 +679,16 @@ PageUI.prototype.showCloseConfirm = function() {
 	}
 
 };
+
+/**
+ * 关闭dialog窗口
+ */
+PageUI.okClose = function(){
+	this.onClosing();
+	this.hide();
+	this.onAfterClose();
+};
+
 
 /**
  * 关闭页面

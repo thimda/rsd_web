@@ -2,6 +2,7 @@ package nc.uap.lfw.jsp.uimeta;
 
 
 
+
 /**
  * @author renxh
  * 表格中的cell
@@ -27,6 +28,8 @@ public class UIGridPanel extends UILayoutPanel {
 	
 	public void setCellType(String cellType){
 		this.setAttribute(CELLTYPE, cellType);
+		UpdatePair pair = new UpdatePair(CELLTYPE, cellType);
+		notifyChange(UPDATE, pair);
 	}
 	
 	public String getCellType(){
@@ -44,24 +47,32 @@ public class UIGridPanel extends UILayoutPanel {
 	}
 	public void setRowSpan(String rowSpan) {
 		this.setAttribute(ROWSPAN, rowSpan);
+		UpdatePair pair = new UpdatePair(ROWSPAN, rowSpan);
+		notifyChange(UPDATE, pair);
 	}
 	public String getColSpan() {
 		return (String)this.getAttribute(COLSPAN);
 	}
 	public void setColSpan(String colSpan) {
 		this.setAttribute(COLSPAN, colSpan);
+		UpdatePair pair = new UpdatePair(COLSPAN, colSpan);
+		notifyChange(UPDATE, pair);
 	}
 	public String getColWidth() {
 		return (String)this.getAttribute(COLWIDTH);
 	}
 	public void setColWidth(String colWidth) {
 		this.setAttribute(COLWIDTH, colWidth);
+		UpdatePair update = new UpdatePair(COLWIDTH, colWidth);
+		notifyChange(UPDATE, update);
 	}
 	public String getColHeight() {
 		return (String)this.getAttribute(COLHEIGHT);
 	}
 	public void setColHeight(String colHeight) {
 		this.setAttribute(COLHEIGHT, colHeight);
+		UpdatePair pair = new UpdatePair(COLHEIGHT, colHeight);
+		notifyChange(UPDATE, pair);
 	}
 	public String getId() {
 		return (String)this.getAttribute(ID);

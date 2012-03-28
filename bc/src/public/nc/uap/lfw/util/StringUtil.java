@@ -97,7 +97,7 @@ public class StringUtil {
 	}
 
 	public static boolean endsWith(String s, char end) {
-		return startsWith(s, (new Character(end)).toString());
+		return startsWith(s, (Character.valueOf(end)).toString());
 	}
 
 	public static boolean endsWith(String s, String end) {
@@ -251,7 +251,7 @@ public class StringUtil {
 	}
 
 	public static String replace(String s, char oldSub, char newSub) {
-		return replace(s, oldSub, new Character(newSub).toString());
+		return replace(s, oldSub, Character.valueOf(newSub).toString());
 	}
 
 	public static String replace(String s, char oldSub, String newSub) {
@@ -540,7 +540,7 @@ public class StringUtil {
     }
 
 	public static boolean startsWith(String s, char begin) {
-		return startsWith(s, (new Character(begin)).toString());
+		return startsWith(s, (Character.valueOf(begin)).toString());
 	}
 
 	public static boolean startsWith(String s, String start) {

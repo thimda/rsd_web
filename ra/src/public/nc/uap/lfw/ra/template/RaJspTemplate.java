@@ -54,11 +54,11 @@ public class RaJspTemplate {
 //				if (uimeta.isJsExcel() == 1)
 //					importStr += " jsExcel = 'true' ";
 
-				if (StringUtils.isNotEmpty(uimeta.getIncudecss())) {
-					importStr += " includeCss = '" + uimeta.getIncudecss() + "' ";
+				if (StringUtils.isNotEmpty(uimeta.getIncludecss())) {
+					importStr += " includeCss = '" + uimeta.getIncludecss() + "' ";
 				}
-				if (StringUtils.isNotEmpty(uimeta.getIncudejs())) {
-					importStr += " includeJs = '" + uimeta.getIncudejs() + "' ";
+				if (StringUtils.isNotEmpty(uimeta.getIncludejs())) {
+					importStr += " includeJs = '" + uimeta.getIncludejs() + "' ";
 				}
 				
 				importStr += " type='App' ";

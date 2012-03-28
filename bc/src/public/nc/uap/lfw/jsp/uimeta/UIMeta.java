@@ -14,6 +14,7 @@ public class UIMeta extends UILayoutPanel implements IUIMeta{
 	private Map<String, UIWidget> dialogMap = new HashMap<String, UIWidget>();
 	public static String ISJQUERY = "jquery";
 	public static String INCLUDEJS ="includejs";
+	public static String INCLUDEID ="includeid";
 	public static String INCLUDECSS = "includecss";
 	public static String LFWINCLUDEJS = "lfwincludejs";
 	public static String LFWINCLUDECSS= "lfwincludecss";
@@ -115,8 +116,16 @@ public class UIMeta extends UILayoutPanel implements IUIMeta{
 		setAttribute(PageCss, pagecss);
 	}
 	
-	public String getIncudejs(){
+	public String getIncludejs(){
 		return (String)getAttribute(INCLUDEJS);
+	}
+	
+	public String getIncludeId(){
+		return (String) getAttribute(INCLUDEID);
+	}
+	
+	public void setIncludeId(String ids){
+		setAttribute(INCLUDEID, ids);
 	}
 	
 	public String getLfwIncudejs(){
@@ -127,7 +136,7 @@ public class UIMeta extends UILayoutPanel implements IUIMeta{
 		return (String)getAttribute(LFWINCLUDECSS);
 	}
 	
-	public String getIncudecss(){
+	public String getIncludecss(){
 		return (String)getAttribute(INCLUDECSS);
 	}
 	

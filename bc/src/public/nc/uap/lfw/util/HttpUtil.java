@@ -394,20 +394,22 @@ public class HttpUtil {
 		if (fileName != null) {
 			
 			InputStream is = new FileInputStream(fileName);
-
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			byte[] bytes = new byte[512];
-
-			for (int i = is.read(bytes, 0, 512); i != -1;
-					i = is.read(bytes, 0, 512)) {
-
-				buffer.write(bytes, 0, i);
+			ByteArrayOutputStream buffer = null;
+			try{
+				buffer = new ByteArrayOutputStream();
+				byte[] bytes = new byte[512];
+				for (int i = is.read(bytes, 0, 512); i != -1;
+						i = is.read(bytes, 0, 512)) {
+	
+					buffer.write(bytes, 0, i);
+				}
+				xml = new String(buffer.toByteArray(), "UTF-8");
+			}	
+			finally{
+				is.close();
+				buffer.close();
 			}
 
-			xml = new String(buffer.toByteArray(), "UTF-8");
-
-			is.close();
-			buffer.close();
 		}
 
 		return xml;

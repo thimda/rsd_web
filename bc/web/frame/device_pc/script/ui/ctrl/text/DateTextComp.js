@@ -15,9 +15,9 @@ DateTextComp.prototype = new TextComp;
 DateTextComp.prototype.componentType = "DATETEXT";
 
 // 默认日期DIV高度
-DateTextComp.CALANDER_HEIGHT = 225;
+DateTextComp.CALANDER_HEIGHT = 210;
 // 默认日期DIV宽度
-DateTextComp.CALANDER_WIDTH = 255;
+DateTextComp.CALANDER_WIDTH = 235;
 
 //日期时间Long值转换的时候 后台UFDate 跟 前台的 UTC 时间 差了8小时   8 * 60 * 60 * 1000 = 28800000
 //DateTextComp.DATETME_LONG_OFFSET = 28800000;
@@ -357,17 +357,18 @@ DateTextComp.prototype.verify = function(oldVlaue) {
  */
 DateTextComp.prototype.openCalendar = function(e) {		 
 	var oThis = this;		
-	var left = 0; 
+	var left = 0;
 	if (document.body.clientWidth < e.clientX + 100)
-		left = e.clientX - 200 - 20;
+		left = e.clientX - 200 - 10;
 	else
-		left = e.clientX - 100 - 20;
+		left = e.clientX - 100 - 10;
 	
 	if(left < 0)
 		left = 0;
 	
-	if (!this.calendar)
+	if (!this.calendar){
 		this.calendar = new CalendarComp(false);
+	}
 	if(this.calendar.Div_gen.style.zIndex < STANDARD_ZINDEX){
 		this.calendar.Div_gen.style.zIndex = getZIndex();
 	}
@@ -390,7 +391,7 @@ DateTextComp.prototype.openCalendar = function(e) {
 	}
 	//超过右边界
 	if (left + DateTextComp.CALANDER_WIDTH > document.body.clientWidth){
-		left = document.body.clientWidth - DateTextComp.CALANDER_WIDTH - 2;
+		left = document.body.clientWidth - DateTextComp.CALANDER_WIDTH;
 	}
 	var dateValue = "";
 	if (this.showTimeBar)

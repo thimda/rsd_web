@@ -11,10 +11,10 @@
  * 4.修改该组件的单例实现方法 . guoweic <b>modified</b>
  */
 ConfirmDialogComp.prototype.componentType = "CONFIRMDIALOG";
-ConfirmDialogComp.HEIGHT = 180;
-ConfirmDialogComp.WIDTH = 350;
+ConfirmDialogComp.HEIGHT = 230;
+ConfirmDialogComp.WIDTH = 482;
 
-ConfirmDialogComp.refImgPath = "/ui/ctrl/dialog/images/confirm_dialog.gif";
+ConfirmDialogComp.refImgPath = "/ui/ctrl/dialog/images/tip3.png";
 
 ConfirmDialogComp.prototype = new ListenerUtil;
 
@@ -97,10 +97,10 @@ ConfirmDialogComp.prototype.create = function() {
 	this.contentDiv.appendChild(this.rightDiv);
 //	this.rightDiv.innerHTML = "<table style='height:100%;width:100%'><tr><td valign='top'></td></tr></table>";
 //	this.msgTd = this.rightDiv.firstChild.rows[0].cells[0];
-	this.rightDiv.innerHTML = "<div style='height:100%;width:100%;position:relative;overflow-y:auto;'></div>";
+	this.rightDiv.innerHTML = "<div style='margin-top:52px;width:100%;position:relative;overflow-y:auto;'></div>";
 	this.msgTd = this.rightDiv.firstChild;
 //	if (!IS_IE || IS_IE8) { 
-	this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2 + "px";
+	//this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2 + "px";
 //	}
 	this.bottomDiv = $ce("DIV");
 	this.modaldialog.getContentPane().appendChild(this.bottomDiv);
@@ -123,7 +123,7 @@ ConfirmDialogComp.prototype.create = function() {
 
 	// 生成确定按钮
 	this.okBt = new ButtonComp(this.okBtDiv, "okBt", 0, 0, "74", "23", this.okText == null?
-			trans("ml_ok") : this.okText , "", '', "relative", "", false, "button_div");
+			trans("ml_ok") : this.okText , "", '', "relative", "", false, "blue_button_div");
 	this.okBt.onclick = function(e) {
 		oThis.onOk();
 		oThis.hide();
@@ -165,7 +165,11 @@ ConfirmDialogComp.prototype.getContentPane = function() {
  */
 ConfirmDialogComp.prototype.changeMsg = function(msg) {
 	this.msg = msg;
-	this.msgTd.innerHTML = "<div style='top:20px;position:relative;'>" + this.msg + "</div>";
+	this.msgTd.innerHTML = this.msg;
+	var height = getTextHeight(this.msg, "message_rightdiv");
+	if(height > 0){
+		this.msgTd.style.marginTop = (52 - (height - 14)/2) + "px";
+	}
 };
 
 /**
@@ -189,7 +193,7 @@ ConfirmDialogComp.prototype.hide = function() {
 
 
 ConfirmDialogComp.prototype.adjustContentdivWidth = function(){
-	this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2 + "px";	
+	//this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth - 2 + "px";	
 };
 
 /**

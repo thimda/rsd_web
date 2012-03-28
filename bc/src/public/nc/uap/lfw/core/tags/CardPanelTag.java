@@ -62,7 +62,7 @@ public class CardPanelTag extends WebElementTag implements IContainerElementTag 
 		// 获取记录当前子Item的Index
 		Integer itemIndex = (Integer) parentTag.getAttribute("itemIndex");
 		if (itemIndex == null) {
-			itemIndex = new Integer(0);
+			itemIndex = Integer.valueOf(0);
 			parentTag.setAttribute("itemIndex", itemIndex);
 		}
 		StringBuffer buf = new StringBuffer();

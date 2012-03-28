@@ -62,15 +62,19 @@ public class PaStructDsListener {
 		
 		WebSession session = LfwRuntimeEnvironment.getWebContext().getWebSession();
 		String mode = (String) session.getAttribute(WebConstant.WINDOW_MODE_KEY);
-		
+		String isEclipse = (String) session.getOriginalParameter("eclipse");
 		if(uimeta != null ){
-			if(mode != null && (WebConstant.MODE_PERSONALIZATION).equals(mode)){
-				setWinRowValue(uimeta, ds, null);
+			if(isEclipse != null && "1".equals(isEclipse)){
+				if(mode != null && (WebConstant.MODE_PERSONALIZATION).equals(mode)){
+					setWinRowValue(uimeta, ds, null);
+				}
+				else{
+					if(uimeta.getElement()!= null)
+						setRowValue(uimeta, ds, null);
+				}
 			}
-			else{
-				if(uimeta.getElement()!= null)
-					setRowValue(uimeta, ds, null);
-			}
+			else
+				setRowValue(uimeta, ds, null);
 			
 		}
 	}
@@ -83,7 +87,10 @@ public class PaStructDsListener {
 		}
 		
 		if(ele instanceof UILayout){
-			if(ele instanceof UIGridLayout){
+			if(ele instanceof UIWidget){
+				return;
+			}
+			else if(ele instanceof UIGridLayout){
 				List<UILayoutPanel> gridRows = ((UIGridLayout) ele).getPanelList();
 				if(gridRows != null && gridRows.size() > 0){
 					for(UILayoutPanel gridRow : gridRows){

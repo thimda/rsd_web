@@ -77,6 +77,7 @@ public class PCChartCompRender extends UINormalComponentRender<UIChartComp, Char
 		buf.append("pageUI.getWidget('" + this.getCurrWidget().getId() + "').addComponent(" + chartId + ");\n");
 
 		String widget = WIDGET_PRE + this.getCurrWidget().getId();
+		buf.append("var " + widget + " = pageUI.getWidget('" + this.getCurrWidget().getId() + "') \n");
 		buf.append(chartId + ".widget=" + widget + ";\n");
 
 		buf.append(chartId + ".setDataset(" + widget + ".getDataset('" + chart.getChartModel().getDataset() + "'));\n");

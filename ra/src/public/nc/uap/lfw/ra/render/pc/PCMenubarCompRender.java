@@ -34,7 +34,7 @@ public class PCMenubarCompRender extends UINormalComponentRender<UIMenubarComp, 
 	public String generateBodyHtml() {
 		// 该处position改为absolute,解决多个menubar时第二个开始的menubar无法显示在左上角的问题
 		StringBuffer buf = new StringBuffer();
-		buf.append("<div id=\"" + getDivId() + "\" style=\"position:relative;width:100%;height:100%;\"></div>");
+		buf.append("<div id=\"" + getDivId() + "\" style=\"position:relative;width:100%;\"></div>");
 		return buf.toString();
 	}
 	
@@ -46,7 +46,7 @@ public class PCMenubarCompRender extends UINormalComponentRender<UIMenubarComp, 
 		buf.append("var ").append(getDivId()).append(" = $ce('DIV');\n");
 		buf.append(getDivId()).append(".style.position = 'relative';\n");
 		buf.append(getDivId()).append(".style.width = '100%';\n");
-		buf.append(getDivId()).append(".style.height = '100%';\n");
+//		buf.append(getDivId()).append(".style.height = '100%';\n");
 //		buf.append(getDivId()).append(".style.overflow = 'hidden';\n");
 		buf.append(getDivId()).append(".id = '"+getDivId()+"';\n");
 		return buf.toString();

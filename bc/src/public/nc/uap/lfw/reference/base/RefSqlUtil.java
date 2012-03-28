@@ -595,8 +595,8 @@ public class RefSqlUtil {
 	
 	private void addSpecialBlurCriteria(StringBuffer buffer, String basSQL) {
 		String blurValue = null;
-		if(blurValue == null)
-			return;
+//		if(blurValue == null)
+//			return;
 		if (blurValue != null/* && isIncludeBlurPart()*/) {
 			if (blurValue.indexOf('*') != -1 || blurValue.indexOf('%') != -1 || blurValue.indexOf('?') != -1) {
 				String[] blurfields = model.getFilterFields();

@@ -1,0 +1,26 @@
+package nc.uap.lfw.core.tags;
+
+import java.util.List;
+
+import nc.uap.lfw.core.comp.GridComp;
+import nc.uap.lfw.core.comp.IGridColumn;
+import nc.uap.lfw.core.comp.WebElement;
+import nc.uap.lfw.core.data.Dataset;
+import nc.uap.lfw.core.event.conf.GridCellListener;
+import nc.uap.lfw.core.event.ctx.LfwPageContext;
+
+/**
+ * Grid±Í«©
+ * @author gd
+ * 2007-02-28
+ */
+public class GridCompTag extends NormalComponentTag {
+	public String generateBodyScript() {
+		GridComp grid = (GridComp) getComponent();
+		Dataset ds = this.getDataset();
+		
+		
+		return buf.toString();
+	}
+}
+

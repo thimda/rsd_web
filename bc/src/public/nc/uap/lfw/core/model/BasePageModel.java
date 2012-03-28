@@ -136,7 +136,7 @@ public class BasePageModel {
 	
 	
 	protected void afterInternalInitialize(){
-		ButtonStateManager.updateButtons();
+		ButtonStateManager.updateButtons(getPageMeta());
 	}
 
 	protected void initUIMetaStruct() {

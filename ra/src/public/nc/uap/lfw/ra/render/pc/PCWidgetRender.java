@@ -245,10 +245,12 @@ public class PCWidgetRender extends UIWidgetRender<UIWidget, WebElement> {
 			buf.append(dlgEventScript);
 		}
 		else{
-			LfwWidget wdg = LfwRuntimeEnvironment.getWebContext().getPageMeta().getWidget(this.getWidget());
-			String dlgEventScript = addEventSupport(wdg, getWidget(), "pageUI.getWidget(\"" + getId() + "\")", null);
-			buf.append(dlgEventScript);
-			buf.append(showId).append(".onBeforeShow();\n");
+			if(!LfwRuntimeEnvironment.isEditMode()){
+				LfwWidget wdg = LfwRuntimeEnvironment.getWebContext().getPageMeta().getWidget(this.getWidget());
+				String dlgEventScript = addEventSupport(wdg, getWidget(), "pageUI.getWidget(\"" + getId() + "\")", null);
+				buf.append(dlgEventScript);
+				buf.append(showId).append(".onBeforeShow();\n");
+			}
 		}
 
 		

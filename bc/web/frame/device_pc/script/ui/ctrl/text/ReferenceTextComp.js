@@ -47,10 +47,10 @@ function ReferenceTextComp(parent, name, left, top, width, position, attrArr, no
 	this.refIndex = "ref_" + (ReferenceTextComp.DIALOG_INDEX ++);
 	this.refresh = false;
 	
-	this.dialogWidth = 800;
+	this.dialogWidth = 600;
 	if(this.dialogWidth >= window.PAGEWIDTH)
 		this.dialogWidth = window.PAGEWIDTH - 100;
-	this.dialogHeight = 500;
+	this.dialogHeight = 400;
 	if(this.dialogWidth >= window.PAGEHEIGHT)
 		this.dialogHeight = window.PAGEHEIGHT - 100;
 	

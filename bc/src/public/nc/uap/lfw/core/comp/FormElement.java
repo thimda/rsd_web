@@ -97,6 +97,7 @@ public final class FormElement extends WebComponent {
 	//文件上传类型的element，加上文件大小限制
 	private String sizeLimit;
 	
+	
 	public String getSizeLimit() {
 		return sizeLimit;
 	}
@@ -511,4 +512,5 @@ public final class FormElement extends WebComponent {
 	public void setHeight(String height) {
 		this.height = height;
 	}
+	
 }

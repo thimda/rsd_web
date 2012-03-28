@@ -35,7 +35,7 @@ public class AppInteractionUtil {
 	
 	public static void showMessageDialog(String msg, String title, String btnText) {
 		ApplicationContext ctx = AppLifeCycleContext.current().getApplicationContext();
-		ctx.addExecScript("showMessageDialog('" + msg + "', '" + title + "', '" + btnText + "')");
+		ctx.addExecScript("showMessageDialog('" + msg + "', null, '" + title + "', '" + btnText + "')");
 	}
 
 	/**

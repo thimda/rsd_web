@@ -14,7 +14,7 @@ AutoFormComp.SPACE_HEIGHT = 1;
 
 
 /**
- * 表单构造函数 renderType 1 固定布局 2 流式布局 3 固定提示布局 4 自由表单
+ * 表单构造函数 renderType 1 固定布局居中 2 流式布局 3 固定提示布局 4 自由表单 5 固定布局右对齐 
  * 
  * @class 表单控件
  */

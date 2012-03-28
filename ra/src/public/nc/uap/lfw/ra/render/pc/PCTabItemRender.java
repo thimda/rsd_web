@@ -45,7 +45,7 @@ public class PCTabItemRender extends UILayoutPanelRender<UITabItem, WebElement> 
 	private Boolean visible;
 
 	public String createRenderHtml() {
-			return super.createRenderHtml();
+		return super.createRenderHtml();
 	}
 
 	public String createRenderScript() {
@@ -64,6 +64,7 @@ public class PCTabItemRender extends UILayoutPanelRender<UITabItem, WebElement> 
 		StringBuffer buf = new StringBuffer();
 		String tabId = tab.getVarId();
 		// name, title, showCloseIcon, isFirstItem, disabled
+		buf.append("var ").append(tabId).append(" = pageUI.getWidget('").append(this.getWidget()).append("').getTab('").append(tab.getId()).append("');");
 		buf.append("var ").append(getId()).append(" = ");
 		buf.append(tabId).append(".createItem(\"");
 		buf.append(getId()).append("\", \"");

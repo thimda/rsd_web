@@ -52,7 +52,7 @@ ContextMenuComp.prototype.create = function() {
 	var oThis = this;
 	this.Div_gen = $ce("DIV");
 	this.Div_gen.className = "contextmenu_div";   
-	this.Div_gen.style.width = this.width;
+	this.Div_gen.style.width = this.width + 2*11;//22左右图片宽度和
 	this.Div_gen.style.position = "absolute";
 	this.Div_gen.style.display = "none";
 	// guoweic: add start 2009-11-25
@@ -62,6 +62,36 @@ ContextMenuComp.prototype.create = function() {
 	this.Div_gen.style.zIndex = getZIndex();
 	// guoweic: add end
 	document.body.appendChild(this.Div_gen);
+	
+	//add by chouhl 2012-3-26
+	this.left_top = $ce("DIV");
+	this.left_top.className = 'left_top_div';
+	this.center_top = $ce("DIV");
+	this.center_top.className = 'center_top_div';
+	this.right_top = $ce("DIV");
+	this.right_top.className = 'right_top_div';
+	this.left_center = $ce("DIV");
+	this.left_center.className = 'left_center_div';
+	this.centerContent = $ce("DIV");
+	this.centerContent.className = 'center_div';
+	this.right_center = $ce("DIV");
+	this.right_center.className = 'right_center_div';
+	this.left_bottom = $ce("DIV");
+	this.left_bottom.className = 'left_bottom_div';
+	this.center_bottom = $ce("DIV");
+	this.center_bottom.className = 'center_bottom_div';
+	this.right_bottom = $ce("DIV");
+	this.right_bottom.className = 'right_bottom_div';
+	
+	this.Div_gen.appendChild(this.centerContent);
+	this.Div_gen.appendChild(this.left_top);
+	this.Div_gen.appendChild(this.center_top);
+	this.Div_gen.appendChild(this.right_top);
+	this.Div_gen.appendChild(this.left_center);
+	this.Div_gen.appendChild(this.right_center);
+	this.Div_gen.appendChild(this.left_bottom);
+	this.Div_gen.appendChild(this.center_bottom);
+	this.Div_gen.appendChild(this.right_bottom);
 	
 	// 注册外部回掉函数
 	window.clickHolders.push(this);
@@ -109,15 +139,15 @@ ContextMenuComp.prototype.addZIndex = function(e) {
  * @param left 设置left属性
  */
 ContextMenuComp.prototype.setPosLeft = function(left) {  
-   this.left = getInteger(left, 0);
-   this.Div_gen.style.left = this.left + "px";   
+   this.left = getInteger(left, 0) - 3;//3左边图片阴影宽度
+   this.Div_gen.style.left = this.left + "px";
 };
 
 /**
  * 设置菜单的top值
  */
 ContextMenuComp.prototype.setPosTop = function(top) {   
-   this.top = getInteger(top, 0);
+   this.top = getInteger(top, 0) - 5;
    this.Div_gen.style.top = this.top + "px";   
 };
 
@@ -127,7 +157,7 @@ ContextMenuComp.prototype.setPosTop = function(top) {
 ContextMenuComp.prototype.setWidth = function(width) {
 	this.width = getString(width, "100%");
 	if (this.width.toString().indexOf("%") == -1)
-		this.Div_gen.style.width = this.width + "px";
+		this.Div_gen.style.width = this.width + 2*11 + "px";//左右图片宽度和
 	else
 		this.Div_gen.style.width = this.width;
 };
@@ -148,7 +178,7 @@ ContextMenuComp.prototype.childItemWidthUpdated = function(width) {
 	if (this.width < width) {	
 		// 改变父菜单的宽度
 		this.width = width;
-		this.Div_gen.style.width = this.width + "px";
+		this.Div_gen.style.width = this.width + 2*11 + "px";//左右图片宽度和
 		// 通知所有子扩大宽度
 		for (var i = 0; i < this.childItems.length; i ++)
 			this.childItems[i].setItemWidth(width);
@@ -223,7 +253,7 @@ ContextMenuComp.prototype.addItemHtml = function(item) {
 	else
 		item.setItemWidth(this.width);
 		
-	this.Div_gen.appendChild(item.Div_gen);
+	this.centerContent.appendChild(item.Div_gen);
 };
 
 /**
@@ -546,7 +576,7 @@ MenuItemComp.prototype.componentType = "MENUITEM";
 MenuItemComp.DEFAULT_CAPTION = "EMPTY_CAPTION";
 MenuItemComp.DEFAULT_ITEM = "";
 MenuItemComp.ITEM_HEIGHT = 27;
-MenuItemComp.IMAGE_WIDTH = 22;
+MenuItemComp.IMAGE_WIDTH = 16;
 
 MenuItemComp.rightImgDownPath = window.themePath + "/ui/ctrl/menu/images/dropdown.png";
 MenuItemComp.rightImgDownOverPath = window.themePath + "/ui/ctrl/menu/images/dropdown_over.png";
@@ -734,6 +764,7 @@ MenuItemComp.prototype.createContent = function() {
 	this.divCaption = $ce("DIV");		 
 	this.Div_gen.appendChild(this.divCaption);
 	this.divCaption.className = "contextmenu_item_caption_off";
+	this.divCaption.style.lineHeight = MenuItemComp.ITEM_HEIGHT + "px";
 	//add by chouhl 2012-2-13
 	this.divLeft = $ce("DIV");
 	this.divCenter = $ce("DIV");
@@ -842,19 +873,23 @@ MenuItemComp.prototype.createContent = function() {
 		//add by chouhl 2012-2-14
 		var hasLeft = false;
 		var hasRight = false;
-		if(oThis.divLeft && this.divLeft != 'undefined'){
+		if(oThis.divLeft && oThis.divLeft != 'undefined'){
 			oThis.divLeft.className = 'divLeft_on';
 			hasLeft = true;
 		}
-		if(oThis.divCenter && this.divCenter != 'undefined'){
+		if(oThis.divCenter && oThis.divCenter != 'undefined'){
 			oThis.divCenter.className = 'divCenter_on';
 		}
-		if(oThis.divRight && this.divRight != 'undefined'){
+		if(oThis.divRight && oThis.divRight != 'undefined'){
 			oThis.divRight.className = 'divRight_on';
 			hasRight = true;
 		}
 		if(oThis.rightImg){
-			oThis.rightImg.src = MenuItemComp.rightImgDownSelectedPath;
+			if(oThis.isMenuBarItem == true){
+				oThis.rightImg.src = MenuItemComp.rightImgDownSelectedPath;
+			}else{
+				oThis.rightImg.src = MenuItemComp.refImgRightSelectedPath;
+			}
 		}
 		if(hasLeft && hasRight){
 			
@@ -933,19 +968,23 @@ MenuItemComp.prototype.createContent = function() {
 		//add by chouhl 2012-2-14
 		var hasLeft = false;
 		var hasRight = false;
-		if(oThis.divLeft && this.divLeft != 'undefined'){
+		if(oThis.divLeft && oThis.divLeft != 'undefined'){
 			oThis.divLeft.className = 'divLeft_off';
 			hasLeft = true;
 		}
-		if(oThis.divCenter && this.divCenter != 'undefined'){
+		if(oThis.divCenter && oThis.divCenter != 'undefined'){
 			oThis.divCenter.className = 'divCenter_off';
 		}
-		if(oThis.divRight && this.divRight != 'undefined'){
+		if(oThis.divRight && oThis.divRight != 'undefined'){
 			oThis.divRight.className = 'divRight_off';
 			hasRight = true;
 		}
 		if(oThis.rightImg){
-			oThis.rightImg.src = MenuItemComp.rightImgDownPath;
+			if(oThis.isMenuBarItem == true){
+				oThis.rightImg.src = MenuItemComp.rightImgDownPath;
+			}else{
+				oThis.rightImg.src = MenuItemComp.refImgRightPath;
+			}
 		}
 		if(hasLeft && hasRight){
 			
@@ -1190,11 +1229,11 @@ MenuItemComp.prototype.addMenu = function(itemName, itemCapiton, itemTip, itemRe
 			};
 			
 			div.setPosLeft = function(left) {
-				this.style.left = left + "px";
+				this.style.left = (left - 3) + "px";//3左边图片阴影宽度
 			};
 			
 			div.setPosTop = function(top) {
-				this.style.top = top + "px";
+				this.style.top = (top - 5) + "px";
 			};
 			
 			div.show = function() {
@@ -1280,7 +1319,6 @@ MenuItemComp.prototype.createRightDiv = function() {
 		//if (!IS_IE || IS_IE8)
 		//	this.rightDiv.style.paddingTop = "3px";
 	} 
-	//else if(this.isMenuBarItem == false) {
 	else {
 		this.rightImg.style.width = "11px";
 		this.rightImg.style.height = "8px";

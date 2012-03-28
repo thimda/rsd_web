@@ -277,6 +277,7 @@ public class AppDefaultReferencePageModel extends PageModel {
 		uiMeta.setElement(uiWidget);
 		UIMeta uiMetaWidget = new UIMeta();
 		uiMetaWidget.setId("main");
+		uiMetaWidget.setFlowmode(false);
 		UIFlowvLayout borderLayout = new UIFlowvLayout();
 		borderLayout.setId("borderLayout");
 		uiWidget.setUimeta(uiMetaWidget);
@@ -306,10 +307,11 @@ public class AppDefaultReferencePageModel extends PageModel {
 		treeComp.setId("reftree");
 		treeComp.setWidgetId("main");
 		borderPanel1.setElement(treeComp);
+		borderPanel1.setLeftPadding("10");
 		
 		UIFlowvPanel borderPanelBottom = new UIFlowvPanel();
 		borderPanelBottom.setId("flowvp3");
-		borderPanelBottom.setHeight("60");
+		borderPanelBottom.setHeight("30");
 		borderLayout.addPanel(borderPanelBottom);
 		
 		UIFlowhLayout uiflowhLayout = new UIFlowhLayout();

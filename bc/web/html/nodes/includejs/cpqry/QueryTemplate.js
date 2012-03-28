@@ -1,4 +1,12 @@
-
+TreeViewComp.prototype.onBeforeNodeCreate = function(row) {
+	if (this.id == "advanceTree") {
+		var fieldType = row.getCellValue(9);
+		var logicType = row.getCellValue(14);
+		if (fieldType == 0 || fieldType == 1 || logicType == 1)
+			return false;
+	}
+	return true;
+};
 
 function OnRootNodeCreatedFun(node) {
 	node.changeCaption("${ml:trans('query_allcondition')}");
@@ -7,150 +15,188 @@ function gerChangeNodeFun(node) {
 	node.changeCaption("${ml:trans('query_generalquery')}");
 }
 
+
+function beforeCallServer(proxy, listenerName, eventName,id){
+ if (listenerName == 'renameSavedTree'){
+		var saveDs = pageUI.getWidget(widgetId).getDataset("savedQueryCondition");
+		if (saveDs != null && saveDs.getSelectedRow() != null){
+			var name = saveDs.getSelectedRow().getCellValue(saveDs.nameToIndex("name"));	
+			if (!window.$c_conditionSavedialog) {
+				window.$c_conditionSavedialog = new InputDialogComp("saveText", "输入对话框", 0, 0, null, null, 100, function(){
+						var saveDs = pageUI.getWidget(widgetId).getDataset("savedQueryCondition");
+						var saveName = window.$c_conditionSavedialog.getItem("conditionSaveText").getValue();
+						
+						if(saveName == ''){
+							//showMessageDialog("${ml:trans('yer_savefoldernotempty')}");
+							showMessageDialog("查询方案名称不能为空!");
+							return;
+						}
+						proxy.addParam('save_name',saveName);
+						proxy.addParam('clc','nc.uap.ctrl.tpl.qry.controller.AdvancedQueryController');
+						proxy.addParam('source_id','savedTreeRename');
+						proxy.addParam('m_n','renameSavedTree');
+						proxy.addParam('event_name','onclick');
+						proxy.addParam('source_type','menubar_menuitem');
+						proxy.addParam('parent_source_id','savedTreeMenubar');
+						showDefaultLoadingBar();
+						return proxy.execute();
+					});
+				window.$c_conditionSavedialog.addItem("请输入保存名:", "conditionSaveText", "string", true, null);
+			}
+			var itemComp = window.$c_conditionSavedialog.items.get('conditionSaveText');
+			itemComp.setValue(name);
+			window.$c_conditionSavedialog.show();
+			throw "";
+		}
+	}
+}
+
+
 /**
  * Init
  */
 function externalInit() {
-	require("toolbar", function(){
-		TreeViewComp.prototype.onBeforeNodeCreate = function(row) {
-			if (this.id == "advanceTree") {
-				var fieldType = row.getCellValue(9);
-				var logicType = row.getCellValue(14);
-				if (fieldType == 0 || fieldType == 1 || logicType == 1)
-					return false;
+
+	window.widgetId = "main";
+	window.$c_normalPanel = new QueryTemplatePanel(document
+			.getElementById("$d_main_normalPanel"), "normalPanel", 0, 0, "100%",
+			"100%", "relative");
+	var widget = pageUI.getWidget(widgetId);
+	$c_normalPanel.widget = widget;
+	$c_normalPanel.setDataset(widget.getDataset("queryConditionDataset"));
+	window.$queryTemplateProcessor = new QueryTemplateProcessor(widget);
+
+	var tab = pageUI.getWidget("main").getTab('sqlTab');
+	tab.beforeItemInit = function(item) {
+	};
+
+	tab.afterItemInit = function(item) {
+		// window.$c_advancedPanel = new
+		// QueryTemplatePanel(document.getElementById("$d_advancePanel"),
+		// "advancePanel", 0, 0, "100%", "100%", "relative");
+		// window.$c_advancedPanel.setIfMust(true);
+		// $c_advancedPanel.setDataset(pageUI.getWidget(widgetId).getDataset("queryConditionTreeDataset"));
+
+		// TODO ??????????????????????
+		var advanceDbClickListener = new TreeNodeListener();
+		advanceDbClickListener.ondbclick = function(treeNodeMouseEvent) {
+			var node = treeNodeMouseEvent.node;
+			templateAdvanceOndbClick(node);
+		};
+		var advanceTree = pageUI.getWidget(widgetId)
+				.getComponent("advanceTree");
+		advanceTree.addListener(advanceDbClickListener);
+
+	};
+
+	tab.rightBarSpace.style.width = "90px";
+	var toolbar_1 = new ToolBarComp(tab.rightBarSpace, "queryConditionToolbar",
+			0, 0, "90", "", "relative", null, true);
+	//toolbar_1.addButton("imageSave", "", "保存", window.themeGlobalPath	+ "/frame/device_pc/themes/" + window.themeId + "/ui/ctrl/qry/images/save.png", "right", true);
+	toolbar_1.addButton("imageClear", "", "清空", window.themeGlobalPath
+			+ "/frame/device_pc/themes/" + window.themeId
+			+ "/ui/ctrl/qry/images/clear.png", "right", true);
+	toolbar_1.addButton("imageReset", "", "重置", window.themeGlobalPath
+			+ "/frame/device_pc/themes/" + window.themeId
+			+ "/ui/ctrl/qry/images//reset.png", "right", true);
+	// 保存
+	/*
+	var imageSaveMouseListener = new MouseListener();
+	imageSaveMouseListener.onclick = function(MouseEvent) {
+		doConditionSave.flag = 'Favorites';
+		if (!window.$c_conditionSavedialog) {
+			window.$c_conditionSavedialog = new InputDialogComp("saveText",
+					"输入对话框", 0, 0, null, null, 100, doConditionSave);
+			window.$c_conditionSavedialog.addItem("请输入保存名:",
+					"conditionSaveText", "string", true, null);
+		}
+		window.$c_conditionSavedialog.show();
+	};
+	toolbar_1.getButton("imageSave").addListener(imageSaveMouseListener);
+	*/
+	// 清空
+	var imageClearMouseListener = new MouseListener();
+	imageClearMouseListener.onclick = function(MouseEvent) {
+		var conditionDs = null;
+		if (pageUI.getWidget("main").getTab('sqlTab').getSelectedIndex() == 0)
+			conditionDs = pageUI.getWidget(widgetId).getDataset(
+					"queryConditionDataset");
+		else
+			conditionDs = pageUI.getWidget(widgetId).getDataset(
+					"queryConditionTreeDataset");
+		var rows = conditionDs.getRows();
+		if (rows != null) {
+			for ( var i = 0; i < rows.length; i++) {
+				// 略过固定
+				if (rows[i].getCellValue(9) == 1)
+					continue;
+				if (rows[i].getCellValue(1) == '$#$')
+					continue;
+				conditionDs.setValueAt(i, 3, null);
 			}
-			return true;
-		};
-		//window.widgetId = "${widgetId}";
-		window.$c_normalPanel = new QueryTemplatePanel(document
-				.getElementById("$d_main_normalPanel"), "normalPanel", 0, 0, "100%",
-				"100%", "relative");
-		var widget = pageUI.getWidget("main");
-		$c_normalPanel.widget = widget;
-		$c_normalPanel.setDataset(widget.getDataset("queryConditionDataset"));
-		window.$queryTemplateProcessor = new QueryTemplateProcessor(widget);
-	
-		var tab = widget.getTab('sqlTab');
-		tab.beforeItemInit = function(item) {
-		};
-	
-		tab.afterItemInit = function(item) {
-			var advanceDbClickListener = new TreeNodeListener();
-			advanceDbClickListener.ondbclick = function(treeNodeMouseEvent) {
-				var node = treeNodeMouseEvent.node;
-				templateAdvanceOndbClick(node);
-			};
-			var advanceTree = pageUI.getWidget(widgetId)
-					.getComponent("advanceTree");
-			advanceTree.addListener(advanceDbClickListener);
-	
-		};
-	
-		tab.rightBarSpace.style.width = "90px";
-		var toolbar_1 = new ToolBarComp(tab.rightBarSpace, "queryConditionToolbar",
-				0, 0, "90", "", "relative", null, true);
-		toolbar_1.addButton("imageSave", "", "保存", window.themePath + "/ext/querytemplate/save.png", "right", true);
-		toolbar_1.addButton("imageClear", "", "清空", window.themeGlobalPath
-				+ "/html/themes/" + window.themeId
-				+ "/images/querytemplate/clear.png", "right", true);
-		toolbar_1.addButton("imageReset", "", "重置", window.themeGlobalPath
-				+ "/html/themes/" + window.themeId
-				+ "/images/querytemplate/reset.png", "right", true);
-		// 保存
-		var imageSaveMouseListener = new MouseListener();
-		imageSaveMouseListener.onclick = function(MouseEvent) {
-			doConditionSave.flag = 'Favorites';
-			if (!window.$c_conditionSavedialog) {
-				window.$c_conditionSavedialog = new InputDialogComp("saveText",
-						"输入对话框", 0, 0, null, null, 100, doConditionSave);
-				window.$c_conditionSavedialog.addItem("请输入保存名:",
-						"conditionSaveText", "string", true, null);
-			}
-			window.$c_conditionSavedialog.show();
-		};
-		toolbar_1.getButton("imageSave").addListener(imageSaveMouseListener);
-		// 清空
-		var imageClearMouseListener = new MouseListener();
-		imageClearMouseListener.onclick = function(MouseEvent) {
-			var conditionDs = null;
-			if (pageUI.getTab('sqlTab').getSelectedIndex() == 0)
-				conditionDs = pageUI.getWidget(widgetId).getDataset(
-						"queryConditionDataset");
-			else
-				conditionDs = pageUI.getWidget(widgetId).getDataset(
-						"queryConditionTreeDataset");
-			var rows = conditionDs.getRows();
-			if (rows != null) {
-				for ( var i = 0; i < rows.length; i++) {
-					// 略过固定
-					if (rows[i].getCellValue(9) == 1)
-						continue;
-					if (rows[i].getCellValue(1) == '$#$')
-						continue;
-					conditionDs.setValueAt(i, 3, null);
-				}
-			}
-		};
-		toolbar_1.getButton("imageClear").addListener(imageClearMouseListener);
-		// 重置
-		var imageResetMouseListener = new MouseListener();
-		imageResetMouseListener.onclick = function(MouseEvent) {
-			var conditionDs = null;
-			if (pageUI.getTab('sqlTab').getSelectedIndex() == 0) {
-				conditionDs = pageUI.getWidget(widgetId).getDataset(
-						"queryConditionDataset");
-				// 删除已显示内容
-				// window.$c_normalPanel.removeAllElement();
-			} else {
-				conditionDs = pageUI.getWidget(widgetId).getDataset(
-						"queryConditionTreeDataset");
-				// 删除已显示内容
-				// var advanceTree =
-				// pageUI.getWidget(widgetId).getComponent("advanceTree");
-				// advanceTree.rootNode.clearChildren();
-			}
-			// 删除原有Dataset内容
-			conditionDs.removeRowSet(conditionDs.currentKey);
-			// 重新加载Dataset内容
-			conditionDs.setCurrentPage(Dataset.MASTER_KEY, 1);
-			// conditionDs.undo();
-		};
-		toolbar_1.getButton("imageReset").addListener(imageResetMouseListener);
-	
-		/* 收藏夹 */
-		var toolbar_2 = new ToolBarComp(document.getElementById("favoritDiv"),
-				"savedConditionToolbar", 0, 0, "100%", "", "relative", null, false);
-		toolbar_2.addButton("imageFolder", "", "生成文件夹", window.themeGlobalPath
-				+ "/html/themes/" + window.themeId
-				+ "/images/querytemplate/folder.png", "right", true);
-		toolbar_2.addButton("imageDelete", "", "删除", window.themeGlobalPath
-				+ "/html/themes/" + window.themeId
-				+ "/images/querytemplate/delete.png", "right", true);
-		// 生成文件夹
-		var folderMouseListener = new MouseListener();
-		folderMouseListener.onclick = function(MouseEvent) {
-			// TODO
-			doConditionSave.flag = 'Folder';
-			if (!window.$c_conditionSavedialog) {
-				window.$c_conditionSavedialog = new InputDialogComp("saveText",
-						"输入对话框", 0, 0, null, null, 100, doConditionSave);
-				window.$c_conditionSavedialog.addItem("请输入保存名:",
-						"conditionSaveText", "string", true, null);
-			}
-			window.$c_conditionSavedialog.show();
-	
-			// var dialog = pageUI.getWidget(widgetId).getComponent("saveDialog");
-			// dialog.show();
-			// doConditionSave.flag = 'Folder';
-		};
-		toolbar_2.getButton("imageFolder").addListener(folderMouseListener);
-		// 删除
-		var deleteMouseListener = new MouseListener();
-		deleteMouseListener.onclick = function(MouseEvent) {
-			deleteFavorit();
-		};
-		toolbar_2.getButton("imageDelete").addListener(deleteMouseListener);
-	});
+		}
+	};
+	toolbar_1.getButton("imageClear").addListener(imageClearMouseListener);
+	// 重置
+	var imageResetMouseListener = new MouseListener();
+	imageResetMouseListener.onclick = function(MouseEvent) {
+		var conditionDs = null;
+		if (pageUI.getWidget("main").getTab('sqlTab').getSelectedIndex() == 0) {
+			conditionDs = pageUI.getWidget(widgetId).getDataset(
+					"queryConditionDataset");
+			// 删除已显示内容
+			// window.$c_normalPanel.removeAllElement();
+		} else {
+			conditionDs = pageUI.getWidget(widgetId).getDataset(
+					"queryConditionTreeDataset");
+			// 删除已显示内容
+			// var advanceTree =
+			// pageUI.getWidget(widgetId).getComponent("advanceTree");
+			// advanceTree.rootNode.clearChildren();
+		}
+		// 删除原有Dataset内容
+		conditionDs.removeRowSet(conditionDs.currentKey);
+		// 重新加载Dataset内容
+		conditionDs.setCurrentPage(Dataset.MASTER_KEY, 1);
+		// conditionDs.undo();
+	};
+	toolbar_1.getButton("imageReset").addListener(imageResetMouseListener);
+
+	/* 收藏夹 */
+	/*
+	var toolbar_2 = new ToolBarComp(document.getElementById("favoritDiv"),
+			"savedConditionToolbar", 0, 0, "100%", "", "relative", null, false);
+	toolbar_2.addButton("imageFolder", "", "生成文件夹", window.themeGlobalPath
+			+ "/html/themes/" + window.themeId
+			+ "/images/querytemplate/reset.png", "right", true);
+	toolbar_2.addButton("imageDelete", "", "删除", window.themeGlobalPath
+			+ "/html/themes/" + window.themeId
+			+ "/images/querytemplate/reset.png", "right", true);
+	// 生成文件夹
+	var folderMouseListener = new MouseListener();
+	folderMouseListener.onclick = function(MouseEvent) {
+		// TODO
+		doConditionSave.flag = 'Folder';
+		if (!window.$c_conditionSavedialog) {
+			window.$c_conditionSavedialog = new InputDialogComp("saveText",
+					"输入对话框", 0, 0, null, null, 100, doConditionSave);
+			window.$c_conditionSavedialog.addItem("请输入保存名:",
+					"conditionSaveText", "string", true, null);
+		}
+		window.$c_conditionSavedialog.show();
+
+		// var dialog = pageUI.getWidget(widgetId).getComponent("saveDialog");
+		// dialog.show();
+		// doConditionSave.flag = 'Folder';
+	};
+	toolbar_2.getButton("imageFolder").addListener(folderMouseListener);
+	// 删除
+	var deleteMouseListener = new MouseListener();
+	deleteMouseListener.onclick = function(MouseEvent) {
+		deleteFavorit();
+	};
+	toolbar_2.getButton("imageDelete").addListener(deleteMouseListener);
+	*/
 
 }
 
@@ -213,9 +259,9 @@ function doConditionSave() {
 	}
 	var row;
 	if (doConditionSave.flag == 'Favorites') {
-		var tabIndex = pageUI.getTab('conditionTab').getSelectedIndex();
+		var tabIndex = pageUI.getWidget("main").getTab('conditionTab').getSelectedIndex();
 		if (tabIndex == 0)
-			pageUI.getTab('conditionTab').activeTab(1);
+			pageUI.getWidget("main").getTab('conditionTab').activeTab(1);
 
 		row = getFavoritesData(saveDs);
 		if (row == null)
@@ -232,7 +278,7 @@ function doConditionSave() {
 		var page_fun_code = getParameter("otherPageId");
 		var nodeInfo = row.contentToXml() + "," + page_fun_code + ","
 				+ "${templateid}";// TODO
-		getService("favorite_service").saveQueryCondition(null, nodeInfo);
+		getService("nc.uap.ctrl.tpl.qry.IQryTemplateRpcService").saveQueryCondition(null, nodeInfo);
 		saveDs.addRow(row);
 	} else if (doConditionSave.flag == 'modify') {
 		row = doConditionSave.row;
@@ -240,7 +286,7 @@ function doConditionSave() {
 		var page_fun_code = getParameter("otherPageId");
 		var nodeInfo = row.contentToXml() + "," + page_fun_code + ","
 				+ "${templateid}";// TODO
-		getService("favorite_service").modifyQueryConditionName(nodeInfo);
+		getService("nc.uap.ctrl.tpl.qry.IQryTemplateRpcService").modifyQueryConditionName(nodeInfo);
 		saveDs.setValueAt(saveDs.getRowIndex(row), 3, saveName);
 	}
 	window.$c_conditionSavedialog.close();
@@ -356,7 +402,7 @@ delNode = function() {
 	var page_fun_code = parent.getParameter("pageId");
 	var nodeInfo = row.contentToXml() + "," + page_fun_code + ","
 			+ "${templateid}"; // TODO
-	getService("favorite_service").deleteQueryCondition(nodeInfo);
+	getService("nc.uap.ctrl.tpl.qry.IQryTemplateRpcService").deleteQueryCondition(nodeInfo);
 	delete (delNode.row);
 }
 
@@ -501,7 +547,7 @@ function modifySavedConditionName(item) {
 function $saveFavoritesImpl(row) {
 	var saveDs = pageUI.getWidget(widgetId).getDataset("savedQueryCondition");
 	var conditionDs = null;
-	if (pageUI.getTab('sqlTab').getSelectedIndex() == 0)
+	if (pageUI.getWidget(widgetId).getTab('sqlTab').getSelectedIndex() == 0)
 		conditionDs = pageUI.getWidget(widgetId).getDataset(
 				"queryConditionDataset");
 	else
@@ -516,9 +562,11 @@ function $saveFavoritesImpl(row) {
 			condArr.push(content);
 		}
 		var page_fun_code = getParameter("otherPageId");
-		var nodeInfo = row.contentToXml() + "," + page_fun_code + ","
-				+ "${templateid}";// TODO
-		getService("favorite_service").saveQueryCondition(condArr, nodeInfo);
+		var nodeInfo = row.contentToXml();
+		//+ "," + page_fun_code + ","
+		//		+ "${templateid}";// TODO
+		//encodeURIComponent(arr[i]), dtMap)
+		getService("nc.uap.ctrl.tpl.qry.IQryTemplateRpcService").execute("saveQueryCondition", encodeURIComponent(condArr), encodeURIComponent(nodeInfo));
 		returnArrayRow = new Array();
 		returnArrayRow.push(row);
 	} else {

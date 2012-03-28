@@ -10,10 +10,10 @@
  */
 
 MessageDialogComp.prototype.componentType = "MESSAGEDIALOG";
-MessageDialogComp.HEIGHT = 180;
-MessageDialogComp.WIDTH = 350;
+MessageDialogComp.HEIGHT = 230;
+MessageDialogComp.WIDTH = 482;
 
-MessageDialogComp.refImgPath = "/ui/ctrl/dialog/images/message_dialog.gif";
+MessageDialogComp.refImgPath = "/ui/ctrl/dialog/images/tip1.png";
 
 MessageDialogComp.prototype = new ListenerUtil;
 
@@ -40,20 +40,6 @@ MessageDialogComp.prototype = new ListenerUtil;
  * @param refImg 信息对话框左侧的显示图片的url
  */
 function MessageDialogComp(name, title, left, top, msg, refImg) {
-	// guoweic: modify start 2009-11-9
-	/*
-	this.getInstance = Singleton;
-	var instance = null;
-
-	if (arguments.length == 0) {
-		instance = this.getInstance(false);
-		return instance;
-	}
-	if (instance = this.getInstance(true))
-		return instance;
-	*/
-	// guoweic: modify end
-
 	this.name = name;
 	this.title = title;
 	this.left = left;
@@ -87,23 +73,15 @@ MessageDialogComp.prototype.create = function() {
 	this.rightDiv = $ce("DIV");
 	this.leftDiv.className = "message_leftdiv";
 	this.rightDiv.className = "message_rightdiv";
-//	this.rightDiv.innerHTML = "<table style='height:100%;width:100%'><tr><td valign='top'></td></tr></table>";
-//	this.msgTd = this.rightDiv.firstChild.rows[0].cells[0];
-	this.rightDiv.innerHTML = "<div style='height:100%;width:100%;position:relative;overflow-y:auto;'></div>";
+	this.rightDiv.innerHTML = "<div style='margin-top:52px;width:100%;position:relative;overflow-y:auto;'></div>";
 	this.msgTd = this.rightDiv.firstChild;
 	this.contentDiv.appendChild(this.leftDiv);
 	this.imgNode = $ce("img");
 	this.imgNode.src = this.refImg;
 	
-	if(IS_IE6){
-		this.imgNode.style.width="32px";
-		this.imgNode.style.height="32px";
-	}
 	this.leftDiv.appendChild(this.imgNode);
 	this.contentDiv.appendChild(this.rightDiv);
-//	if (!IS_IE || IS_IE8) {
-	this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth + "px";
-//	}
+	//this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth + "px";
 	this.bottomDiv = $ce("DIV");
 	this.modaldialog.getContentPane().appendChild(this.bottomDiv);
 	this.bottomDiv.className = "message_bottomdiv";
@@ -118,7 +96,7 @@ MessageDialogComp.prototype.create = function() {
 	this.bottomDiv.appendChild(this.okBtDiv);
 	// 生成确定按钮
 	this.okBt = new ButtonComp(this.okBtDiv, "okBt", 0, 0, "74", "23",
-			trans("ml_ok"), "", '', "relative", "", false, "button_div");
+			trans("ml_ok"), "", '', "relative", "", false, "blue_button_div");
 	this.okBt.onclick = function(e) {
 		e = EventUtil.getEvent();
 		oThis.onclick(e);
@@ -126,8 +104,7 @@ MessageDialogComp.prototype.create = function() {
 		// 删除事件对象（用于清除依赖关系）
 		clearEventSimply(e);
 	};
-	if (IS_IE8)
-		this.okBt.Div_gen.style.margin = "0 auto";
+	this.okBt.Div_gen.style.margin = "0 auto";
 	this.contentDiv.style.height = this.modaldialog.getContentPane().offsetHeight - this.bottomDiv.offsetHeight + "px";
 };
 
@@ -138,7 +115,11 @@ MessageDialogComp.prototype.create = function() {
  */
 MessageDialogComp.prototype.changeMsg = function(msg) {
 	this.msg = msg;
-	this.msgTd.innerHTML = "<div style='top:20px;position:relative;'>" + this.msg + "</div>";
+	this.msgTd.innerHTML = this.msg;
+	var height = getTextHeight(this.msg, "message_rightdiv");
+	if(height > 0){
+		this.msgTd.style.marginTop = (52 - (height - 14)/2) + "px";
+	}
 };
 
 /**
@@ -149,20 +130,11 @@ MessageDialogComp.prototype.changeMsg = function(msg) {
 MessageDialogComp.prototype.show = function() {
 	this.modaldialog.show();
 	this.adjustContentdivWidth();
-//	MessageDialogComp.CurrentDialog = this;
-//	setTimeout("MessageDialogComp.hideCurrentDialog()",3000);
 };
-
-//MessageDialogComp.hideCurrentDialog = function(){
-//	if (MessageDialogComp.CurrentDialog != null){
-//		MessageDialogComp.CurrentDialog.okBt.onclick();
-//		MessageDialogComp.CurrentDialog == null;
-//	}
-//};
 
 
 MessageDialogComp.prototype.adjustContentdivWidth = function(){
-	this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth + "px";	
+	//this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth + "px";	
 };
 
 
@@ -180,18 +152,17 @@ MessageDialogComp.prototype.hide = function() {
  * 
  * @param message 要显示的提示信息文字
  */
-MessageDialogComp.showDialog = function(message, title) {
-	// guoweic: modify start 2009-11-10
-	//var dialog = new MessageDialogComp("MessageDialog",
-	//		trans("ml_messagedialog"), "", "", message, "");
-	if (!window.globalObject.$c_MessageDialog)
+MessageDialogComp.showDialog = function(message, title, btnText) {
+	if (!window.globalObject.$c_MessageDialog){
 		window.globalObject.$c_MessageDialog = new MessageDialogComp("MessageDialog",
 						trans("ml_messagedialog"), "", "", message, "");
+	}
 	var dialog = window.globalObject.$c_MessageDialog;
-	// guoweic: modify end
 	dialog.changeMsg(message);
 	if(title != null)
-		dialog.setTitle(title);
+		dialog.modaldialog.setTitle(title);
+	if(btnText != null)
+		dialog.okBt.changeText(btnText);
 	dialog.show();
 	return dialog;
 };
@@ -201,10 +172,7 @@ MessageDialogComp.showDialog = function(message, title) {
  */
 MessageDialogComp.hideDialog = function() {
 	try {
-		// guoweic: modify start 2009-11-10
-		//var dialog = new MessageDialogComp();
 		var dialog = window.globalObject.$c_MessageDialog;
-		// guoweic: modify end
 		dialog.hide();
 	} catch (error) {
 	}

@@ -1,3 +1,8 @@
+/**
+*	鏌ヨ妯＄増鏅�氭搷浣滀笓鐢≒anel鎺т欢銆�
+*   
+*	@author dengjt
+*/
 QueryTemplatePanel.prototype = new BaseComponent;
 QueryTemplatePanel.prototype.componentType = "QUERY_TEMPLATE_PANEL";
 
@@ -41,7 +46,7 @@ QueryTemplatePanel.prototype.setDataset = function(ds)
 	this.table.appendChild(tbody);
 	this.Div_gen.appendChild(this.table);
 	
-	var rows = this.dataset.getRows();
+	var rows = this.dataset.getAllRows();
 	if(rows != null){
 		for(var i = 0; i < rows.length; i ++){
 			if(this.ifMust){
@@ -55,8 +60,33 @@ QueryTemplatePanel.prototype.setDataset = function(ds)
 	}
 };
 
+/**
+ * 把date类型格式化成yyyy-MM-dd HH:Mi:SS
+ * @param {date} datetime
+ * @return {String}   YYYY-MM-DD HH:Mi:SS
+ * private
+ */
+QueryTemplatePanel.prototype.dateTimeFormat = function(date) {   
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	if (parseInt(month)<10) month = "0" + month;
+	var day = date.getDate();
+	if (parseInt(day)<10) day = "0" + day;
+	var hours = date.getHours();
+	if (parseInt(hours)<10) hours = "0" + hours;
+	var minutes = date.getMinutes();
+	if (parseInt(minutes)<10) minutes = "0" + minutes;
+	var seconds = date.getSeconds();
+	if (parseInt(seconds)<10) seconds = "0" + seconds;
+	var formatString = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+	return formatString;
+};
+
+
+
 QueryTemplatePanel.prototype.onModelChanged = function(event)
 { 
+	//蹇呰緭鏉′欢锛屼笉鍝嶅簲浜嬩欢
 	if(this.ifMust)
 		return;
 	if(RowSelectEvent.prototype.isPrototypeOf(event))
@@ -90,10 +120,30 @@ QueryTemplatePanel.prototype.onModelChanged = function(event)
 	else if (PageChangeEvent.prototype.isPrototypeOf(event))
 	{
 		this.removeAllElement();
-		var rows = this.dataset.getRows();
+		var rows = this.dataset.getAllRows();
 		if(rows != null){
-			for(var i = 0; i < rows.length; i ++)
+			for(var i = 0; i < rows.length; i ++){
+				//
+				var type = rows[i].getCellValue(5);
+				if (type == EditorType.DATETEXT){
+					value = rows[i].getCellValue(3);
+					var valueArr = value.split(",");
+					if (valueArr[1] == null)
+						valueArr[1] = valueArr[0];
+					if (parseInt(valueArr[0]) == valueArr[0]){
+						var date = new Date();
+						date.setTime(valueArr[0]);
+						valueArr[0] = this.dateTimeFormat(date); 
+					}	
+					if (parseInt(valueArr[1]) == valueArr[1]){
+						var date = new Date();
+						date.setTime(valueArr[1]);
+						valueArr[1] = this.dateTimeFormat(date); 
+					}
+					rows[i].setCellValue(3, valueArr[0] + "," + valueArr[1]);
+				}
 				this.createElement(rows[i]);
+			}
 		}
 	}
 };
@@ -111,6 +161,7 @@ QueryTemplatePanel.prototype.createElement = function(dsRow)
 	var fieldType = dsRow.getCellValue(9);
 	var logicType = dsRow.getCellValue(14);
 	var editable = fieldType != 1;
+	//闈炲浐瀹氭潯浠跺拰蹇呴』鏉′欢锛屾墠娣诲姞鍒犻櫎鎸夐挳
 	if((fieldType != 0 && fieldType != 1) && logicType != "1"){
 		var img = new ImageComp(cell, "img", window.themeGlobalPath + "/themes/" + window.themeId + "/images/querytemplate/remove.png", 0, 0, "16", "16", "删除条件", null, {position:"relative"});
 		img.relationRow = dsRow;
@@ -137,6 +188,7 @@ QueryTemplatePanel.prototype.createElement = function(dsRow)
 	var fieldId = dsRow.getCellValue(10);
 	var comboData = this.widget.getComboData("comb_" + fieldId);
 	condComb.setComboData(comboData);
+	//璁剧疆鏌ヨ鏉′欢鍊�
 	condComb.setValue(dsRow.getCellValue(2));
 	condComb.relationRow = dsRow;
 	
@@ -176,14 +228,17 @@ QueryTemplatePanel.prototype.createElement = function(dsRow)
 
 QueryTemplatePanel.prototype.removeElement = function(row, index)
 {
+	//涓嶅垱寤烘櫘閫氳
 	if(row.getCellValue(1) == "$#$")
 		return;
+	//鐣ユ帀And鍜孫r琛�
 	var rows = this.dataset.getRows();
 	if(rows != null)
 	{
 		var count = 0;
 		for(var i = 0; i < rows.length && i < index; i ++)
 		{
+			//鐣ユ帀And鍜孫r琛�
 			if(rows[i].getCellValue(1) != "$#$")
 				count ++;
 		}
@@ -194,6 +249,7 @@ QueryTemplatePanel.prototype.removeElement = function(row, index)
 
 QueryTemplatePanel.prototype.removeAllElement = function()
 {
+	//鐣ユ帀And鍜孫r琛�
 	var n = this.table.rows.length;
 	if(n > 0)
 	{
@@ -206,14 +262,17 @@ QueryTemplatePanel.prototype.removeAllElement = function()
 
 QueryTemplatePanel.prototype.modifyElement = function(row, cellRowIndex, cellColIndex, value, oldValue)
 {
+	//涓嶅垱寤烘櫘閫氳
 	if(row.getCellValue(1) == "$#$")
 		return;
+	//鐣ユ帀And鍜孫r琛�
 	var rows = this.dataset.getRows();
 	if(rows != null)
 	{
 		var count = 0;
 		for(var i = 0; i < rows.length && i < cellRowIndex; i ++)
 		{
+			//鐣ユ帀And鍜孫r琛�
 			if(rows[i].getCellValue(1) != "$#$")
 				count ++;
 		}
@@ -225,10 +284,12 @@ QueryTemplatePanel.prototype.modifyElement = function(row, cellRowIndex, cellCol
 
 
 /**
+  * 澶勭悊鏉′欢鍙樺寲鐨勬儏鍐点�俧lag 0,琛ㄧず闈炰粙浜庡埌闈炰粙浜�, 1,琛ㄧず浠嬩簬鍒伴潪浠嬩簬锛� 2锛岃〃绀洪潪浠嬩簬鍒颁粙浜� 
   */
 QueryTemplatePanel.prototype.processCondition = function(flag, row, dsRow, editable)
 { 
 	var cell = row.cells[3];
+	//鍏堟竻鎺夊師鏉ユ棫鎺т欢
 	if(flag != 0){
     	if(cell.firstChild && cell.firstChild.owner) {
     		cell.firstChild.owner.destroySelf();

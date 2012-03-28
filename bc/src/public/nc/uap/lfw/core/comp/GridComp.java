@@ -26,7 +26,7 @@ import nc.uap.lfw.jsp.uimeta.UIMeta;
  * Grid控件后台对应的配置类
  *
  */
-public class GridComp extends WebComponent implements IDataBinding 
+public class GridComp extends WebComponent implements IDataBinding  , IContainerComp<GridColumn>
 {
 	private static final long serialVersionUID = -525473184313225199L;
 	private String dataset;
@@ -675,6 +675,15 @@ public class GridComp extends WebComponent implements IDataBinding
 //			}
 		}
 //		return null;
+	}
+
+	@Override
+	public GridColumn getElementById(String id) {
+		IGridColumn gc = getColumnByField(id);
+		if(gc instanceof GridColumn){
+			return (GridColumn) gc;
+		}
+		return null;
 	}
 	
 }

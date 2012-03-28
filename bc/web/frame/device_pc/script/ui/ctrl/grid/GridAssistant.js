@@ -60,7 +60,14 @@ DefaultRender.render = function(rowIndex, colIndex, value, header, cell, parentR
 		loadImg.onclick = expandGridChild;
 		cell.appendChild(loadImg);
 	}
-	cell.appendChild(document.createTextNode(value));
+	var userDiv = null;
+	if (typeof fillCellContent != "undefined"){
+		userDiv = fillCellContent.call(this, grid, rowIndex, colIndex, value, header, parentRowIndex);
+	}
+	if (userDiv == null)
+		cell.appendChild(document.createTextNode(value));
+	else	
+		cell.appendChild(userDiv);
 };
 
 function expandGridChild(e){

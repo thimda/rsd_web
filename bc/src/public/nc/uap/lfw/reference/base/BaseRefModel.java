@@ -206,8 +206,7 @@ public abstract class BaseRefModel implements ILfwRefModel {
 			int index = htCodeIndex.size();
 			if (ncModel.isDynamicCol() && ncModel.getDynamicFieldNames() != null) {
 				for (int i = 0; i < ncModel.getDynamicFieldNames().length; i++) {
-					htCodeIndex.put(ncModel.getDynamicFieldNames()[i].trim(),
-							new Integer(index + i));
+					htCodeIndex.put(ncModel.getDynamicFieldNames()[i].trim(),Integer.valueOf(index + i));
 				}
 			}
 			o = getHtCodeIndex(ncModel).get(field.trim());
@@ -228,7 +227,7 @@ public abstract class BaseRefModel implements ILfwRefModel {
 					String key = ncModel.getFieldCode()[i].trim();
 					if (-1 != key.indexOf(" "))
 						key = key.substring(key.indexOf(" "));
-					htCodeIndex.put(key, new Integer(i));
+					htCodeIndex.put(key, Integer.valueOf(i));
 				}
 			if (ncModel.getHiddenFieldCode() != null) {
 				int index = 0;
@@ -240,7 +239,7 @@ public abstract class BaseRefModel implements ILfwRefModel {
 						String key = ncModel.getHiddenFieldCode()[i].trim();
 						if (-1 != key.indexOf(" "))
 							key = key.substring(key.lastIndexOf(" ") + 1);
-						htCodeIndex.put(key, new Integer(index + i));
+						htCodeIndex.put(key, Integer.valueOf(index + i));
 					} else {
 						LfwLogger.debug("Waring: The RefModel has some errors.");
 					}

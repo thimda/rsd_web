@@ -1,6 +1,7 @@
 package nc.uap.lfw.core.importer;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -60,6 +61,9 @@ public final class SmartImporter {
 	 * 所有lib的缓存字符串,优化
 	 */
 	private String optimizedLibArrStr;
+	private Set<String> includeJsSet = new HashSet<String>();
+	private Set<String> includeCssSet = new HashSet<String>();
+	private Set<String> includeIdSet = new HashSet<String>();
 	private PageMeta pm;
 	public String genImporters(PageMeta pm, UIMeta um, boolean optimized){
 		this.pm = pm;
@@ -102,14 +106,25 @@ public final class SmartImporter {
 			loadLib("jquery", importList, cssImportList, idSet, optimized);
 		
 		if(um != null && um.isReference() != null && um.isReference() == 1){
-//			importList.add(new Importer("ui/ctrl/ref/refscript"));
-//			importList.add(new Importer("ui/ctrl/ref/reftree"));
-//			importList.add(new Importer("ui/ctrl/ref/refgrid"));
-//			importList.add(new Importer("ui/ctrl/ref/refgridtree"));
 			loadLib("reflib", importList, cssImportList, idSet, optimized);
 		}
 		
 		getImportList(importList, cssImportList, idSet, um, pm, optimized);
+		
+		if(um != null){
+			String includeId = um.getIncludeId();
+			if(includeId != null){
+				String[] includeIds = includeId.split(",");
+				for (int i = 0; i < includeIds.length; i++) {
+					loadLib(includeIds[i], importList, cssImportList, idSet, optimized);
+				}
+			}
+		}
+		
+		Iterator<String> idIt = includeIdSet.iterator();
+		while(idIt.hasNext()){
+			loadLib(idIt.next(), importList, cssImportList, idSet, optimized);
+		}
 		
 		String frameDevice = "/frame/device_pc";
 		boolean clientMode = LfwRuntimeEnvironment.isClientMode();
@@ -150,15 +165,22 @@ public final class SmartImporter {
 		String lfwIncludeCss = null;
 		String pageCss = null;
 		if(um != null){
-			includeJs = um.getIncudejs();
-			includeCss = um.getIncudecss();
+			includeJs = um.getIncludejs();
+			includeCss = um.getIncludecss();
 			lfwIncludeJs = um.getLfwIncudejs();
 			lfwIncludeCss = um.getLfwIncudecss();
 			pageCss = um.getPagecss();
 		}
 		
 		addExtendJs(includeJs, scriptBuf);
+		Iterator<String> jsIt = includeJsSet.iterator();
+		while(jsIt.hasNext())
+			addExtendJs(jsIt.next(), scriptBuf);
+		
 		addExtendCss(includeCss, cssBuf);
+		Iterator<String> incCssIt = includeCssSet.iterator();
+		while(incCssIt.hasNext())
+			addExtendCss(incCssIt.next(), cssBuf);
 		
 		
 		addPageCss(pageCss,scriptBuf);
@@ -572,6 +594,17 @@ public final class SmartImporter {
 	
 	private void getWidgetImportList(LinkedHashSet<Importer> importList, LinkedHashSet<Importer> cssImportList, Set<String> idSet, UIWidget widget, boolean optimized){
 		UIMeta um = widget.getUimeta();
+		String includeJs = um.getIncludejs();
+		String includeCss = um.getIncludecss();
+		String includeId = um.getIncludeId();
+		if(includeJs != null && !includeJs.equals(""))
+			includeJsSet.addAll(Arrays.asList(includeJs.split(",")));
+		
+		if(includeCss != null && !includeCss.equals(""))
+			includeCssSet.addAll(Arrays.asList(includeCss.split(",")));
+		
+		if(includeId != null && !includeId.equals(""))
+			includeIdSet.addAll(Arrays.asList(includeId.split(",")));
 		getImportList(importList, cssImportList, idSet, um, optimized);
 	}
 

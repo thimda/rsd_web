@@ -2,13 +2,9 @@
 {
 	position:absolute;                
     z-Index:10000;
-    width:255px;               
+    width:235px;               
 	visibility:hidden;
 	overflow:hidden;
-	border-color:#A0B3C6;
-	border-width:1px;
-	border-style:solid;
-	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/calendar/images/background.gif');
 }
 
 .calendar_div .calendar_bar_input
@@ -16,19 +12,22 @@
 	border-color:#A0B3C6;
 	border-width:1px;
 	border-style:solid;
-	width:48px;
-	height:18px;
+	width:37px;
+	height:19px;
 	position:absolute;
-	left:10px;
-	top:5px;
+	padding-left:8px;
+	padding-right:8px;
+	font-size:15px;
+	font-weight:bold;
+	color:#4b99ca;
 }
 
 .calendar_div .calendar_bar_img_div
 {
 	position:absolute;
-	left:60px;
-	top:5px;
-	height:18px;
+	left:0px;
+	top:0px;
+	height:19px;
 	width:14px;
 	padding-top:2px;
 	border-top-style:solid;
@@ -56,29 +55,194 @@
 	top:10px;
 }
 
-.calendar_day_cell {
+.calendar_div .calendar_day_cell {
         cursor:pointer;
-        padding:0px;
         vertical-align:sub;
         text-align:center;
-        border:0px;
-        font-size:10pt;
+        font-size:12px;
         font-family:Arial;
+        font-weight:bold;
         z-index:10000;
         position:absolute;
-        left:0px;
-        top:0px;
-        width:216px;
-        height:205px;
+        width:31px;
+        height:31px;
+        line-height:24px;
+        color:#333333;
  }
-
-.calendar_day {
-        position:absolute;
-        text-align:center;
-        font-size:11pt;
-        font-family:Arial;
-        top:40px;
-        width:30px;
-        height:20px;
+ 
+.calendar_div .calendar_rest_day_cell{
+	color:#999999;
 }
+
+.calendar_div .calendar_current_day_cell{
+	background:url('images/today.png') no-repeat;
+	width:31px;
+	height:31px;
+	color:#ffffff;
+}
+
+.calendar_div .calendar_day {
+    position:absolute;
+    text-align:center;
+    font-size:12px;
+    font-family:Arial;
+    font-weight:bold;
+    width:30px;
+}
+
+.calendar_div .calendar_current_day {
+    color:#0084ff;
+}
+
+.calendar_div .opBar{
+	position:relative;
+	width:100%;
+	height:25px;
+	border-bottom:1px solid #cccccc;
+	padding-bottom:5px;
+}
+
+.calendar_div .preYearDiv{
+	width:5px;
+	height:9px;
+	position:absolute;
+	left:10px;
+	top:0px;
+	margin-top:6px;
+}
+
+.calendar_div .nextYearDiv{
+	width:5px;
+	height:9px;
+	position:absolute;
+	left:80px;
+	top:0px;
+	margin-top:6px;
+}
+
+.calendar_div .preDiv{
+	width:5px;
+	height:9px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	background:url('images/arrow_left.png') no-repeat;
+	margin-top:6px;
+}
+
+.calendar_div .nextDiv{
+	width:5px;
+	height:9px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	background:url('images/arrow_right.png') no-repeat;
+	margin-top:6px;
+}
+
+.calendar_div .weekBar{
+	position:relative;
+	width:100%;
+	height:15px;
+	border-bottom:1px solid #cccccc;
+	padding-bottom:5px;
+	padding-top:5px;
+	line-height:15px;
+}
+
+.calendar_div .calendarDiv{
+	position:relative;
+	width:100%;
+}
+
+/*背景样式*/
+
+.background_div{
+	position:relative;
+	width:100%;
+	height:100%;
+}
+
+.background_div .bg_left_top_div{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_left_top.png') no-repeat;
+}
+
+.background_div .bg_center_top_div{
+	position:absolute;
+	left:11px;
+	right:11px;
+	top:0px;
+	height:11px;
+	background:url('images/drop_top_center.png') repeat-x;
+}
+
+.background_div .bg_right_top_div{
+	position:absolute;
+	right:0px;
+	top:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_right_top.png') no-repeat;
+}
+
+.background_div .bg_left_center_div{
+	position:absolute;
+	left:0px;
+	top:11px;
+	bottom:11px;
+	width:11px;
+	background:url('images/drop_left_center.png') repeat-y;
+}
+
+.background_div .bg_center_div{
+	position:absolute;
+	left:11px;
+	right:11px;
+	top:11px;
+	bottom:11px;
+	background:url('images/drop_center.png') repeat;
+	padding:1px 2px 3px 2px;
+}
+
+.background_div .bg_right_center_div{
+	position:absolute;
+	right:0px;
+	top:11px;
+	bottom:11px;
+	width:11px;
+	background:url('images/drop_right_center.png') repeat-y;
+}
+
+.background_div .bg_left_bottom_div{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_left_bottom.png') no-repeat;
+}
+
+.background_div .bg_center_bottom_div{
+	position:absolute;
+	left:11px;
+	right:11px;
+	bottom:0px;
+	height:11px;
+	background:url('images/drop_bottom_center.png') repeat-x;
+}
+
+.background_div .bg_right_bottom_div{
+	position:absolute;
+	right:0px;
+	bottom:0px;
+	width:11px;
+	height:11px;
+	background:url('images/drop_right_bottom.png') no-repeat;
+}
+
 

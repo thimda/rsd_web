@@ -3,7 +3,7 @@
 	<id>toolbar</id>
 	<fullname>ui.ctrl.toolbar.ToolBarComp</fullname>
 	<cssfullname>ui.ctrl.toolbar.toolbar</cssfullname>
-	<dependences>label,combotext</dependences>
+	<dependences></dependences>
 	<javaclazz>nc.uap.lfw.core.comp.ToolBarComp</javaclazz>
 	<uijavaclazz>nc.uap.lfw.jsp.uimeta.UIToolBar</uijavaclazz>
 	<serializer>nc.uap.lfw.core.ctrlfrm.seria.ToolbarSerializer</serializer>

@@ -144,7 +144,7 @@ public abstract class WebElementTag extends SimpleTagWithAttribute {
 		if(divShowId == null){
 			Integer index = (Integer) getJspContext().getAttribute(DIV_INDEX);
 			if(index == null){
-				index = new Integer(0);
+				index = Integer.valueOf(0);
 			}
 			divShowId = DIV_PRE + getId() + index;
 			getJspContext().setAttribute(DIV_INDEX, (index + 1));

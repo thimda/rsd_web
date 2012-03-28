@@ -384,7 +384,7 @@ public class UIMetaParserUtil implements UIConstant {
 				layout.setAttribute(UICanvas.CLASSNAME, className);
 			
 			String title = getAttributeValue(node, UICanvas.TITLE);
-			if(title != null && !title.equals(""))
+			if(title != null)
 				layout.setAttribute(UICanvas.TITLE, title);
 		}
 		else if (nodeName.equals(FLOWH_LAYOUT)) {

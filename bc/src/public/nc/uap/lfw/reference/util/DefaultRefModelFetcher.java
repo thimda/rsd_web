@@ -9,20 +9,24 @@ import nc.uap.lfw.reference.base.ILfwRefModel;
 public class DefaultRefModelFetcher implements IRefModelFetcher {
 
 	public ILfwRefModel getRefModel(RefNode refnode, Map<String, Object> param) {
-		if(refnode instanceof RefNode){
+//		if(refnode instanceof RefNode){
 			String refModel = refnode.getRefModel();
 			try {
 				return (ILfwRefModel) Class.forName(refModel).newInstance();
 				//return (ILfwRefModel)Class.forName(refModel).getConstructor(RefNode.class).newInstance(refnode);
 			} catch (InstantiationException e) {
 				Logger.error(e.getMessage(), e);
+				return null;
 			} catch (IllegalAccessException e) {
 				Logger.error(e.getMessage(), e);
+				return null;
 			} catch (ClassNotFoundException e) {
 				Logger.error(e.getMessage(), e);
+				return null;
 			} catch (SecurityException e) {
 				Logger.error(e.getMessage(), e);
-			} 
+				return null;
+			}
 //			catch (NoSuchMethodException e) {
 //				Logger.error(e.getMessage(), e);
 //			} catch (IllegalArgumentException e) {
@@ -30,8 +34,7 @@ public class DefaultRefModelFetcher implements IRefModelFetcher {
 //			} catch (InvocationTargetException e) {
 //				Logger.error(e.getMessage(), e);
 //			};
-		}
-		return null;
+//		}
 	}
 
 }

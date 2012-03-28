@@ -3017,7 +3017,8 @@ TreeNode.prototype.toggle = function() {
 			this.open = false;
 		
 			this.refTree.paintZone();
-		} else {
+		} 
+		else {
 			// 即将展开的节点的孩子的宽度从而增加树的宽度
 			this.divContent.style.display = 'block';
 			// guoweic modify firefox、IE8中有问题 start 2009-11-4
@@ -3037,6 +3038,7 @@ TreeNode.prototype.toggle = function() {
 				this.reloadNode();
 		}
 		this.changeIcon();
+		adjustContainerFramesHeight();
 	}
 };
 

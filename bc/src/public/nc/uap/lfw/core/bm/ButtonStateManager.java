@@ -8,15 +8,28 @@ import nc.uap.lfw.core.comp.MenubarComp;
 import nc.uap.lfw.core.comp.WebComponent;
 import nc.uap.lfw.core.ctx.AppLifeCycleContext;
 import nc.uap.lfw.core.ctx.ViewContext;
+import nc.uap.lfw.core.page.LfwWidget;
+import nc.uap.lfw.core.page.PageMeta;
 import nc.uap.lfw.util.LfwClassUtil;
 
 public final class ButtonStateManager {
 	public static void updateButtons() {
 		AppLifeCycleContext ctx = AppLifeCycleContext.current();
 		ViewContext viewCtx = ctx.getApplicationContext().getCurrentWindowContext().getCurrentViewContext();
-		WebComponent[] mbs = viewCtx.getView().getViewComponents().getComponentByType(MenubarComp.class);
+		updateButtons(viewCtx.getView());
+	}
+	
+	public static void updateButtons(PageMeta pm) {
+		LfwWidget[] widgets = pm.getWidgets();
+		for (int i = 0; i < widgets.length; i++) {
+			updateButtons(widgets[i]);
+		}
+	}
+	
+	public static void updateButtons(LfwWidget widget){
+		WebComponent[] mbs = widget.getViewComponents().getComponentByType(MenubarComp.class);
 		if(mbs == null || mbs.length == 0){
-			mbs = viewCtx.getView().getViewMenus().getMenuBars();
+			mbs = widget.getViewMenus().getMenuBars();
 		}
 		
 		if(mbs != null && mbs.length > 0){
@@ -30,7 +43,7 @@ public final class ButtonStateManager {
 						String stateMgrStr = item.getStateManager();
 						if(stateMgrStr != null && !stateMgrStr.equals("")){
 							IStateManager stateMgr = (IStateManager) LfwClassUtil.newInstance(stateMgrStr);
-							IStateManager.State enabled = stateMgr.getState(item, viewCtx.getView());
+							IStateManager.State enabled = stateMgr.getState(item, widget);
 							if(enabled.equals(IStateManager.State.ENABLED))
 								item.setEnabled(true);
 							else if(enabled.equals(IStateManager.State.DISABLED))

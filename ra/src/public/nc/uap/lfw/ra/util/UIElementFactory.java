@@ -821,9 +821,9 @@ public class UIElementFactory {
 			panel = flowvLayout;
 		} else if (elementType.equals(LfwPageContext.SOURCE_TYPE_FLOWHPANEL)) {
 			UIFlowhPanel flowhLayout = new UIFlowhPanel();
-			String width = null;
-			if (width != null)
-				flowhLayout.setWidth(width);
+//			String width = null;
+//			if (width != null)
+//				flowhLayout.setWidth(width);
 			panel = flowhLayout;
 		} else if (elementType.equals(LfwPageContext.SOURCE_TYPE_CARDPANEL)) {
 			UICardPanel cardPanel = new UICardPanel();
@@ -854,10 +854,10 @@ public class UIElementFactory {
 			String i18nName = null;
 			item.setI18nName(i18nName);
 
-			String state = null;
-			if (state != null && !state.equals("")) {
-				item.setState(Integer.valueOf(state));
-			}
+//			String state = null;
+//			if (state != null && !state.equals("")) {
+//				item.setState(Integer.valueOf(state));
+//			}
 			panel = item;
 		}
 
@@ -873,9 +873,9 @@ public class UIElementFactory {
 			panel = item;
 		} else if (elementType.equals(LfwPageContext.SOURCE_TYPE_MENU_GROUP_ITEM)) {
 			UIMenuGroupItem groupItem = new UIMenuGroupItem();
-			String state = null;
-			if (state != null)
-				groupItem.setState(Integer.valueOf(state));
+//			String state = null;
+//			if (state != null)
+//				groupItem.setState(Integer.valueOf(state));
 			panel = groupItem;
 		} else if (elementType.equals(LfwPageContext.SOURCE_TYPE_GRIDPANEL)) {
 			UIGridPanel gridPanel = new UIGridPanel();
@@ -886,13 +886,13 @@ public class UIElementFactory {
 			if (colSpan != null)
 				gridPanel.setColSpan(colSpan);
 
-			String colWidth = null;
-			if (colWidth != null)
-				gridPanel.setColWidth(colWidth);
+//			String colWidth = null;
+//			if (colWidth != null)
+//				gridPanel.setColWidth(colWidth);
 
-			String colHeight = null;
-			if (colHeight != null)
-				gridPanel.setColHeight(colHeight);
+//			String colHeight = null;
+//			if (colHeight != null)
+//				gridPanel.setColHeight(colHeight);
 
 			panel = gridPanel;
 		}

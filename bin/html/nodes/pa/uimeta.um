@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding='UTF-8'?>
 <UIMeta chart="0" jquery="1" jsEditor="0" jsExcel="0" flowmode="false" id="pa_um">
-    <Splitter boundMode="0" divideSize="75" hideBar="false" id="spliter1" inverse="0" oneTouch="false" orientation="h" spliterWidth="4">
+    <Splitter boundMode="1" divideSize="250" id="spliter1" inverse="true" oneTouch="false" orientation="h" spliterWidth="4">
         <SplitterOne>
             <Widget id="editor">
             </Widget>
         </SplitterOne>
         <SplitterTwo>
-            <Splitter boundMode="0" divideSize="50" hideBar="true" id="spliter2" inverse="0" oneTouch="false" orientation="v" spliterWidth="4">
-                <SplitterOne>
-                    <Widget id="data">
-                    </Widget>
-                </SplitterOne>
-                <SplitterTwo>
-                    <Widget id="settings">
-                    </Widget>
-                </SplitterTwo>
-            </Splitter>
-        </SplitterTwo>
+	    <Border id="bd1" width="1" roundBorder="true">
+	        <BorderTrue id="bdtr">
+		    <FlowvLayout id="navflowv1">
+			<FlowvPanel id="flowv1">
+			    <Widget id="data">
+			    </Widget>
+			</FlowvPanel>
+			<FlowvPanel id="flowv2">
+			    <Widget id="settings">
+			    </Widget>		
+			</FlowvPanel>
+		    </FlowvLayout>
+		</BorderTrue>
+	    </Border>
+	</SplitterTwo>
     </Splitter>
 </UIMeta>

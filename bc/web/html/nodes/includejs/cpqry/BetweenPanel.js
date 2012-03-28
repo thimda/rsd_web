@@ -18,7 +18,7 @@ function BetweenPanel(parent, name, left, top, width, height, position, type, us
 	this.create();
 };
 
-BetweenPanel.prototype.create = function() {
+BetweenPanel.prototype.create = function() { 
 	this.Div_gen = $ce("DIV");
 	this.Div_gen.owner = this;
 	this.Div_gen.style.position = this.position;
@@ -38,7 +38,9 @@ BetweenPanel.prototype.create = function() {
 	var row = this.table.insertRow(-1);
 	var cell1 = row.insertCell(-1);
 	var spaceCell = row.insertCell(-1);
-	spaceCell.style.width = "10";
+	spaceCell.style.width = "30";
+	spaceCell.style.textAlign = "center";
+	spaceCell.innerHTML ="---";
 	var cell2 = row.insertCell(-1);
 	this.Div_gen.appendChild(this.table);
 	this.createPairComp(cell1, cell2);
@@ -75,6 +77,11 @@ BetweenPanel.prototype.createPairComp = function(cell1, cell2) {
 	    this.smallValueComp = new StringTextComp(cell1, "smallValueComp", 0, 0, "112", "relative", null, null);
 	    this.bigValueComp = new StringTextComp(cell2, "bigValueComp", 0, 0, "112", "relative", null, null);
 	}
+	var bigValueDiv = this.bigValueComp.Div_gen;
+	if (IS_IE)
+		bigValueDiv.style.styleFloat = "right";
+	else
+		bigValueDiv.style.cssFloat = "right";
 	var oThis = this;
 	this.smallValueComp.onblur = function(e) {
 		e = EventUtil.getEvent();

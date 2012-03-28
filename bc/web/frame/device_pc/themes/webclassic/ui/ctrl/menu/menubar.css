@@ -1,25 +1,25 @@
 .menubar_div
 {	
-	height:41px;
+	height:27px;
 }
 
 .menubar_div .div_left
 {	
-	height:41px;
-	width:10px;
+	height:27px;
+	width:15px;
 	/*background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/menubar_bg_left.png') no-repeat;*/
 }
 
 .menubar_div .div_center
 {	
-	height:41px;
+	height:27px;
 	/*background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/menubar_bg.png') repeat-x;*/
 }
 
 .menubar_div .div_right
 {	
-	height:41px;
-	width:10px;
+	height:27px;
+	width:15px;
 	/*background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/menu/images/menubar_bg_right.png') no-repeat;*/
 }
 
@@ -28,7 +28,6 @@
 {
 	width: 100%;
 	overflow: auto;
-	margin-top:7px;
 }
 
 /* 分隔条 */

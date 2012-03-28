@@ -21,67 +21,89 @@
 /********************定义JS所需静态常量   end ***********************/
 
 .button_div .btn_center {
-	float: left;
-	height:22px;
+	position:relative;
+	height:23px;
+	margin-left:4px;
+	margin-right:4px;
 }
 
 .button_div .btn_left_off {
-	float: left;
+	position:absolute;
+	left:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_normal_left.png') no-repeat right center;
 } 
 .button_div .btn_left_on {
-	float: left;
+	position:absolute;
+	left:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_normal_left.png') no-repeat right center;
 }
 .button_div .btn_left_down {
-	float: left;
+	position:absolute;
+	left:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_press_left.png') no-repeat right center;
 }
 .button_div .btn_left_focus {
-	float: left;
+	position:absolute;
+	left:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_left.png') no-repeat right center;
 }
 .button_div .btn_left_disabled {
-	float: left;
+	position:absolute;
+	left:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_disable_left.png') no-repeat right center;
 }
 
 .button_div .btn_right_off {
-	float: right;
+	position:absolute;
+	right:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_normal_right.png') no-repeat left center;
 } 
 .button_div .btn_right_on {
-	float: right;
+	position:absolute;
+	right:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_normal_right.png') no-repeat left center;
 }
 .button_div .btn_right_down {
-	float: left;
+	position:absolute;
+	right:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_press_right.png') no-repeat right center;
 }
 .button_div .btn_right_focus {
-	float: left;
+	position:absolute;
+	right:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_right.png') no-repeat right center;
 }
 .button_div .btn_right_disabled {
-	float: right;
+	position:absolute;
+	right:0px;
+	top:0px;
 	height:23px;
 	width: 4px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_disable_right.png') no-repeat left center;
@@ -126,4 +148,150 @@
  	padding-top: 0px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_disable_center.png') repeat-x;
  	color:#666666;
+}
+
+/*blue样式*/
+
+.blue_button_div{
+	
+}
+
+.blue_button_div .btn_center {
+	position:relative;
+	height:23px;
+	margin-left:4px;
+	margin-right:4px;
+}
+
+.blue_button_div .btn_left_off {
+	position:absolute;
+	left:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_left.png') no-repeat right center;
+} 
+.blue_button_div .btn_left_on {
+	position:absolute;
+	left:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_left.png') no-repeat right center;
+}
+.blue_button_div .btn_left_down {
+	position:absolute;
+	left:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_left.png') no-repeat right center;
+}
+.blue_button_div .btn_left_focus {
+	position:absolute;
+	left:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_left.png') no-repeat right center;
+}
+.blue_button_div .btn_left_disabled {
+	position:absolute;
+	left:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_left.png') no-repeat right center;
+}
+
+.blue_button_div .btn_right_off {
+	position:absolute;
+	right:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_right.png') no-repeat left center;
+} 
+.blue_button_div .btn_right_on {
+	position:absolute;
+	right:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_right.png') no-repeat left center;
+}
+.blue_button_div .btn_right_down {
+	position:absolute;
+	right:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_right.png') no-repeat right center;
+}
+.blue_button_div .btn_right_focus {
+	position:absolute;
+	right:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_right.png') no-repeat right center;
+}
+.blue_button_div .btn_right_disabled {
+	position:absolute;
+	right:0px;
+	top:0px;
+	height:23px;
+	width: 4px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_right.png') no-repeat left center;
+}
+
+.blue_button_div .btn_off {
+	border-style:none;
+	height:23px;
+ 	cursor: pointer;
+ 	padding-top: 0px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_center.png') repeat-x;
+ 	color:#4eb5e7;
+ 	font-size:12px;
+ 	/*font-weight:bold;*/
+} 
+.blue_button_div .btn_on {
+	border-style:none;
+	height:23px;
+ 	padding-top: 0px;
+ 	cursor: pointer;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_center.png') repeat-x;
+ 	color:#4eb5e7;
+ 	font-size:12px;
+ 	/*font-weight:bold;*/
+}
+.blue_button_div .btn_down {
+	border-style:none;
+	height:23px;
+ 	padding-top: 0px;
+ 	cursor: pointer;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_center.png') repeat-x;
+ 	color:#4eb5e7;
+ 	font-size:12px;
+ 	/*font-weight:bold;*/
+}
+.blue_button_div .btn_focus {
+	border-style:none;
+	height:23px;
+ 	padding-top: 0px;
+ 	cursor: pointer;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_center.png') repeat-x;
+ 	color:#4eb5e7;
+ 	font-size:12px;
+ 	/*font-weight:bold;*/
+}
+.blue_button_div .btn_disabled {
+	border-style:none;
+	height:23px;
+ 	cursor: pointer;
+ 	padding-top: 0px;
+ 	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_center.png') repeat-x;
+ 	color:#4eb5e7;
+ 	font-size:12px;
+ 	/*font-weight:bold;*/
 }

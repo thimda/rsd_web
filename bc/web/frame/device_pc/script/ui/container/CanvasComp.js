@@ -14,7 +14,7 @@ function CanvasComp(parent, name, left, top, width, height, position, attr, clas
 	this.position = getString(position, "absolute");
 	this.className = getString(className, "fullcanvas");
 	this.title = attr.title;
-	if(this.title == null || this.title == "")
+	if(this.title == null)
 		this.title = "快捷栏";
 	this.create();
 };
@@ -74,8 +74,14 @@ CanvasComp.prototype.generateDiv = function(className){
 		contentTd = this.Div_gen.firstChild.rows[0].cells[1];
 	}
 	
+	else if(className == "centercanvas"){
+		var html = "<table cellspacing='0' cellpadding='0' class='" + className + "'><tr><td class='centercontent'></td></tr></table>";
+		this.Div_gen.innerHTML = html;
+		contentTd = this.Div_gen.firstChild.rows[0].cells[0];
+	}
+	
 	this.contentDiv = $ce("DIV");
-	this.contentDiv.style.height = "100%";
+//	this.contentDiv.style.height = "100%";
 	contentTd.appendChild(this.contentDiv);
 };
 

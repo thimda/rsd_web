@@ -44,6 +44,18 @@ public class UIMetaRender extends UILayoutPanelRender<UIMeta, WebElement> {
 	 * @see nc.uap.lfw.ra.render.UILayoutPanelRender#createRenderHtml()
 	 */
 	public String createRenderHtml() {
+		StringBuffer buf = new StringBuffer();
+		buf.append(this.createRenderHtmlHead());
+		buf.append(this.generalTailHtml());
+		return buf.toString();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see nc.uap.lfw.ra.render.UILayoutPanelRender#createRenderHtml()
+	 */
+	public String createRenderHtmlHead() {
 		StringBuffer buf = new StringBuffer("");
 		buf.append(this.generalHeadHtml());
 		UIMeta uimeta = this.getUiMeta();
@@ -62,7 +74,6 @@ public class UIMetaRender extends UILayoutPanelRender<UIMeta, WebElement> {
 				buf.append(dialogRender.createRenderHtml());
 			}
 		}
-		buf.append(this.generalTailHtml());
 		return buf.toString();
 	}
 	
@@ -73,6 +84,19 @@ public class UIMetaRender extends UILayoutPanelRender<UIMeta, WebElement> {
 	 * @see nc.uap.lfw.ra.render.UILayoutPanelRender#createRenderScript()
 	 */
 	public String createRenderScript() {
+		StringBuffer buf = new StringBuffer("");
+		buf.append(createRenderScriptHead());
+		buf.append(this.generalTailScript());
+		buf.append(this.generalEditableTailScript());
+		return buf.toString();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see nc.uap.lfw.ra.render.UILayoutPanelRender#createRenderScript()
+	 */
+	public String createRenderScriptHead() {
 		StringBuffer buf = new StringBuffer("");
 		buf.append(this.generalEditableHeadScript());
 		buf.append(this.generalHeadScript());
@@ -91,10 +115,9 @@ public class UIMetaRender extends UILayoutPanelRender<UIMeta, WebElement> {
 				buf.append(dialogRender.createRenderScript());
 			}
 		}
-		buf.append(this.generalTailScript());
-		buf.append(this.generalEditableTailScript());
 		return buf.toString();
 	}
+	
 	
 	public String createRenderScriptDynamic() {
 		return super.createRenderScriptDynamic();
@@ -104,6 +127,9 @@ public class UIMetaRender extends UILayoutPanelRender<UIMeta, WebElement> {
 		StringBuffer buf = new StringBuffer("");
 		UIMeta wuimeta = this.getUiElement();
 		String height = "height:100%;";
+		if(isEditMode() && getParentRender() == null){
+			height = "height:99%;";
+		}
 //		if(wuimeta.getFlowmode().booleanValue())
 //			height = "min-height:100%;";
 		buf.append("<div id=\"" + getNewDivId() + "\" style=\"width:100%;" + height + "top:0px;left:0px;position:relative;\">");

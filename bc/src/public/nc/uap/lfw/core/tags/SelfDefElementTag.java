@@ -53,6 +53,10 @@ public class SelfDefElementTag extends ContainerElementTag {
 		return "</div>";
 	}
 	
+	public void setFormComp(FormComp form){
+		this.formComp = form;
+	}
+	
 	private FormComp getFormComp()
 	{
 		if(formComp == null)

@@ -109,7 +109,7 @@ FixedGridLayout.prototype.paint = function() {
 		return;
 		
 	//固定布局时，label宽度统一为列宽减去form上定义的控件宽度
-	if (this.renderType == 1){
+	if (this.renderType == 5){
 		var lableWidth = (parseInt(offsetWidth) / parseInt(this.columnCount)) - parseInt(this.basewidth);
 		if (lableWidth > 0)
 			this.fixedLabelWidth = (parseInt(offsetWidth) / parseInt(this.columnCount)) - parseInt(this.basewidth);   
@@ -129,7 +129,11 @@ FixedGridLayout.prototype.paint = function() {
 	//重绘table
 	this.Div_gen.removeChild(this.table);
 	this.table = this.createTable();
+//	this.table.setAttribute("width","100%");
+	this.table.style.margin = "0px auto";
+//	this.table.style.tableLayout = "fixed";
 	this.Div_gen.appendChild(this.table);
+	
 	
 	//记录当前行索引
 	var nowRow = 0;
@@ -146,7 +150,7 @@ FixedGridLayout.prototype.paint = function() {
 		
 		// 新行开始，加上行标
 		if (count == 0) {
-			currentRow = this.createRow();		
+			currentRow = this.createRow();
 		}	
 
 		// 加上跨行元素宽度
@@ -223,6 +227,7 @@ FixedGridLayout.prototype.paint = function() {
 
 FixedGridLayout.prototype.renderOneElement = function(cell, comp, count, labels){
 	var table = this.createTable();
+	table.setAttribute("width","100%");
 	cell.appendChild(table);
 	if(this.labelPosition == 'top'){
 		var labelRow = table.insertRow(-1);		
@@ -298,7 +303,7 @@ FixedGridLayout.prototype.renderOneElement = function(cell, comp, count, labels)
  */
 FixedGridLayout.prototype.createTable = function() {
 	var table = $ce("table");
-	table.setAttribute("width","100%");
+//	table.setAttribute("width","100%");
 //	table.setAttribute("height","100%");
 	return table;
 };
@@ -337,6 +342,7 @@ FixedGridLayout.prototype.createCell = function(row,rowSpan,colSpan) {
 	cell.setAttribute("valign","top");
 	cell.setAttribute("rowSpan",rowSpan);
 	cell.setAttribute("colSpan",colSpan);
+	
 	// rSpan解决ie8的bug用
 	var rSpan = row.getAttribute("rSpan");
 	if (rSpan == null || rowSpan > rSpan)

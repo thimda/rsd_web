@@ -82,7 +82,7 @@ public class PaEditorPageModel extends PageModel {
 		else if(fromWhere != null && fromWhere.equals("1")){	
 			String appId = session.getOriginalParameter("appId");
 			String viewId = session.getOriginalParameter("viewId");
-			String winId = session.getOriginalParameter("winId");
+			String winId = LfwRuntimeEnvironment.getWebContext().getRequest().getParameterMap().get("winId")[1];
 			
 			if(winId != null){
 				session.setAttribute("_pageId", winId);
@@ -103,10 +103,10 @@ public class PaEditorPageModel extends PageModel {
 					
 					String pk_template = session.getOriginalParameter("pk_template");
 					if(("mockapp").equals(appId)){
-						url1 = LfwRuntimeEnvironment.getRootPath() + "/app/" + appId + "/" + winId + "?pk_templateDB=" + pk_template + "&model=nc.uap.lfw.core.model.PageModel&emode=1&otherPageUniqueId="+LfwRuntimeEnvironment.getWebContext().getPageUniqueId();
+						url1 = LfwRuntimeEnvironment.getRootPath() + "/core/uimeta.ra?pageId=" + winId + "&pk_templateDB=" + pk_template + "&model=nc.uap.lfw.core.model.PageModel&emode=1&otherPageUniqueId="+LfwRuntimeEnvironment.getWebContext().getPageUniqueId();
 					}
 					else
-						url1 = LfwRuntimeEnvironment.getRootPath() + "/app/" + appId + "?pk_templateDB=" + pk_template + "&model=nc.uap.lfw.core.model.PageModel&emode=1&otherPageUniqueId="+LfwRuntimeEnvironment.getWebContext().getPageUniqueId();
+						url1 = LfwRuntimeEnvironment.getRootPath() + "/core/uimeta.ra?pageId=" + winId + "&pk_templateDB=" + pk_template + "&model=nc.uap.lfw.core.model.PageModel&emode=1&otherPageUniqueId="+LfwRuntimeEnvironment.getWebContext().getPageUniqueId();
 //					url1 = LfwRuntimeEnvironment.getRootPath() + "/core/uimeta.ra?pageId=" + winId + "&appId = " + appId + "&model=nc.uap.lfw.core.model.PageModel&emode=1&otherPageUniqueId="+LfwRuntimeEnvironment.getWebContext().getPageUniqueId();
 				}
 			}

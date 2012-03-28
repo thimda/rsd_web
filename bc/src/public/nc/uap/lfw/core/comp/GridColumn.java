@@ -354,6 +354,7 @@ public class GridColumn extends WebElement implements IGridColumn
 	}
 	public void setText(String text) {
 		this.text = text;
+		notify("updateText", this);
 	}
 
 	public GridComp getGridComp() {

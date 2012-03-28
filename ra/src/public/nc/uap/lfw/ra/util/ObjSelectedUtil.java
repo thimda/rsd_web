@@ -10,6 +10,7 @@ import nc.uap.lfw.jsp.uimeta.UIGridPanel;
 import nc.uap.lfw.jsp.uimeta.UIGridRowLayout;
 import nc.uap.lfw.jsp.uimeta.UILayoutPanel;
 import nc.uap.lfw.jsp.uimeta.UIMeta;
+import nc.uap.lfw.jsp.uimeta.UIPanelPanel;
 import nc.uap.lfw.ra.itf.IUIRender;
 import nc.uap.lfw.ra.itf.IUIRenderGroup;
 import nc.uap.lfw.ra.kit.RenderKit;
@@ -29,7 +30,10 @@ public class ObjSelectedUtil {
 				IUIRender c = ControlFramework.getInstance().getUIRender(uimeta, cell, pageMeta, r, DriverPhase.PC);
 				renderDiv = c.getDivId();
 			}
-			else{
+			else if(ele instanceof UIPanelPanel){
+				UIElement parent = UIElementFinder.findParent(uimeta, ele);
+				renderDiv = parent.getId() + "_content";
+			}else{
 				UIElement parent = UIElementFinder.findParent(uimeta, ele);
 				IUIRender parentRender = ControlFramework.getInstance().getUIRender(uimeta, parent, pageMeta, null, DriverPhase.PC);
 				IUIRender render = ControlFramework.getInstance().getUIRender(uimeta, ele, pageMeta, parentRender, DriverPhase.PC);

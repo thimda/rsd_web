@@ -97,11 +97,11 @@ public class UIMetaConvertUtil implements Convert2JspUtil {
 //                if(meta.isJsExcel() == 1)
 //                	importStr += " jsExcel = 'true' ";
                 
-                if (StringUtils.isNotEmpty(meta.getIncudecss())) {
-                    importStr += " includeCss = '" + meta.getIncudecss() + "' ";
+                if (StringUtils.isNotEmpty(meta.getIncludecss())) {
+                    importStr += " includeCss = '" + meta.getIncludecss() + "' ";
                 }
-                if (StringUtils.isNotEmpty(meta.getIncudejs())) {
-                    importStr += " includeJs = '" + meta.getIncudejs() + "' ";
+                if (StringUtils.isNotEmpty(meta.getIncludejs())) {
+                    importStr += " includeJs = '" + meta.getIncludejs() + "' ";
                 }
             }
             importStr += "/>";

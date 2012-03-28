@@ -248,8 +248,9 @@ public abstract class UILayoutPanelRender<T extends UILayoutPanel, K extends Web
 		String html = render.createRenderHtmlDynamic();
 		buf.append(html);
 		
-		
-		buf.append("$ge('" + divId + "').appendChild(" + render.getNewDivId() + ");\n");
+		buf.append("var tmpdiv = ").append("$ge('" + divId + "');\n");
+		buf.append("if(tmpdiv == null) \n tmpdiv = document.body;\n");
+		buf.append("tmpdiv.appendChild(" + render.getNewDivId() + ");\n");
 		buf.append(render.createRenderScriptDynamic());
 		
 		addDynamicScript(buf.toString());

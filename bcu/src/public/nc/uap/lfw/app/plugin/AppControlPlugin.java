@@ -69,6 +69,19 @@ public class AppControlPlugin implements ControlPlugin {
 			winid = app.getDefaultWindowId();
 		}
 		
+		if(winid == null)
+			throw new LfwRuntimeException("Ã»ÓÐÉèÖÃwindow id");
+		
+		String url = null;
+		int index = winid.indexOf(".");
+		if(index != -1){
+			url = "/core/uimeta.jsp";
+			winid = winid.split("\\.")[0];
+		}
+		else{
+			url = "/core/uimeta.ra";
+		}
+		
 		if(winOpe != null && winOpe.equals("add")){
 			if(app.getWindowConf(winid) == null){
 				PageMeta win = new PageMeta();
@@ -85,8 +98,6 @@ public class AppControlPlugin implements ControlPlugin {
 			String key = (String) entry.getKey();
 			String[] value =(String[])entry.getValue();
 			if(!key.equals(AppConsts.PARAM_WIN_ID)){
-//				if(value != null && value.length > 0)
-//					url += ("&" + entry.getKey() + "=" + value[0]);
 				mockReq.addParameter((String) entry.getKey() , value[0]);
 			}
 		}
@@ -106,7 +117,7 @@ public class AppControlPlugin implements ControlPlugin {
 			
 			lifeCtx.setApplicationContext(appCtx);
 			AppLifeCycleContext.current(lifeCtx);
-			String url = "/core/uimeta.ra";
+			
 			RequestDispatcher dispatcher = LfwRuntimeEnvironment.getServletContext().getRequestDispatcher(url);
 			dispatcher.forward(mockReq, res);
 //		res.sendRedirect(url);

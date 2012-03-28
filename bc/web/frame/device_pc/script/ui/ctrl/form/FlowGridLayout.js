@@ -170,7 +170,9 @@ FlowGridLayout.prototype.paint = function(isForce) {
 		for (var k = colNum, count1 = colNum + compColNum; k < count1; k++)
 			compWidth = compWidth + this.realColmWidth[k];
 
-		compWidth = compWidth - labelWidth;
+		if(this.labelPosition != 'top'){
+			compWidth = compWidth - labelWidth;
+		}
 		// 新行开始直接往面版上加组件,无需判断.但要获得组件所占的列数
 		var usedWidth = 0;
 		if (colNum != 0) {
@@ -182,11 +184,18 @@ FlowGridLayout.prototype.paint = function(isForce) {
 				usedWidth -= 50 * colNum;
 			}
 		}
-		var top = this.marginTop + rowNum * (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE);
+		var top = 0;
 		if(this.labelPosition == 'top'){
-			top = this.marginTop + rowNum * 2 * (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE);
+			top = rowNum * 2 * (FlowGridLayout.COMPHEIGHT) + (rowNum * 10);//10文字和输入框间距
+		}else{
+			top = this.marginTop + rowNum * (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE);
 		}
-		var left = usedWidth + FlowGridLayout.COLSPACE - 6;
+		var left = 0;
+		if(this.labelPosition == 'top'){
+			left = usedWidth;
+		}else{
+			left = usedWidth + FlowGridLayout.COLSPACE - 6;
+		}
 		
 		if (this.comps[i].attachedLabel != null) {
 			this.comps[i].attachedLabel.style.left = left + "px";
@@ -229,8 +238,6 @@ FlowGridLayout.prototype.paint = function(isForce) {
 		var tmpCompHeight = FlowGridLayout.COMPHEIGHT * this.comps[i].rowSpan
 				+ FlowGridLayout.ROWSPACE * (this.comps[i].rowSpan - 1);
 		// 设置组件的位置
-
-		var compLeft = usedWidth + labelWidth;
 		//如果是textarea，控件占满布局，否则控件大小不变
 //		if (this.comps[i].componentType == "TEXTAREA"){
 //			this.comps[i].setBounds(compLeft + 5, this.marginTop + rowNum
@@ -238,17 +245,20 @@ FlowGridLayout.prototype.paint = function(isForce) {
 //					compWidth, tmpCompHeight);
 //		}
 //		else{
-		if (this.comps[i].basewidth.indexOf("%") != -1)
-			compWidth = compWidth * parseFloat(this.comps[i].basewidth) / 100 ;
-		else
-			compWidth = this.comps[i].basewidth > compWidth ? compWidth : this.comps[i].basewidth;
-		
-		top = this.marginTop + rowNum * (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE);
+		var compLeft = 0;
 		if(this.labelPosition == 'top'){
 			compLeft = usedWidth;
-			top = this.marginTop + (rowNum * 2 + 1) * (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE);
+			top = rowNum * 2 * (FlowGridLayout.COMPHEIGHT) + (rowNum * 10) + FlowGridLayout.COMPHEIGHT;
+			compWidth = this.nowPaintWidth;
+		}else{
+			compLeft = usedWidth + labelWidth + 10;
+			top = this.marginTop + rowNum * (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE);
+			if (this.comps[i].basewidth.indexOf("%") != -1)
+				compWidth = compWidth * parseFloat(this.comps[i].basewidth) / 100 ;
+			else
+				compWidth = this.comps[i].basewidth > compWidth ? compWidth : this.comps[i].basewidth;			
 		}
-		this.comps[i].setBounds(compLeft + 10, top, compWidth, tmpCompHeight);
+		this.comps[i].setBounds(compLeft, top, compWidth, tmpCompHeight);
 		
 		//this.comps[i].setBounds(compLeft + 5, this.marginTop + rowNum
 		//		* (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE),
@@ -422,7 +432,7 @@ FlowGridLayout.prototype.getCompsHeight = function() {
 	// TODO
 	// var comps = this.getComps();
 	// return comps[0].getCompHeight();
-	return 20;
+	return 22;
 };
 
 /**

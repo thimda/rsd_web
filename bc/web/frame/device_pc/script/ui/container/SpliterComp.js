@@ -91,10 +91,6 @@ SpliterComp.prototype.create = function() {
  */
 SpliterComp.prototype.manageSelf = function() {
 	var oThis = this;
-//	this.Div_gen.onresize = function() {
-//		oThis.fixProp();
-//	};
-	
 	addResizeEvent(this.Div_gen, function() {
 		oThis.fixProp(oThis.prop, oThis.isInverse);
 	});
@@ -102,7 +98,6 @@ SpliterComp.prototype.manageSelf = function() {
 	//创建div1
 	this.div1 = $ce("DIV");
 	this.div1.className= "spliter_div1";
-//	this.div1.style.overflow = this.overflow;
 	this.Div_gen.appendChild(this.div1);
 	this.div1.owner = this;
 	this.div1.add = function(obj) {		 
@@ -113,7 +108,6 @@ SpliterComp.prototype.manageSelf = function() {
 	this.div2 = $ce("DIV");
 	this.div2.id = "spliter_div2";
 	this.div2.className = "spliter_div2";
-//	this.div2.style.overflow = this.overflow;
 	this.Div_gen.appendChild(this.div2);
 	this.div2.owner = this;
 		
@@ -129,7 +123,7 @@ SpliterComp.prototype.manageSelf = function() {
 	if (this.orientation == 'h') {
 		this.divBar.style.minHeight = "50px";
 	}
-	//add drag script
+	
 	var drag = false;
 	var oldX = 0;
 	var oldY = 0;
@@ -164,9 +158,6 @@ SpliterComp.prototype.manageSelf = function() {
 				else
 					oThis.fixProp(oThis.divBar.offsetTop);
 			}
-//			// 调整所有tab组件大小
-//			if (TabComp)
-//				TabComp.allTabCompResize();
 		}
 		
 	};
@@ -220,90 +211,15 @@ SpliterComp.prototype.manageSelf = function() {
 	};
 	
 	if (this.oneTouch) {
-		// 如果可改变大小，创建一拖动条
-		this.dragDiv = $ce("DIV");
-		this.dragDiv.id = "dragdiv";
-		this.dragDiv.className = "spliter_dragdiv";
-		this.divBar.appendChild(this.dragDiv);
 		
-		this.divBar.className = "spliter_bar_onetouch";
+		this.divBar.style.height  = "100%";
+		if (this.spliterWidth)
+			this.divBar.style.width = this.spliterWidth;  
+		else
+			this.divBar.style.width = getStyleAttribute(this.divBar, "width");
+		this.div1.style.height = "100%";			 
+		this.div2.style.height = "100%";  
 
-		this.dragDiv.onmouseover = function() {
-	 		oThis.dragDiv.style.cursor = "pointer";
-			oThis.img.src= window.themePath + "/ui/container/spliter/images/drag_" + oThis.orientation + "_on.gif";  
-		};
-	 
-		this.dragDiv.onmouseout = function() {
-			oThis.img.src = window.themePath + "/ui/container/spliter/images/drag_" + oThis.orientation + "_off.gif";
-		};
-
-		if (this.orientation == 'v') {
-			this.divBar.style.width = "100%";
-			if (this.spliterWidth)	  
-				this.divBar.style.height = this.spliterWidth;
-			else
-				this.divBar.style.height = getStyleAttribute(this.divBar, "height");
-			this.dragDiv.style.left = "40%";			
-			this.dragDiv.style.width = "20%";			
-			this.dragDiv.style.height = "100%";
-			this.div1.style.width = "100%";			 
-			this.div2.style.width = "100%";			 
-		} else {
-			this.divBar.style.height  = "100%";
-			if (this.spliterWidth)
-				this.divBar.style.width = this.spliterWidth;  
-			else
-				this.divBar.style.width = getStyleAttribute(this.divBar, "width");		  
-			this.dragDiv.style.top = "40%";
-			this.dragDiv.style.width = "100%";
-			this.dragDiv.style.height = "20%";
-			this.div1.style.height = "100%";			 
-			this.div2.style.height = "100%";  
-		}	
-	
-		// 如果显示图片
-	  	this.img = $ce("IMG");
-	  	this.img.style.margin = "0 auto";
-	  	this.img.src = window.themePath + "/ui/container/spliter/images/drag_" + this.orientation + "_off.gif";
-	  	
-	  	this.img.style.display = "block";
-	  	
-	   	this.dragDiv.appendChild(this.img);
-	   	this.dragDiv.onclick = function() {
-			if (oThis.hideDirection) {
-				if (!oThis.redoit) {
-					oThis.div1.style.visibility = "hidden";
-					oThis.oldProp = oThis.prop;
-					oThis.prop = 0;
-					oThis.redoit = true;
-				} else {
-					oThis.div1.style.visibility = "visible";
-					oThis.prop = oThis.oldProp;
-					oThis.redoit = false;
-				}
-			} else {
-				if (!oThis.redoit) {
-					oThis.div2.style.visibility = "hidden";
-					oThis.oldProp = oThis.prop;
-					if (oThis.boundMode == '%') {
-						oThis.prop = 1;
-					} else {
-						if (oThis.orientation == 'v') {
-							oThis.prop = oThis.Div_gen.offsetHeight - oThis.divBar.offsetHeight;
-						} else {
-							oThis.prop = oThis.Div_gen.offsetWidth - oThis.divBar.offsetWidth;
-						}
-					}
-					oThis.redoit = true;
-				} else {
-					oThis.div2.style.visibility = "visible";
-					oThis.prop = oThis.oldProp;
-					oThis.redoit = false;
-				}	
-			}
-	   		
-			oThis.fixProp();
-		};
 	}
  
 	//不显示拖动条

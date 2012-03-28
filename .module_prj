@@ -1,0 +1,6 @@
+#
+#Fri Oct 21 15:22:52 CST 2011
+module.name=uapweb
+module.webContext=lfw
+bcp.manifest.ts=1318471648000
+module.defConfig=module.xml

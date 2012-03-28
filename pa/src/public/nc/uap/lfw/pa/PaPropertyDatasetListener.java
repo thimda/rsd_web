@@ -75,7 +75,10 @@ public class PaPropertyDatasetListener {
 			addHandler();
 		}
 		else if(oper.equals(RaDynamicScriptListener.INIT)){
-			focusSelectDs();
+			boolean sign = focusSelectDs();
+			if(!sign)
+				return;
+			
 			setFormElementVisible();
 		}
 	}
@@ -130,6 +133,8 @@ public class PaPropertyDatasetListener {
 		Dataset dsMiddle = LfwRuntimeEnvironment.getWebContext().getPageMeta().getWidget("settings").getViewModels().getDataset("ds_middle");;
 		String type = replaceNullString(ctx.getParameter(RaDynamicScriptListener.PARAM_TYPE));
 		
+		if(eleId == null && uiId == null && subEleId == null && subuiId == null)
+			return false;
 		String pid = (uiId == null) ? eleId : uiId;
 		String cid = (subuiId == null) ? subEleId : subuiId;
 		String itemId = pid;
@@ -175,7 +180,6 @@ public class PaPropertyDatasetListener {
 				}
 			}
 			
-			
 			doAdd(uiEle, webEle, pid, cid, widgetId, uimeta, type);
 			//再次调用
 			focusSelectDs();
@@ -203,6 +207,11 @@ public class PaPropertyDatasetListener {
 						return (GridColumn) col;
 				}
 			}
+		}
+		else if(comp instanceof FormComp){
+			FormElement formEle = ((FormComp) comp).getElementById(subEleId);
+			if(formEle != null)
+				return formEle;
 		}
 		return null;
 	}
@@ -242,6 +251,7 @@ public class PaPropertyDatasetListener {
 			
 			if(webEle == null && uiEle == null)
 				throw new LfwRuntimeException("没有取到对应 元素");
+			type = getTypeByEle(uiEle);
 			setDsInfo(widgetId, type, null, uiEle, PaConstant.DS_UPDATE, itemId, prtId);
 			if(parentEle == null)
 				setNavTreeDs(null, uiId, "add");

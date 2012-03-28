@@ -22,7 +22,6 @@ import nc.uap.lfw.reference.util.LfwRefUtil;
  */
 public class PCTextCompRender extends UINormalComponentRender<UITextField ,TextComp> {
 
-
 	public PCTextCompRender(UITextField uiEle, TextComp webEle, UIMeta uimeta, PageMeta pageMeta, UIRender<? extends UIElement, ? extends WebElement> parentPanel) {
 		super(uiEle, webEle, uimeta, pageMeta, parentPanel);
 	}
@@ -198,6 +197,9 @@ public class PCTextCompRender extends UINormalComponentRender<UITextField ,TextC
 			return "integertext";
 		}
 		else if (t.getEditorType().equals(EditorTypeConst.DATETEXT)){
+			return "datetext";
+		}
+		else if (t.getEditorType().equals(EditorTypeConst.DATETIMETEXT)){
 			return "datetext";
 		}
 		else if (t.getEditorType().equals(EditorTypeConst.DECIMALTEXT)){

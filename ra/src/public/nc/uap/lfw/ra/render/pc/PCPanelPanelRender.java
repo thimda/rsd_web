@@ -12,6 +12,7 @@ import nc.uap.lfw.jsp.uimeta.UIElement;
 import nc.uap.lfw.jsp.uimeta.UILayout;
 import nc.uap.lfw.jsp.uimeta.UIMeta;
 import nc.uap.lfw.jsp.uimeta.UIPanelPanel;
+import nc.uap.lfw.jsp.uimeta.UIWidget;
 import nc.uap.lfw.ra.itf.IUIRender;
 import nc.uap.lfw.ra.render.UILayoutPanelRender;
 import nc.uap.lfw.ra.render.UILayoutRender;
@@ -101,7 +102,7 @@ public class PCPanelPanelRender extends UILayoutPanelRender<UIPanelPanel, WebEle
 		
 		UILayoutRender parent = (UILayoutRender) this.getParentRender();
 		String widgetId = ele.getWidgetId();
-		if(widgetId != null){
+		if(widgetId != null && !(ele instanceof UIWidget)){
 			buf.append("pageUI.getWidget('" + widgetId + "').getPanel('" + parent.getId()+ "').getContentDiv().appendChild(" + render.getNewDivId() + ");\n");
 		}
 		else{

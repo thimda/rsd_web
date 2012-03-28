@@ -8,6 +8,7 @@ import nc.uap.lfw.core.page.PageMeta;
 import nc.uap.lfw.jsp.uimeta.UIGridLayout;
 import nc.uap.lfw.jsp.uimeta.UIGridPanel;
 import nc.uap.lfw.jsp.uimeta.UIMeta;
+import nc.uap.lfw.jsp.uimeta.UpdatePair;
 import nc.uap.lfw.ra.itf.IUIRender;
 import nc.uap.lfw.ra.render.UILayoutPanelRender;
 import nc.uap.lfw.ra.render.UILayoutRender;
@@ -201,23 +202,22 @@ public class PCGridPanelRender extends UILayoutPanelRender<UIGridPanel, WebEleme
 	public void notifyUpdate(UIMeta uiMeta, PageMeta pageMeta, Object obj) {
 		UIGridPanel panel = this.getUiElement();
 //		this.setEditMode(true);
-		if (getDivId() != null) {
+		if (obj instanceof UpdatePair) {
+			UpdatePair pair = (UpdatePair) obj;
 			StringBuffer buf = new StringBuffer();
 			buf.append("var ").append(getDivId()).append(" = $ge('" + getDivId() + "');\n");
-			buf.append("if(" + getDivId() + "){");
-			if (this.colWidth != null && !this.colWidth.equals("")) {
+			if(pair.getKey().equals(UIGridPanel.COLWIDTH)){
+				String colWidth = (String) pair.getValue();
 				buf.append(getDivId()).append(".setAttribute('width','").append(colWidth).append("');\n");
 				buf.append(getDivId()).append(".setAttribute('haswidth','1');\n");
-			} else {
-				buf.append(getDivId()).append(".setAttribute('haswidth','0');\n");
 			}
-			if (this.colHeight != null && !this.colHeight.equals("")) {
+			else if(pair.getKey().equals(UIGridPanel.COLHEIGHT)){
+				String colHeight = (String) pair.getValue();
 				buf.append(getDivId()).append(".setAttribute('height','").append(colHeight).append("');\n");
 				buf.append(getDivId()).append(".setAttribute('hasheight','1');\n");
-			}else{
-				buf.append(getDivId()).append(".setAttribute('hasheight','0');\n");
 			}
-			if (rowSpan != null) {
+			else if(pair.getKey().equals(UIGridPanel.ROWSPAN)){
+				String rowSpan = (String) pair.getValue();
 				buf.append(getDivId()).append(".setAttribute('rowspan','").append(rowSpan).append("');\n");
 				if(obj != null && obj.equals("already")){
 					//已经做了调整
@@ -231,7 +231,8 @@ public class PCGridPanelRender extends UILayoutPanelRender<UIGridPanel, WebEleme
 					
 				}
 			}
-			if (colSpan != null) {
+			else if(pair.getKey().equals(UIGridPanel.COLSPAN)){
+				String colSpan = (String) pair.getValue();
 				buf.append(getDivId()).append(".setAttribute('colspan','").append(colSpan).append("');\n");
 				if(obj != null && obj.equals("already")){
 					//已经做了调整
@@ -243,10 +244,50 @@ public class PCGridPanelRender extends UILayoutPanelRender<UIGridPanel, WebEleme
 					adjustCellByColSpan(panel, count);
 				}
 			}
-			if (cellType != null) {
+			else if(pair.getKey().equals(UIGridPanel.CELLTYPE)){
+				String cellType = (String) pair.getValue();
 				buf.append(getDivId()).append(".setAttribute('celltype','").append(cellType).append("');\n");
 			}
-			buf.append("}");
+//			buf.append("if(" + getDivId() + "){");
+//			else {
+//				buf.append(getDivId()).append(".setAttribute('haswidth','0');\n");
+//			}
+//			if (this.colHeight != null && !this.colHeight.equals("")) {
+//				buf.append(getDivId()).append(".setAttribute('height','").append(colHeight).append("');\n");
+//				buf.append(getDivId()).append(".setAttribute('hasheight','1');\n");
+//			}else{
+//				buf.append(getDivId()).append(".setAttribute('hasheight','0');\n");
+//			}
+//			if (rowSpan != null) {
+//				buf.append(getDivId()).append(".setAttribute('rowspan','").append(rowSpan).append("');\n");
+//				if(obj != null && obj.equals("already")){
+//					//已经做了调整
+//				}
+//				else{
+//					//对所影响cell作调整
+//					int count = Integer.parseInt(rowSpan);
+//					if(count < 1) return;
+//					
+//					adjustCellByRowSpan(panel, count);
+//					
+//				}
+//			}
+//			if (colSpan != null) {
+//				buf.append(getDivId()).append(".setAttribute('colspan','").append(colSpan).append("');\n");
+//				if(obj != null && obj.equals("already")){
+//					//已经做了调整
+//				}
+//				else{
+//					//对所影响cell作调整
+//					int count = Integer.parseInt(colSpan);
+//					if(count < 1)return;
+//					adjustCellByColSpan(panel, count);
+//				}
+//			}
+//			if (cellType != null) {
+//				buf.append(getDivId()).append(".setAttribute('celltype','").append(cellType).append("');\n");
+//			}
+//			buf.append("}");
 			addDynamicScript(buf.toString());
 		}
 	}
