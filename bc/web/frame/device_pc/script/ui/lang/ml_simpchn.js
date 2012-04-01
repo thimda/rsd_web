@@ -8,6 +8,7 @@ function trans(key){
 		window.transMap = new Object;
 		window.transMap.ml_ok = "确定";
 		window.transMap.ml_cancel = "取消";
+		window.transMap.ml_understand = "知道了";
 		 
 		window.transMap.ml_progressdialog = "进度";
 		window.transMap.ml_messagedialog = "信息";

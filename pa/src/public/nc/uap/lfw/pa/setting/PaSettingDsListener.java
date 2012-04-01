@@ -73,7 +73,7 @@ public class PaSettingDsListener {
 			ApplicationContext ctx = AppLifeCycleContext.current().getApplicationContext();
 			ctx.addExecScript("setEditorState();");
 			LfwLogger.debug("组件ID:"+itemId+";父节点ID:"+prtId+"; 组件类型:"+ type +"; 前台属性:"+pi.getId() + "; 属性类型:" + pi.getType() + "; 显示的label:" + pi.getLabel()+ "; 修改前的值:" + oldValue +"; 修改后的值: "+ newValue);
-			System.out.println("组件ID:"+itemId+";父节点ID:"+prtId+"; 组件类型:"+ type +"; 前台属性:"+pi.getId() + "; 属性类型:" + pi.getType() + "; 显示的label:" + pi.getLabel()+ "; 修改前的值:" + oldValue +"; 修改后的值: "+ newValue);
+//			LfwLogger.debug("组件ID:"+itemId+";父节点ID:"+prtId+"; 组件类型:"+ type +"; 前台属性:"+pi.getId() + "; 属性类型:" + pi.getType() + "; 显示的label:" + pi.getLabel()+ "; 修改前的值:" + oldValue +"; 修改后的值: "+ newValue);
 			row.setValue(stateIndex, PaConstant.DS_UPDATE);
 //			String widgetId = (String) row.getValue(ds.nameToIndex(""));
 			ctx.addExecScript("var obj ={widgetid :'" + viewId + "',updateid:" + (changeIndex == idIndex) + ", parentid : '" + prtId + "', compid:'" + itemId + "', type:'" + type + "', attr:'" + pi.getId()+ "', attrtype:'" + pi.getType() + "', oldvalue:'" + oldValue + "', newvalue:'" + newValue + "'};");

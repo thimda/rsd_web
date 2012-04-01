@@ -7,10 +7,10 @@
  */
 InputDialogComp.prototype.componentType = "INPUTDIALOG";
 InputDialogComp.HEIGHT = 90;
-InputDialogComp.WIDTH = 350;
+InputDialogComp.WIDTH = 426;
 
-InputDialogComp.LABEL_WIDTH = 80;
-InputDialogComp.ITEM_HEIGHT = 30;
+InputDialogComp.LABEL_WIDTH = 120;
+InputDialogComp.ITEM_HEIGHT = 32;
 
 InputDialogComp.STRING_TYPE = "string";
 InputDialogComp.PSWTEXT_TYPE = "pswtext";
@@ -175,7 +175,7 @@ InputDialogComp.prototype.addItem = function(labelText, inputId, inputType, isMu
 		if (inputType == InputDialogComp.RADIO_TYPE){
 			if (attrArr && attrArr.comboData) {
 				this.height += InputDialogComp.ITEM_HEIGHT * attrArr.comboData.combItems.length;		
-				this.contentDiv.style.height = (this.contentDiv.offsetHeight + InputDialogComp.ITEM_HEIGHT * attrArr.comboData.combItems.length) + "px";	
+				this.contentDiv.style.height = (this.contentDiv.offsetHeight + InputDialogComp.ITEM_HEIGHT * attrArr.comboData.combItems.length) + 60 + "px";	
 			}
 		}
 		else{
@@ -196,7 +196,14 @@ InputDialogComp.prototype.addItem = function(labelText, inputId, inputType, isMu
 		itemDiv.leftDiv.style.width = "0";
 	}
 	else
-		var label = new LabelComp(itemDiv.leftDiv, "", 10, 9, labelText, "relative", null);
+		var label = new LabelComp(itemDiv.leftDiv, "", 0, 9, labelText, "relative", null, {'textAlign':'right'});
+	// 必输项提示
+	if (isMust == true) {
+		itemDiv.mustDiv = $ce("DIV");
+		itemDiv.mustDiv.className = "input_mustdiv";
+		itemDiv.mustDiv.innerHTML = "<font color='red'>*</font>";
+		itemDiv.appendChild(itemDiv.mustDiv);
+	}
 	// 右边输入区域
 	itemDiv.rightDiv = $ce("DIV");
 	itemDiv.rightDiv.className = "input_rightdiv";
@@ -204,20 +211,20 @@ InputDialogComp.prototype.addItem = function(labelText, inputId, inputType, isMu
 	itemDiv.rightDiv.style.width = itemDiv.rightDiv.parentNode.offsetWidth - itemDiv.leftDiv.offsetWidth - 30 + "px";
 	
 	var inputComp;
-	var inputWidth = this.width - this.labelWidth - 80 + "px";
+	var inputWidth = 210;//this.width - this.labelWidth - 60 - 40 + "px";
 	if (inputType == InputDialogComp.STRING_TYPE) {  // 字符串输入框
-		inputComp = new StringTextComp(itemDiv.rightDiv, inputId, 10, 5, inputWidth, "relative", attrArr, null);
+		inputComp = new StringTextComp(itemDiv.rightDiv, inputId, 7, 5, inputWidth, "relative", attrArr, null);
 	}else if (inputType == InputDialogComp.PSWTEXT_TYPE) {  // 整型输入框
-		inputComp = new PswTextComp(itemDiv.rightDiv, inputId, 10, 5, inputWidth, "relative", attrArr ? attrArr.maxValue : null, attrArr ? attrArr.minValue : null, attrArr, null);
+		inputComp = new PswTextComp(itemDiv.rightDiv, inputId, 7, 5, inputWidth, "relative", attrArr ? attrArr.maxValue : null, attrArr ? attrArr.minValue : null, attrArr, null);
 	} else if (inputType == InputDialogComp.INT_TYPE) {  // 整型输入框
-		inputComp = new IntegerTextComp(itemDiv.rightDiv, inputId, 10, 5, inputWidth, "relative", attrArr ? attrArr.maxValue : null, attrArr ? attrArr.minValue : null, attrArr, null);
+		inputComp = new IntegerTextComp(itemDiv.rightDiv, inputId, 7, 5, inputWidth, "relative", attrArr ? attrArr.maxValue : null, attrArr ? attrArr.minValue : null, attrArr, null);
 	}else if (inputType == InputDialogComp.LABEL_TYPE) {  // 整型输入框
-		inputComp = new LabelComp(itemDiv.rightDiv, inputId, 10, 5, labelText,"relative",className);
+		inputComp = new LabelComp(itemDiv.rightDiv, inputId, 7, 5, labelText,"relative",className);
 	} else if (inputType == InputDialogComp.DECIMAL_TYPE) {
-		inputComp = new FloatTextComp(itemDiv.rightDiv, inputId, 10, 5, inputWidth, "relative", attrArr ? attrArr.precision : null, attrArr, null);
+		inputComp = new FloatTextComp(itemDiv.rightDiv, inputId, 7, 5, inputWidth, "relative", attrArr ? attrArr.precision : null, attrArr, null);
 	} 
 	else if (inputType == InputDialogComp.COMBO_TYPE) {  // 下拉输入框
-		inputComp = new ComboComp(itemDiv.rightDiv, inputId, 10, 5, inputWidth, "relative", attrArr ? attrArr.selectOnly : true, attrArr, null);
+		inputComp = new ComboComp(itemDiv.rightDiv, inputId, 7, 5, inputWidth, "relative", attrArr ? attrArr.selectOnly : true, attrArr, null);
 		if (attrArr && attrArr.comboData) {
 			inputComp.setComboData(attrArr.comboData);
 			if (attrArr.selectIndex)
@@ -226,7 +233,7 @@ InputDialogComp.prototype.addItem = function(labelText, inputId, inputType, isMu
 	} 
 	else if (inputType == InputDialogComp.RADIO_TYPE){
 		attrArr.changeLine = true;
-		inputComp = new RadioGroupComp(itemDiv.rightDiv, inputId, 10, 5, inputWidth, "relative",  attrArr, null);
+		inputComp = new RadioGroupComp(itemDiv.rightDiv, inputId, 7, 5, inputWidth, "relative",  attrArr, null);
 		if (attrArr && attrArr.comboData) {
 			inputComp.setComboData(attrArr.comboData);
 			if (attrArr.selectIndex)
@@ -238,12 +245,11 @@ InputDialogComp.prototype.addItem = function(labelText, inputId, inputType, isMu
 	
 	if(value != null)
 		inputComp.setValue(value);
-	// 必输项提示
-	if (isMust == true) {
-		itemDiv.mustDiv = $ce("DIV");
-		itemDiv.mustDiv.className = "input_mustdiv";
-		itemDiv.mustDiv.innerHTML = "<font color='red'>*</font>";
-		itemDiv.appendChild(itemDiv.mustDiv);
+	
+	if(!this.fixHeight){
+		var sumHeight = InputDialogComp.ITEM_HEIGHT * this.getItems().length + 60;
+		this.contentDiv.style.height = sumHeight + "px";
+		this.modaldialog.setSize(this.width, sumHeight + 41 + 43);
 	}
 };
 

@@ -53,7 +53,9 @@ public class UIGridLayout extends UILayout {
 	
 
 	public void addGridRow(UIGridRowLayout row) {
-		addPanel(new UIGridRowPanel(row));
+		UIGridRowPanel rowPanel = new UIGridRowPanel(row);
+		rowPanel.setId(row.getId()+"Panel");
+		addPanel(rowPanel);
 	}
 	
 	public void removeGridRow(UIGridRowLayout row) {
@@ -69,12 +71,6 @@ public class UIGridLayout extends UILayout {
 		}
 		if(currPanel != null)
 			removePanel(currPanel);
-	}
-
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
 	}
 
 	@Override

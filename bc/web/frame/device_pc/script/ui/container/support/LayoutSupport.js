@@ -265,6 +265,13 @@ function flowhResize(e) {
 			width = parseInt(width);
 			
 			for (var i = 0; i < itemLength; i++) {
+				var paddingLeft = parseInt(arrUnknownWidthItem[i].style.paddingLeft);
+				paddingLeft = isNaN(paddingLeft) ? 0 : paddingLeft;  
+				var paddingRight = parseInt(arrUnknownWidthItem[i].style.paddingRight);
+				paddingRight = isNaN(paddingRight) ? 0 : paddingRight;  
+				width = width - paddingLeft - paddingRight;
+				if  (width < 0)
+					width = 0;
 				//处理最后一个，使之自动扩展
 				if (i == itemLength -1 && arrUnknownWidthItem[i] == lastChild) {
 					arrUnknownWidthItem[i].style.marginLeft = (newWidth - totalWidth + width * (itemLength - 1)) + "px";
@@ -369,13 +376,15 @@ function flowvResize(e) {
 		for (var i = 0, n = arrUnknownHeightItem.length; i < n; i++) {
 			if (i == n-1) {
 				height = (totalHeight - height * (arrUnknownHeightItem.length - 1));
-			}
+ 			}
+			var paddingTop = parseInt(arrUnknownHeightItem[i].style.paddingTop);
+			paddingTop = isNaN(paddingTop) ? 0 : paddingTop;  
+			var paddingBottom = parseInt(arrUnknownHeightItem[i].style.paddingBottom);
+			paddingBottom = isNaN(paddingBottom) ? 0 : paddingBottom;  
+			height = height - paddingTop - paddingBottom;
 			if (height < 0)
 				height = 0;
 			arrUnknownHeightItem[i].style.height = height + "px";
-			if (IS_IE6) {  // 如果是IE6，调整内部div高度
-				resizeChildDiv(arrUnknownHeightItem[i], height + "px");
-			}
 		}
 	}
 	oFlow.oldHeight = oFlow.offsetHeight;

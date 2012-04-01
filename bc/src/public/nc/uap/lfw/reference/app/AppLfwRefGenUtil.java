@@ -21,7 +21,6 @@ import nc.uap.lfw.core.data.LfwParameter;
 import nc.uap.lfw.core.event.conf.DatasetRule;
 import nc.uap.lfw.core.event.conf.EventConf;
 import nc.uap.lfw.core.event.conf.EventSubmitRule;
-import nc.uap.lfw.core.event.conf.TreeNodeListener;
 import nc.uap.lfw.core.event.conf.WidgetRule;
 import nc.uap.lfw.core.log.LfwLogger;
 import nc.uap.lfw.core.page.LfwWidget;
@@ -641,7 +640,7 @@ public class AppLfwRefGenUtil {
 		}
 		else if(refType == ILfwRefModel.REFTYPE_TREE) {
 			//Éú³ÉÊ÷
-			TreeViewComp treeView =  (TreeViewComp) generateTree(ReferenceConstant.MASTER_DS_ID)[0];
+			TreeViewComp treeView = (TreeViewComp) generateTree(ReferenceConstant.MASTER_DS_ID)[0];
 			if(refnode instanceof NCRefNode){
 				 NCRefNode ncRefNode = (NCRefNode) refnode;
 				 if(ncRefNode.isOrgs()){
@@ -938,7 +937,7 @@ public class AppLfwRefGenUtil {
 		TreeViewComp tree = new TreeViewComp();
 		tree.setId("reftree");
 		//tree.setHeight("100%");
-		tree.setWithRoot(true);
+		tree.setWithRoot(false);
 		tree.setRootOpen(true);
 		tree.setText(treeModel.getClassRootName());
 		int refType = LfwRefUtil.getRefType(model);
@@ -1265,7 +1264,7 @@ public class AppLfwRefGenUtil {
 		TreeViewComp tree = new TreeViewComp();
 		tree.setId("reftree");
 		//tree.setHeight("100%");
-		tree.setWithRoot(true);
+		tree.setWithRoot(false);
 		tree.setRootOpen(true);
 		tree.setText(treeModel.getRootName());
 		if(refnode.isMultiSel())

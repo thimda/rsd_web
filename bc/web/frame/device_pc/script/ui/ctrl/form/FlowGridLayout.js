@@ -17,7 +17,7 @@ FlowGridLayout.prototype = new PanelComp;
 
 // 常量设置
 FlowGridLayout.BASEWIDTH = 120;
-FlowGridLayout.COLSPACE = 16;
+FlowGridLayout.COLSPACE = 21;
 FlowGridLayout.ROWSPACE = 6;
 FlowGridLayout.COMPHEIGHT = 22;
 
@@ -196,7 +196,6 @@ FlowGridLayout.prototype.paint = function(isForce) {
 		}else{
 			left = usedWidth + FlowGridLayout.COLSPACE - 6;
 		}
-		
 		if (this.comps[i].attachedLabel != null) {
 			this.comps[i].attachedLabel.style.left = left + "px";
 			this.comps[i].attachedLabel.style.top = top + "px";
@@ -251,7 +250,7 @@ FlowGridLayout.prototype.paint = function(isForce) {
 			top = rowNum * 2 * (FlowGridLayout.COMPHEIGHT) + (rowNum * 10) + FlowGridLayout.COMPHEIGHT;
 			compWidth = this.nowPaintWidth;
 		}else{
-			compLeft = usedWidth + labelWidth + 10;
+			compLeft = usedWidth + labelWidth + FlowGridLayout.COLSPACE - 6;
 			top = this.marginTop + rowNum * (FlowGridLayout.COMPHEIGHT + FlowGridLayout.ROWSPACE);
 			if (this.comps[i].basewidth.indexOf("%") != -1)
 				compWidth = compWidth * parseFloat(this.comps[i].basewidth) / 100 ;

@@ -471,13 +471,13 @@ public class Xml2DatasetSerializer implements IXml2ObjectSerializer<Dataset[]> {
 	private static int getState(String stateName) {
 		if (stateName.trim().equals("add"))
 			return Row.STATE_ADD;
-		else if (stateName.trim().equals("upd"))
+		else if (stateName.trim().equals("upd")) 
 			return Row.STATE_UPDATE;
 		else if (stateName.trim().equals("del"))
 			return Row.STATE_DELETED;
 		//假删除的行，在序列化回来时将状态置为删除标志
 		else if (stateName.trim().equals("fdel"))
-			return Row.STATE_DELETED;
+			return Row.STATE_FALSE_DELETED;
 		else
 			return Row.STATE_NORMAL;
 	}

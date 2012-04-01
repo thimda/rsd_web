@@ -251,16 +251,30 @@ public class RaDynamicScriptListener extends ScriptServerListener {
 		Object ele = null;
 		Object ele2 = null;
 
-		UIElement uiEle = null;//getUIElement((UIMeta) uiMeta, ele);
-		if(subuiId != null && !subuiId.equals("")){
-			uiEle = UIElementFinder.findElementById(uiMeta, uiId, subuiId);
+		String colIndex = replaceNullString(lpc.getParameter(RaDynamicScriptListener.PARAM_COLINDEX));
+		String rowIndex = replaceNullString(lpc.getParameter(RaDynamicScriptListener.PARAM_ROWINDEX));
+		
+		UIElement uiEle = null;
+		UIElement parent = null;
+		//表格数据
+		if(rowIndex != null){
+			uiEle = getGridElement(uiMeta, uiId, rowIndex, colIndex);
+			UIGridPanel gridPanel = (UIGridPanel) uiEle;
+			parent = gridPanel.getParent();
+			this.removeUIElement(parent, gridPanel);
 		}
 		else{
-			uiEle = UIElementFinder.findElementById(uiMeta, uiId);
+			
+			if(subuiId != null && !subuiId.equals("")){
+				uiEle = UIElementFinder.findElementById(uiMeta, uiId, subuiId);
+			}
+			else{
+				uiEle = UIElementFinder.findElementById(uiMeta, uiId);
+			}
+			parent = UIElementFinder.findParent((UIMeta) uiMeta, uiEle);
+			
+			this.removeUIElement(parent, uiEle);
 		}
-		UIElement parent = UIElementFinder.findParent((UIMeta) uiMeta, uiEle);
-		
-		this.removeUIElement(parent, uiEle);
 		
 		ParamObject param = new ParamObject();
 		param.subuiId = uiEle.getId();

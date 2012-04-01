@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import nc.uap.lfw.core.LfwRuntimeEnvironment;
 import nc.uap.lfw.core.combodata.CombItem;
@@ -19,9 +20,16 @@ import nc.uap.lfw.core.data.DatasetRelation;
 import nc.uap.lfw.core.data.DatasetRelations;
 import nc.uap.lfw.core.data.Field;
 import nc.uap.lfw.core.data.IRefDataset;
+import nc.uap.lfw.core.data.Parameter;
 import nc.uap.lfw.core.event.IEventSupport;
+import nc.uap.lfw.core.event.conf.DatasetRule;
 import nc.uap.lfw.core.event.conf.EventHandlerConf;
+import nc.uap.lfw.core.event.conf.EventSubmitRule;
+import nc.uap.lfw.core.event.conf.FormRule;
+import nc.uap.lfw.core.event.conf.GridRule;
 import nc.uap.lfw.core.event.conf.JsListenerConf;
+import nc.uap.lfw.core.event.conf.TreeRule;
+import nc.uap.lfw.core.event.conf.WidgetRule;
 import nc.uap.lfw.core.event.ctx.LfwPageContext;
 import nc.uap.lfw.core.exception.LfwRuntimeException;
 import nc.uap.lfw.core.model.AppTypeUtil;
@@ -270,16 +278,24 @@ public class PCWidgetRender extends UIWidgetRender<UIWidget, WebElement> {
 		if (plugoutDescs != null && plugoutDescs.size() > 0) {
 			for (PlugoutDesc plugout : plugoutDescs) {
 				String id = plugout.getId();
-				buf.append("var plugout_").append(id).append(" = new PlugOut('").append(id).append("');\n");
-				List<PlugoutDescItem> plugoutDescItems = plugout.getDescItemList();
-				if (plugoutDescItems != null && plugoutDescItems.size() > 0) {
-					for (PlugoutDescItem item : plugoutDescItems) {
-						buf.append("var plugoutItem_").append(item.getName()).append(" = new PlugOutItem('").append(item.getName()).append("','").append(item.getType()).append(
-								"','").append(item.getSource()).append("','").append(item.getDesc() == null ? "" : item.getDesc()).append("');\n");
-						buf.append(" plugout_").append(id).append(".addItem(").append("plugoutItem_").append(item.getName()).append(");\n");
-					}
-					buf.append(varId).append(".addPlugOut(plugout_").append(id).append(");\n");
+				buf.append("var ").append(id).append(" = new PlugOut('").append(id).append("');\n");
+//				List<PlugoutDescItem> plugoutDescItems = plugout.getDescItemList();
+//				if (plugoutDescItems != null && plugoutDescItems.size() > 0) {
+//					for (PlugoutDescItem item : plugoutDescItems) {
+//						buf.append("var plugoutItem_").append(item.getName()).append(" = new PlugOutItem('").append(item.getName()).append("','").append(item.getType()).append(
+//								"','").append(item.getSource()).append("','").append(item.getDesc() == null ? "" : item.getDesc()).append("');\n");
+//						buf.append(" plugout_").append(id).append(".addItem(").append("plugoutItem_").append(item.getName()).append(");\n");
+//					}
+//					buf.append(varId).append(".addPlugOut(plugout_").append(id).append(");\n");
+//				}
+				EventSubmitRule sr = plugout.getSubmitRule();
+				if (sr != null){
+					String submitRuleId = "sr";
+					String srScript = generateSubmitRuleScript(sr, submitRuleId);
+					buf.append(srScript);
+					buf.append("").append(id).append(".submitRule = ").append(submitRuleId).append(";\n");
 				}
+				buf.append(varId).append(".addPlugOut(").append(id).append(");\n");
 			}
 		}
 		buf.append(wrapByRequired("form", PcFormRenderUtil.getAllFormDsScript(this.id)));//自由表单的数据集的设置
@@ -647,6 +663,15 @@ public class PCWidgetRender extends UIWidgetRender<UIWidget, WebElement> {
 			if (widget.isDialog() || uiWidget instanceof UIDialog) {
 				StringBuffer buf = new StringBuffer();
 //				String cId = COMP_PRE + getId();
+				String title = "";
+				if(uiWidget instanceof UIDialog){
+					UIDialog dialog = (UIDialog) uiWidget;
+					title = dialog.getTitle();
+					if(title != null){
+						buf.append("pageUI.getDialog('").append(id).append("')");
+						buf.append(".setTitle('").append(title).append("');\n");
+					}
+				}
 				buf.append("pageUI.getWidget('").append(id).append("')");
 				if (uiWidget != null && !((UIDialog)uiWidget).isVisible()){
 					buf.append(".setVisible(false);\n");
@@ -654,6 +679,7 @@ public class PCWidgetRender extends UIWidgetRender<UIWidget, WebElement> {
 				else {
 					buf.append(".setVisible(true);\n");		
 				}
+				
 				addDynamicScript(wrapByRequired("modaldialog", buf.toString()));
 			} 
 			else {
@@ -748,4 +774,139 @@ public class PCWidgetRender extends UIWidgetRender<UIWidget, WebElement> {
 		util.replaceComboData(comboData.getId(), widgetId, (ComboData) comboData.clone());
 		comboData.removeExtendAttribute(OBS_IN);
 	}
+	
+	/**
+	 * 生成提交规则
+	 * 
+	 */
+	public String generateSubmitRuleScript(EventSubmitRule submitRule, String submitRuleId) {
+		if (submitRule != null) {
+//			String ruleId = "sr_" + jsEvent.getName() + "_" + listener.getId();
+			String ruleId = submitRuleId;
+			StringBuffer buf = new StringBuffer();
+			buf.append("var ").append(ruleId).append(" = new SubmitRule();\n");
+			if (submitRule.getParamMap() != null && submitRule.getParamMap().size() > 0) {
+				Iterator<Entry<String, Parameter>> it = submitRule.getParamMap().entrySet().iterator();
+				while (it.hasNext()) {
+					Entry<String, Parameter> entry = it.next();
+					buf.append(ruleId).append(".addParam('").append(entry.getKey()).append("', '").append(entry.getValue().getValue()).append("');\n");
+				}
+			}
+			if (submitRule.isCardSubmit()) {
+				buf.append(ruleId).append(".setCardSubmit(true);\n");
+			}
+			if (submitRule.isTabSubmit()) {
+				buf.append(ruleId).append(".setTabSubmit(true);\n");
+			}
+			if (submitRule.isPanelSubmit()) {
+				buf.append(ruleId).append(".setPanelSubmit(true);\n");
+			}
+
+			String jsScript = generateWidgetRulesScript(submitRule, ruleId);
+			buf.append(jsScript);
+
+			EventSubmitRule pSubmitRule = submitRule.getParentSubmitRule();
+			if (pSubmitRule != null) {
+				String pRuleId = ruleId + "_parent";
+				buf.append("var " + pRuleId + " = new SubmitRule();\n");
+				String pJsScript = generateWidgetRulesScript(pSubmitRule, pRuleId);
+				buf.append(pJsScript);
+				buf.append(ruleId + ".setParentSubmitRule(" + pRuleId + ");\n");
+			}
+			return buf.toString();
+//			buf.append(listenerShowId).append(".").append(jsEvent.getName()).append(".submitRule = (").append(ruleId).append(");\n");
+		}
+		else 
+			return "";
+
+	}
+
+	/**
+	 * 创建所有Widget的提交规则
+	 * 
+	 * @param submitRule
+	 * @param ruleId
+	 * @return
+	 */
+	private String generateWidgetRulesScript(EventSubmitRule submitRule, String ruleId) {
+		StringBuffer sb = new StringBuffer();
+		Map<String, WidgetRule> widgetRuleMap = submitRule.getWidgetRules();
+		if (widgetRuleMap != null && !widgetRuleMap.isEmpty()) {
+			Iterator<Entry<String, WidgetRule>> it = widgetRuleMap.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<String, WidgetRule> entry = it.next();
+				WidgetRule widgetRule = entry.getValue();
+				String wstr = generateWidgetRuleScript(widgetRule);
+				sb.append(wstr);
+
+				String widgetId = widgetRule.getId();
+				sb.append(ruleId).append(".addWidgetRule('").append(widgetId).append("', wdr_").append(widgetId).append(");\n");
+			}
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * 得到Widget的规则
+	 * 
+	 * @param widgetRule
+	 * @return
+	 */
+	private String generateWidgetRuleScript(WidgetRule widgetRule) {
+		StringBuffer buf = new StringBuffer();
+		String wid = "wdr_" + widgetRule.getId();
+		buf.append("var ").append(wid).append(" = new WidgetRule('").append(widgetRule.getId()).append("');\n");
+		if (widgetRule.isCardSubmit()) {
+			buf.append(wid).append(".setCardSubmit(true);\n");
+		}
+		if (widgetRule.isTabSubmit()) {
+			buf.append(wid).append(".setTabSubmit(true);\n");
+		}
+		if (widgetRule.isPanelSubmit()) {
+			buf.append(wid).append(".setPanelSubmit(true);\n");
+		}
+
+		DatasetRule[] dsRules = widgetRule.getDatasetRules();
+		if (dsRules != null) {
+			for (int i = 0; i < dsRules.length; i++) {
+				DatasetRule dsRule = dsRules[i];
+				String id = "dsr_" + dsRule.getId();
+				buf.append("var ").append(id).append(" = new DatasetRule('").append(dsRule.getId()).append("','").append(dsRule.getType()).append("');\n");
+				buf.append(wid).append(".addDsRule('").append(dsRule.getId()).append("',").append(id).append(");\n");
+			}
+		}
+
+		TreeRule[] treeRules = widgetRule.getTreeRules();
+		if (treeRules != null) {
+			for (int i = 0; i < treeRules.length; i++) {
+				TreeRule treeRule = treeRules[i];
+				String id = "treer_" + treeRule.getId();
+				buf.append("var ").append(id).append(" = new TreeRule('").append(treeRule.getId()).append("','").append(treeRule.getType()).append("');\n");
+				buf.append(wid).append(".addTreeRule('").append(treeRule.getId()).append("',").append(id).append(");\n");
+			}
+		}
+
+		GridRule[] gridRules = widgetRule.getGridRules();
+		if (gridRules != null) {
+			for (int i = 0; i < gridRules.length; i++) {
+				GridRule gridRule = gridRules[i];
+				String id = "gridr_" + gridRule.getId();
+				buf.append("var ").append(id).append(" = new GridRule('").append(gridRule.getId()).append("','").append(gridRule.getType()).append("');\n");
+				buf.append(wid).append(".addGridRule('").append(gridRule.getId() + "',").append(id).append(");\n");
+			}
+		}
+
+		FormRule[] formRules = widgetRule.getFormRules();
+		if (formRules != null) {
+			for (int i = 0; i < formRules.length; i++) {
+				FormRule formRule = formRules[i];
+				String id = "formr_" + formRule.getId();
+				buf.append("var ").append(id).append(" = new FormRule('").append(formRule.getId()).append("','").append(formRule.getType()).append("');\n");
+				buf.append(wid).append(".addFormRule('").append(formRule.getId() + "',").append(id).append(");\n");
+			}
+		}
+		return buf.toString();
+	}
+	
+	
 }

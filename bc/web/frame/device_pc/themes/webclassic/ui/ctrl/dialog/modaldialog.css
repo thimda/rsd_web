@@ -104,10 +104,12 @@
 	padding-left: 15px;
 	height: 22px;
 	float:left;
+	font-family:微软雅黑;
 }
 
 .dialog_div .dialog_content
 {
+	position:relative;
 	height:100%;
 }
 
@@ -218,6 +220,15 @@
 	margin-right:20px;
 }
 
+.dialog_div .message_msgdiv{
+	float:left;
+	text-align:center;
+	margin-left:20px;
+	margin-top:4px;
+	color:#4EB5E7;
+	font-size:12px;
+}
+
 
 .dialog_div .warning_contentdiv{
 	width:100%;
@@ -303,12 +314,13 @@
 
 .dialog_div .input_contentdiv{
 	width:100%;
-	height:10px;
+	margin-top:30px;
+	margin-bottom:30px;
 }
 
 .dialog_div .input_itemdiv{
 	width:100%;
-	min-height:30px;
+	min-height:32px;
 }
 
 .dialog_div .input_leftdiv{
@@ -324,30 +336,30 @@
 .dialog_div .input_mustdiv{
 	float:left;
 	height:20px;
-	width:10px;
+	width:5px;
 	padding-top:8px;
+	margin-left:3px;
 }
 
 .dialog_div .input_bottomdiv{
-	float:left;
+	position:absolute;
+	bottom:8px;
 	height:35px;
 	width:100%;
 }
 
 .dialog_div .input_okbtdiv{
-	float:left;
-	width:46%;
+	float:right;
 	text-align:right;
-	padding-right:10px;
-	padding-top:10px;
+	margin-right:10px;
+	margin-top:10px;
 }
 
 .dialog_div .input_cancelbtdiv{
 	float:right;
-	width:46%;
 	text-align:left;
-	padding-left:10px;
-	padding-top:10px;
+	margin-right:20px;
+	margin-top:10px;
 }
 
 .dialog_div .input_1btdiv{

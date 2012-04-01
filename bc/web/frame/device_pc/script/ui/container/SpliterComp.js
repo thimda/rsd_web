@@ -249,6 +249,9 @@ SpliterComp.prototype.manageSelf = function() {
 			this.div2.placeIn = "0";
 			this.div2.className = "spliter_flow_div";
 			this.div2.style.zIndex = getTopZIndex(this.div2.style.zIndex);
+			this.shadowDiv = $ce("DIV");
+			this.shadowDiv.className = "spliter_shadow_div";
+			this.div2.appendChild(this.shadowDiv);
 			this.divFeel = $ce("DIV");
 			this.divFeel.id = "spliterFeelDiv";
 			this.divFeel.className = "spliter_feel_div";

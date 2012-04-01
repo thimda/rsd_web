@@ -56,10 +56,10 @@ public class PCFlowvPanelRender extends UILayoutPanelRender<UIFlowvPanel, WebEle
 	public String generalHeadHtml() {
 		StringBuffer buf = new StringBuffer();
 		if (height != null) {
-			buf.append("<div id=\"" + getNewDivId() + "\" hasheight=\"1\" style=\"" + getBorderString(false) + getMarginLeftString(false) + getMarginRightString(false) + getMarginTopString(false) + getMarginBottomString(false) + "height:" + height + ";left:0px;position:relative;\" ");
+			buf.append("<div id=\"" + getNewDivId() + "\" hasheight=\"1\" style=\"" + getBorderString(false) + getPaddingLeftString(false) + getPaddingRightString(false) + getPaddingTopString(false) + getPaddingBottomString(false) + "height:" + height + ";left:0px;position:relative;\" ");
 		} 
 		else {
-			buf.append("<div id=\"" + getNewDivId() + "\" hasheight=\"0\" style=\"" + getBorderString(false) + getMarginLeftString(false) + getMarginRightString(false) + getMarginTopString(false) + getMarginBottomString(false) + "left:0px;position:relative;\" ");
+			buf.append("<div id=\"" + getNewDivId() + "\" hasheight=\"0\" style=\"" + getBorderString(false) + getPaddingLeftString(false) + getPaddingRightString(false) + getPaddingTopString(false) + getPaddingBottomString(false) + "left:0px;position:relative;\" ");
 		}
 		if (anchor != null)
 			buf.append("anchor=\"").append(anchor).append("\"");
@@ -74,11 +74,17 @@ public class PCFlowvPanelRender extends UILayoutPanelRender<UIFlowvPanel, WebEle
 	public String generalHeadHtmlDynamic() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("var ").append(getNewDivId()).append(" = $ce('DIV');\n");
-		buf.append(getNewDivId()).append(".style.width = '100%';\n");
+//		buf.append(getNewDivId()).append(".style.width = '100%';\n");
 		buf.append(getNewDivId()).append(".style.left = '0px';\n");
 		buf.append(getNewDivId()).append(".style.position = 'relative';\n");
 //		buf.append(getNewDivId()).append(".style.overflow = 'auto';\n");
 		buf.append(getNewDivId()).append(".id = '" + getNewDivId() + "';\n");
+		
+		getBorderScript(buf, getNewDivId());
+		getPaddingLeftScript(buf, getNewDivId());
+		getPaddingRightScript(buf, getNewDivId());
+		getPaddingTopScript(buf, getNewDivId());
+		getPaddingBottomScript(buf, getNewDivId());
 		
 		if (height != null) {
 			buf.append(getNewDivId()).append(".style.height = '"+height+"';\n");

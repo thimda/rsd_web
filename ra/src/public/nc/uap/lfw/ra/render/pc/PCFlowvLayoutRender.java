@@ -25,7 +25,7 @@ public class PCFlowvLayoutRender extends UILayoutRender<UIFlowvLayout, WebElemen
 
 	public PCFlowvLayoutRender(UIFlowvLayout uiEle, UIMeta uimeta, PageMeta pageMeta,UIRender<?, ?> parentRender) {
 		super(uiEle, uimeta, pageMeta, parentRender);
-		UIFlowvLayout flowvLayout = this.getUiElement();
+//		UIFlowvLayout flowvLayout = this.getUiElement();
 		
 //		if(flowvLayout.getAttribute(UIFlowvLayout.AUTO_FILL) != null){
 //			if((Integer)flowvLayout.getAttribute(UIFlowvLayout.AUTO_FILL) == 0){
@@ -39,13 +39,17 @@ public class PCFlowvLayoutRender extends UILayoutRender<UIFlowvLayout, WebElemen
 	}
 
 	public String generalHeadHtml() {
+		UIFlowvLayout flowvLayout = this.getUiElement();
 		StringBuffer buf = new StringBuffer();
 		String height = "height:100%;";
 		if(isFlowMode()){
 			height = "";
 		}
 //		if (autoFill == false) // 子项自动填充
-		buf.append("<div id=\"" + getNewDivId() + "\" style=\"width:100%;" + height + "overflow:visible;position:relative;\" name='flowv'>\n");
+		buf.append("<div id=\"" + getNewDivId() + "\" class='"+flowvLayout.getClassName()+"' style=\"width:100%;" + height + "overflow:visible;position:relative;\" name='flowv'");
+		if(this.getUiElement().getClassName() != null)
+			buf.append(" class='").append(this.getUiElement().getClassName()).append("'");
+		buf.append(">\n");
 //		else
 //			buf.append("<div id=\"" + getNewDivId() + "\" style=\"width:100%;" + height + "overflow:hidden;position:relative;\">\n");
 		buf.append(this.generalEditableHeadHtml());

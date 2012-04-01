@@ -209,7 +209,7 @@ function showDefaultLoadingBar() {
 	if (window.loadingBar == null) {
 		var imgSrc = window.themePath + "/ui/ctrl/loading/images/loading.gif";
 //		var innerHTML = "<div align='center' style='height:100%;width:100%;'><br><img src='" + imgSrc + "'/> 加载中...</div>";
-		var innerHTML = "<table width=100% height=100%><tr><td align='center'><img class='panel_vertical_middle_div' src='" + imgSrc + "'/> 加载中...</td></tr></table>";
+		var innerHTML = "<table width=100% height=100%><tr><td align='center'><img class='panel_vertical_middle_div' src='" + imgSrc + "'/></td></tr></table>";
 //		var imgSrc = window.themePath + "/ui/ctrl/loading/images/loading.swf";
 //		var innerHTML = "<div align='center' style='height:100%;width:100%;background-color:#fff;'><br><OBJECT WIDTH='20' HEIGHT='20'><param name='wmode' value='transparent'><PARAM NAME=movie VALUE='" + imgSrc + "'><EMBED src='" + imgSrc + "' WIDTH='20' HEIGHT='20' NAME='2' ALIGN=''></EMBED></OBJECT> 加载中  ... </div>";
 		window.loadingBar = new LoadingBarComp(document.body, "$loadingBar", 0, 0, "150", "50", null, "center", "center", 100000);

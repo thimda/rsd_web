@@ -18,8 +18,7 @@ import nc.vo.pub.SuperVO;
  *
  */
 public class UifDatasetLoadCmd extends DatasetCmd {
-
-	private static final String OPEN_BILL_ID = "openBillId";
+	public static final String OPEN_BILL_ID = "openBillId";
 	private String datasetId;
 	
 	public UifDatasetLoadCmd(String dsId) {

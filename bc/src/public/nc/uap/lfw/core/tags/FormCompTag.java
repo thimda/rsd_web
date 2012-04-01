@@ -180,7 +180,7 @@ public class FormCompTag extends ContainerComponentTag {
 		while (compIndex < listSize) {
 			FormElement element = list.get(compIndex);
 			// 如果元素不可见,并且form也设置为不渲染隐藏控件,则Form中相当于此控件不存在.之所以还允许定义，是因为一些逻辑的需要
-			if(!form.isRenderHiddenEle() && element.isVisible() == false){
+			if(element.isVisible() == false){
 				compIndex ++;
 				continue;
 			}
@@ -350,7 +350,7 @@ public class FormCompTag extends ContainerComponentTag {
 		   .append("\",")
 		   .append(form.getRenderType())
 		   .append(",")
-		   .append(form.isRenderHiddenEle())
+		   .append(false)
 		   .append(",")
 		   .append(form.getRowHeight())
 		   .append(",")
@@ -371,7 +371,7 @@ public class FormCompTag extends ContainerComponentTag {
 		while(it.hasNext())
 		{	
 			FormElement ele = it.next();
-			if(!form.isRenderHiddenEle() && ele.isVisible() == false)
+			if(ele.isVisible() == false)
 				continue;
 			fillDataTypeAndEditorType(ds, ele);
 			if(ele.getEditorType() != null && ele.getEditorType().equals(EditorTypeConst.SELFDEF))
@@ -537,19 +537,11 @@ public class FormCompTag extends ContainerComponentTag {
 				buf.append(userObj.toString());
 			}
 			else if(ele.getEditorType().equals(EditorTypeConst.RICHEDITOR)){
-				String hideBarIndices = ele.getHideBarIndices();
-				String hideImageIndices = ele.getHideImageIndices();
-				buf.append("[");
-				if(hideBarIndices != null && !"".equals(hideBarIndices))
-					buf.append(hideBarIndices);
-				else
-					buf.append("");
-				buf.append(",");
-				if(hideImageIndices != null && !"".equals(hideImageIndices))
-					buf.append(hideImageIndices);
-				else
-					buf.append("");
-				buf.append("]");
+				String toolbarType = ele.getToolbarType();
+				buf.append("{");
+				if (toolbarType != null)
+					buf.append("toolbarType:'").append(toolbarType).append("'");
+				buf.append("}");
 			}
 			else
 				buf.append("null");

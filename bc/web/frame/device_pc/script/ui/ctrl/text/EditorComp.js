@@ -17,13 +17,13 @@ EditorComp.prototype.componentType = "EDITOR";
  * @param hideBarIndices
  *            需要隐藏的行
  */
-function EditorComp(parent, name, left, top, width, height, position,
-		hideBarIndices, hideImageIndices, className) {
+function EditorComp(parent, name, left, top, width, height, position, className, toolbarType) {
 	this.base = BaseComponent;
 	this.base(name, left, top, width, height);
 	this.parentOwner = parent;
 	this.position = getString(position, "absolute");
 	this.className = getString(className, "cms_editor");
+	this.toolbarType = getString(toolbarType, "Custom"); //Full  Custom
 	window.clickHolders.push(this);	
 //	this.imageNode = null;
 //	this.liNode = null;
@@ -109,9 +109,13 @@ EditorComp.prototype.manageSelf = function() {
 EditorComp.prototype.createFrame = function() {
 	var oThis = this;
 	CKEDITOR.basePath = window.frameGlobalPath + "/ui/editor/";
-	var spanHeight = this.Div_gen.offsetHeight * 0.55;
+	var spanHeight = 0;
+	if (this.toolbarType == "Full")
+		spanHeight = this.Div_gen.offsetHeight * 0.6;
+	else if (this.toolbarType == "Custom")	
+		spanHeight = this.Div_gen.offsetHeight * 0.78;
 	if (spanHeight > 0){
-		CKEDITOR.replace(this.contentId,{height:spanHeight});
+		CKEDITOR.replace(this.contentId,{height:spanHeight,toolbar:this.toolbarType});
 	}
 	else	
 		CKEDITOR.replace(this.contentId);

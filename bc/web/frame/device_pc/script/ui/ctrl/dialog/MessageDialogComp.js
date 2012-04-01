@@ -85,6 +85,12 @@ MessageDialogComp.prototype.create = function() {
 	this.bottomDiv = $ce("DIV");
 	this.modaldialog.getContentPane().appendChild(this.bottomDiv);
 	this.bottomDiv.className = "message_bottomdiv";
+	
+	//左下方提示信息
+	this.messageDiv = $ce("DIV");
+	this.messageDiv.className = "message_msgdiv";
+	this.messageDiv.innerHTML = "当前窗口将在<span id='secMsgDiv'>4</span>秒钟后自动关闭！";
+	this.bottomDiv.appendChild(this.messageDiv);
 
 	this.okBtDiv = $ce("DIV");
 	this.okBtDiv.className = "message_okbtdiv";
@@ -96,7 +102,7 @@ MessageDialogComp.prototype.create = function() {
 	this.bottomDiv.appendChild(this.okBtDiv);
 	// 生成确定按钮
 	this.okBt = new ButtonComp(this.okBtDiv, "okBt", 0, 0, "74", "23",
-			trans("ml_ok"), "", '', "relative", "", false, "blue_button_div");
+			trans("ml_understand"), "", '', "relative", "", false, "blue_button_div");
 	this.okBt.onclick = function(e) {
 		e = EventUtil.getEvent();
 		oThis.onclick(e);
@@ -130,8 +136,24 @@ MessageDialogComp.prototype.changeMsg = function(msg) {
 MessageDialogComp.prototype.show = function() {
 	this.modaldialog.show();
 	this.adjustContentdivWidth();
+	$ge("secMsgDiv").innerHTML = 4;
+	this.secChange();
 };
 
+MessageDialogComp.prototype.secChange = function(){
+	var oThis = this;
+	if(this.secTimeout){
+		window.clearTimeout(this.secTimeout);
+	}
+	var sec = parseInt($ge("secMsgDiv").innerHTML, 10);
+	if(sec > 0){
+		sec = sec - 1;
+		$ge("secMsgDiv").innerHTML = sec;
+		this.secTimeout = window.setTimeout(function(){oThis.secChange()}, 1000);
+	}else{
+		this.hide();
+	}
+}
 
 MessageDialogComp.prototype.adjustContentdivWidth = function(){
 	//this.rightDiv.style.width = this.rightDiv.parentNode.offsetWidth - this.leftDiv.offsetWidth + "px";	

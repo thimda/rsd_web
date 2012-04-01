@@ -93,7 +93,7 @@ public class AppDefaultReferencePageModel extends PageModel {
 		uiMeta.setElement(uiWidget);
 		UIMeta uiMetaWidget = new UIMeta();
 		uiMetaWidget.setFlowmode(false);
-		uiMetaWidget.setId("main");
+		uiMetaWidget.setId("main_um");
 		uiWidget.setUimeta(uiMetaWidget);
 		
 		UIFlowvLayout flowvLayout = new UIFlowvLayout();
@@ -126,60 +126,76 @@ public class AppDefaultReferencePageModel extends PageModel {
 		
 		centerFlowvPanel.setElement(flowhLayout);
 		
-		UIFlowhPanel uiSplitterOne = new UIFlowhPanel();
-		uiSplitterOne.setId("panel1");
-		uiSplitterOne.setWidth("200");
-		uiSplitterOne.setRightBorder("#");
-		flowhLayout.addPanel(uiSplitterOne);
+		UIFlowhPanel flowhPanel1 = new UIFlowhPanel();
+		flowhPanel1.setId("panel1");
+		flowhPanel1.setWidth("240");
+		flowhPanel1.setRightBorder("#");
+//		flowhPanel1.setTopPadding("14");
+		flowhLayout.addPanel(flowhPanel1);
 		
-		UIFlowhPanel uiSplitterTwo = new UIFlowhPanel();
-		uiSplitterTwo.setId("panel2");
-		flowhLayout.addPanel(uiSplitterTwo);
+		
+		UIFlowvLayout leftFlowv = new UIFlowvLayout();
+		leftFlowv.setId("leftflowv");
+		flowhPanel1.setElement(leftFlowv);
+		
+		UIFlowvPanel leftPanel1 = new UIFlowvPanel();
+		leftPanel1.setId("leftflowvp1");
+		leftPanel1.setHeight("14");
+		leftFlowv.addPanel(leftPanel1);
+
 		
 		UITreeComp treeComp = new UITreeComp();
 		treeComp.setId("reftree");
 		treeComp.setWidgetId("main");
-		uiSplitterOne.setElement(treeComp);
+		treeComp.setWidth("220");
+		treeComp.setLeft("10");
+		leftFlowv.addElementToPanel(treeComp);
+//		flowhPanel1.setElement(treeComp);
 		
 		UIGridComp uigridComp = new UIGridComp();
 		uigridComp.setId("refgrid");
 		uigridComp.setWidgetId("main");
-		uiSplitterTwo.setElement(uigridComp);
+		flowhLayout.addElementToPanel(uigridComp);
 		
 		//bottom
-		UIFlowvPanel borderPanelBottom = new UIFlowvPanel();
-		borderPanelBottom.setId("bottomvp1");
-		borderPanelBottom.setHeight("30");
-		flowvLayout.addPanel(borderPanelBottom);
+		UIFlowvPanel flowvBottomPanel = new UIFlowvPanel();
+		flowvBottomPanel.setId("bottomvp1");
+		flowvBottomPanel.setHeight("45");
+		flowvLayout.addPanel(flowvBottomPanel);
 
 		UIFlowhLayout uiflowhLayout = new UIFlowhLayout();
 		uiflowhLayout.setId("flowhLayout");
-		borderPanelBottom.setElement(uiflowhLayout);
+		flowvBottomPanel.setElement(uiflowhLayout);
 		
-		UIFlowhPanel flowhPanel1 = new UIFlowhPanel();
-		flowhPanel1.setAttribute("id", "flowhPanel1");
-		uiflowhLayout.addPanel(flowhPanel1);
-		
+//		UIFlowhPanel flowhPanel1 = new UIFlowhPanel();
+//		flowhPanel1.setAttribute("id", "flowhPanel1");
+//		uiflowhLayout.addPanel(flowhPanel1);
+		uiflowhLayout.addElementToPanel(null);
 		if (refnode.isDialog()){
-			UIFlowhPanel flowhPanel2 = new UIFlowhPanel();
-			flowhPanel2.setAttribute("id", "flowhPanel2");
-			uiflowhLayout.addPanel(flowhPanel2);
-			flowhPanel2.setWidth("80");
+//			UIFlowhPanel flowhPanel2 = new UIFlowhPanel();
+//			flowhPanel2.setAttribute("id", "flowhPanel2");
+//			uiflowhLayout.addPanel(flowhPanel2);
+//			flowhPanel2.setWidth("80");
 			
 			UIButton buttonOk = new UIButton();
 			buttonOk.setId("okbt");
 			buttonOk.setWidgetId("main");
-			flowhPanel2.setElement(buttonOk); 
-			
-			UIFlowhPanel flowhPanel3 = new UIFlowhPanel();
-			uiflowhLayout.addPanel(flowhPanel3);
-			flowhPanel3.setAttribute("id", "flowhPanel3");
-			flowhPanel3.setWidth("100");
+			buttonOk.setWidth("74");
+			UIFlowhPanel flowhPanel2 = uiflowhLayout.addElementToPanel(buttonOk); 
+			flowhPanel2.setWidth("84");
+			flowhPanel2.setTopPadding("12");
+//			UIFlowhPanel flowhPanel3 = new UIFlowhPanel();
+//			uiflowhLayout.addPanel(flowhPanel3);
+//			flowhPanel3.setAttribute("id", "flowhPanel3");
+//			flowhPanel3.setWidth("100");
 			
 			UIButton buttonCanCel = new UIButton();
 			buttonCanCel.setId("cancelbt");
 			buttonCanCel.setWidgetId("main");
-			flowhPanel3.setElement(buttonCanCel);
+			buttonCanCel.setWidth("74");
+			UIFlowhPanel flowhPanel3 = uiflowhLayout.addElementToPanel(buttonCanCel);
+			flowhPanel3.setWidth("94");
+			flowhPanel3.setTopPadding("12");
 		}
 	}
 
@@ -193,13 +209,13 @@ public class AppDefaultReferencePageModel extends PageModel {
 		UIWidget uiWidget = new UIWidget();
 		uiWidget.setId("main");
 		uiMeta.setElement(uiWidget);
-		UIMeta uiMetaWidget = new UIMeta();
-		uiMetaWidget.setId("main");
+		UIMeta widgetUIMeta = new UIMeta();
+		widgetUIMeta.setId("main");
 
 		UIFlowvLayout flowvLayout = new UIFlowvLayout();
 		flowvLayout.setId("borderLayout");
-		uiWidget.setUimeta(uiMetaWidget);
-		uiMetaWidget.setElement(flowvLayout);
+		uiWidget.setUimeta(widgetUIMeta);
+		widgetUIMeta.setElement(flowvLayout);
 		
 		if(refnode instanceof NCRefNode){
 			NCRefNode ncRefNode = (NCRefNode) refnode;
@@ -246,21 +262,23 @@ public class AppDefaultReferencePageModel extends PageModel {
 			UIFlowhPanel flowhPanel2 = new UIFlowhPanel();
 			flowhPanel2.setAttribute("id", "flowhPanel2");
 			uiflowhLayout.addPanel(flowhPanel2);
-			flowhPanel2.setWidth("80");
+			flowhPanel2.setWidth("84");
 			
 			UIButton buttonOk = new UIButton();
 			buttonOk.setId("okbt");
 			buttonOk.setWidgetId("main");
+			buttonOk.setWidth("74");
 			flowhPanel2.setElement(buttonOk); 
 			
 			UIFlowhPanel flowhPanel3 = new UIFlowhPanel();
 			uiflowhLayout.addPanel(flowhPanel3);
 			flowhPanel3.setAttribute("id", "flowhPanel3");
-			flowhPanel3.setWidth("100");
+			flowhPanel3.setWidth("94");
 			
 			UIButton buttonCanCel = new UIButton();
 			buttonCanCel.setId("cancelbt");
 			buttonCanCel.setWidgetId("main");
+			buttonCanCel.setWidth("74");
 			flowhPanel3.setElement(buttonCanCel);
 		}
 	}
@@ -275,73 +293,57 @@ public class AppDefaultReferencePageModel extends PageModel {
 		UIWidget uiWidget = new UIWidget();
 		uiWidget.setId("main");
 		uiMeta.setElement(uiWidget);
-		UIMeta uiMetaWidget = new UIMeta();
-		uiMetaWidget.setId("main");
-		uiMetaWidget.setFlowmode(false);
-		UIFlowvLayout borderLayout = new UIFlowvLayout();
-		borderLayout.setId("borderLayout");
-		uiWidget.setUimeta(uiMetaWidget);
-		uiMetaWidget.setElement(borderLayout);
+		UIMeta widgetUIMeta = new UIMeta();
+		widgetUIMeta.setId("main");
+		widgetUIMeta.setFlowmode(false);
+		UIFlowvLayout flowvLayout = new UIFlowvLayout();
+		flowvLayout.setId("borderLayout");
+		uiWidget.setUimeta(widgetUIMeta);
+		widgetUIMeta.setElement(flowvLayout);
 		
 		//top∑≈÷√◊È÷Ø
 		if(refnode instanceof NCRefNode){
 			NCRefNode ncRefNode = (NCRefNode) refnode;
 			if(ncRefNode.isOrgs()){
-				UIFlowvPanel borderPanelTop = new UIFlowvPanel();
-				borderPanelTop.setId("flowvp1");
-				borderLayout.addPanel(borderPanelTop);
-				
-				borderPanelTop.setHeight("30");
 				UITextField locationField = new UITextField();
 				locationField.setId("refcomp_org");
 				locationField.setWidth("220");
 				locationField.setWidgetId("main");
-				borderPanelTop.setElement(locationField);
+				UIFlowvPanel flowvTopPanel = flowvLayout.addElementToPanel(locationField);
+				flowvTopPanel.setHeight("30");
 			}
 		}
 		
-		UIFlowvPanel borderPanel1 = new UIFlowvPanel();
-		borderPanel1.setId("flowvp2");
-		borderLayout.addPanel(borderPanel1);
 		UITreeComp treeComp = new UITreeComp();
 		treeComp.setId("reftree");
 		treeComp.setWidgetId("main");
-		borderPanel1.setElement(treeComp);
-		borderPanel1.setLeftPadding("10");
-		
-		UIFlowvPanel borderPanelBottom = new UIFlowvPanel();
-		borderPanelBottom.setId("flowvp3");
-		borderPanelBottom.setHeight("30");
-		borderLayout.addPanel(borderPanelBottom);
+		UIFlowvPanel centerFlowvPanel = flowvLayout.addElementToPanel(treeComp);
+		centerFlowvPanel.setLeftPadding("10");
+		centerFlowvPanel.setRightPadding("10");
+		centerFlowvPanel.setTopPadding("14");
 		
 		UIFlowhLayout uiflowhLayout = new UIFlowhLayout();
 		uiflowhLayout.setId("flowhLayout");
-		borderPanelBottom.setElement(uiflowhLayout);
+		UIFlowvPanel borderPanelBottom = flowvLayout.addElementToPanel(uiflowhLayout);
+		borderPanelBottom.setHeight("32");
 		
 		UIFlowhPanel flowhPanel1 = new UIFlowhPanel();
 		flowhPanel1.setAttribute("id", "flowhPanel1");
 		uiflowhLayout.addPanel(flowhPanel1);
-		
 		if (refnode.isDialog()){
-			UIFlowhPanel flowhPanel2 = new UIFlowhPanel();
-			flowhPanel2.setAttribute("id", "flowhPanel2");
-			uiflowhLayout.addPanel(flowhPanel2);
-			flowhPanel2.setWidth("80");
-			
 			UIButton buttonOk = new UIButton();
 			buttonOk.setId("okbt");
 			buttonOk.setWidgetId("main");
-			flowhPanel2.setElement(buttonOk); 
-			
-			UIFlowhPanel flowhPanel3 = new UIFlowhPanel();
-			uiflowhLayout.addPanel(flowhPanel3);
-			flowhPanel3.setAttribute("id", "flowhPanel3");
-			flowhPanel3.setWidth("100");
+			buttonOk.setWidth("74");
+			UIFlowhPanel flowhPanel2 = uiflowhLayout.addElementToPanel(buttonOk); 
+			flowhPanel2.setWidth("84");
 			
 			UIButton buttonCanCel = new UIButton();
 			buttonCanCel.setId("cancelbt");
 			buttonCanCel.setWidgetId("main");
-			flowhPanel3.setElement(buttonCanCel);
+			buttonCanCel.setWidth("74");
+			UIFlowhPanel flowhPanel3 = uiflowhLayout.addElementToPanel(buttonCanCel);
+			flowhPanel3.setWidth("94");
 		}
 	}
 	
@@ -384,7 +386,6 @@ public class AppDefaultReferencePageModel extends PageModel {
 		window.setEditFormularClazz(null);	
 		cache.put(key, window);
 	
-
 		return (PageMeta)window.clone();
 	}
 	

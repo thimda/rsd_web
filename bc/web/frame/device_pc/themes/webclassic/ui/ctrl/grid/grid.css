@@ -12,7 +12,7 @@
 }
 .grid_div_ROW_HEIGHT
 {
-	height:29px;
+	height:24px;
 }
 .grid_div_SELECTCOLUM_WIDTH
 {
@@ -340,13 +340,13 @@
 }
 
 .grid_div .gridcell_mouseover {
-	background:#FFFFFF url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/grid/images/highlight_center.png') repeat-x;
+	background:#FFFFFF url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/grid/images/highlight_center.png') repeat-x center;
 }
 
 .grid_div .cell_select {
 	/*border-top: 1px solid #FFFFB0;*/
 	/*background-color: #FFFFB0;*/
-	background:#FFFFFF url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/grid/images/highlight_center.png') repeat-x;
+	background:#FFFFFF url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/grid/images/highlight_center.png') repeat-x center;
 }
 
 .grid_div .fixedcell_select {
@@ -382,6 +382,8 @@
 }
 
 .grid_div .tempDiv div{
+	position:relative;
+	float:left;
 	padding-left:10px;
 	padding-right:10px;
 }
@@ -582,4 +584,91 @@
 	float:left;
 	color:#999999;
 }
+
+.tip_message{
+	position:absolute;
+	height:50px;
+}
+
+.tip_message .left_top_div{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:18px;
+	height:18px;
+	background:url('images/pw_arrow_left_top.png') no-repeat;
+}
+
+.tip_message .center_top_div{
+	position:absolute;
+	left:18px;
+	right:18px;
+	top:0px;
+	height:18px;
+	background:url('images/pw_arrow_top_center.png') repeat-x;
+}
+
+.tip_message .right_top_div{
+	position:absolute;
+	right:0px;
+	top:0px;
+	width:18px;
+	height:18px;
+	background:url('images/pw_round_right_top.png') no-repeat;
+}
+
+.tip_message .left_center_div{
+	position:absolute;
+	left:0px;
+	top:18px;
+	bottom:18px;
+	width:18px;
+	background:url('images/pw_arrow_left_center.png') repeat-y;
+}
+
+.tip_message .center_div{
+	position:absolute;
+	left:18px;
+	right:18px;
+	top:18px;
+	bottom:18px;
+	background:url('images/pw_arrow_center.png') repeat;
+}
+
+.tip_message .right_center_div{
+	position:absolute;
+	right:0px;
+	top:18px;
+	bottom:18px;
+	width:18px;
+	background:url('images/pw_arrow_right_center.png') repeat-y;
+}
+
+.tip_message .left_bottom_div{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:18px;
+	height:18px;
+	background:url('images/pw_round_left_bottom.png') no-repeat;
+}
+
+.tip_message .center_bottom_div{
+	position:absolute;
+	left:18px;
+	right:18px;
+	bottom:0px;
+	height:18px;
+	background:url('images/pw_arrow_bottom_center.png') repeat-x;
+}
+
+.tip_message .right_bottom_div{
+	position:absolute;
+	right:0px;
+	bottom:0px;
+	width:18px;
+	height:18px;
+	background:url('images/pw_angle_right_bottom.png') no-repeat;
+}
+
 

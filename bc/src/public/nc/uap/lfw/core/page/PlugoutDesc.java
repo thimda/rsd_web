@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import nc.uap.lfw.core.event.conf.EventSubmitRule;
 import nc.uap.lfw.core.exception.LfwRuntimeException;
 
 /**
@@ -21,6 +22,10 @@ public class PlugoutDesc implements Serializable, Cloneable {
 
 	//plugout¿‡–Õ
 	private String plugoutType = PLUGOUTNORMAL;
+	
+	//submitRule
+	private EventSubmitRule submitRule = null;
+	
 	
 	public String getPlugoutType() {
 		return plugoutType;
@@ -62,6 +67,13 @@ public class PlugoutDesc implements Serializable, Cloneable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public EventSubmitRule getSubmitRule() {
+		return submitRule;
+	}
+	public void setSubmitRule(EventSubmitRule submitRule) {
+		this.submitRule = submitRule;
+	}
 	public Object clone(){
 		try {
 			PlugoutDesc plugoutDesc = (PlugoutDesc)super.clone();
@@ -77,6 +89,9 @@ public class PlugoutDesc implements Serializable, Cloneable {
 				for (PlugoutEmitItem item : this.emitList){
 					plugoutDesc.addEmitItem(item);
 				}
+			}
+			if (this.submitRule != null){
+				plugoutDesc.submitRule = (EventSubmitRule)this.submitRule.clone(); 
 			}
 			return plugoutDesc;
 		} catch (CloneNotSupportedException e) {

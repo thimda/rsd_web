@@ -39,7 +39,4 @@ public interface IUIRenderGroup {
 	 * @return
 	 */
 	public IUIRender getContextMenuUIRender(UIMeta uimeta, UIElement uiEle,ContextMenuComp webEle, PageMeta pageMeta, IUIRender parentRender);
-	
-	public void clear();
-
 }

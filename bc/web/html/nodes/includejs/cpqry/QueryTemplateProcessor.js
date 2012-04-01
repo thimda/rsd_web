@@ -499,7 +499,7 @@ function templateRowDelete(row)
 {
 	if(row == null)
        return ;
-    var ds = pageUI.getWidget("template").getDataset("queryConditionDataset");
+    var ds = pageUI.getWidget("main").getDataset("queryConditionDataset");
     if(ds == null)
        return ;
     var parentId = row.getCellValue(4);

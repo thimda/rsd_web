@@ -17,6 +17,8 @@ public abstract class InteractionInfo implements Serializable{
 	public String INPUT_TYPE = "INPUT_DIALOG";
 	// 信息对话框
 	public String MESSAGE_TYPE = "MESSAGE_DIALOG";
+	// 错误异常信息对话框
+	public String ERROR_MESSAGE_TYPE = "ERROR_MESSAGE_DIALOG";
 	// 交互框标题
 	private String title;
 	

@@ -158,7 +158,7 @@ public class LabelCompInfo extends ControlInfo {
 		style.setDsField("string_ext16");
 		style.setLabel("字体样式");
 		style.setVoField("style");
-		list.add(style);
+		//list.add(style);
 		
 		StringPropertyInfo weight = new StringPropertyInfo();
 		weight.setId("weight");
@@ -167,7 +167,7 @@ public class LabelCompInfo extends ControlInfo {
 		weight.setDsField("string_ext17");
 		weight.setLabel("字体宽度");
 		weight.setVoField("weight");
-		list.add(weight);
+		//list.add(weight);
 		
 		StringPropertyInfo size = new StringPropertyInfo();
 		size.setId("size");
@@ -176,7 +176,7 @@ public class LabelCompInfo extends ControlInfo {
 		size.setDsField("string_ext18");
 		size.setLabel("字体大小");
 		size.setVoField("size");
-		list.add(size);
+		//list.add(size);
 		
 		StringPropertyInfo family = new StringPropertyInfo();
 		family.setId("family");
@@ -185,7 +185,7 @@ public class LabelCompInfo extends ControlInfo {
 		family.setDsField("string_ext19");
 		family.setLabel("字体");
 		family.setVoField("family");
-		list.add(family);
+		//list.add(family);
 		
 		ComboPropertyInfo textAlign = new ComboPropertyInfo();
 		textAlign.setId("textAlign");

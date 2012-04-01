@@ -32,7 +32,10 @@ public class PCFlowhLayoutRender extends UILayoutRender<UIFlowhLayout, WebElemen
 		boolean isFlowmode = isFlowMode();
 		if(isFlowmode && !autoFill)
 			height = "";
-		buf.append("<div id=\"" + getNewDivId() + "\" style=\"" + height + "\" flowmode=\"" + isFlowmode + "\">\n");
+		buf.append("<div id=\"" + getNewDivId() + "\" style=\"" + height + "\" flowmode=\"" + isFlowmode + "\"");
+		if(this.getUiElement().getClassName() != null)
+			buf.append(" class='").append(this.getUiElement().getClassName()).append("'");
+		buf.append(">\n");
 		buf.append(this.generalEditableHeadHtml());
 		return buf.toString();
 	}

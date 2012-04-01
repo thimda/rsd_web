@@ -14,7 +14,7 @@ public class RowData implements Serializable,Cloneable{
 	private RowSet rowSet = null;
 	private int pageindex;
 	private List<Integer> selectIndices;
-	public List<Row> deleteRowList;
+	private List<Row> deleteRowList;
 	public RowData(int pageindex) {
 		this.pageindex = pageindex;
 	}

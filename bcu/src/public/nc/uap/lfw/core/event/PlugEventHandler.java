@@ -31,7 +31,7 @@ public class PlugEventHandler {
 		AppLifeCycleContext ctx = AppLifeCycleContext.current();
 		String plugoutId = ctx.getParameter(AppLifeCycleContext.PLUGOUT_ID);
 		String plugoutSource = ctx.getParameter(AppLifeCycleContext.PLUGOUT_SOURCE);
-		String plugoutSourceWindow = ctx.getParameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW);
+//		String plugoutSourceWindow = ctx.getParameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW);
 		String params = ctx.getParameter(AppLifeCycleContext.PLUGOUT_PARAMS);
 		JSONObject paramsJson = null;
 		if (params != null){
@@ -49,14 +49,17 @@ public class PlugEventHandler {
 //		}
 		
 		WindowContext winCtx = null;
-		if (plugoutSourceWindow == null || plugoutSourceWindow.equals(""))
+//		if (plugoutSourceWindow == null || plugoutSourceWindow.equals(""))
 			winCtx = ctx.getWindowContext();
-		else
-			winCtx = ctx.getApplicationContext().getWindowContext(plugoutSourceWindow);
+//		else
+//			winCtx = ctx.getApplicationContext().getWindowContext(plugoutSourceWindow);
 		ViewContext viewCtx = winCtx.getViewContext(plugoutSource);
 		LfwWidget widget = winCtx.getWindow().getWidget(plugoutSource);
 		PlugoutDesc plugout = widget.getPlugoutDesc(plugoutId);
-		Map<String, Object> paramMap = winCtx.getPlug(plugoutSource + "_" + plugoutId);
+		
+		
+		Map<String, Object> paramMap = ctx.getApplicationContext().getPlug(winCtx.getId() + "_" + plugoutSource + "_" + plugoutId);
+		//Map<String, Object> paramMap = winCtx.getPlug(plugoutSource + "_" + plugoutId);
 		//windowÄÚplugµ÷ÓÃ 
 		Connector[] connectors = winCtx.getWindow().getConnectors();
 		if(connectors != null){

@@ -2,6 +2,7 @@ package nc.uap.lfw.core.ctx;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,9 @@ public class ApplicationContext {
 	 * 浏览器窗口类型
 	 */
 	public static final String TYPE_WINDOW = "TYPE_WINDOW";
+	
+	public static final String OUTER_WIN_WIDTH = "1200";
+	
 	private List<String> execScriptList;
 	
 	private List<String> beforeExecScriptList;
@@ -139,6 +143,24 @@ public class ApplicationContext {
 		return LfwRuntimeEnvironment.getWebContext().getAppSession();
 	}
 	
+	
+
+	public Map<String, Object> getPlug(String key) {
+		return getPlugMap().get(key);
+	}
+	
+	public void addPlug(String key, Map<String, Object> value) {
+		getPlugMap().put(key, value);
+	}
+	
+	private Map<String, Map<String, Object>> getPlugMap() {
+		Map<String, Map<String, Object>> map = (Map<String, Map<String, Object>>) getAppSession().getAttribute("PLUGMAP");
+		if(map == null){
+			map = new HashMap<String, Map<String, Object>>();
+			getAppSession().setAttribute("PLUGMAP", (Serializable) map);
+		}
+		return map;
+	}
 	/**
 	 * 打开一个新窗口
 	 * @param url
@@ -240,7 +262,18 @@ public class ApplicationContext {
 	 * @param height
 	 */
 	public void popOuterWindow(String url, String title, String width, String height) {
-		this.addExecScript("openWindowInCenter('" + url + "', '" + title + "', " + height + ", " + width + ", true);\n");
+		this.addExecScript("openWindowInCenter('" + url + "', '" + title + "', '" + height + "', '" + width + "', true);\n");
+	}
+	
+	/**
+	 * 全屏打开一个新窗口
+	 * @param url
+	 * @param title
+	 * @param width
+	 * @param height
+	 */
+	public void popOuterWindow(String url, String title) {
+		popOuterWindow(url, title, OUTER_WIN_WIDTH, "100%");
 	}
 	
 	public WindowContext getCurrentWindowContext() {

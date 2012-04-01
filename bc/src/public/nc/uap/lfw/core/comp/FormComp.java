@@ -19,6 +19,7 @@ import nc.uap.lfw.core.exception.LfwPluginException;
 public class FormComp extends WebComponent implements IDataBinding , IContainerComp<FormElement>{
 
 	private static final long serialVersionUID = 7651132623606479940L;
+	public static final int DEFAULT_WIDTH = 120;
 	public static final int FIXED_LAYOUT = 1;
 	public static final int FLOW_LAYOUT = 2;
 	public static final int FIXED_HINT_LAYOUT = 3;
@@ -29,8 +30,19 @@ public class FormComp extends WebComponent implements IDataBinding , IContainerC
 	private String dataset;
 	private int rowHeight = 22;
 	private int eleWidth = 0;
+	// 最小标签宽度
+	private int labelMinWidth = 0;
 
 	private String caption;
+
+	private boolean withForm = false;
+	// form背景色
+	private String backgroundColor = null;
+	// 默认渲染方式，以类NC的卡片渲染器进行渲染, 1 table渲染方式， 2NC卡片渲染方式
+	private int renderType = FLOW_LAYOUT;
+//	// 是否渲染隐藏的表单元素,默认不渲染.
+//	private boolean renderHiddenEle = false;
+	private boolean readOnly = false;
 
 	public String getCaption() {
 		return caption;
@@ -40,8 +52,6 @@ public class FormComp extends WebComponent implements IDataBinding , IContainerC
 		this.caption = caption;
 	}
 
-	// 最小标签宽度
-	private int labelMinWidth = 0;
 
 	public int getLabelMinWidth() {
 		return labelMinWidth;
@@ -50,16 +60,6 @@ public class FormComp extends WebComponent implements IDataBinding , IContainerC
 	public void setLabelMinWidth(int labelMinWidth) {
 		this.labelMinWidth = labelMinWidth;
 	}
-
-	public static final int DEFAULT_WIDTH = 120;
-	private boolean withForm = false;
-	// form背景色
-	private String backgroundColor = null;
-	// 默认渲染方式，以类NC的卡片渲染器进行渲染, 1 table渲染方式， 2NC卡片渲染方式
-	private int renderType = FLOW_LAYOUT;
-	// 是否渲染隐藏的表单元素,默认不渲染.
-	private boolean renderHiddenEle = false;
-	private boolean readOnly = false;
 
 	public FormComp() {
 		super();
@@ -232,13 +232,13 @@ public class FormComp extends WebComponent implements IDataBinding , IContainerC
 		// throw new LfwRuntimeException("not implemented");
 	}
 
-	public boolean isRenderHiddenEle() {
-		return renderHiddenEle;
-	}
-
-	public void setRenderHiddenEle(boolean renderHiddenEle) {
-		this.renderHiddenEle = renderHiddenEle;
-	}
+//	public boolean isRenderHiddenEle() {
+//		return renderHiddenEle;
+//	}
+//
+//	public void setRenderHiddenEle(boolean renderHiddenEle) {
+//		this.renderHiddenEle = renderHiddenEle;
+//	}
 
 	public void validate() {
 		StringBuffer buffer = new StringBuffer();

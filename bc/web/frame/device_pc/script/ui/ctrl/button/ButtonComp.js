@@ -229,7 +229,11 @@ ButtonComp.prototype.manageSelf = function() {
 	this.textNode = document.createTextNode(this.text);
 
 	this.textNodeDiv = $ce("DIV");
-	this.textNodeDiv.style.marginBottom = "3px";
+	if(IS_IE){
+		this.textNodeDiv.style.marginTop = "3px";		
+	}else{
+		this.textNodeDiv.style.marginBottom = "3px";	
+	}
 	this.textNodeDiv.appendChild(this.textNode);
 
 	if (this.refImg != "") {

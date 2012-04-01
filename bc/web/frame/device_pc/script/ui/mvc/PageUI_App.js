@@ -1750,7 +1750,7 @@ ServerProxy.$processContext = function(node, source) {
  * @param {} plugoutId
  * @param {} submitRule 提交规则
  */
-function triggerPlugout(submitRule, paramMap){
+function triggerPlugout_bak(submitRule, paramMap){
 //	 var plugout = pageUI.getWidget(widgetId).getPlugout(id);
 //	 if (plugout == null) return;
 //	 var items = plugout.getItems();
@@ -1765,6 +1765,20 @@ function triggerPlugout(submitRule, paramMap){
 //	proxy.addParam(paramMap);
 	proxy.execute();
 };
+
+/**
+ *触发plugout 
+ * 
+ */
+function triggerPlugout(widgetId, plugoutId){
+	var plugout = pageUI.getWidget(widgetId).getPlugOut(plugoutId);
+	if (plugout == null) return; 
+	var proxy = new ServerProxy();
+	if (plugout.submitRule != null)
+		proxy.submitRule = plugout.submitRule;
+	proxy.execute();
+}
+
 
 
 

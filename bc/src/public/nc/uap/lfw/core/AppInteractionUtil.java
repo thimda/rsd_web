@@ -5,10 +5,10 @@ import java.util.Map;
 
 import nc.uap.lfw.core.ctx.AppLifeCycleContext;
 import nc.uap.lfw.core.ctx.ApplicationContext;
+import nc.uap.lfw.core.exception.ErrorMessageInteractionInfo;
 import nc.uap.lfw.core.exception.InputInteractionInfo;
 import nc.uap.lfw.core.exception.InputItem;
 import nc.uap.lfw.core.exception.LfwInteractionException;
-import nc.uap.lfw.core.exception.MessageInteractionInfo;
 import nc.uap.lfw.core.exception.OkCancelInteractionInfo;
 import nc.uap.lfw.core.exception.ThreeButtonInteractionInfo;
 
@@ -57,7 +57,7 @@ public class AppInteractionUtil {
 	 * @return
 	 */
 	public static boolean showErrorDialog(String msg, String title, String btnText) {
-		return showErrorDialog("MSG_", msg, btnText, false);
+		return showErrorDialog(msg, title, btnText, false);
 	}
 
 	public static boolean showErrorDialog(String msg, String title, String btnText, boolean okReturn) {
@@ -75,7 +75,7 @@ public class AppInteractionUtil {
 		String interactionFlag = LfwRuntimeEnvironment.getWebContext()
 				.getRequest().getParameter(dialogId + INTERACT_FLAG);
 		if (interactionFlag == null) {
-			MessageInteractionInfo info = new MessageInteractionInfo(dialogId,
+			ErrorMessageInteractionInfo info = new ErrorMessageInteractionInfo(dialogId,
 					msg, title, btnText, okReturn);
 			throw new LfwInteractionException(info);
 		}

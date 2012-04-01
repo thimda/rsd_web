@@ -51,7 +51,7 @@ function ConfirmDialogComp(name, title, left, top, msg, refImg, another, okText,
 		// guoweic: modify end
 	}
 	this.name = name;
-	this.title = getString(title, "Dialog");
+	this.title = getString(title, trans("ml_confirmdialog"));
 	this.left = left;
 	this.top = top;
 	this.width = ConfirmDialogComp.WIDTH;
@@ -207,22 +207,22 @@ ConfirmDialogComp.prototype.adjustContentdivWidth = function(){
  * @param{boolean} another 由于确认对话框生命周期的特殊性,特殊时候需要另一个实例
  */
 ConfirmDialogComp.showDialog = function(message, okFunc, cancelFunc, obj1,
-		obj2, zIndex, another, okText, cancelText) {
+		obj2, zIndex, another, okText, cancelText, title) {
 	// guoweic: modify start 2009-11-10
 	if (!another) {
 		if (!window.globalObject.$c_ConfirmDialog){
 			window.globalObject.$c_ConfirmDialog = new ConfirmDialogComp("confirmDialog",
-					trans("ml_confirmdialog"), "", "", message, "", null, okText, cancelText);
+					title, "", "", message, "", null, okText, cancelText);
 		}
 		else{
 			if(window.globalObject.$c_ConfirmDialog.okText != okText)
 				window.globalObject.$c_ConfirmDialog = new ConfirmDialogComp("confirmDialog",
-						trans("ml_confirmdialog"), "", "", message, "", null, okText, cancelText);
+						title, "", "", message, "", null, okText, cancelText);
 		}
 		var dialog = window.globalObject.$c_ConfirmDialog;
 	} else {
 			var dialog = new ConfirmDialogComp("confirmDialog",
-				trans("ml_confirmdialog"), "", "", message, "");
+				title, "", "", message, "");
 	}
 	// guoweic: modify end
 	dialog.changeMsg(message);

@@ -350,15 +350,19 @@ public class Dataset extends WidgetElement implements IDetachable {
 	}
 	public void removeRow(Row row) {
 		getCurrentRowSet().getCurrentRowData().removeRow(row);
+		this.setFocusIndex(-1);
 	}
 	public void removeRow(int index) {
 		getCurrentRowSet().getCurrentRowData().removeRow(index);
+		this.setFocusIndex(-1);
 	}
 	public void removeRow(Row row, boolean isTrueRemove) {
 		getCurrentRowSet().getCurrentRowData().removeRow(row, isTrueRemove);
+		this.setFocusIndex(-1);
 	}
 	public void removeRow(int index, boolean isTrueRemove) {
 		getCurrentRowSet().getCurrentRowData().removeRow(index, isTrueRemove);
+		this.setFocusIndex(-1);
 	}
 	public int nameToIndex(String field) {
 		return getFieldSet().nameToIndex(field);

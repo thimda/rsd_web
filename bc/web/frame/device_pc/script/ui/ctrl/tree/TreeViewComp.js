@@ -890,7 +890,7 @@ TreeViewComp.prototype.createNodes = function(rows, dataset, currLevel) {
 			realpNodeId = pNodeId + "_" + currLevel.id;
 		
 		// 给用户参与节点构建的机会(可以个性化树节点的创建)
-		var node = this.nodeCreated(realNodeId, caption, value, realpNodeId, nodeData, dataset, i==0 ? true:false);
+		var node = this.nodeCreated(realNodeId, caption, value, realpNodeId, nodeData, dataset, false);
 		if (node == null)
 			continue;
 		//node.level = currLevel;
@@ -1755,89 +1755,6 @@ TreeNode.prototype.create1 = function() {
 	}
 };
 
-TreeNode.prototype.create1_backup = function() {
-	if (this.painted == TreeNode.NOPAINT) {
-		var oThis = this;
-		// 标示此节点画得状态
-		this.painted = TreeNode.PAINTHALF;
-		// 创建每个节点的总div
-		this.Div_gen = $ce("DIV");
-		// guoweic: modify start 2009-11-3
-		// 设置高度从而撑开高度占位
-		//this.Div_gen.style.height = TreeViewComp.NODEHEIGHT;
-		this.Div_gen.id = this.id;
-		this.Div_gen.owner = this;
-
-		this.divRow = $ce("DIV");
-		this.Div_gen.appendChild(this.divRow);
-		//this.divRow.style.height = TreeViewComp.NODEHEIGHT;
-		this.divRow.style.height = TreeViewComp.NODEHEIGHT + "px";
-		this.divRow.style.width = "auto";
-		
-		this.divContent = $ce("DIV");
-		this.Div_gen.appendChild(this.divContent);
-		this.divContent.style.height = "100%";
-		this.divContent.style.display = "none";
-
-		this.DIVT = $ce("DIV");
-		this.DIVT.style[ATTRFLOAT] = "left";
-		this.divContent.appendChild(this.DIVT);
-		
-		var divtStyle = this.DIVT.style;
-		divtStyle.width = "19px";
-		divtStyle.height = "0px";
-		divtStyle.background = "url(" + window.themePath + "/ui/ctrl/tree/images/I.gif)";
-
-		this.divChildren = $ce("DIV");
-		this.divChildren.style[ATTRFLOAT] = "left";
-		//****this.divChildren.style.width = "100%";
-		this.divContent.appendChild(this.divChildren);
-		
-		if (!IS_IE6 && !IS_IE7) {  // 增加一个空DIV行，使this.divContent高度为auto起作用
-			this.divSpace = $ce("DIV");
-			this.divSpace.style.clear = "both";
-			this.divSpace.style.display = "block";
-			this.divContent.appendChild(this.divSpace);
-		}
-		
-		if (!this.root) {
-			if (this.parentTreeNode.open && !this.parentTreeNode.isLeaf)
-				this.parentTreeNode.divContent.style.display = 'block';
-			this.parentTreeNode.divChildren.appendChild(this.Div_gen);
-			
-			if (IS_IE6 && this.parentTreeNode.DIVT.offsetHeight < TreeViewComp.NODEHEIGHT) {
-				// guoweic: IE6中会将DIVT的高度初始一个值，所以要将其强行设置为0
-				this.parentTreeNode.DIVT.style.height = "0px";
-				var currentNode = this.parentTreeNode;
-				while (currentNode) {
-					if (currentNode.DIVT.style.height == "0px")
-						currentNode.DIVT.style.height = TreeViewComp.NODEHEIGHT + "px";
-					else {
-						//guoweic: add start 2010-1-7
-						if (currentNode.DIVT.offsetHeight < TreeViewComp.NODEHEIGHT * currentNode.getPaintedChildNodesSize(0))
-						//guoweic: add end
-							currentNode.DIVT.style.height = currentNode.DIVT.offsetHeight + TreeViewComp.NODEHEIGHT + "px";
-					}
-					currentNode = currentNode.parentTreeNode;
-				}
-			} else {
-				var currentNode = this.parentTreeNode;
-				while (currentNode) {
-					//guoweic: add start 2010-1-7
-					if (currentNode.DIVT.offsetHeight < TreeViewComp.NODEHEIGHT * currentNode.getPaintedChildNodesSize(0))
-					//guoweic: add end
-						currentNode.DIVT.style.height = currentNode.DIVT.offsetHeight + TreeViewComp.NODEHEIGHT + "px";
-					currentNode = currentNode.parentTreeNode;
-				}
-				//this.parentTreeNode.DIVT.style.height = this.parentTreeNode.DIVT.offsetHeight + TreeViewComp.NODEHEIGHT + "px";
-			}
-	
-		}
-		
-		// guoweic: modify end
-	}
-};
-
 /**
  * 获得节点下所有已画出的子孙结点数量
  * @author guoweic
@@ -1979,6 +1896,9 @@ TreeNode.prototype.create2 = function(levelNum) {
 		// 保存此节点对象
 		this.divText.owner = this;
 		this.divText.className = "treenode_text";
+		if(this.isLeaf){
+			this.divText.style.color = "#000000";
+		}
 		if(this.isBold){
 			this.divText.style.fontWeight = "bold";
 		}
@@ -2034,153 +1954,11 @@ TreeNode.prototype.create2 = function(levelNum) {
 		
 		// 树节点的点击事件
 		this.divText.onclick = function(e){
+			//handleTreeNodeTextClick(e, this);
 			this.owner.isClickTreeNode = true;
 			handleTreeNodeClick(e, this);
 			this.owner.isClickTreeNode = false;
 		};//handleTreeNodeClick;
-		// 文字双击效果等同于点击文件夹和加号按钮的效果
-		this.divText.ondblclick = handleTreeNodeDblclick;
-		// 显示右键菜单
-		this.divText.oncontextmenu = handleTreeNodeContextMenu;
-
-		if (!this.root) {
-			if (this.refTree)
-				this.changeChildrenIcon();
-		}
-
-		/* 树节点拖放处理函数 */
-		this.refTree.oDrag = null;
-		this.refTree.iDiffX = 0;
-		this.refTree.iDiffY = 0;
-		this.refTree.bDragStart = false;
-	}
-};
-
-TreeNode.prototype.create2_backup = function() {
-	if (this.painted == TreeNode.PAINTHALF) {
-		// 标示此节点画得状态
-		this.painted = TreeNode.PAINTALL;
-		
-		//****
-		/*
-		var div_left = $ce("div");
-		div_left.className = "treenode_left_off";
-		var div_center = $ce("div");
-		div_center.className = "treenode_off";
-		var div_right = $ce("div");
-		div_right.className = "treenode_right_off";
-		
-		this.divRow.appendChild(div_left);
-		this.divRow.appendChild(div_center);
-		this.divRow.appendChild(div_right);
-		*/
-		//****
-		this.divRowTable = $ce("table");
-		
-		//div_center.appendChild(this.divRowTable);
-		this.divRow.appendChild(this.divRowTable);
-		
-		this.divRowTable.cellSpacing = "0";
-		this.divRowTable.cellPadding = "0";
-//		this.divRowTable.width = "100%";
-		var oTBody = $ce("tbody");
-		this.divRowTable.appendChild(oTBody);
-		
-		this.row = oTBody.insertRow(-1);
-		// 加号,减号图标的cell
-		this.img1Cell = this.row.insertCell(-1);
-		this.img1Cell.style.width = "19px";
-		this.img1Cell.style.height = "23px";
-
-		var oThis = this;
-		
-		if (this.withCheckBox) {
-			//复选框状态  0:全部非选中,1:全部选中,2:部分子非选中,3:只读(当前状态为非选中),4,5:只读(当前状态为选中)
-			this.checkstate = 0;
-			// 放置checkbox的cell
-			this.imgCheckCell = this.row.insertCell(-1);
-			this.imgCheckCell.style.width = "19px";
-			this.imgCheckCell.style.height = "23px";
-			// checkbox
-//			this.checkbox = $ce("input");
-//			this.checkbox.type = "checkbox";
-			this.checkbox = $ce("img");
-			this.imgCheckCell.appendChild(this.checkbox);
-			// 设置选中状态
-			if (!this.root){
-//				this.checkbox.checked = this.isNodeDataSelected();
-				this._setCheck(this.isNodeDataSelected()?1:0);
-				this._correctCheckStates();
-				//
-			}else{
-				this._setCheck(0);
-			}
-			// checkbox选择事件
-			this.checkbox.onclick = function() {
-				if (oThis.refTree) {
-					oThis._setSubChecked(!oThis.checked,oThis.root);
-					oThis._correctCheckStates();
-//					oThis.setChecked(this.checked);
-				}
-			};
-		}
-		
-		// 放置文件,文件夹图标的cell
-		this.img2Cell = this.row.insertCell(-1);
-		this.img2Cell.style.width = "19px";
-		this.img2Cell.style.height = "23px";
-		// 放置文字的cell
-		this.textCell = this.row.insertCell(-1);
-		
-		// 文字的宽度
-		//var textWidth = getTextWidth(this.caption, "treenode_text");
-
-		// 加号,减号箭头图标(初始化为文件,文件夹图标changeIcon方法会替换为加号,减号图标)
-		this.img1 = $ce("IMG");
-		this.img1Cell.appendChild(this.img1);
-		this.img1.src = this.icon1;
-		this.img1.className = "treenode_img";
-		// this.img1.style.position = "relative";
-		this.img1.style[ATTRFLOAT] = "left";
-		this.img1.owner = this;
-		this.img1.onclick = handleTreeNodeImg1Click;
-
-		// 文件夹,文件图标
-		this.img2 = $ce("IMG");
-		this.img2Cell.appendChild(this.img2);
-		this.img2.src = this.icon1;
-		this.img2.className = "treenode_img";
-		// this.img2.style.position = "relative";
-		this.img2.style[ATTRFLOAT] = "left";
-		this.img2.owner = this;
-		this.img2.onclick = handleTreeNodeImg2Click;
-		this.img2.ondblclick = handleTreeNodeImg2Dblclick;
-
-		// 创建树每个节点的文字
-		this.divText = $ce("SPAN");
-		this.textCell.appendChild(this.divText);
-		// 保存此节点对象
-		this.divText.owner = this;
-		
-		this.divText.className = "treenode_text";
-		if(this.isBold){
-			this.divText.style.fontWeight = "bold";
-		}
-		// guoweic: modify start 2009-11-2
-		//this.divText.style.height = getTextHeight(this.caption,
-		//		this.divText.className);
-//		this.divText.style.height = getTextHeight(this.caption,
-//						this.divText.className) + "px";
-		//this.divText.style.width = textWidth + 10;
-		//this.divText.style.width = textWidth + 10 + "px";
-		// guoweic: modify end
-		this.divText.appendChild(document.createTextNode(this.caption));
-		
-		this.divText.onmousedown = function(e) {handleTreeNodeMouseDown(e, this, oThis);};
-		this.divText.onmousemove = handleTreeNodeMouseMove;
-		this.divText.onmouseup = handleTreeNodeMouseUp;
-		// 树节点的点击事件
-		this.divText.onclick = handleTreeNodeClick;
 		// 文字双击效果等同于点击文件夹和加号按钮的效果
 		this.divText.ondblclick = handleTreeNodeDblclick;
 		// 显示右键菜单
@@ -2412,6 +2190,24 @@ function handleTreeNodeImg1Click(e) {
 	}
 	oThis.toggle();
 
+	// 在禁止掉事件进一步传播时先掉用系统注册方法
+	document.onclick();
+	stopEvent(e);
+	// 删除事件对象（用于清除依赖关系）
+	clearEventSimply(e);
+};
+/**
+ * 节点文字点击方法
+ */
+function handleTreeNodeTextClick(e, oThis) {
+	e = EventUtil.getEvent();
+	if (oThis.owner.refTree.isTreeActive == false) {
+		// 删除事件对象（用于清除依赖关系）
+		clearEventSimply(e);
+		return;
+	}
+	oThis.owner.toggle();
+	
 	// 在禁止掉事件进一步传播时先掉用系统注册方法
 	document.onclick();
 	stopEvent(e);

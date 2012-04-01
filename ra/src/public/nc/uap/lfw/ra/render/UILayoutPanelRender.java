@@ -296,21 +296,53 @@ public abstract class UILayoutPanelRender<T extends UILayoutPanel, K extends Web
 		return "";
 	}
 	
+	protected void getBorderScript(StringBuffer buf, String divId){
+		UILayoutPanel panel = getUiElement();
+		String border = panel.getBorder();
+		if(border != null && !border.equals("")){
+			buf.append(divId).append(".style.border='").append(border).append("px';\n");
+		}
+		String leftBorder = panel.getLeftBorder();
+		if(leftBorder != null && !leftBorder.equals("")){
+			buf.append(divId).append(".style.borderLef=':").append(getThemeBorder(leftBorder)).append("px';\n;");
+		}
+		String rightBorder = panel.getRightBorder();
+		if(rightBorder != null && !rightBorder.equals("")){
+			buf.append(divId).append(".style.borderRight='").append(getThemeBorder(rightBorder)).append("px';\n");
+		}
+		String topBorder = panel.getTopBorder();
+		if(topBorder != null && !topBorder.equals("")){
+			buf.append(divId).append(".style.borderTop='").append(getThemeBorder(topBorder)).append("px';\n");
+		}
+		String bottomBorder = panel.getBottomBorder();
+		if(bottomBorder != null && !bottomBorder.equals("")){
+			buf.append(divId).append(".style.borderBottom='").append(getThemeBorder(bottomBorder)).append("px';\n");
+		}
+	}
+	
 	private String getThemeBorder(String border){
 		if(border.equals("#"))
 			border = "1px solid #d1e2d8";
 		return border;
 	}
 	
-	protected String getMarginLeftString(boolean script) {
+	protected String getPaddingLeftString(boolean script) {
 		UILayoutPanel panel = getUiElement();
 		String leftPadding = panel.getLeftPadding();
 		if(leftPadding == null || leftPadding.equals(""))
 			return "";
 		return "padding-left:" + leftPadding + "px;";
 	}
+	
+	protected void getPaddingLeftScript(StringBuffer buf, String divId) {
+		UILayoutPanel panel = getUiElement();
+		String leftPadding = panel.getLeftPadding();
+		if(leftPadding == null || leftPadding.equals(""))
+			return;
+		buf.append(divId).append(".style.paddingLeft='").append(leftPadding).append("px';\n");
+	}
 
-	protected String getMarginRightString(boolean script) {
+	protected String getPaddingRightString(boolean script) {
 		UILayoutPanel panel = getUiElement();
 		String rightPadding = panel.getRightPadding();
 		if(rightPadding == null || rightPadding.equals(""))
@@ -318,20 +350,45 @@ public abstract class UILayoutPanelRender<T extends UILayoutPanel, K extends Web
 		return "padding-right:" + rightPadding + "px;";
 	}
 	
-	protected String getMarginBottomString(boolean script) {
+	protected void getPaddingRightScript(StringBuffer buf, String divId) {
+		UILayoutPanel panel = getUiElement();
+		String rightPadding = panel.getRightPadding();
+		if(rightPadding == null || rightPadding.equals(""))
+			return;
+		buf.append(divId).append(".style.paddingRight='").append(rightPadding).append("px';\n");
+	}
+	
+	protected String getPaddingBottomString(boolean script) {
 		UILayoutPanel panel = getUiElement();
 		String bottomPadding = panel.getBottomPadding();
 		if(bottomPadding == null || bottomPadding.equals(""))
 			return "";
 		return "padding-bottom:" + bottomPadding + "px;";
 	}
+
+	protected void getPaddingBottomScript(StringBuffer buf, String divId) {
+		UILayoutPanel panel = getUiElement();
+		String bottomPadding = panel.getBottomPadding();
+		if(bottomPadding == null || bottomPadding.equals(""))
+			return;
+		buf.append(divId).append(".style.paddingBottom='").append(bottomPadding).append("px';\n");
+	}
+
 	
-	protected String getMarginTopString(boolean script) {
+	protected String getPaddingTopString(boolean script) {
 		UILayoutPanel panel = getUiElement();
 		String topPadding = panel.getTopPadding();
 		if(topPadding == null || topPadding.equals(""))
 			return "";
 		return "padding-top:" + topPadding + "px;";
+	}
+	
+	protected void getPaddingTopScript(StringBuffer buf, String divId) {
+		UILayoutPanel panel = getUiElement();
+		String topPadding = panel.getTopPadding();
+		if(topPadding == null || topPadding.equals(""))
+			return;
+		buf.append(divId).append(".style.paddingTop='").append(topPadding).append("px';\n");
 	}
 
 }

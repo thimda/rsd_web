@@ -251,7 +251,7 @@ public class JSONArray {
      */
     public boolean isNull(int index) {
         Object o = opt(index);
-        return o == null || o.equals(null);
+        return o == null;
     }
 
 

@@ -27,8 +27,8 @@ public class LfwSubmitRuleMergeUtil {
 		//处理plugout的提交规则参数
 		if (targetSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SIGN) == null && sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SIGN) != null){
 			targetSubmitRule.addParam(sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SIGN));
-			if (sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW) != null)
-				targetSubmitRule.addParam(sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW));
+//			if (sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW) != null)
+//				targetSubmitRule.addParam(sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW));
 			if (sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SOURCE) != null)
 				targetSubmitRule.addParam(sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_SOURCE));
 			if (sourceSubmitRule.getParam(AppLifeCycleContext.PLUGOUT_ID) != null)

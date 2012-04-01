@@ -51,7 +51,7 @@ function ThreeButtonsDialog(name, title, left, top, msg, refImg, another) {
 		// guoweic: modify end
 	}
 	this.name = name;
-	this.title = getString(title, "Dialog");
+	this.title = getString(title, trans("ml_confirmdialog"));
 	this.left = left;
 	this.top = top;
 	this.width = ThreeButtonsDialog.WIDTH;
@@ -215,17 +215,17 @@ ThreeButtonsDialog.prototype.adjustContentdivWidth = function(){
  * @param{boolean} another 由于确认对话框生命周期的特殊性,特殊时候需要另一个实例
  */
 ThreeButtonsDialog.showDialog = function(message, okFunc, cancelFunc, middleFunc, btntexts, obj1,
-		obj2, obj3, zIndex, another) {
+		obj2, obj3, zIndex, another, title) {
 	// guoweic: modify start 2009-11-10
 	if (!another) {
 		if (!window.globalObject.$c_3ButtonsDialog)
 			window.globalObject.$c_3ButtonsDialog = new ThreeButtonsDialog("confirmDialog",
-					trans("ml_confirmdialog"), "", "", message, "");
+					title, "", "", message, "");
 		var dialog = window.globalObject.$c_3ButtonsDialog;
 	} 
 	else {
 		var dialog = new ThreeButtonsDialog("confirmDialog",
-				trans("ml_confirmdialog"), "", "", message, "");
+				title, "", "", message, "");
 	}
 	// guoweic: modify end
 	dialog.changeMsg(message);

@@ -440,19 +440,25 @@ public class PCFormElementRender extends UINormalComponentRender<UIFormElement, 
 	}
 
 	private void richEditorObj(FormElement ele, StringBuffer buf) {
-		String hideBarIndices = ele.getHideBarIndices();
-		String hideImageIndices = ele.getHideImageIndices();
-		buf.append("[");
-		if (hideBarIndices != null && !"".equals(hideBarIndices))
-			buf.append(hideBarIndices);
-		else
-			buf.append("");
-		buf.append(",");
-		if (hideImageIndices != null && !"".equals(hideImageIndices))
-			buf.append(hideImageIndices);
-		else
-			buf.append("");
-		buf.append("]");
+		String toolbarType = ele.getToolbarType();
+		buf.append("{");
+		if (toolbarType != null)
+			buf.append("toolbarType:'").append(toolbarType).append("'");
+		buf.append("}");
+		
+//		String hideBarIndices = ele.getHideBarIndices();
+//		String hideImageIndices = ele.getHideImageIndices();
+//		buf.append("[");
+//		if (hideBarIndices != null && !"".equals(hideBarIndices))
+//			buf.append(hideBarIndices);
+//		else
+//			buf.append("");
+//		buf.append(",");
+//		if (hideImageIndices != null && !"".equals(hideImageIndices))
+//			buf.append(hideImageIndices);
+//		else
+//			buf.append("");
+//		buf.append("]");
 	}
 
 	private String createForm(boolean isDynamic) {
@@ -469,7 +475,7 @@ public class PCFormElementRender extends UINormalComponentRender<UIFormElement, 
 			buf.append("'), \"").append(form.getId());
 		}
 
-		buf.append("\",4,").append(form.isRenderHiddenEle());
+		buf.append("\",4,").append(false);
 		buf.append(",").append(form.getRowHeight()).append(",").append(form.getColumnCount()).append(");\n");
 		buf.append(varFormId + ".widget = " + widget + ";\n");
 		buf.append(widget + ".addComponent(" + varFormId + ");\n");

@@ -307,30 +307,30 @@ public abstract class UINormalComponentRender<T extends UIComponent, K extends W
 	public void notifyDestroy(UIMeta uiMeta, PageMeta pageMeta,Object obj){
 		String divId = this.getDivId();
 		UIComponent uiEle = this.getUiElement();
-		if (this.getUiElement()!=null) {
-			String sessionId = LfwRuntimeEnvironment.getWebContext().getRequest().getSession().getId();
-			String pageId =  LfwRuntimeEnvironment.getWebContext().getWebSession().getPageId();
-			IPaEditorService ipaService = NCLocator.getInstance().lookup(IPaEditorService.class);
-			PageMeta outPageMeta = ipaService.getOutPageMeta(pageId,sessionId);// 获得外部的pageMeta
-			LfwWidget widget = outPageMeta.getWidget(this.getUiElement().getWidgetId());
-			if (widget != null) {
-				WebComponent webComp = null;
-				if(isMenu(uiEle)){
-					webComp = widget.getViewMenus().getMenuBar(uiEle.getId());
-				}
-				else
-					webComp = (WebComponent) widget.getViewComponents().getComponent(uiEle.getId());
-				StringBuffer buf = new StringBuffer();
-				if (divId != null) {
-					buf.append("window.execDynamicScript2RemoveComponent('" + divId + "','" + uiEle.getWidgetId() + "','" + webComp.getId() + "');");
-					this.removeComponent(widget.getId(), uiEle.getId(),isMenu(uiEle));
-				} else {
-					buf.append("alert('删除控件失败！未获得divId')");
-				}
-				addDynamicScript(buf.toString());
-
-			}
-		}
+//		if (this.getUiElement()!=null) {
+//			String sessionId = LfwRuntimeEnvironment.getWebContext().getRequest().getSession().getId();
+//			String pageId =  LfwRuntimeEnvironment.getWebContext().getWebSession().getPageId();
+//			IPaEditorService ipaService = NCLocator.getInstance().lookup(IPaEditorService.class);
+//			PageMeta outPageMeta = ipaService.getOutPageMeta(pageId,sessionId);// 获得外部的pageMeta
+//			LfwWidget widget = outPageMeta.getWidget(this.getUiElement().getWidgetId());
+//			if (widget != null) {
+//				WebComponent webComp = null;
+//				if(isMenu(uiEle)){
+//					webComp = widget.getViewMenus().getMenuBar(uiEle.getId());
+//				}
+//				else
+//					webComp = (WebComponent) widget.getViewComponents().getComponent(uiEle.getId());
+//				StringBuffer buf = new StringBuffer();
+//				if (divId != null) {
+//					buf.append("window.execDynamicScript2RemoveComponent('" + divId + "','" + uiEle.getWidgetId() + "','" + webComp.getId() + "');");
+//					this.removeComponent(widget.getId(), uiEle.getId(),isMenu(uiEle));
+//				} else {
+//					buf.append("alert('删除控件失败！未获得divId')");
+//				}
+//				addDynamicScript(buf.toString());
+//
+//			}
+//		}
 	}
 	
 	@Override

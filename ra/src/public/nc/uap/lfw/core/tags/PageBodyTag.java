@@ -218,7 +218,7 @@ public class PageBodyTag extends WebElementTag {
 
 	private void addDynamicScript(StringBuffer scriptBuf) throws IOException {
 		if (!LfwRuntimeEnvironment.getMode().equals(WebConstant.MODE_PRODUCTION))
-			System.out.println(scriptBuf.toString());
+			LfwLogger.debug(scriptBuf.toString());
 		String script = "<script>\n" + scriptBuf.toString() + "</script>";
 		getJspContext().getOut().write(script);
 	}

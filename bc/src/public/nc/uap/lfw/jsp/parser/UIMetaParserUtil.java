@@ -596,11 +596,17 @@ public class UIMetaParserUtil implements UIConstant {
 			return null;
 		// modify by renxh
 		String id = getAttributeValue(node, ID);
-		if (id != null)
+		if (id != null && !id.equals(""))
 			layout.setAttribute(ID, id);
+		
 		String widgetId = getAttributeValue(node, WIDGET_ID);
-		if (widgetId != null)
+		if (widgetId != null && !widgetId.equals(""))
 			layout.setAttribute(WIDGET_ID, widgetId);
+		
+		String className = getAttributeValue(node, UILayout.CLASSNAME);
+		if(className != null && !className.equals(""))
+			layout.setAttribute(UILayout.CLASSNAME, className);
+		
 
 		if (nodeName.equals(GRID_LAYOUT)) {
 			NodeList list = node.getChildNodes();
@@ -867,6 +873,10 @@ public class UIMetaParserUtil implements UIConstant {
 		String border = getAttributeValue(panelNode, UILayoutPanel.BORDER);
 		if(border != null && !border.equals(""))
 			panel.setBorder(border);
+		
+		String className = getAttributeValue(panelNode, UILayoutPanel.CLASSNAME);
+		if(className != null && !className.equals(""))
+			panel.setClassName(className);
 
 		NodeList list = panelNode.getChildNodes();
 		for (int i = 0; i < list.getLength(); i++) {
@@ -1099,6 +1109,10 @@ public class UIMetaParserUtil implements UIConstant {
 		String position = getAttributeValue(node, "position");
 		if(position != null && !position.equals(""))
 			comp.setPosition(position);
+		
+		String className =getAttributeValue(node, UIComponent.CLASSNAME);
+		if(className != null && !className.equals(""))
+			comp.setClassName(className);
 		
 		return comp;
 	}

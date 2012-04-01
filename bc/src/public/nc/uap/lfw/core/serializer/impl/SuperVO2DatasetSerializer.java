@@ -29,9 +29,10 @@ public class SuperVO2DatasetSerializer implements IObject2DatasetSerializer<Supe
 				rs = ds.getRowSet(Dataset.MASTER_KEY, true);
 			}
 			pInfo = rs.getPaginationInfo();
-			if (vos != null && pInfo.getPageSize() == -1) { // 不分页时，设置recordsCount为vos的数量
+			//if (vos != null && pInfo.getPageSize() == -1) { // 不分页时，设置recordsCount为vos的数量
+			if(vos != null)
 				pInfo.setRecordsCount(vos.length);
-			}
+			//}
 		} catch (Exception e) {
 			Logger.error(e.getMessage());
 		}

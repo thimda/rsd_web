@@ -45,11 +45,19 @@ public class PCFlowhPanelRender extends UILayoutPanelRender<UIFlowhPanel, WebEle
 
 	public String generalHeadHtml() {
 		StringBuffer strBuf = new StringBuffer();
+		String paddingTop = getPaddingTopString(false);
+		String paddingBottom = getPaddingBottomString(false);
+		String height = "height:100%;";
+		if(!paddingTop.equals("") || !paddingBottom.equals(""))
+			height = "";
 		if (width != null) {
-			strBuf.append("<div id=\"" + getNewDivId() + "\" haswidth=\"1\" style=\"" + getBorderString(false) + getMarginLeftString(false) + getMarginRightString(false) + "position:relative;width:" + width + ";height:100%;min-height:" + MIN_HEIGHT + ";float:left;\">\n");
+			strBuf.append("<div id=\"" + getNewDivId() + "\" haswidth=\"1\" style=\"" + getBorderString(false) + paddingTop + paddingBottom + "position:relative;width:" + width + ";" + height + "min-height:" + MIN_HEIGHT + ";float:left;\"");
 		} else {
-			strBuf.append("<div id=\"" + getNewDivId() + "\" haswidth=\"0\" style=\"" + getBorderString(false) + getMarginLeftString(false) + getMarginRightString(false) + "position:relative;height:100%;min-height:" + MIN_HEIGHT + ";float:left;\">\n");
+			strBuf.append("<div id=\"" + getNewDivId() + "\" haswidth=\"0\" style=\"" + getBorderString(false) + paddingTop + paddingBottom + "position:relative;" + height + "min-height:" + MIN_HEIGHT + ";float:left;\"");
 		}
+		if(this.getUiElement().getClassName() != null)
+			strBuf.append(" class=\"").append(this.getUiElement().getClassName()).append("\"");
+		strBuf.append(">\n");
 		strBuf.append(this.generalEditableHeadHtml());
 		return strBuf.toString();
 	}
@@ -84,13 +92,21 @@ public class PCFlowhPanelRender extends UILayoutPanelRender<UIFlowhPanel, WebEle
 		buf.append("var ").append(newDivId).append(" = $ce('DIV');\n");
 		buf.append(newDivId).append(".style.position = 'relative';\n");
 		buf.append(newDivId).append(".style.height = '100%';\n");
+//		buf.append(newDivId).append(".style[CSSFLOAT] = 'left';\n");
 		buf.append("if(IS_IE){");
 		buf.append(newDivId).append(".style.styleFloat = 'left';\n");
 		buf.append("}else{");
 		buf.append(newDivId).append(".style.cssFloat = 'left';\n");
-		buf.append("};\n");
+		buf.append("};\n");		
 		buf.append(newDivId).append(".style.minHeight = '").append(MIN_HEIGHT).append("';\n");
 		buf.append(newDivId).append(".id = '" + newDivId + "';\n");
+		
+		getBorderScript(buf, getNewDivId());
+		getPaddingLeftScript(buf, getNewDivId());
+		getPaddingRightScript(buf, getNewDivId());
+		getPaddingTopScript(buf, getNewDivId());
+		getPaddingBottomScript(buf, getNewDivId());
+		
 		if (width != null) {
 			buf.append(newDivId).append(".style.width = '" + width + "';\n");
 			buf.append(newDivId).append(".setAttribute('haswidth','1');\n");

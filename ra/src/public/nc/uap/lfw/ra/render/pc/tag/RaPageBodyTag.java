@@ -17,7 +17,6 @@ import nc.uap.lfw.core.common.WebConstant;
 import nc.uap.lfw.core.exception.LfwRuntimeException;
 import nc.uap.lfw.core.log.LfwLogger;
 import nc.uap.lfw.core.model.BasePageModel;
-import nc.uap.lfw.core.model.PageModel;
 import nc.uap.lfw.core.model.util.LfwMaskerUtil;
 import nc.uap.lfw.core.page.PageMeta;
 import nc.uap.lfw.core.serializer.impl.LfwJsonSerializer;
@@ -153,7 +152,7 @@ public class RaPageBodyTag extends SimpleTagWithAttribute {
 	
 	private void addDynamicScript(StringBuffer scriptBuf) throws IOException {
 		if (!LfwRuntimeEnvironment.getMode().equals(WebConstant.MODE_PRODUCTION))
-			System.out.println(scriptBuf.toString());
+			LfwLogger.debug(scriptBuf.toString());
 		String script = "<script>\n" + scriptBuf.toString() + "</script>";
 		getJspContext().getOut().write(script);
 	}

@@ -1,8 +1,5 @@
 package nc.uap.lfw.ra.group;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import nc.uap.lfw.core.common.EditorTypeConst;
 import nc.uap.lfw.core.comp.ButtonComp;
 import nc.uap.lfw.core.comp.ChartComp;
@@ -29,7 +26,6 @@ import nc.uap.lfw.core.comp.WebPartComp;
 import nc.uap.lfw.core.comp.WebSilverlightWidget;
 import nc.uap.lfw.core.comp.text.ComboBoxComp;
 import nc.uap.lfw.core.comp.text.TextComp;
-import nc.uap.lfw.core.log.LfwLogger;
 import nc.uap.lfw.core.page.LfwWidget;
 import nc.uap.lfw.core.page.PageMeta;
 import nc.uap.lfw.jsp.uimeta.UIBorder;
@@ -146,20 +142,20 @@ import nc.uap.lfw.ra.render.pc.PCWidgetRender;
  */
 public class PCUIRenderGroup implements IUIRenderGroup {
 
-	/**
-	 * 存储通过UIElement为参数生成的render
-	 */
-	Map<UIElement, UIRender<?, ?>> uiMap = new HashMap<UIElement, UIRender<?, ?>>();
-
-	/**
-	 * 存储通过WebElement生成的render
-	 */
-	Map<WebElement, UIRender<?, ?>> webMap = new HashMap<WebElement, UIRender<?, ?>>();
-
-	/**
-	 * 存储已经创建的对话框render
-	 */
-	Map<WebElement, UIRender<?, ?>> dialogUIMap = new HashMap<WebElement, UIRender<?, ?>>();
+//	/**
+//	 * 存储通过UIElement为参数生成的render
+//	 */
+//	Map<UIElement, UIRender<?, ?>> uiMap = new HashMap<UIElement, UIRender<?, ?>>();
+//
+//	/**
+//	 * 存储通过WebElement生成的render
+//	 */
+//	Map<WebElement, UIRender<?, ?>> webMap = new HashMap<WebElement, UIRender<?, ?>>();
+//
+//	/**
+//	 * 存储已经创建的对话框render
+//	 */
+//	Map<WebElement, UIRender<?, ?>> dialogUIMap = new HashMap<WebElement, UIRender<?, ?>>();
 //
 //	/*
 //	 * (non-Javadoc)
@@ -169,22 +165,16 @@ public class PCUIRenderGroup implements IUIRenderGroup {
 //	 * , nc.uap.lfw.core.page.PageMeta, nc.uap.lfw.ra.render.UIRender)
 //	 */
 	public IUIRender getUIRender(UIMeta uimeta, UIElement type, PageMeta pageMeta, IUIRender parentRender) {
-		UIRender<?, ?> render = getUIRender(type);
-		if (render == null) {
-			if (type instanceof UILayout) {
-				render = this.getUILayoutRender(uimeta, type, pageMeta,(UIRender<?, ?>) parentRender);
-			} 
-			else if (type instanceof UIComponent) {
-				render = this.getUIComponentRender(uimeta, type, pageMeta, (UIRender<?, ?>) parentRender);
+		UIRender<?, ?> render = null;
+		if (type instanceof UILayout) {
+			render = this.getUILayoutRender(uimeta, type, pageMeta,(UIRender<?, ?>) parentRender);
+		} 
+		else if (type instanceof UIComponent) {
+			render = this.getUIComponentRender(uimeta, type, pageMeta, (UIRender<?, ?>) parentRender);
 
-			} 
-			else if (type instanceof UILayoutPanel) {
-				render = this.getUILayoutPanelRender(uimeta, type, pageMeta, (UILayoutRender<?, ?>) parentRender);
-
-			}
-			if (render != null) {
-				this.storeUIRender(type, render);
-			}
+		} 
+		else if (type instanceof UILayoutPanel) {
+			render = this.getUILayoutPanelRender(uimeta, type, pageMeta, (UILayoutRender<?, ?>) parentRender);
 
 		}
 
@@ -445,72 +435,47 @@ public class PCUIRenderGroup implements IUIRenderGroup {
 		return render;
 	}
 
-	/**
-	 * 2011-7-19 下午08:32:39 renxh des：根据UIElement对象是否相等，获得已经初始化好的render，
-	 * 因为createhtml 和 createscript是分开执行的，如果初始化两个render，
-	 * 就会造成id的不一致，而原本他们的id应该是一样的
-	 * 
-	 * @param type
-	 * @return
-	 */
-	private UIRender<?,?> getUIRender(UIElement type) {
-		if (uiMap.containsKey(type)) {
-			LfwLogger.info("get render from map using key :" + type);
-			return (UIRender<?,?>) uiMap.get(type);
-		}
-		return null;
-	}
-
-	/**
-	 * 2011-7-19 下午08:35:51 renxh des：根据uielement对初始化的render进行保存，以备下次使用
-	 * 
-	 * @param type
-	 * @param render
-	 */
-	private void storeUIRender(UIElement type, UIRender<?,?> render) {
-		if (this.getUIRender(type) == null)
-			uiMap.put(type, render);
-	}
+//
+//	/**
+//	 * 2011-7-19 下午08:35:51 renxh des：根据uielement对初始化的render进行保存，以备下次使用
+//	 * 
+//	 * @param type
+//	 * @param render
+//	 */
+//	private void storeUIRender(UIElement type, UIRender<?,?> render) {
+//		if (this.getUIRender(type) == null)
+//			uiMap.put(type, render);
+//	}
 
 	public IUIRender getContextMenuUIRender(UIMeta uimeta, UIElement uiEle,ContextMenuComp webEle, PageMeta pageMeta, IUIRender parentRender) {
-		UIRender<?,?> render = getDialogUIRender(webEle);
-		if (render == null) {
-			if (webEle instanceof ContextMenuComp) {
-				render = new PCContextMenuCompRender((UIComponent)uiEle,(ContextMenuComp) webEle, uimeta, pageMeta, parentRender);
-			}
-			if (render != null) {
-				this.storeDialogUIRender(webEle, render);
-			}
-
-		}
-
+		UIRender<?,?> render = new PCContextMenuCompRender((UIComponent)uiEle,(ContextMenuComp) webEle, uimeta, pageMeta, parentRender);
 		return render;
 	}
-
-	/**
-	 * 2011-8-2 下午07:19:28 renxh des：获得已经创建的对话框render
-	 * 
-	 * @param type
-	 * @return
-	 */
-	private UIRender<?,?> getDialogUIRender(WebElement type) {
-		if (dialogUIMap.containsKey(type)) {
-			LfwLogger.info("get render from map using key :" + type);
-			return (UIRender<?,?>) uiMap.get(type);
-		}
-		return null;
-	}
-
-	/**
-	 * 2011-8-2 下午07:19:48 renxh des：存储已经创建的对话框render
-	 * 
-	 * @param type
-	 * @param render
-	 */
-	private void storeDialogUIRender(WebElement type, UIRender<?,?> render) {
-		if (this.getDialogUIRender(type) == null)
-			dialogUIMap.put(type, render);
-	}
+//
+//	/**
+//	 * 2011-8-2 下午07:19:28 renxh des：获得已经创建的对话框render
+//	 * 
+//	 * @param type
+//	 * @return
+//	 */
+//	private UIRender<?,?> getDialogUIRender(WebElement type) {
+//		if (dialogUIMap.containsKey(type)) {
+//			LfwLogger.info("get render from map using key :" + type);
+//			return (UIRender<?,?>) uiMap.get(type);
+//		}
+//		return null;
+//	}
+//
+//	/**
+//	 * 2011-8-2 下午07:19:48 renxh des：存储已经创建的对话框render
+//	 * 
+//	 * @param type
+//	 * @param render
+//	 */
+//	private void storeDialogUIRender(WebElement type, UIRender<?,?> render) {
+//		if (this.getDialogUIRender(type) == null)
+//			dialogUIMap.put(type, render);
+//	}
 
 	/**
 	 * 获取Render，如果该render已经初始化，则直接取出
@@ -521,41 +486,23 @@ public class PCUIRenderGroup implements IUIRenderGroup {
 	 * @return
 	 */
 	public IUIRender getUIRender(UIMeta uimeta, UIElement uiEle,WebElement webEle, PageMeta pageMeta, IUIRender parentRender) {
-
-		UIRender<?,?> render = getUIComponentRender(webEle);
-		if (render == null) {
-			render = this.getUIComponentRender(uimeta, uiEle, webEle, pageMeta, (UIRender<?, ?>) parentRender);
-//			render.setEditMode(editMode);
-			this.storeUIComponentRender(webEle, render);
-		}
+		UIRender<?,?> render = this.getUIComponentRender(uimeta, uiEle, webEle, pageMeta, (UIRender<?, ?>) parentRender);
 		return render;
 	}
 
-	/**
-	 * 2011-8-2 下午07:20:11 renxh des：获得已经创建的component render
-	 * 
-	 * @param webEle
-	 * @return
-	 */
-	private UIRender<?,?> getUIComponentRender(WebElement webEle) {
-		if (this.webMap != null) {
-			return this.webMap.get(webEle);
-		}
-		return null;
-	}
 
-	/**
-	 * 2011-8-2 下午07:20:35 renxh des：存储已经创建的控件的render
-	 * 
-	 * @param webEle
-	 * @param render
-	 */
-	private void storeUIComponentRender(WebElement webEle, UIRender<?,?> render) {
-		if (this.webMap == null) {
-			this.webMap = new HashMap<WebElement, UIRender<?, ?>>();
-		}
-		webMap.put(webEle, render);
-	}
+//	/**
+//	 * 2011-8-2 下午07:20:35 renxh des：存储已经创建的控件的render
+//	 * 
+//	 * @param webEle
+//	 * @param render
+//	 */
+//	private void storeUIComponentRender(WebElement webEle, UIRender<?,?> render) {
+//		if (this.webMap == null) {
+//			this.webMap = new HashMap<WebElement, UIRender<?, ?>>();
+//		}
+//		webMap.put(webEle, render);
+//	}
 
 	/**
 	 * 根据WebElement获取render
@@ -630,13 +577,6 @@ public class PCUIRenderGroup implements IUIRenderGroup {
 			render = new PCExcelCompRender((UIExcelComp)uiEle,(ExcelComp) webComp, uimeta, pageMeta, parentRender);
 		}
 		return render;
-	}
-
-	public void clear() {
-		this.webMap = null;
-		this.uiMap = null;
-		this.dialogUIMap = null;
-		System.gc();
 	}
 
 }

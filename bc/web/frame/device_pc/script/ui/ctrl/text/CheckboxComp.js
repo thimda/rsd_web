@@ -229,7 +229,7 @@ CheckboxComp.prototype.setReadOnly = function(readOnly) {
 		this.input.disabled = true;
 		this.readOnly = true;
 		this.input.className = "checkbox_box inactive_bgcolor";
-		this.Div_gen.className = "checkbox_box inactive_bgcolor";
+		this.Div_gen.className = "checkbox_box";
 	}
 };
 
@@ -319,7 +319,7 @@ CheckboxComp.prototype.setActive = function(isActive) {
 		this.input.disabled = true;
 		this.disabled = true;
 		this.input.className = "checkbox_box inactive_bgcolor";
-		this.Div_gen.className = "checkbox_box inactive_bgcolor";
+		this.Div_gen.className = "checkbox_box";
 	}
 	// 控件处于禁用状态变为激活状态
 	else if (this.disabled == true && isActive == true) {

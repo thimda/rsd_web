@@ -877,12 +877,12 @@ TabComp.prototype.createItem = function(name, title, showCloseIcon,
 			attrObj = {
 				position : 'relative',
 				boolFloatRight : true,
-				pRefInactive : window.themePath + "/images/tabs/toright.gif"
+				pRefInactive : window.themePath + "/ui/container/tab/images/toright.gif"
 			};
 			this.next = new ImageComp(this.divImg, "ToRight", window.themePath
-					+ "/images/tabs/toright.gif", 0, 0, "24", "22",
+					+ "/ui/container/tab/images/toright.gif", 0, 0, "24", "22",
 					trans("ml_toright"), window.themePath
-							+ "/images/tabs/toright.gif", attrObj);
+							+ "/ui/container/tab/images/toright.gif", attrObj);
 			var barHeight = parseInt(this.divItemsBar.offsetHeight), imageHeight = parseInt(this.next.Div_gen.offsetHeight);
 
 			this.next.Div_gen.style.top = 0 + "px";
@@ -895,12 +895,12 @@ TabComp.prototype.createItem = function(name, title, showCloseIcon,
 			attrObj = {
 				position : 'relative',
 				boolFloatRight : true,
-				pRefInactive : window.themePath + "/images/tabs/toleft.gif"
+				pRefInactive : window.themePath + "/ui/container/tab/images/toleft.gif"
 			};
 			this.previous = new ImageComp(this.divImg, "ToLeft",
-					window.themePath + "/images/tabs/toleft.gif", 0, 0, "24",
+					window.themePath + "/ui/container/tab/images/toleft.gif", 0, 0, "24",
 					"22", trans("ml_toleft"), window.themePath
-							+ "/images/tabs/toleft.gif", attrObj);
+							+ "/ui/container/tab/images/toleft.gif", attrObj);
 
 			this.previous.Div_gen.style.top = 0 + "px";
 
@@ -1154,11 +1154,11 @@ TabComp.prototype.adjustSelf = function() {
 			attrObj = {
 				position : 'relative',
 				boolFloatRight : true,
-				pRefInactive : window.themePath + "/images/tabs/toright.gif"
+				pRefInactive : window.themePath + "/ui/container/tab/images/toright.gif"
 			};
 			this.next = new ImageComp(this.divImg, "ToRight", window.themePath
-					+ "/images/tabs/toright.gif", -8, 0, "", "", "To Right",
-					window.themePath + "/images/tabs/toright.gif", attrObj);
+					+ "/ui/container/tab/images/toright.gif", -8, 0, "", "", "To Right",
+					window.themePath + "/ui/container/tab/images/toright.gif", attrObj);
 			this.next.onclick = function(e) {
 				oThis.MoveTab(1);
 			};
@@ -1167,12 +1167,12 @@ TabComp.prototype.adjustSelf = function() {
 			attrObj = {
 				position : 'relative',
 				boolFloatRight : true,
-				pRefInactive : window.themePath + "/images/tabs/toleft.gif"
+				pRefInactive : window.themePath + "/ui/container/tab/images/toleft.gif"
 			};
 			this.previous = new ImageComp(this.divImg, "ToLeft",
-					window.themePath + "/images/tabs/toleft.gif", -17, 0, "",
+					window.themePath + "/ui/container/tab/images/toleft.gif", -17, 0, "",
 					"", "To Left",
-					window.themePath + "/images/tabs/toleft.gif", attrObj);
+					window.themePath + "/ui/container/tab/images/toleft.gif", attrObj);
 			this.previous.onclick = function(e) {
 				oThis.MoveTab(-1);
 			};

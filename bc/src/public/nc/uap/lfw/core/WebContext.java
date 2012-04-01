@@ -52,13 +52,14 @@ public class WebContext implements Serializable {
 	private HttpServletResponse response = null;
 	public static final String WEB_SESSION_PRE = "$WS_ID_";
 	private static final String PARENT_UNIQUE_ID = "$PARENT_UNIQUE_ID";
-	// private static final String PARENT_PAGE_ID = "$PARENT_PAGE_ID";
+	 private static final String PARENT_PAGE_ID = "$PARENT_PAGE_ID";
 	public static final String PAGEMETA_KEY = "$PAGEMETA_KEY";
 	public static final String UIMETA_KEY = "$UIMETA_KEY";
 	public static final String APP_CONF = "APP_CONF";
 	public static final String APP_ID = "appId";
 	public static final String APP_UNIQUE_ID = "appUniqueId";
 	public static final String APP_SES = "$APP_SES";
+//	private static final String PARENT_PAGE_ID = null;
 	private WebSession ses;
 	private WebSession appSes;
 	public WebContext() {
@@ -243,10 +244,10 @@ public class WebContext implements Serializable {
 	 * 消除这个页面所对应的session区域及子区域
 	 */
 	public void destroyWebSession() {
-		doDestroyPage(this.pageUniqueId);
+		doDestroyPage(this.pageId, this.pageUniqueId);
 	}
 
-	private void doDestroyPage(String pageId) {
+	private void doDestroyPage(String pageId, String pageUniqueId) {
 		//为了确保页面的正常逻辑，延迟5秒钟之后执行销毁
 		DelayRunnable run = new DelayRunnable(){
 			public void run() {
@@ -258,13 +259,14 @@ public class WebContext implements Serializable {
 				}
 				LfwRuntimeEnvironment.setDatasource(datasource);
 				ILfwCache cache = LfwCacheManager.getSessionCache(session.getId());
-				doDelayDestroyPage(pageId, cache, session);
+				doDelayDestroyPage(pageId, pageUniqueId, cache, session);
 				if(appSes != null){
 					Map<String, String> childIds = (Map<String, String>) appSes.getAttribute(CHILDLIST);
 					if(childIds == null || childIds.size() == 0){
 						String id = WEB_SESSION_PRE + appSes.getWebSessionId();
 						cache.remove(id);
 						appSes.destroy();
+//						System.out.println("destroy app session:" + appSes.getWebSessionId());
 					}
 				}
 				doClearSession(cache, session);
@@ -272,9 +274,10 @@ public class WebContext implements Serializable {
 		};
 		
 		run.pageId = pageId;
+		run.pageUniqueId = pageUniqueId;
 		run.session = request.getSession(true);
 		run.datasource = LfwRuntimeEnvironment.getDatasource();
-		WebSession ws = getWebSession(pageId);
+		WebSession ws = getWebSession(pageUniqueId);
 		if(ws.getAttribute(APP_UNIQUE_ID) != null)
 			run.appSes = getAppSession((String) ws.getAttribute(APP_UNIQUE_ID));
 		Executor thread = new Executor(run);
@@ -311,11 +314,11 @@ public class WebContext implements Serializable {
 	}
 	/**
 	 * 真正进行删除
-	 * @param pageId
+	 * @param pageUniqueId
 	 * @param session 
 	 */
 	@SuppressWarnings("unchecked")
-	private void doDelayDestroyPage(String pageId, ILfwCache cache, HttpSession session){
+	private void doDelayDestroyPage(String pageId, String pageUniqueId, ILfwCache cache, HttpSession session){
 		try{
 			//递归消除子页面内存
 			Iterator em = cache.getKeys().iterator();
@@ -326,9 +329,10 @@ public class WebContext implements Serializable {
 					if (ws == null)
 						continue;
 					String pId = (String) ws.getAttribute(PARENT_UNIQUE_ID);
+					String pPageId = (String) ws.getAttribute(PARENT_PAGE_ID);
 					if (pId != null) {
-						if (pId.equals(pageId)) {
-							doDelayDestroyPage(ws.getWebSessionId(), cache, session);
+						if (pId.equals(pageUniqueId)) {
+							doDelayDestroyPage(pPageId, ws.getWebSessionId(), cache, session);
 						}
 					}
 				}
@@ -341,19 +345,21 @@ public class WebContext implements Serializable {
 		catch(IllegalStateException e){
 		}
 		
-		if(this.appUniqueId != null && !pageId.equals(this.appUniqueId)){
+		if(this.appUniqueId != null && !pageUniqueId.equals(this.appUniqueId)){
 			WebSession appSes = getAppSession();
 			Map<String, String> childIds = (Map<String, String>) appSes.getAttribute(CHILDLIST);
 			if(childIds != null)
 				childIds.remove(pageId);
 		}
 		
-		String uid = WEB_SESSION_PRE + pageId;
+		String uid = WEB_SESSION_PRE + pageUniqueId;
 		WebSession ws = (WebSession) cache.remove(uid);
-		if(ws != null)
+		if(ws != null){
 			ws.destroy();
+//			System.out.println("destroy web session:" + ws.getWebSessionId());
+		}
 		
-		LfwLogger.info(LfwLogger.LOGGER_LFW_SYS, "destroy websession:" + pageId);
+		LfwLogger.info(LfwLogger.LOGGER_LFW_SYS, "destroy websession:" + pageUniqueId);
 	}
 
 	public WebSession getParentSession() {
@@ -430,6 +436,7 @@ public class WebContext implements Serializable {
 			initParam(ws);
 		}
 		ws.created();
+//		System.out.println("create app session:" + ws.getWebSessionId());
 		return ws;
 	}
 	
@@ -449,6 +456,7 @@ public class WebContext implements Serializable {
 			ws.setPageId(getPageId());
 			if (parentUniqueId != null) {
 				ws.setAttribute(PARENT_UNIQUE_ID, parentUniqueId);
+				ws.setAttribute(PARENT_PAGE_ID, parentPageId);
 			}
 			ws.setAttribute(APP_UNIQUE_ID, appUniqueId);
 			if(this.appUniqueId != null){
@@ -461,6 +469,7 @@ public class WebContext implements Serializable {
 				initParam(ws);
 			}
 			ws.created();
+//			System.out.println("create web session:" + ws.getWebSessionId());
 		}
 		return ws;
 	}
@@ -589,6 +598,7 @@ public class WebContext implements Serializable {
 
 abstract class DelayRunnable implements Runnable{
 	protected String pageId;
+	protected String pageUniqueId;
 	protected HttpSession session;
 	protected String datasource;
 	protected WebSession appSes;

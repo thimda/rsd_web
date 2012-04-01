@@ -38,7 +38,7 @@ ErrorDialogComp.prototype = new ListenerUtil;
  * @param msg 显示的出错信息,用户输入
  * @param refImg 错误对话框左侧的显示图片的url
  */
-function ErrorDialogComp(name, title, left, top, msg, refImg) {
+function ErrorDialogComp(name, title, left, top, msg, refImg, okText) {
 	// guoweic: modify start 2009-11-9
 	/*
 	this.getInstance = Singleton;
@@ -54,7 +54,8 @@ function ErrorDialogComp(name, title, left, top, msg, refImg) {
 	// guoweic: modify end
 
 	this.name = name;
-	this.title = title;
+	this.title = getString(title, trans("ml_errordialog"));
+	this.okText = getString(okText, trans("ml_ok"));
 	this.left = left;
 	this.top = top;
 	this.width = ErrorDialogComp.WIDTH;
@@ -116,7 +117,7 @@ ErrorDialogComp.prototype.create = function() {
 
 	// 生成确定按钮
 	this.okBt = new ButtonComp(this.okBtDiv, "okBt", 0, 0, "74", "23",
-			trans("ml_ok"), "", '', "relative", "", false, "blue_button_div");
+			this.okText, "", '', "relative", "", false, "blue_button_div");
 	if (IS_IE8)
 		this.okBt.Div_gen.style.margin = "0 auto";
 	this.okBt.onclick = function(e) {
@@ -180,13 +181,13 @@ ErrorDialogComp.prototype.hide = function() {
  * 
  * @param message 要显示的错误信息
  */
-ErrorDialogComp.showDialog = function(message) {
+ErrorDialogComp.showDialog = function(message, title, okText) {
 	// guoweic: modify start 2009-11-10
 	//var dialog = new ErrorDialogComp("ErrorDialog", trans("ml_errordialog"),
 	//		"", "", message, "");
 	if (!window.globalObject.$c_ErrorDialog)
 		window.globalObject.$c_ErrorDialog = new ErrorDialogComp("ErrorDialog"
-				, trans("ml_errordialog"), "", "", message, "");
+				, title, "", "", message, "", okText);
 	var dialog = window.globalObject.$c_ErrorDialog;
 	// guoweic: modify end
 	dialog.changeMsg(message);

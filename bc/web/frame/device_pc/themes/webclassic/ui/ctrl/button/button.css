@@ -116,6 +116,7 @@
  	padding-top: 0px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_normal_center.png') repeat-x;
  	color:#4d4d4d;
+ 	font-size:12px;
 } 
 .button_div .btn_on {
 	border-style:none;
@@ -124,6 +125,7 @@
  	cursor: pointer;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_normal_center.png') repeat-x;
  	color:#0086b2;
+ 	font-size:12px;
 }
 .button_div .btn_down {
 	border-style:none;
@@ -132,6 +134,7 @@
  	cursor: pointer;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_press_center.png') repeat-x;
  	color:#4d4d4d;
+ 	font-size:12px;
 }
 .button_div .btn_focus {
 	border-style:none;
@@ -140,6 +143,7 @@
  	cursor: pointer;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_highlight_center.png') repeat-x;
  	color:#0086b2;
+ 	font-size:12px;
 }
 .button_div .btn_disabled {
 	border-style:none;
@@ -148,6 +152,7 @@
  	padding-top: 0px;
  	background:url('/lfw/frame/device_pc/themes/webclassic/ui/ctrl/button/images/btn_disable_center.png') repeat-x;
  	color:#666666;
+ 	font-size:12px;
 }
 
 /*blue样式*/

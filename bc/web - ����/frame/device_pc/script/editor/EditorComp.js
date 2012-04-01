@@ -24,32 +24,32 @@ function EditorComp(parent, name, left, top, width, height, position,
 	this.parentOwner = parent;
 	this.position = getString(position, "absolute");
 	this.className = getString(className, "cms_editor");
-//	this.imageNode = null;
-//	this.liNode = null;
-//	this.hiddenContent = null;
-//	this.frame = null;
-//	this.hideBarIndices = hideBarIndices;
-//	this.hideImageIndices = hideImageIndices;
-//	this.charset = "UTF-8";
-//	// 当前模式 0 代码,1 design
-//	this.mode = 1;
-//	this.toolbars = new Array;
-//	this.btDesign = null;
-//	this.btView = null;
-//	this.btHtml = null;
-//	this.filterScript = false;
-//	// 用来记录当前是否初始化完成。防止iframe多线程操作出问题
-//	this.initialized = false;
-//	// 当前编辑器是否可以编辑
-//	this.disabled = false;
-//	this.value = "";
-//
-//	// 在页面上设置当前编辑器对象
-//	window.currentEditor = this;
-//	
-//	// redo栈，当执行undo时，将undo前的信息保存在栈中
-//	this.redoStack = new Array();
-	
+	// this.imageNode = null;
+	// this.liNode = null;
+	// this.hiddenContent = null;
+	// this.frame = null;
+	// this.hideBarIndices = hideBarIndices;
+	// this.hideImageIndices = hideImageIndices;
+	// this.charset = "UTF-8";
+	// // 当前模式 0 代码,1 design
+	// this.mode = 1;
+	// this.toolbars = new Array;
+	// this.btDesign = null;
+	// this.btView = null;
+	// this.btHtml = null;
+	// this.filterScript = false;
+	// // 用来记录当前是否初始化完成。防止iframe多线程操作出问题
+	// this.initialized = false;
+	// // 当前编辑器是否可以编辑
+	// this.disabled = false;
+	// this.value = "";
+	//
+	// // 在页面上设置当前编辑器对象
+	// window.currentEditor = this;
+	//	
+	// // redo栈，当执行undo时，将undo前的信息保存在栈中
+	// this.redoStack = new Array();
+
 	this.create();
 };
 
@@ -88,40 +88,41 @@ EditorComp.prototype.create = function() {
  * @private
  */
 EditorComp.prototype.manageSelf = function() {
-	
-//	this.textarea = $ce("TEXTAREA");
-//	this.textarea.style.width = "100%";
-//	this.textarea.style.height = "100%";
-//	this.Div_gen.appendChild(this.textarea);
+
+	// this.textarea = $ce("TEXTAREA");
+	// this.textarea.style.width = "100%";
+	// this.textarea.style.height = "100%";
+	// this.Div_gen.appendChild(this.textarea);
 	this.contentId = this.id + "_content";
-//	this.textarea.name = this.contentId;
-	this.Div_gen.innerHTML = '<textarea name="' + this.contentId + '" style="width:100%;height:30px;"></textarea>';
-//	this.Div_gen.innerHTML = '<textarea name="' + this.contentId + '" style="width:100%;height:100%;visibility:hidden;">ddd</textarea>';
-//	this.createToolBars();
-//	this.initEditor();
-//	this.createOperateBars();
+	// this.textarea.name = this.contentId;
+	this.Div_gen.innerHTML = '<textarea name="' + this.contentId
+			+ '" style="width:100%;height:30px;"></textarea>';
+	// this.Div_gen.innerHTML = '<textarea name="' + this.contentId + '"
+	// style="width:100%;height:100%;visibility:hidden;">ddd</textarea>';
+	// this.createToolBars();
+	// this.initEditor();
+	// this.createOperateBars();
 };
 
 /**
  * @private
  */
 EditorComp.prototype.createFrame = function() {
-//	var oThis = this;
+	// var oThis = this;
 	CKEDITOR.basePath = window.baseGlobalPath + "/frame/script/ckeditor/";
 	CKEDITOR.replace(this.contentId);
-//	KindEditor.ready(
-//			function(K) {
-//				var editor1 = K.create('textarea[name="' + oThis.contentId + '"]', {allowFileManager : true});
-//				oThis.editor = editor1;
-//				editor1.afterBlur = function(e){
-//					oThis.onblur(e);
-//				}
-//			}
-//		
-//		);
+	// KindEditor.ready(
+	// function(K) {
+	// var editor1 = K.create('textarea[name="' + oThis.contentId + '"]',
+	// {allowFileManager : true});
+	// oThis.editor = editor1;
+	// editor1.afterBlur = function(e){
+	// oThis.onblur(e);
+	// }
+	// }
+	//		
+	// );
 };
-
-
 
 /**
  * 清除内容
@@ -139,7 +140,7 @@ EditorComp.prototype.cleanHtml = function() {
 	}
 	// guoweic: modify end
 	var curr;
-	for ( var i = fonts.length - 1; i >= 0; i--) {
+	for (var i = fonts.length - 1; i >= 0; i--) {
 		curr = fonts[i];
 		if (curr.style.backgroundColor == "#ffffff")
 			curr.outerHTML = curr.innerHTML;
@@ -153,27 +154,27 @@ EditorComp.prototype.cleanHtml = function() {
  * @private
  */
 EditorComp.prototype.oblog_InsertSymbol = function(str1) {
-		this.editorWindow.focus();
-		// TODO guoweic: modify start 2009-11-23
-		var oblog_selection;
-		if(this.oblog_selection){
-			oblog_selection = this.oblog_selection;
-		}else{
-			oblog_selection = this.oblog_selectRange();
-		}
-		
-		if (IS_IE){
-			var oRange = oblog_selection.createRange();
-			// EditorComp.currectSelectRange(oRange,EditorComp.$oRange);
-			oRange.pasteHTML(str1);
-		}
-			
-		else {
-	        var spanElement = document.createElement("span");
-	        spanElement.innerHTML = str1;
-			EditorComp.insertElement(this.frame.contentWindow, spanElement);
-		}
-	
+	this.editorWindow.focus();
+	// TODO guoweic: modify start 2009-11-23
+	var oblog_selection;
+	if (this.oblog_selection) {
+		oblog_selection = this.oblog_selection;
+	} else {
+		oblog_selection = this.oblog_selectRange();
+	}
+
+	if (IS_IE) {
+		var oRange = oblog_selection.createRange();
+		// EditorComp.currectSelectRange(oRange,EditorComp.$oRange);
+		oRange.pasteHTML(str1);
+	}
+
+	else {
+		var spanElement = document.createElement("span");
+		spanElement.innerHTML = str1;
+		EditorComp.insertElement(this.frame.contentWindow, spanElement);
+	}
+
 	// guoweic: modify end
 };
 
@@ -181,11 +182,11 @@ EditorComp.prototype.oblog_InsertSymbol = function(str1) {
  * 设值
  */
 EditorComp.prototype.setValue = function(value) {
-	if(!this.editor) return;
-	if(value != null){
+	if (!this.editor)
+		return;
+	if (value != null) {
 		this.editor.html(value);
-	}
-	else{
+	} else {
 		this.editor.html("");
 	}
 };
@@ -194,8 +195,8 @@ EditorComp.prototype.setValue = function(value) {
  * 追加值
  */
 EditorComp.prototype.appendValue = function(value) {
-	if(value != null){
-		if(this.editor)
+	if (value != null) {
+		if (this.editor)
 			this.editor.appendHtml(value);
 	}
 };
@@ -204,8 +205,8 @@ EditorComp.prototype.appendValue = function(value) {
  * 插入值
  */
 EditorComp.prototype.insertValue = function(value) {
-	if(value != null){
-		if(this.editor)
+	if (value != null) {
+		if (this.editor)
 			this.editor.insertHtml(value);
 	}
 };
@@ -214,7 +215,7 @@ EditorComp.prototype.insertValue = function(value) {
  * 获取editor的内容
  */
 EditorComp.prototype.getValue = function() {
-	if(this.editor.html)
+	if (this.editor.html)
 		return this.editor.html();
 	return null;
 };
@@ -223,8 +224,7 @@ EditorComp.prototype.getValue = function() {
  * 设置可编辑状态
  */
 EditorComp.prototype.setActive = function(active) {
-	
-	
+
 };
 
 /**
@@ -234,11 +234,11 @@ EditorComp.prototype.setActive = function(active) {
  */
 EditorComp.prototype.onblur = function(e) {
 	var focusEvent = {
-			"obj" : this.editor,
-			"event" : e
-		};
+		"obj" : this.editor,
+		"event" : e
+	};
 	this.doEventFunc("onBlur", FocusListener.listenerType, focusEvent);
-	
+
 };
 
 /**
@@ -248,7 +248,7 @@ EditorComp.prototype.onblur = function(e) {
  */
 EditorComp.prototype.getContext = function() {
 	var context = new Object;
-// context.javaClass = "nc.uap.lfw.core.comp.ctx.EditorContext";
+	// context.javaClass = "nc.uap.lfw.core.comp.ctx.EditorContext";
 	context.c = "EditorContext";
 	context.id = this.id;
 	context.enabled = !this.disabled;

@@ -75,6 +75,8 @@ public final class PlugEventAdjuster {
 			return;
 		//对每个pageMeta都增加一个参照Plugin
 		addRefPlugin(pageMeta);
+		//如果页面包含公共的查询模板则给此查询模板添加一个一个plugin
+		addpubSimpleQueryPlugin(pageMeta);
 		//打开的为参照pageMeta时，增加参照plugout，注：参照的view的id定为"main"
 		String pageId = LfwRuntimeEnvironment.getWebContext().getPageId();
 		String isReference = (String)LfwRuntimeEnvironment.getWebContext().getWebSession().getOriginalParameter("isReference");
@@ -111,6 +113,32 @@ public final class PlugEventAdjuster {
 			}
 		}
 		
+		//是否是弹出查询模板
+		String isqeury = (String)LfwRuntimeEnvironment.getWebContext().getWebSession().getOriginalParameter("isAdvanceQuery");
+		if (isqeury != null && isqeury.equals("true")){
+			generateQueryConnection(pageMeta, pageId);
+		}
+
+		
+		//生成plugout对象上的提交规则
+		for (Connector conn : appCtx.getApplication().getConnectorList()){
+			String sourceWindowId = conn.getSourceWindow();
+			String targetWindowId = conn.getTargetWindow();
+			//处理plugout
+			if (sourceWindowId.equals(pageId)){
+				PageMeta inPagemeta = LfwRuntimeEnvironment.getWebContext().getCrossPageMeta(targetWindowId);
+				genPlugoutSubmitRule(pageMeta, inPagemeta, conn);
+			}
+			//处理plugin   不做处理，对于  plugout在先打开的window中,plugin在后打开的window中的情况，不支持
+//			if (targetWindowId.equals(pageMeta.getId())){
+//				PageMeta outPagemeta = LfwRuntimeEnvironment.getWebContext().getCrossPageMeta(sourceWindowId);
+//				if (outPagemeta == null)
+//					return;
+//				genPlugoutSubmitRule(pageMeta, pageMeta, conn);
+//			}
+		}
+		
+		//绑定触发器事件
 		for (Connector conn : appCtx.getApplication().getConnectorList()){
 			String sourceWindowId = conn.getSourceWindow();
 			String targetWindowId = conn.getTargetWindow();
@@ -121,71 +149,91 @@ public final class PlugEventAdjuster {
 				PageMeta inPagemeta = LfwRuntimeEnvironment.getWebContext().getCrossPageMeta(targetWindowId);
 				addEvent(pageMeta, inPagemeta, conn);
 			}
-			//处理plugin
-			if (targetWindowId.equals(pageMeta.getId())){
-//				PageMeta outPagemeta = appCtx.getWindowContext(sourceWindowId).getWindow();
-				PageMeta outPagemeta = LfwRuntimeEnvironment.getWebContext().getCrossPageMeta(sourceWindowId);
-				if (outPagemeta == null)
-					return;
-				addEventSubmitRule(pageMeta, outPagemeta, conn);
+			//处理plugin  不做处理，对于  plugout在先打开的window中,plugin在后打开的window中的情况，不支持
+//			if (targetWindowId.equals(pageMeta.getId())){
+//				PageMeta outPagemeta = LfwRuntimeEnvironment.getWebContext().getCrossPageMeta(sourceWindowId);
+//				if (outPagemeta == null)
+//					return;
+//				genPlugoutSubmitRule(pageMeta, pageMeta, conn);
+//				//				addEventSubmitRule(pageMeta, outPagemeta, conn);
+//			}
+		}
+	}
+	
+	
+	/**
+	 * 产生包含查询模板的window和查询模板间的connection
+	 * @param appCtx
+	 * @param pageMeta
+	 * @param pageId
+	 */
+	private void generateQueryConnection(PageMeta pageMeta, String pageId) {
+		ApplicationContext appCtx = AppLifeCycleContext.current().getApplicationContext();
+		String sourceViewId = "main";
+		if (pageMeta.getWidget("main") == null)
+			return;
+//			LfwWidget refWidget = pageMeta.getWidget("main");
+		LfwWidget refWidget = pageMeta.getWidget(sourceViewId);
+		if (refWidget != null){
+			addAdvanceQueryPlugout(refWidget);
+			//创建连接
+			Connector conn = new Connector(); 
+			conn.setSourceWindow(pageId);
+			conn.setSource(refWidget.getId());
+			conn.setPlugoutId("advanceQueryPlugOut");
+			String parentPageId = (String)LfwRuntimeEnvironment.getWebContext().getWebSession().getOriginalParameter("otherPageId");
+			conn.setTargetWindow(parentPageId);
+			String widgetId = (String) LfwRuntimeEnvironment.getWebContext().getWebSession().getOriginalParameter("widgetId");
+			conn.setTarget(widgetId);
+			conn.setPluginId("advancePlugin");
+			String connId = conn.getSourceWindow() + "$" + conn.getSource() + "$" + conn.getTargetWindow() + "$" + conn.getTarget();
+			boolean existConn = false;
+			for (Connector c : appCtx.getApplication().getConnectorList()){
+				if (c.getId() != null && c.getId().equals(connId)){
+					existConn = true;
+					break;
+				}
+			}
+			if (!existConn){
+				conn.setId(connId);
+				appCtx.getApplication().addConnector(conn);
 			}
 		}
 	}
 	
+	
 	/**
-	 * 对每个pageMeta都增加一个参照Plugin
+	 * 给包含公共简单查询模板的widget添加plugin, plugin的id
 	 * @param pageMeta
 	 */
-	
-	private void addRefPlugin(PageMeta pageMeta) {
+	private void addpubSimpleQueryPlugin(PageMeta pageMeta) {
+		boolean iscontains = false;
+		LfwWidget[] widgets = pageMeta.getWidgets();
+		for (int i = 0; i < widgets.length; i++) {
+			LfwWidget widget = widgets[i];
+			if("simplequery".equals(widget.getId())){
+				iscontains = true;
+				break;
+			}
+		}
+		if(iscontains == false)
+			return;
 		PluginDesc pluginDesc = new PluginDesc();
-		pluginDesc.setId(RefOkController.PLUGIN_ID);
+		pluginDesc.setId("advancePlugin");
 		List<PluginDescItem> descItemList = new ArrayList<PluginDescItem>();
 		
 		PluginDescItem typeItem = new PluginDescItem();
-		typeItem.setId(RefOkController.TYPE);
-		PluginDescItem idItem = new PluginDescItem();
-		idItem.setId(RefOkController.ID);
-		PluginDescItem writefieldsItem = new PluginDescItem();
-		writefieldsItem.setId(RefOkController.WRITEFIELDS);
-		
+		typeItem.setId("queryParam");
+			
 		descItemList.add(typeItem);
-		descItemList.add(idItem);
-		descItemList.add(writefieldsItem);
 		pluginDesc.setDescItemList(descItemList);
 		for (LfwWidget widget :  pageMeta.getWidgets()){
-			if (widget.getPluginDesc(RefOkController.PLUGIN_ID) == null)
+			if (widget.getPluginDesc("advancePlugin") == null)
 				widget.addPluginDescs(pluginDesc);
 		}
+		
 	}
 
-	/**
-	 * 对每个pageMeta都增加一个参照Plugout
-	 * 
-	 * @param refWidget
-	 */
-	private void addRefPlugout(LfwWidget refWidget) {
-		PlugoutDesc plugoutDesc = new PlugoutDesc(); 
-		plugoutDesc.setId(RefOkController.PLUGOUT_ID);
-		List<PlugoutDescItem>  plugoutDescItemList = new ArrayList<PlugoutDescItem>();
-		
-		PlugoutDescItem typeItem = new PlugoutDescItem();
-		typeItem.setName(RefOkController.TYPE);
-		PlugoutDescItem idItem = new PlugoutDescItem();
-		idItem.setName(RefOkController.ID);
-		PlugoutDescItem writefieldsItem = new PlugoutDescItem();
-		writefieldsItem.setName(RefOkController.WRITEFIELDS);
-		PlugoutDescItem valuesItem = new PlugoutDescItem();
-		plugoutDescItemList.add(typeItem);
-		plugoutDescItemList.add(idItem);
-		plugoutDescItemList.add(writefieldsItem);
-		plugoutDescItemList.add(valuesItem);
-		plugoutDesc.setDescItemList(plugoutDescItemList);
-		if (refWidget.getPlugoutDesc(RefOkController.PLUGOUT_ID) == null)
-			refWidget.addPlugoutDescs(plugoutDesc);
-	}
-	
-	
 	/**
 	 * 对前台事件追加plugout提交规则 
 	 * 
@@ -193,8 +241,9 @@ public final class PlugEventAdjuster {
 	 * @param outPagemeta
 	 * @param conn
 	 */
+	@Deprecated
 	private void addEventSubmitRule(PageMeta inPageMeta, PageMeta outPageMeta, Connector conn){
-		String sourceWindowId = conn.getSourceWindow();
+		//		String sourceWindowId = conn.getSourceWindow();
 		String soruceWidgetId = conn.getSource();
 		String plugoutId = conn.getPlugoutId();
 		String targetWidgetId = conn.getTarget();
@@ -233,8 +282,8 @@ public final class PlugEventAdjuster {
 				sr.addWidgetRule(targetsubmitRule.getWidgetRule(targetWidgetId));
 			}
 			sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SIGN,"1"));
-			if (sourceWindowId != null)
-				sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW,sourceWindowId));
+//			if (sourceWindowId != null)
+//				sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW,sourceWindowId));
 			sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE,soruceWidgetId));
 			sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_ID,plugoutId));
 		}
@@ -288,42 +337,39 @@ public final class PlugEventAdjuster {
 		}
 	}
 	
-	private List<EventConf> getEventList(WidgetElement ele){
-		List<EventConf> eventList = null;
-		eventList = ele.getEventConfList();
-		if (eventList == null){
-			eventList = new ArrayList<EventConf>();
-			ele.setEventConfList(eventList);
-		}
-		return eventList;
-	}
-	
 	/**
 	 * 针对window内plug增加plugEvent
 	 * @param pageMeta
 	 */
 	public void addPlugEventConf(PageMeta pageMeta){
+		//生成plugout对象上的提交规则
 		Iterator<Connector> it = pageMeta.getConnectorMap().values().iterator();
 		while(it.hasNext()){
 			Connector conn = it.next();
+			genPlugoutSubmitRule(pageMeta, pageMeta, conn);
+		}
+		//绑定触发器事件
+		Iterator<Connector> it2 = pageMeta.getConnectorMap().values().iterator();
+		while(it2.hasNext()){
+			Connector conn = it2.next();
 			addEvent(pageMeta, pageMeta, conn);
 		}	
 	}
 
-	
-	private void addEvent(PageMeta outPageMeta,PageMeta inPageMeta, Connector conn){
-		String sourceWindowId = conn.getSourceWindow();
+	/**
+	 * 根据Connector对plugout对象生成或合并提交规则
+	 * @param outPageMeta
+	 * @param inPageMeta
+	 * @param conn
+	 */
+	private void genPlugoutSubmitRule(PageMeta outPageMeta,PageMeta inPageMeta, Connector conn) {
+//		String sourceWindowId = conn.getSourceWindow();
 		String sourceWidgetId = conn.getSource();
 		String plugoutId = conn.getPlugoutId();
 		String targetWidgetId = conn.getTarget();
 		String pluginId = conn.getPluginId();
 		PlugoutDesc plugoutDesc = outPageMeta.getWidget(sourceWidgetId).getPlugoutDesc(plugoutId);
-		if (plugoutDesc == null)
-			return;
-		List<PlugoutEmitItem> descEmitList = plugoutDesc.getEmitList();
-		if (descEmitList == null)
-			return;
-
+		if (plugoutDesc == null) return;
 		EventSubmitRule sr = null;
 		//设置提交规则
 		sr = new EventSubmitRule();
@@ -343,15 +389,14 @@ public final class PlugEventAdjuster {
 			}
 		}
 		sr.addWidgetRule(sourceWr);
-		if (sourceWindowId != null)
-			sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW,sourceWindowId));
+//		if (sourceWindowId != null)
+//			sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW,sourceWindowId));
 		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SIGN,"1"));
 		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE,sourceWidgetId));
 		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_ID,plugoutId));
 		
 		//增加plugin的提交规则
 		if(inPageMeta != null){
-			//TODO 
 			//不同window
 			if (!inPageMeta.getId().equals(outPageMeta.getId())){
 				LfwWidget targetWidget = inPageMeta.getWidget(targetWidgetId);
@@ -377,6 +422,87 @@ public final class PlugEventAdjuster {
 				}
 			}
 		}
+
+		if (plugoutDesc.getSubmitRule() == null)  
+			plugoutDesc.setSubmitRule(sr);
+		else 
+			LfwSubmitRuleMergeUtil.mergeSubmitRule(plugoutDesc.getSubmitRule(), sr);
+	}
+
+	/**
+	 * 对于有触发器的plugout，往触发器上绑定plug事件
+	 * 
+	 * @param outPageMeta
+	 * @param inPageMeta
+	 * @param conn
+	 */
+	private void addEvent(PageMeta outPageMeta,PageMeta inPageMeta, Connector conn){
+//		String sourceWindowId = conn.getSourceWindow();
+		String sourceWidgetId = conn.getSource();
+		String plugoutId = conn.getPlugoutId();
+//		String targetWidgetId = conn.getTarget();
+//		String pluginId = conn.getPluginId();
+		PlugoutDesc plugoutDesc = outPageMeta.getWidget(sourceWidgetId).getPlugoutDesc(plugoutId);
+		if (plugoutDesc == null)
+			return;
+		List<PlugoutEmitItem> descEmitList = plugoutDesc.getEmitList();
+		if (descEmitList == null)
+			return;
+
+		EventSubmitRule sr = plugoutDesc.getSubmitRule();
+		
+		//设置提交规则
+//		sr = new EventSubmitRule();
+//		
+//		WidgetRule sourceWr = new WidgetRule();				
+//		sourceWr.setId(sourceWidgetId);
+//		
+//		List<PlugoutDescItem> descDescList = plugoutDesc.getDescItemList();
+//		if(descDescList != null && descDescList.size() > 0){
+//			for (PlugoutDescItem item : descDescList){
+//			String type = item.getType();
+//			//			type = type.split("\\.")[1];
+//			String source = item.getSource();
+//			IPlugoutType plugoutType = PlugoutTypeFactory.getPlugoutType(type);
+//			if (plugoutType != null)
+//				plugoutType.buildSourceWidgetRule(sourceWr, source);
+//			}
+//		}
+//		sr.addWidgetRule(sourceWr);
+////		if (sourceWindowId != null)
+////			sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW,sourceWindowId));
+//		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SIGN,"1"));
+//		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE,sourceWidgetId));
+//		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_ID,plugoutId));
+//		
+//		//增加plugin的提交规则
+//		if(inPageMeta != null){
+//			//TODO 
+//			//不同window
+//			if (!inPageMeta.getId().equals(outPageMeta.getId())){
+//				LfwWidget targetWidget = inPageMeta.getWidget(targetWidgetId);
+//				if (targetWidget != null){
+//					EventSubmitRule targetsubmitRule = getTargetWidgetSubmitRule(targetWidget, pluginId);
+//					if (targetsubmitRule == null){
+//						targetsubmitRule = new EventSubmitRule();
+//						WidgetRule pwr = new WidgetRule();
+//						pwr.setId(targetWidgetId);
+//						targetsubmitRule.addWidgetRule(pwr);
+//					}
+//					sr.setParentSubmitRule(targetsubmitRule);
+//				}
+//			}
+//			//同window内
+//			else{
+//				LfwWidget targetWidget = inPageMeta.getWidget(targetWidgetId);
+//				if (targetWidget != null){
+//					EventSubmitRule targetsubmitRule = getTargetWidgetSubmitRule(targetWidget, pluginId);
+//					if (targetsubmitRule != null){
+//						sr.addWidgetRule(targetsubmitRule.getWidgetRule(targetWidgetId));
+//					}
+//				}
+//			}
+//		}
 		
 		for (PlugoutEmitItem item : descEmitList){
 			//TODO  增加异常处理
@@ -622,7 +748,7 @@ public final class PlugEventAdjuster {
 	 * 生成提交规则
 	 * 
 	 */
-	public String generateSubmitRule(EventSubmitRule submitRule) {
+	public String generateSubmitRuleScript(EventSubmitRule submitRule) {
 		if (submitRule != null) {
 //			String ruleId = "sr_" + jsEvent.getName() + "_" + listener.getId();
 			String ruleId = "submitRule";
@@ -645,14 +771,14 @@ public final class PlugEventAdjuster {
 				buf.append(ruleId).append(".setPanelSubmit(true);\n");
 			}
 
-			String jsScript = createJsSubmitRule(submitRule, ruleId);
+			String jsScript = generateWidgetRulesScript(submitRule, ruleId);
 			buf.append(jsScript);
 
 			EventSubmitRule pSubmitRule = submitRule.getParentSubmitRule();
 			if (pSubmitRule != null) {
 				String pRuleId = ruleId + "_parent";
 				buf.append("var " + pRuleId + " = new SubmitRule();\n");
-				String pJsScript = createJsSubmitRule(pSubmitRule, pRuleId);
+				String pJsScript = generateWidgetRulesScript(pSubmitRule, pRuleId);
 				buf.append(pJsScript);
 				buf.append(ruleId + ".setParentSubmitRule(" + pRuleId + ");\n");
 			}
@@ -671,7 +797,7 @@ public final class PlugEventAdjuster {
 	 * @param ruleId
 	 * @return
 	 */
-	private String createJsSubmitRule(EventSubmitRule submitRule, String ruleId) {
+	private String generateWidgetRulesScript(EventSubmitRule submitRule, String ruleId) {
 		StringBuffer sb = new StringBuffer();
 		Map<String, WidgetRule> widgetRuleMap = submitRule.getWidgetRules();
 		if (widgetRuleMap != null && !widgetRuleMap.isEmpty()) {
@@ -679,7 +805,7 @@ public final class PlugEventAdjuster {
 			while (it.hasNext()) {
 				Entry<String, WidgetRule> entry = it.next();
 				WidgetRule widgetRule = entry.getValue();
-				String wstr = getWidgetRule(widgetRule);
+				String wstr = generateWidgetRuleScript(widgetRule);
 				sb.append(wstr);
 
 				String widgetId = widgetRule.getId();
@@ -695,7 +821,7 @@ public final class PlugEventAdjuster {
 	 * @param widgetRule
 	 * @return
 	 */
-	private String getWidgetRule(WidgetRule widgetRule) {
+	private String generateWidgetRuleScript(WidgetRule widgetRule) {
 		StringBuffer buf = new StringBuffer();
 		String wid = "wdr_" + widgetRule.getId();
 		buf.append("var ").append(wid).append(" = new WidgetRule('").append(widgetRule.getId()).append("');\n");
@@ -749,6 +875,96 @@ public final class PlugEventAdjuster {
 			}
 		}
 		return buf.toString();
+	}
+	
+	/**
+	 * 对每个pageMeta都增加一个参照Plugin
+	 * @param pageMeta
+	 */
+	
+	private void addRefPlugin(PageMeta pageMeta) {
+		PluginDesc pluginDesc = new PluginDesc();
+		pluginDesc.setId(RefOkController.PLUGIN_ID);
+		List<PluginDescItem> descItemList = new ArrayList<PluginDescItem>();
+		
+		PluginDescItem typeItem = new PluginDescItem();
+		typeItem.setId(RefOkController.TYPE);
+		PluginDescItem idItem = new PluginDescItem();
+		idItem.setId(RefOkController.ID);
+		PluginDescItem writefieldsItem = new PluginDescItem();
+		writefieldsItem.setId(RefOkController.WRITEFIELDS);
+		
+		descItemList.add(typeItem);
+		descItemList.add(idItem);
+		descItemList.add(writefieldsItem);
+		pluginDesc.setDescItemList(descItemList);
+		for (LfwWidget widget :  pageMeta.getWidgets()){
+			if (widget.getPluginDesc(RefOkController.PLUGIN_ID) == null)
+				widget.addPluginDescs(pluginDesc);
+		}
+	}
+
+	
+	
+	/**
+	 * 对每个pageMeta都增加一个参照Plugout
+	 * 
+	 * @param refWidget
+	 */
+	private void addAdvanceQueryPlugout(LfwWidget refWidget) {
+		PlugoutDesc plugoutDesc = new PlugoutDesc(); 
+		plugoutDesc.setId("advanceQueryPlugOut");
+		List<PlugoutDescItem>  plugoutDescItemList = new ArrayList<PlugoutDescItem>();
+		
+		PlugoutDescItem typeItem = new PlugoutDescItem();
+		typeItem.setName(RefOkController.TYPE);
+		plugoutDescItemList.add(typeItem);
+		plugoutDesc.setDescItemList(plugoutDescItemList);
+		if (refWidget.getPlugoutDesc("advanceQueryPlugOut") == null)
+			refWidget.addPlugoutDescs(plugoutDesc);
+	}
+	
+	
+	/**
+	 * 对每个pageMeta都增加一个参照Plugout
+	 * 
+	 * @param refWidget
+	 */
+	private void addRefPlugout(LfwWidget refWidget) {
+		PlugoutDesc plugoutDesc = new PlugoutDesc(); 
+		plugoutDesc.setId(RefOkController.PLUGOUT_ID);
+		List<PlugoutDescItem>  plugoutDescItemList = new ArrayList<PlugoutDescItem>();
+		
+		PlugoutDescItem typeItem = new PlugoutDescItem();
+		typeItem.setName(RefOkController.TYPE);
+		PlugoutDescItem idItem = new PlugoutDescItem();
+		idItem.setName(RefOkController.ID);
+		PlugoutDescItem writefieldsItem = new PlugoutDescItem();
+		writefieldsItem.setName(RefOkController.WRITEFIELDS);
+		PlugoutDescItem valuesItem = new PlugoutDescItem();
+		plugoutDescItemList.add(typeItem);
+		plugoutDescItemList.add(idItem);
+		plugoutDescItemList.add(writefieldsItem);
+		plugoutDescItemList.add(valuesItem);
+		plugoutDesc.setDescItemList(plugoutDescItemList);
+		if (refWidget.getPlugoutDesc(RefOkController.PLUGOUT_ID) == null)
+			refWidget.addPlugoutDescs(plugoutDesc);
+	}
+	
+	/**
+	 * 获取WidgetElement上的事件列表
+	 * 
+	 * @param ele
+	 * @return
+	 */
+	private List<EventConf> getEventList(WidgetElement ele){
+		List<EventConf> eventList = null;
+		eventList = ele.getEventConfList();
+		if (eventList == null){
+			eventList = new ArrayList<EventConf>();
+			ele.setEventConfList(eventList);
+		}
+		return eventList;
 	}
 	
 

@@ -152,6 +152,8 @@ public class WindowContext{
 			RequestLifeCycleContext.get().setPhase(LifeCyclePhase.ajax);
 			um.setDialog(viewId, dialog);
 		}
+		if(dialog.getTitle() != null && !dialog.getTitle().equals(title))
+			dialog.setTitle(title);
 		dialog.setVisible(true);	
 		
 	}

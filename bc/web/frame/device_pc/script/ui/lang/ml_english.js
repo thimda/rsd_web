@@ -8,6 +8,7 @@ function trans(key){
 		window.transMap = new Object;
 		window.transMap.ml_ok = "ok";
 		window.transMap.ml_cancel = "cancel";
+		window.transMap.ml_understand = "understand";
 		 
 		window.transMap.ml_progressdialog = "progress";
 		window.transMap.ml_messagedialog = "infomation";

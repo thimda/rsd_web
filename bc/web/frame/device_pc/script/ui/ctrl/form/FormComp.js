@@ -171,9 +171,7 @@ AutoFormComp.prototype.createElement = function(eleId, field, eleWidth, height,
 	var pdiv, position;
 	if (className == null)
 		className = "text_div";
-	if (this.renderType == 1 || this.renderType == 3) {
-		// dingrf
-		// pdiv = $ge("$d_" + this.id + eleId);
+	if (this.renderType == 1 || this.renderType == 3 || this.renderType == 5) {
 		pdiv = this.pLayout;
 		position = "relative";
 	} else if (this.renderType == 4) {// renxh
@@ -350,7 +348,10 @@ AutoFormComp.prototype.createElement = function(eleId, field, eleWidth, height,
 		}
 
 	} else if (type == EditorType.RICHEDITOR) {
-		ele = new EditorComp(pdiv, field, 0, 0, "100%", "100%", position);
+		var toolbarType = null;
+		if (userObject && userObject.toolbarType)
+			toolbarType = userObject.toolbarType;
+		ele = new EditorComp(pdiv, field, 0, 0, "100%", "100%", position, null, toolbarType);
 //		ele = new EditorComp(pdiv, field, 0, 0, eleWidth, height, position);
 	}
 	// form的自定义元素
@@ -579,25 +580,24 @@ AutoFormComp.prototype.createElement = function(eleId, field, eleWidth, height,
  * 
  * @param {} id
  */
-//AutoFormComp.resize = function(id){
-//	var ele = window.objects[id];
-//	try{
-//		AutoFormComp.type4Resize(ele);
-//	}catch(e){}
-//};
-//
-//AutoFormComp.type4Resize = function(ele){
-////	if (this.eleArr.length == 0) return;
-////	ele = this.eleArr[0];
-//	if (ele == null) return;
-//	if (ele.pDiv){
-//		if (ele.attachedLabel){
-//				ele.pDiv.style.width =  ele.pDiv.parentNode.offsetWidth - ele.attachedLabel.offsetWidth + "px";
-//		}
-//		else	
-//			ele.pDiv.style.width = ele.pDiv.parentNode.offsetWidth + "px";
-//	}		
-//};
+AutoFormComp.resize = function(id){
+	var ele = window.objects[id];
+	try{
+		AutoFormComp.type4Resize(ele);
+	}catch(e){}
+};
+
+AutoFormComp.type4Resize = function(ele){
+//	if (this.eleArr.length == 0) return;
+//	ele = this.eleArr[0];
+	if (ele == null) return;
+	if (ele.outerDiv){
+		if (ele.formWidth && ele.formWidth.indexOf("%") != -1){
+			var outerWidth = parseInt(ele.formWidth) * ele.outerDiv.parentNode.offsetWidth / 100;
+			ele.outerDiv.style.width = outerWidth + "px"; 
+		}
+	}		
+};
 
 /**
  * 更新FormElement的宽度
@@ -1186,18 +1186,32 @@ AutoFormComp.prototype.DataCheckFailed = function(dataCheckEvent) {
 
 //AutoFormComp.prototype.createLabel = function(pDiv, comp) {
 AutoFormComp.prototype.createType4Div = function(pDiv, comp) {
+	var oThis = this;
 	var outerWidth = 0;
+	//大小变化时是否需要重算
+	var needResize = false;
 	if (comp.formWidth == null)
 		outerWidth = pDiv.offsetWidth;
 	else{
-		if (comp.formWidth.indexOf("%") != -1)
+		if (comp.formWidth.indexOf("%") != -1){
 			outerWidth = parseInt(comp.formWidth) * pDiv.offsetWidth / 100;
+			needResize = true;
+		}
 		else	
 			outerWidth = comp.formWidth;
 	}	
 	var outerDiv = $ce("DIV");
 	outerDiv.style.width = outerWidth + "px";
 	outerDiv.style.height = "100%";
+	if (needResize){
+		 
+		comp.outerDiv = outerDiv; 
+		window.objects[this.id + "$" + comp.id] = comp;
+		addResizeEvent(outerDiv, function() {
+			AutoFormComp.resize(oThis.id + "$" + comp.id);
+		});
+		
+	}
 	pDiv.appendChild(outerDiv);
 	
 	//标签

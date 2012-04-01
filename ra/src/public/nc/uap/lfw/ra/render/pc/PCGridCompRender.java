@@ -152,16 +152,16 @@ public class PCGridCompRender extends UINormalComponentRender<UIGridComp, GridCo
 
 	protected void addProxyParam(StringBuffer buf, String eventName) {
 		if (GridCellListener.AFTER_EDIT.equals(eventName)) {
-			buf.append("proxy.addParam('rowIndex', cellEvent.rowIndex);\n");
-			buf.append("proxy.addParam('colIndex', cellEvent.colIndex);\n");
-			buf.append("proxy.addParam('newValue', cellEvent.newValue);\n");
-			buf.append("proxy.addParam('oldValue', cellEvent.oldValue);\n");
+			buf.append("proxy.addParam('rowIndex', gridCellEvent.rowIndex);\n");
+			buf.append("proxy.addParam('colIndex', gridCellEvent.colIndex);\n");
+			buf.append("proxy.addParam('newValue', gridCellEvent.newValue);\n");
+			buf.append("proxy.addParam('oldValue', gridCellEvent.oldValue);\n");
 		} else if (GridCellListener.BEFORE_EDIT.equals(eventName)) {
 			buf.append("proxy.addParam('rowIndex', gridCellEvent.rowIndex);\n");
 			buf.append("proxy.addParam('colIndex', gridCellEvent.colIndex);\n");
 		} else if (GridCellListener.ON_CELL_CLICK.equals(eventName) || GridCellListener.CELL_EDIT.equals(eventName)) {
-			buf.append("proxy.addParam('rowIndex', cellEvent.rowIndex);\n");
-			buf.append("proxy.addParam('colIndex', cellEvent.colIndex);\n");
+			buf.append("proxy.addParam('rowIndex', gridCellEvent.rowIndex);\n");
+			buf.append("proxy.addParam('colIndex', gridCellEvent.colIndex);\n");
 		} else if (GridCellListener.CELL_VALUE_CHANGED.equals(eventName)){
 				buf.append("proxy.addParam('rowIndex', gridCellEvent.rowIndex);\n");
 				buf.append("proxy.addParam('colIndex', gridCellEvent.colIndex);\n");

@@ -115,6 +115,7 @@ ModalDialogComp.prototype.manageSelf = function () {
     this.cL = this.secondRow.insertCell(-1);
     this.cC = this.secondRow.insertCell(-1);
     //70为table的 firstRow 跟 thirdRow的高度之和
+//    alert(this.divdialog.offsetHeight);
     this.cC.height = this.divdialog.offsetHeight - 66 + "px";
 //    this.cC.height = "100%";
     this.cR = this.secondRow.insertCell(-1);
@@ -302,7 +303,7 @@ ModalDialogComp.prototype.setSize = function(width, height) {
 	this.height = parseInt(height, 10) + 25;
 	this.divdialog.style.width = this.width + "px";
 	this.divdialog.style.height = this.height + "px";
-	this.cC.height = this.divdialog.offsetHeight - 70 + "px";
+	this.cC.height = this.divdialog.offsetHeight - 66 + "px";
 };
 
 /**

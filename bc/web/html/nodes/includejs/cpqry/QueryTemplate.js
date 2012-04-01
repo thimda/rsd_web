@@ -21,10 +21,10 @@ function beforeCallServer(proxy, listenerName, eventName,id){
 		var saveDs = pageUI.getWidget(widgetId).getDataset("savedQueryCondition");
 		if (saveDs != null && saveDs.getSelectedRow() != null){
 			var name = saveDs.getSelectedRow().getCellValue(saveDs.nameToIndex("name"));	
-			if (!window.$c_conditionSavedialog) {
-				window.$c_conditionSavedialog = new InputDialogComp("saveText", "输入对话框", 0, 0, null, null, 100, function(){
+			if (!window.$c_conditionRenamedialog) {
+				window.$c_conditionRenamedialog = new InputDialogComp("saveText", "输入对话框", 0, 0, null, null, 100, function(){
 						var saveDs = pageUI.getWidget(widgetId).getDataset("savedQueryCondition");
-						var saveName = window.$c_conditionSavedialog.getItem("conditionSaveText").getValue();
+						var saveName = window.$c_conditionRenamedialog.getItem("conditionSaveText").getValue();
 						
 						if(saveName == ''){
 							//showMessageDialog("${ml:trans('yer_savefoldernotempty')}");
@@ -41,11 +41,11 @@ function beforeCallServer(proxy, listenerName, eventName,id){
 						showDefaultLoadingBar();
 						return proxy.execute();
 					});
-				window.$c_conditionSavedialog.addItem("请输入保存名:", "conditionSaveText", "string", true, null);
+				window.$c_conditionRenamedialog.addItem("请输入保存名:", "conditionSaveText", "string", true, null);
 			}
-			var itemComp = window.$c_conditionSavedialog.items.get('conditionSaveText');
+			var itemComp = window.$c_conditionRenamedialog.items.get('conditionSaveText');
 			itemComp.setValue(name);
-			window.$c_conditionSavedialog.show();
+			window.$c_conditionRenamedialog.show();
 			throw "";
 		}
 	}

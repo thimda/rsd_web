@@ -1,5 +1,5 @@
 /**
-*	鏌ヨ妯＄増鏅�氭搷浣滀笓鐢≒anel鎺т欢銆�
+*	查询模板条件渲染面板
 *   
 *	@author dengjt
 */
@@ -86,7 +86,6 @@ QueryTemplatePanel.prototype.dateTimeFormat = function(date) {
 
 QueryTemplatePanel.prototype.onModelChanged = function(event)
 { 
-	//蹇呰緭鏉′欢锛屼笉鍝嶅簲浜嬩欢
 	if(this.ifMust)
 		return;
 	if(RowSelectEvent.prototype.isPrototypeOf(event))
@@ -161,7 +160,7 @@ QueryTemplatePanel.prototype.createElement = function(dsRow)
 	var fieldType = dsRow.getCellValue(9);
 	var logicType = dsRow.getCellValue(14);
 	var editable = fieldType != 1;
-	//闈炲浐瀹氭潯浠跺拰蹇呴』鏉′欢锛屾墠娣诲姞鍒犻櫎鎸夐挳
+	//查询模板每个条件前面的删除图片
 	if((fieldType != 0 && fieldType != 1) && logicType != "1"){
 		var img = new ImageComp(cell, "img", window.themeGlobalPath + "/themes/" + window.themeId + "/images/querytemplate/remove.png", 0, 0, "16", "16", "删除条件", null, {position:"relative"});
 		img.relationRow = dsRow;
@@ -188,7 +187,7 @@ QueryTemplatePanel.prototype.createElement = function(dsRow)
 	var fieldId = dsRow.getCellValue(10);
 	var comboData = this.widget.getComboData("comb_" + fieldId);
 	condComb.setComboData(comboData);
-	//璁剧疆鏌ヨ鏉′欢鍊�
+	//设置具体条件的值
 	condComb.setValue(dsRow.getCellValue(2));
 	condComb.relationRow = dsRow;
 	

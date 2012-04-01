@@ -72,10 +72,13 @@ public final class FormElement extends WebComponent {
 	/*精度*/
 	private String precision;
 	
+	/*富文本框工具栏类型 ：简单：Custom ，全部:Full */
+	private String toolbarType="Custom";
+	
 	// 针对于高级编辑器(需要隐藏的操作条:以js数组形式传入,例[0,1])
-	private String hideBarIndices;
+//	private String hideBarIndices;
 	// 针对高级编辑器(需要隐藏的操作条中的图片,以js数组的形式传入,例[[0,1],[],[2]])
-	private String hideImageIndices;
+//	private String hideImageIndices;
 	
 	// 是否聚焦
 	private boolean focus = false;
@@ -282,18 +285,18 @@ public final class FormElement extends WebComponent {
 		}
 	}
 	
-	public String getHideBarIndices() {
-		return hideBarIndices;
-	}
-	public void setHideBarIndices(String hideBarIndices) {
-		this.hideBarIndices = hideBarIndices;
-	}
-	public String getHideImageIndices() {
-		return hideImageIndices;
-	}
-	public void setHideImageIndices(String hideImageIndices) {
-		this.hideImageIndices = hideImageIndices;
-	}
+//	public String getHideBarIndices() {
+//		return hideBarIndices;
+//	}
+//	public void setHideBarIndices(String hideBarIndices) {
+//		this.hideBarIndices = hideBarIndices;
+//	}
+//	public String getHideImageIndices() {
+//		return hideImageIndices;
+//	}
+//	public void setHideImageIndices(String hideImageIndices) {
+//		this.hideImageIndices = hideImageIndices;
+//	}
 	public boolean isRequired() {
 		return !nullAble;
 	}
@@ -511,6 +514,12 @@ public final class FormElement extends WebComponent {
 
 	public void setHeight(String height) {
 		this.height = height;
+	}
+	public String getToolbarType() {
+		return toolbarType;
+	}
+	public void setToolbarType(String toolbarType) {
+		this.toolbarType = toolbarType;
 	}
 	
 }

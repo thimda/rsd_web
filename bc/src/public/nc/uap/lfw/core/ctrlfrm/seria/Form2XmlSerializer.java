@@ -53,7 +53,7 @@ public class Form2XmlSerializer extends BaseSerializer<FormComp> implements IVie
 			formNode.setAttribute("labelMinWidth", String.valueOf(form.getLabelMinWidth()));
 			formNode.setAttribute("enabled", String.valueOf(form.isEnabled()));
 			formNode.setAttribute("visible", String.valueOf(form.isVisible()));
-			formNode.setAttribute("renderHiddenEle", String.valueOf(form.isRenderHiddenEle()));
+//			formNode.setAttribute("renderHiddenEle", String.valueOf(form.isRenderHiddenEle()));
 			
 			List<FormElement> eles = form.getElementList();
 			if(eles != null && eles.size() > 0)
@@ -116,10 +116,8 @@ public class Form2XmlSerializer extends BaseSerializer<FormComp> implements IVie
 						formEleNode.setAttribute("minValue", ele.getMinValue());
 					if(isNotNullString(ele.getPrecision()))
 						formEleNode.setAttribute("precision", ele.getPrecision());
-					if(isNotNullString(ele.getHideBarIndices()))
-						formEleNode.setAttribute("hideBarIndices", ele.getHideBarIndices());
-					if(isNotNullString(ele.getHideImageIndices()))
-						formEleNode.setAttribute("hideImageIndices", ele.getHideImageIndices());
+					if(isNotNullString(ele.getToolbarType()))
+						formEleNode.setAttribute("toolbarType", ele.getToolbarType());
 					if(isNotNullString(ele.getTip()))
 						formEleNode.setAttribute("tip", ele.getTip());
 					if(isNotNullString(ele.getPrecision()))

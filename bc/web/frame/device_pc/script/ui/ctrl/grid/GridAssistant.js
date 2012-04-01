@@ -25,7 +25,7 @@ DefaultRender.render = function(rowIndex, colIndex, value, header, cell, parentR
 		value = "";
 	cell.tip = value;
 	
-	if(parentRowIndex != null){
+	if(parentRowIndex != null && colIndex == 0){
 	    if(cell.level != null){
 	    	for(var i = 0; i < cell.level; i ++){
 				cell.innerHTML += '<span style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
@@ -115,10 +115,11 @@ BooleanRender.render = function(rowIndex, colIndex, value, header, cell) {
 	if (GridComp.ROW_HEIGHT == DefaultRender.HEADERROW_HEIGHT)
 		cell.style.paddingTop = "0px";
 	else
-		cell.style.paddingTop = Math.floor((GridComp.ROW_HEIGHT - 20)/2) + "px";
+		cell.style.paddingTop = "0px";//Math.floor((GridComp.ROW_HEIGHT - 20)/2) + "px";
 	
 	var checkBox = $ce("INPUT");
 	checkBox.type = "checkbox";
+	checkBox.style.marginTop = "5px";
 	checkBox.rowIndex = rowIndex;
 	checkBox.colIndex = colIndex;
 	cell.appendChild(checkBox);

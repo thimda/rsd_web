@@ -1,7 +1,10 @@
 package nc.uap.lfw.core.event;
 
+import nc.uap.lfw.core.app.LfwAppDefaultController;
 import nc.uap.lfw.core.ctx.AppLifeCycleContext;
 import nc.uap.lfw.core.ctx.ApplicationContext;
+import nc.uap.lfw.core.event.conf.EventConf;
+import nc.uap.lfw.core.event.conf.PageListener;
 import nc.uap.lfw.core.model.IRuntimeAdjuster;
 import nc.uap.lfw.core.page.LfwWidget;
 import nc.uap.lfw.core.page.PageMeta;
@@ -20,6 +23,13 @@ public final class AppTypeRuntimeAdjuster implements IRuntimeAdjuster{
 		plugEventAdjuster.addAppPlugEventConf(appCtx, pageMeta);
 		plugEventAdjuster.addPlugEventConf(pageMeta);
 		adjustRefNode(pageMeta);
+		
+		EventConf event = new EventConf();
+		event.setJsEventClaszz(PageListener.class.getName());
+		event.setMethodName("onPageClosed");
+		event.setName("onClosed");
+		event.setControllerClazz(LfwAppDefaultController.class.getName());
+		pageMeta.addEventConf(event);
 	}
 	
 	private void adjustRefNode(PageMeta pageMeta) {

@@ -83,7 +83,7 @@ public class PCFormCompRender extends UIContainerComponentRender<UIFormComp, For
 		Iterator<FormElement> it = list.iterator();
 		while (it.hasNext()) {
 			FormElement ele = it.next();
-			if (!form.isRenderHiddenEle() && ele.isVisible() == false)
+			if (ele.isVisible() == false)
 				continue;
 			fillDataTypeAndEditorType(ds, ele);// 为 ele指定类型
 
@@ -133,7 +133,7 @@ public class PCFormCompRender extends UIContainerComponentRender<UIFormComp, For
 		buf.append(", \"").append(getId());
 
 		buf.append("\",").append(form.getRenderType());
-		buf.append(",").append(form.isRenderHiddenEle());
+		buf.append(",").append(false);
 		buf.append(",").append(form.getRowHeight()).append(",").append(form.getColumnCount());
 		String attrArr = generateAttrArr(form, uiComp);
 		buf.append(",").append(attrArr).append(");\n");
@@ -149,7 +149,7 @@ public class PCFormCompRender extends UIContainerComponentRender<UIFormComp, For
 		List<String> selDefEleIds = new ArrayList<String>(10);
 		while (it.hasNext()) {
 			FormElement ele = it.next();
-			if (!form.isRenderHiddenEle() && ele.isVisible() == false) // 隐藏的不需要渲染
+			if (ele.isVisible() == false) // 隐藏的不需要渲染
 				continue;
 			fillDataTypeAndEditorType(ds, ele);// 为 ele指定类型
 			if (ele.getEditorType() != null && ele.getEditorType().equals(EditorTypeConst.SELFDEF))
@@ -276,19 +276,13 @@ public class PCFormCompRender extends UIContainerComponentRender<UIFormComp, For
 				userObj.append(",visible:").append(ele.isVisible()).append("}");
 				buf.append(userObj.toString());
 			} else if (editorType.equals(EditorTypeConst.RICHEDITOR)) {
-				String hideBarIndices = ele.getHideBarIndices();
-				String hideImageIndices = ele.getHideImageIndices();
-				buf.append("[");
-				if (hideBarIndices != null && !"".equals(hideBarIndices))
-					buf.append(hideBarIndices);
-				else
-					buf.append("");
-				buf.append(",");
-				if (hideImageIndices != null && !"".equals(hideImageIndices))
-					buf.append(hideImageIndices);
-				else
-					buf.append("");
-				buf.append("]");
+				String toolbarType = ele.getToolbarType();
+				StringBuffer userObj = new StringBuffer();
+				userObj.append("{");
+				if (toolbarType != null)
+					userObj.append("toolbarType:'").append(toolbarType).append("'");
+				userObj.append("}");
+				buf.append(userObj.toString());
 			} else
 				buf.append("null");
 			buf.append(",").append(!ele.isEnabled()).append(",").append(!ele.isEditable()).append(",");

@@ -24,6 +24,12 @@ ReferenceTextComp.prototype.inputClassName_inactive = IS_IE7? "text_input_inacti
 ReferenceTextComp.prototype.imageWidth = 17;
 ReferenceTextComp.prototype.imageHeight = 17;
 
+ReferenceTextComp.DEFAULT = 0;
+ReferenceTextComp.TREE = 1;
+ReferenceTextComp.GRID = 2;
+ReferenceTextComp.GRIDTREE = 3;
+ReferenceTextComp.TREETREE = 4;
+
 //TODO 暂时写在这里
 window.PAGEWIDTH = 1500;
 window.PAGEHEIGHT = 1500;
@@ -33,7 +39,10 @@ window.PAGEHEIGHT = 1500;
  */
 function ReferenceTextComp(parent, name, left, top, width, position, attrArr, nodeInfo, className, isDialog) {
 	this.refCodeName = null;
-	this.refType = ReferenceTextComp.GRIDTREE;
+	this.refType = ReferenceTextComp.DEFAULT;
+	if(attrArr){
+		this.refType = getInteger(attrArr.refType, this.refType);
+	}
 	this.showValue = null;
 	this.trueValue = null;
 	TextComp.call(this, parent, name, left, top, width, "R", position, attrArr, className);
@@ -46,17 +55,43 @@ function ReferenceTextComp(parent, name, left, top, width, position, attrArr, no
 	
 	this.refIndex = "ref_" + (ReferenceTextComp.DIALOG_INDEX ++);
 	this.refresh = false;
-	
+
 	this.dialogWidth = 600;
+	this.divWidth = 600;
+	if(this.refType == ReferenceTextComp.TREE){
+		this.dialogWidth = 36 + 310;//36左右图片宽度和
+		this.divWidth = 36 + 310;
+	}else if(this.refType == ReferenceTextComp.GRID){
+		this.dialogWidth = 36 + 618;
+		this.divWidth = 36 + 618;
+	}else if(this.refType == ReferenceTextComp.GRIDTREE){
+		this.dialogWidth = 36 + 240 + 525;
+		this.divWidth = 36 + 240 + 525;
+	}else if(this.refType == ReferenceTextComp.TREETREE){
+		this.dialogWidth = 36 + 240 + 240 + 80 + 4;
+		this.divWidth = 36 + 240 + 240 + 80 + 4;
+	}
 	if(this.dialogWidth >= window.PAGEWIDTH)
 		this.dialogWidth = window.PAGEWIDTH - 100;
-	this.dialogHeight = 400;
+	
+	this.dialogHeight = 460;
+	this.divHeight = 460;
+	if(this.refType == ReferenceTextComp.TREE){
+		this.dialogHeight = 48 + 412;//36左右图片宽度和
+		this.divHeight = 48 + 412;
+	}else if(this.refType == ReferenceTextComp.GRID){
+		this.dialogHeight = 48 + 412;
+		this.divHeight = 48 + 412;
+	}else if(this.refType == ReferenceTextComp.GRIDTREE){
+		this.dialogHeight = 48 + 412;
+		this.divHeight = 48 + 412;
+	}else if(this.refType == ReferenceTextComp.TREETREE){
+		this.dialogHeight = 48 + 400;
+		this.divHeight = 48 + 400;
+	}
 	if(this.dialogWidth >= window.PAGEHEIGHT)
 		this.dialogHeight = window.PAGEHEIGHT - 100;
-	
-	this.divWidth = 600;
-	this.divHeight = 400;
-	
+
 	// 是否每次打开参照刷新,默认不刷新
 	this.refreshRefPage = false;
 	if (this.nodeInfo != null && this.nodeInfo.refreshRefPage) {

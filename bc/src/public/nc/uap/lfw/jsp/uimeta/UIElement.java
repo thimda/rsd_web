@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import nc.uap.lfw.core.base.ExtendAttributeSupport;
 import nc.uap.lfw.core.event.EventUtil;
 import nc.uap.lfw.core.event.IEventSupport;
 import nc.uap.lfw.core.event.conf.EventConf;
@@ -16,7 +17,7 @@ import nc.uap.lfw.core.page.LifeCyclePhase;
 import nc.uap.lfw.core.page.RequestLifeCycleContext;
 import nc.uap.lfw.render.observer.IUIElementObserver;
 import nc.uap.lfw.util.LfwClassUtil;
-public class UIElement implements IEventSupport, Serializable, ILifeCycleSupport, Cloneable {
+public class UIElement extends ExtendAttributeSupport implements IEventSupport, Serializable, ILifeCycleSupport, Cloneable {
 	private static final long serialVersionUID = 1083409119485229582L;
 	private Map<String, Serializable> attrMap = null;
 	public static final String ID = "id";
@@ -145,21 +146,17 @@ public class UIElement implements IEventSupport, Serializable, ILifeCycleSupport
 		this.notifyChange(UPDATE);
 	}
 	public Object doClone() {
-		try {
-			UIElement ele = (UIElement) this.clone();
-			if (this.attrMap != null) {
-				ele.attrMap = ele.createAttrMap();
-				Iterator<String> keys = this.attrMap.keySet().iterator();
-				while (keys.hasNext()) {
-					String key = keys.next();
-					Serializable s = this.attrMap.get(key);
-					ele.attrMap.put(key, s);
-				}
+		UIElement ele = (UIElement) this.clone();
+		if (this.attrMap != null) {
+			ele.attrMap = ele.createAttrMap();
+			Iterator<String> keys = this.attrMap.keySet().iterator();
+			while (keys.hasNext()) {
+				String key = keys.next();
+				Serializable s = this.attrMap.get(key);
+				ele.attrMap.put(key, s);
 			}
-			return ele;
-		} catch (CloneNotSupportedException e) {
-			return this;
 		}
+		return ele;
 	}
 	@Override public void addEventConf(EventConf event) {
 		if (eventConfList == null)

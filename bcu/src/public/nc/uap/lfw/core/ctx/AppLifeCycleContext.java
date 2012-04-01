@@ -14,7 +14,7 @@ public class AppLifeCycleContext {
 	public static final String PLUGOUT_SIGN = "plug";
 	public static final String PLUGOUT_ID = "plugid";
 	public static final String PLUGOUT_SOURCE = "plugsource";
-	public static final String PLUGOUT_SOURCE_WINDOW = "plugsourcewindow";
+//	public static final String PLUGOUT_SOURCE_WINDOW = "plugsourcewindow";
 	public static final String PLUGOUT_FROMSERVER = "fromServer";
 	public static final String PLUGOUT_PARAMS = "plugparams";
 	private static ThreadLocal<AppLifeCycleContext> threadLocal = new ThreadLocal<AppLifeCycleContext>();

@@ -311,8 +311,13 @@ function hideProgressDialog() {
 /**
  * 显示错误对话框
  */
-function showErrorDialog(msg) {
-	require('errordialog', function(){ErrorDialogComp.showDialog(msg)});
+function showErrorDialog(msg, func, title, okText) {
+	require('errordialog', function(){
+		var dialog = ErrorDialogComp.showDialog(msg, title, okText);
+		if(func){
+			dialog.onclick = func;
+		}
+	});
 };
 
 /**
@@ -347,14 +352,24 @@ function hideMessageDialog() {
  * 在正中位置打开窗口
  */
 function openWindowInCenter(url, title, height, width) {
-	var bodyWidth = window.screen.availWidth - 30;
-	var bodyHeight = window.screen.availHeight - 30;
-	var left = bodyWidth > width ? (bodyWidth - width)/2 : 0;
-	var top = bodyHeight > height ? (bodyHeight - height)/2 : 0;
-//	if(IS_IE)
-		window.showModalDialog(url, self, "status:no;dialogHeight:" + height + "px;dialogWidth:" + width + "px;dialogLeft:" + left + "px;dialogTop:" + top + "px");
-//	else
-//		window.open(url, title, "modal=yes, height=" + height + ", width=" + width + ", left=" + left + ", top=" + top, true);
+	var bodyWidth = window.screen.availWidth;
+	var bodyHeight = window.screen.availHeight;
+	var left = 0;
+	if(typeof (width) == 'number' || width.indexOf("%") == -1){
+		var intWidth = parseInt(width);
+		left = bodyWidth > intWidth ? (bodyWidth - intWidth)/2 : 0;
+		width += "px";
+	}
+	var top = 0;
+	if(typeof (height) == 'number' || height.indexOf("%") == -1){
+		var intHeight = parseInt(height);
+		top = bodyHeight > intHeight ? (bodyHeight - intHeight)/2 : 0;
+		height += "px";
+	}
+	else{
+		height = bodyHeight + "px";
+	}
+	window.showModalDialog(url, self, "status:no;dialogHeight:" + height + ";dialogWidth:" + width + ";dialogLeft:" + left + "px;dialogTop:" + top + "px");
 };
 
 /**
@@ -746,23 +761,33 @@ function handleExceptionByDoc(doc, exception, ajaxArgs, ajaxObj, xmlHttpReq) {
 		rePostReq.dialogId = interationInfo.id;
 		if(interationInfo.type == "OKCANCEL_DIALOG") {
 			var msg = interationInfo.msg;
+			var title = interationInfo.title;
 			var okText = interationInfo.okText;
 			var cancelText = interationInfo.cancelText;
 			rePostReq.ajaxObj = ajaxObj;
-			showConfirmDialog(msg, rePostOk, rePostCancel, null, null, null, okText, cancelText);
+			showConfirmDialog(msg, rePostOk, rePostCancel, null, null, null, okText, cancelText, title);
 		}
 		else if(interationInfo.type == "THREE_BUTTONS_DIALOG") {
 			var msg = interationInfo.msg;
+			var title = interationInfo.title;
 			rePostReq.ajaxObj = ajaxObj;
-			require("threebuttondialog", function(){ThreeButtonsDialog.showDialog(msg, rePostOk, rePostCancel, rePostMiddle, interationInfo.btnTexts)});
+			require("threebuttondialog", function(){ThreeButtonsDialog.showDialog(msg, rePostOk, rePostCancel, rePostMiddle, interationInfo.btnTexts, null, null, null, null, null, title)});
 		}
 		else if (interationInfo.type == "MESSAGE_DIALOG") {
 			var msg = interationInfo.msg;
-			var title = interactionInfo.title;
-			var btnText = interactionInfo.btnText;
+			var title = interationInfo.title;
+			var btnText = interationInfo.btnText;
 			rePostReq.ajaxObj = ajaxObj;
 			rePostReq.okReturn = interationInfo.okReturn;
 			showMessageDialog(msg, rePostOk, title, btnText);
+		}
+		else if (interationInfo.type == "ERROR_MESSAGE_DIALOG"){
+			var msg = interationInfo.msg;
+			var title = interationInfo.title;
+			var btnText = interationInfo.btnText;
+			rePostReq.ajaxObj = ajaxObj;
+			rePostReq.okReturn = interationInfo.okReturn;
+			showErrorDialog(msg, rePostOk, title, btnText);
 		}
 		else if(interationInfo.type == "INPUT_DIALOG") {
 			var items = interationInfo.items;
@@ -971,8 +996,8 @@ function hideWarningDialog() {
 /**
  * 显示确认对话框
  */
-function showConfirmDialog(msg, okFunc, cancelFunc, obj1, obj2, zIndex, okText, cancelText) {
-	require("confirmdialog", function(){ConfirmDialogComp.showDialog(msg, okFunc, cancelFunc, obj1, obj2, null, null, okText, cancelText)});
+function showConfirmDialog(msg, okFunc, cancelFunc, obj1, obj2, zIndex, okText, cancelText, title) {
+	require("confirmdialog", function(){ConfirmDialogComp.showDialog(msg, okFunc, cancelFunc, obj1, obj2, null, null, okText, cancelText, title)});
 };
 
 /**

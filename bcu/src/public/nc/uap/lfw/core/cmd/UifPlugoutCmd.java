@@ -25,11 +25,12 @@ import nc.uap.lfw.core.page.PlugoutDescItem;
 public class UifPlugoutCmd extends UifCommand {
 	private String plugoutId;
 	private String widgetId;
-	private String sourceWindowId = getLifeCycleContext().getWindowContext().getId();
+	private String sourceWindowId;
+//	private String sourceWindowId = getLifeCycleContext().getWindowContext().getId();
 	private Map<String, Object> paramMap;
 	
 	/**
-	 * 同window内的plug调用
+	 * plugout调用
 	 * 
 	 */
 	public UifPlugoutCmd(String widgetId, String plugoutId){
@@ -38,20 +39,21 @@ public class UifPlugoutCmd extends UifCommand {
 	}
 	
 	/**
-	 * 跨window的plug调用
+	 * 不需要指定sourceWindowId,与使用UifPlugoutCmd(String widgetId, String plugoutId)等同
 	 * 
 	 * @param sourceWindowId
 	 * @param widgetId
 	 * @param plugoutId
 	 */
+	@Deprecated
 	public UifPlugoutCmd(String sourceWindowId, String widgetId, String plugoutId){
-		this.sourceWindowId = sourceWindowId;
+//		this.sourceWindowId = sourceWindowId;
 		this.widgetId = widgetId;
 		this.plugoutId = plugoutId;
 	}
 	
 	/**
-	 * 同window内的plug调用
+	 * plugout调用
 	 * 
 	 */
 	public UifPlugoutCmd(String widgetId, String plugoutId, Map<String, Object> paramMap){
@@ -61,14 +63,15 @@ public class UifPlugoutCmd extends UifCommand {
 	}
 	
 	/**
-	 * 跨window的plug调用
+	 * 不需要指定sourceWindowId,与使用UifPlugoutCmd(String widgetId, String plugoutId, Map<String, Object> paramMap)等同
 	 * 
 	 * @param sourceWindowId
 	 * @param widgetId
 	 * @param plugoutId
 	 */
+	@Deprecated
 	public UifPlugoutCmd(String sourceWindowId, String widgetId, String plugoutId,  Map<String, Object> paramMap){
-		this.sourceWindowId = sourceWindowId;
+//		this.sourceWindowId = sourceWindowId;
 		this.widgetId = widgetId;
 		this.plugoutId = plugoutId;
 		this.paramMap = paramMap;
@@ -76,16 +79,25 @@ public class UifPlugoutCmd extends UifCommand {
 	
 	@Override
 	public void execute() {
+		//WindowContext windowctx = getLifeCycleContext().getWindowContext();
+		//windowctx.addPlug(widgetId + "_" + plugoutId, this.paramMap);
+		
+		WindowContext windowctx = getLifeCycleContext().getWindowContext();
+		getLifeCycleContext().getApplicationContext().addPlug(windowctx.getId() + "_" + widgetId + "_" + plugoutId, this.paramMap);
+	
+		
 		StringBuffer scriptBuf = new StringBuffer();
-		genPlugoutScript(scriptBuf);
+//		genPlugoutScript(scriptBuf);
+		scriptBuf.append("triggerPlugout('").append(this.widgetId).append("','").append(this.plugoutId).append("');\n");
 		getLifeCycleContext().getApplicationContext().addExecScript(scriptBuf.toString());
 	}
 
-	/**
+	/**废弃
 	 * 
 	 * 生成前台plugout脚本
 	 * @param scriptBuf
 	 */
+	@Deprecated
 	private void genPlugoutScript(StringBuffer scriptBuf) {
 		List<Connector> connList = getConnector();
 		if (connList.size() == 0)
@@ -155,14 +167,14 @@ public class UifPlugoutCmd extends UifCommand {
 		
 		//增加参数
 		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SIGN,"1"));
-		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW,sourceWindowId));
+//		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE_WINDOW,sourceWindowId));
 		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_SOURCE,widgetId));
 		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_ID,plugoutId));
 		sr.addParam(new Parameter(AppLifeCycleContext.PLUGOUT_FROMSERVER,"1"));
 		sr.addParam(new Parameter(LfwPageContext.WIDGET_ID,widgetId));
 
 		//生成前台脚本
-		scriptBuf.append(plugEventAdjuster.generateSubmitRule(sr));
+		scriptBuf.append(plugEventAdjuster.generateSubmitRuleScript(sr));
 //		
 //		{"key":"value", "key":"value"}
 //		key : "key"
@@ -189,11 +201,12 @@ public class UifPlugoutCmd extends UifCommand {
 		scriptBuf.append("triggerPlugout(submitRule," + values + ");");
 	}
 
-	/**
+	/**废弃
 	 * 获取plug连接
 	 * 
 	 * @return
 	 */
+	@Deprecated
 	private List<Connector> getConnector() {
 		WindowContext windowctx = getLifeCycleContext().getWindowContext();
 		List<Connector> connList = new ArrayList<Connector>();

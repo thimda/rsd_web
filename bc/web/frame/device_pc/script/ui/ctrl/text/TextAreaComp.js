@@ -392,7 +392,7 @@ TextAreaComp.prototype.setContext = function(context) {
 		this.setActive(context.enabled);
 	if (context.readOnly != null && this.readOnly != context.readOnly)
 		this.setReadOnly(context.readOnly);
-	if (context.value && context.value != this.textArea.value)
+	if (context.value != null && context.value != this.textArea.value)
 		this.setValue(context.value);
 //	if (context.visible != this.visible) {
 		if (context.visible)
